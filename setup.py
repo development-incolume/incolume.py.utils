@@ -60,7 +60,8 @@ setup(name=NAME,
           'setuptools',
           # -*- Extra requirements: -*-
           'pytest',
-          'nose'
+          'nose',
+          'rstr',
       ],
       entry_points={
           'console_scripts': [
