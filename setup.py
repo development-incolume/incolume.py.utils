@@ -2,7 +2,7 @@ import os
 from setuptools import setup, find_packages
 
 NAME = 'incolumepy.utils'
-NAMESPACE = NAME.split('.')
+NAMESPACE = NAME.split('.')[:-1]
 DESCRIPTION = "package incolumepy utils"
 KEYWORDS = 'python utils incolumepy'
 AUTHOR = 'incolume.com.br'
@@ -60,6 +60,7 @@ setup(name=NAME,
           'setuptools',
           # -*- Extra requirements: -*-
           'pytest',
+          'nose'
       ],
       entry_points={
           'console_scripts': [
