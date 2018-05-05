@@ -21,17 +21,17 @@ CLASSIFIERS = [
 VERSION = open(os.path.join(NAME.replace('.','/'), "version.txt")).read().strip()
 LONG_DESCRIPTION = (
         open('README.md').read()
-        + '\n'
+        + '\n\n'
         +'History\n'
         +'=======\n'
         + '\n' +
         open(os.path.join("docs", "HISTORY.rst")).read()
-        + "\n"
+        + "\n\n"
         +'Contributors\n'
         +'============\n'
         + '\n' +
         open(os.path.join('docs', 'CONTRIBUTORS.rst')).read()
-        + '\n'
+        + '\n\n'
         +'Changes\n'
         +'=======\n'
         + '\n' +
