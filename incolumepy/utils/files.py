@@ -24,7 +24,7 @@ def realfilename(filebase, ext=None, digits=2, separador=True):
         ext = sufix['default']
 
     dir = os.path.dirname(filebase)
-    print(dir)
+    #print(dir)
     os.makedirs(os.path.abspath(dir), exist_ok=True, mode=0o777)
     if separador:
         sep = '_'
