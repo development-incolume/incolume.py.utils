@@ -1,4 +1,5 @@
 import os
+
 from setuptools import setup, find_packages
 
 NAME = 'incolumepy.utils'
@@ -6,16 +7,17 @@ NAMESPACE = NAME.split('.')[:-1]
 DESCRIPTION = "package incolumepy utils"
 KEYWORDS = 'python utils incolumepy'
 AUTHOR = '@britodfbr'
-AUTHOR_EMAIL = 'contato at incolume.com.br'
+AUTHOR_EMAIL = 'contato@incolume.com.br'
 URL = 'http://www.incolume.com.br'
 LICENSE = 'BSD'
-CLASSIFIERS = '''
-        'License :: Other/Proprietary License',
-        'Operating System :: OS Independent',
-        'Natural Language :: Portuguese',
-        "Programming Language :: Python",
-        'Topic :: Software Development :: Libraries :: Python Modules',
-'''
+CLASSIFIERS = [
+'Development Status :: 5 - Production/Stable',
+'Operating System :: OS Independent',
+'Natural Language :: Portuguese (Brazilian)',
+"Programming Language :: Python",
+'Topic :: Software Development :: Libraries :: Python Modules',
+'Topic :: Utilities',]
+
 VERSION = open(os.path.join(NAME.replace('.','/'), "version.txt")).read().strip()
 LONG_DESCRIPTION = (
         open('README.md').read()
@@ -42,9 +44,7 @@ setup(name=NAME,
       long_description=LONG_DESCRIPTION,
 
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
-      classifiers=[
-          CLASSIFIERS
-      ],
+      classifiers=CLASSIFIERS,
       keywords=KEYWORDS,
       author=AUTHOR,
       author_email=AUTHOR_EMAIL,
