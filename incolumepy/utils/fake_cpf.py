@@ -3,9 +3,9 @@ from string import digits
 
 def gen_fake_cpf(formated=True):
     '''
-    Cria um Gerador numeros de CPF com 11 digitos nao verificados
-    :param formated: True para formatados e False para somente numeros
-    :return: string com numero de CPF
+    Cria um Gerador numeros de CPF com 11 digitos não verificados
+    :param formated: True para formatados(000.000.001-91) e False para somente numeros(00000000191)
+    :return: string com numero de CPF de 11 digitos 000.000.001-91 ou 00000000191
     '''
     while True:
         cpf = rstr(digits, 11)
