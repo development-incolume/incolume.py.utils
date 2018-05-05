@@ -55,6 +55,11 @@ class UtilsTest(unittest.TestCase):
         file = realfilename('/tmp/utils/tmp/registro.xml')
         self.assertEqual(sys.stdout.getvalue().strip(), 'Criado arquivo: {}'.format(file))
 
+    @staticmethod
+    def main():
+        super().main()
+        shutil.rmtree('tmp')
+
 
 if __name__ == '__main__':
     unittest.main()
