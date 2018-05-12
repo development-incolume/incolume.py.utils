@@ -28,4 +28,8 @@ Atualizar o pacote
 Gerar pacote a partir dos fontes para instalação
 --
 
-python setup.py bdist_egg bdist_wheel
+$ python setup.py bdist_egg bdist_wheel
+
+Exemplos
+--
+Exemplos disponíveis em docs/EXAMPLES
