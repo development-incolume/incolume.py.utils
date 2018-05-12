@@ -9,6 +9,14 @@ KEYWORDS = 'python utils incolumepy'
 AUTHOR = '@britodfbr'
 AUTHOR_EMAIL = 'contato@incolume.com.br'
 URL = 'http://www.incolume.com.br'
+PROJECT_URLS={
+    'Documentation': 'https://pypi.org/project/incolumepy.utils/',
+    'Funding': None,
+    'Say Thanks!': None,
+    'Source': 'https://gitlab.com/development-incolume/incolumepy.utils',
+    'Git': 'https://gitlab.com/development-incolume/incolumepy.utils.git',
+    'Tracker': 'https://gitlab.com/development-incolume/incolumepy.utils/issues',
+}
 LICENSE = 'BSD'
 CLASSIFIERS = [
 'Development Status :: 5 - Production/Stable',
@@ -26,6 +34,11 @@ LONG_DESCRIPTION = (
         +'=======\n'
         + '\n' +
         open(os.path.join("docs", "HISTORY.rst")).read()
+        + '\n\n'+
+        +'Examples\n'
+        +'=======\n'
+        +'\n'+
+        open(os.path.join('docs', 'EXAMPLES.rst')).read()
         + "\n\n"
         +'Contributors\n'
         +'============\n'
@@ -36,7 +49,8 @@ LONG_DESCRIPTION = (
         +'=======\n'
         + '\n' +
         open(os.path.join('docs', 'CHANGES.rst')).read()
-        + '\n')
+        + '\n'
+)
 
 setup(name=NAME,
       version=VERSION,
@@ -49,6 +63,7 @@ setup(name=NAME,
       author=AUTHOR,
       author_email=AUTHOR_EMAIL,
       url=URL,
+      project_urls= PROJECT_URLS,
       license=LICENSE,
       namespace_packages=NAMESPACE,
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
