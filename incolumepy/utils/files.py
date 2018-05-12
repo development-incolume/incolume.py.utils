@@ -1,5 +1,14 @@
 import os
 
+def ll(path='.', string=True):
+    ''' recursive list of file on directory.
+    string True return list of string, string False return list of tuple(path, file)'''
+
+    if not string:
+        return [(p, file) for p, _, files in os.walk(os.path.abspath(path)) for file in files]
+    else:
+        return [os.path.join(p, file) for p, _, files in os.walk(os.path.abspath(path)) for file in files]
+
 def realfilename(filebase, ext=None, digits=2, separador=True):
     count = 0
     sufix = {'default': 'txt', 0: 'txt', 1: None, 2: None}
