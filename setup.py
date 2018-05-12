@@ -10,12 +10,13 @@ AUTHOR = '@britodfbr'
 AUTHOR_EMAIL = 'contato@incolume.com.br'
 URL = 'http://www.incolume.com.br'
 PROJECT_URLS={
-    'Documentation': 'https://pypi.org/project/incolumepy.utils/',
+    'Documentation': 'https://brito.blog.incolume.com.br/search/label/development-incolume',
     'Funding': None,
     'Say Thanks!': None,
     'Source': 'https://gitlab.com/development-incolume/incolumepy.utils',
     'Git': 'https://gitlab.com/development-incolume/incolumepy.utils.git',
     'Tracker': 'https://gitlab.com/development-incolume/incolumepy.utils/issues',
+    'Oficial': 'https://pypi.org/project/incolumepy.utils/',
 }
 LICENSE = 'BSD'
 CLASSIFIERS = [
