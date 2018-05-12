@@ -1,4 +1,5 @@
 import os
+from shutil import rmtree
 
 def ll(path='.', string=True):
     ''' recursive list of file on directory.
@@ -55,7 +56,7 @@ def realfilename(filebase, ext=None, digits=2, separador=True):
         finally:
             count += 1
 
-if __name__ == '__main__':
+def run(remove=False):
     with open(realfilename(
             os.path.join('tmp', 'britodfbr','diretorio', 'para', 'teste'),
             ext='.dat', separador=True), 'w') as file:
@@ -87,8 +88,16 @@ if __name__ == '__main__':
         file.write(file.name)
 
     with open(realfilename(os.path.join('tmp', os.path.basename(__file__)),
-            digits=5, ext='log'), 'a') as file:
-        file.write(file.name)
+            digits=5, ext='csv'), 'a') as file:
+        file.write('{}'.format(file.name))
 
     with open(realfilename('../utils/tmp/registro.xml'), 'w') as file:
         file.write(file.name)
+
+    if remove:
+        dirlist=['tmp']
+        for i in dirlist:
+            rmtree(i)
+
+if __name__ == '__main__':
+    run(False)
