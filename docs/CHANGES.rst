@@ -1,3 +1,5 @@
+0.7.1 = atualizações no setup, e na apresentação da documentação
+
 0.7 = adicionado incolume.files.ll
 
 0.6 = testes automatizados
