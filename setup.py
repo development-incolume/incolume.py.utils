@@ -34,7 +34,7 @@ LONG_DESCRIPTION = (
         +'=======\n'
         + '\n' +
         open(os.path.join("docs", "HISTORY.rst")).read()
-        + '\n\n'+
+        + '\n\n'
         +'Examples\n'
         +'=======\n'
         +'\n'+
