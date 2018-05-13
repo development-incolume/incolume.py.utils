@@ -1,14 +1,25 @@
 import os
 from shutil import rmtree
 
-def ll(path='.', string=True):
-    ''' recursive list of file on directory.
-    string True return list of string, string False return list of tuple(path, file)'''
+def ll(path='.', string=True, recursive=False):
+    '''
+    recursive list of file on directory or not.
+    string True return list of string, string False return list of tuple(path, file)
 
-    if not string:
+    :param path:
+    :param string: Bool
+    :param recursive: Bool
+    :return:
+    '''
+
+    if not string and recursive:
         return [(p, file) for p, _, files in os.walk(os.path.abspath(path)) for file in files]
-    else:
+    elif string and recursive:
         return [os.path.join(p, file) for p, _, files in os.walk(os.path.abspath(path)) for file in files]
+    elif not string and not recursive:
+        [(path, nome) for nome in os.listdir(path) if os.path.isfile(os.path.join(path, nome))]
+    else:
+        [os.path.join(path, nome) for nome in os.listdir(path) if os.path.isfile(os.path.join(path, nome))]
 
 def realfilename(filebase, ext=None, digits=2, separador=True):
     count = 0
@@ -93,6 +104,8 @@ def run(remove=False):
 
     with open(realfilename('../utils/tmp/registro.xml'), 'w') as file:
         file.write(file.name)
+
+    print(ll())
 
     if remove:
         dirlist=['tmp']
