@@ -3,13 +3,14 @@ from shutil import rmtree
 
 def ll(path='.', string=True, recursive=False):
     '''
-    recursive list of file on directory or not.
-    string True return list of string, string False return list of tuple(path, file)
+    recursive or single list of file on directory.
+    recursive=True return list recursive, string=True return list of string(path+file),
+    string=False return list of tuple(path, file)
 
-    :param path:
+    :param path: path on Operation System
     :param string: Bool
     :param recursive: Bool
-    :return:
+    :return: full path of file
     '''
 
     if not string and recursive:
