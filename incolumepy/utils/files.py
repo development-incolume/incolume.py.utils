@@ -4,7 +4,7 @@
 import os
 from shutil import rmtree
 
-def ll(path='.', string=True, recursive=False):
+def ll(path='.', ext=None, string=True, recursive=False):
     '''
     recursive or single list of file on directory.
     recursive=True return list recursive, string=True return list of string(path+file),
@@ -15,10 +15,11 @@ def ll(path='.', string=True, recursive=False):
     :param recursive: Bool
     :return: absolute path of file
     '''
-
-    if not string and recursive:
-        return [(p, file) for p, _, files in os.walk(os.path.abspath(path)) for file in files]
-    elif string and recursive:
+    if (not string and recursive) and not ext:
+        return [(p, file) for p, _, files in os.walk(os.path.abspath(path))for file in files]
+    elif (not string and recursive) and ext:
+        return [(p, file) for p, _, files in os.walk(os.path.abspath(path))for file in files if file.lower().endswith(ext)]
+    elif (string and recursive) and not ext:
         return [os.path.join(p, file) for p, _, files in os.walk(os.path.abspath(path)) for file in files]
     elif not string and not recursive:
         return [(path, nome) for nome in os.listdir(path) if os.path.isfile(os.path.join(path, nome))]
