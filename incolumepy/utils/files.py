@@ -1,7 +1,7 @@
 import os
 from shutil import rmtree
 
-def ll(path='.', string=True, recursive=False):
+def ll(path='.', ext=None, string=True, recursive=False):
     '''
     recursive list of file on directory or not.
     string True return list of string, string False return list of tuple(path, file)
@@ -11,15 +11,22 @@ def ll(path='.', string=True, recursive=False):
     :param recursive: Bool
     :return:
     '''
-
-    if not string and recursive:
-        return [(p, file) for p, _, files in os.walk(os.path.abspath(path)) for file in files]
-    elif string and recursive:
+    if (not string and recursive) and not ext:
+        return [(p, file) for p, _, files in os.walk(os.path.abspath(path))for file in files]
+    elif (not string and recursive) and ext:
+        return [(p, file) for p, _, files in os.walk(os.path.abspath(path))for file in files if file.lower().endswith(ext)]
+    elif (string and recursive) and not ext:
         return [os.path.join(p, file) for p, _, files in os.walk(os.path.abspath(path)) for file in files]
-    elif not string and not recursive:
-        [(path, nome) for nome in os.listdir(path) if os.path.isfile(os.path.join(path, nome))]
+    elif (string and recursive) and ext:
+        return [os.path.join(p, file) for p, _, files in os.walk(os.path.abspath(path)) for file in files if file.lower().endswith(ext)]
+    elif (not string and not recursive) and not ext:
+        return [(path, nome) for nome in os.listdir(path) if os.path.isfile(os.path.join(path, nome))]
+    elif (not string and not recursive) and ext:
+        return [(path, nome) for nome in os.listdir(path) if os.path.isfile(os.path.join(path, nome)) and nome.lower().endswith(ext)]
+    elif (string and not recursive) and ext:
+        return [os.path.join(path, nome) for nome in os.listdir(path) if os.path.isfile(os.path.join(path, nome)) and nome.lower().endswith(ext)]
     else:
-        [os.path.join(path, nome) for nome in os.listdir(path) if os.path.isfile(os.path.join(path, nome))]
+        return [os.path.join(path, nome) for nome in os.listdir(path) if os.path.isfile(os.path.join(path, nome))]
 
 def realfilename(filebase, ext=None, digits=2, separador=True):
     count = 0
