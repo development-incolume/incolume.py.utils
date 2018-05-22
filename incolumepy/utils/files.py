@@ -1,3 +1,6 @@
+#!/usr/bin/python
+#coding: utf-8
+
 import os
 from shutil import rmtree
 
@@ -10,7 +13,7 @@ def ll(path='.', string=True, recursive=False):
     :param path: path on Operation System
     :param string: Bool
     :param recursive: Bool
-    :return: full path of file
+    :return: absolute path of file
     '''
 
     if not string and recursive:
@@ -18,9 +21,9 @@ def ll(path='.', string=True, recursive=False):
     elif string and recursive:
         return [os.path.join(p, file) for p, _, files in os.walk(os.path.abspath(path)) for file in files]
     elif not string and not recursive:
-        [(path, nome) for nome in os.listdir(path) if os.path.isfile(os.path.join(path, nome))]
+        return [(path, nome) for nome in os.listdir(path) if os.path.isfile(os.path.join(path, nome))]
     else:
-        [os.path.join(path, nome) for nome in os.listdir(path) if os.path.isfile(os.path.join(path, nome))]
+        return [os.path.join(path, nome) for nome in os.listdir(path) if os.path.isfile(os.path.join(path, nome))]
 
 def realfilename(filebase, ext=None, digits=2, separador=True):
     count = 0
