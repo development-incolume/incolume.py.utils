@@ -21,10 +21,6 @@ def ll(path='.', ext=None, string=True, recursive=False):
         return [(p, file) for p, _, files in os.walk(os.path.abspath(path))for file in files if file.lower().endswith(ext)]
     elif (string and recursive) and not ext:
         return [os.path.join(p, file) for p, _, files in os.walk(os.path.abspath(path)) for file in files]
-<<<<<<< HEAD
-    elif not string and not recursive:
-        return [(path, nome) for nome in os.listdir(path) if os.path.isfile(os.path.join(path, nome))]
-=======
     elif (string and recursive) and ext:
         return [os.path.join(p, file) for p, _, files in os.walk(os.path.abspath(path)) for file in files if file.lower().endswith(ext)]
     elif (not string and not recursive) and not ext:
@@ -33,7 +29,6 @@ def ll(path='.', ext=None, string=True, recursive=False):
         return [(path, nome) for nome in os.listdir(path) if os.path.isfile(os.path.join(path, nome)) and nome.lower().endswith(ext)]
     elif (string and not recursive) and ext:
         return [os.path.join(path, nome) for nome in os.listdir(path) if os.path.isfile(os.path.join(path, nome)) and nome.lower().endswith(ext)]
->>>>>>> 3b144507e7e655a5244f38af0ec124b98e9ee378
     else:
         return [os.path.join(path, nome) for nome in os.listdir(path) if os.path.isfile(os.path.join(path, nome))]
 
