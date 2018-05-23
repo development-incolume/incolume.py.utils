@@ -1,0 +1,12 @@
+bs4
+coverage
+lxml
+numpy
+pandas
+requests
+selenium
+tox
+urllib3
+virtualenv>=16.0.0
+xlrd
+XlsxWriter
