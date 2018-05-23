@@ -1,3 +1,4 @@
+0.8             ll() adicionado
 0.7.2           EXAMPLE.rst
 0.7.1           atualizações no setup, e na apresentação da documentação
 0.7             added incolumepy.utils.files.ll
