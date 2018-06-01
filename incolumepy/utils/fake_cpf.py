@@ -1,3 +1,4 @@
+# coding: utf-8
 from rstr import rstr
 from string import digits
 
