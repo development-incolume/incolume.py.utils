@@ -19,7 +19,6 @@ class UtilsTest(unittest.TestCase):
             l.append(a.__next__())
         self.assertEqual(a.__next__(), 7927)
         self.assertIn(7669, l)
-
         a = Sequencia.Primos()
         l.clear()
         for i in range(2000):
@@ -45,7 +44,6 @@ class UtilsTest(unittest.TestCase):
         self.assertEqual(a.__next__(), 377)
         self.assertEqual(a.__next__(), 610)
         self.assertEqual(a.__next__(), 987)
-        a = Sequencia.Fibonacci()
         l.clear()
         for i in range(2000):
             l.append(a.__next__())
@@ -94,3 +92,6 @@ class UtilsTest(unittest.TestCase):
         for i in range(5):
             l.append(a.__next__())
         self.assertTrue(l == [22, 23, 24, 25,26])
+
+if __name__ == '__main__':
+    unittest.main()
