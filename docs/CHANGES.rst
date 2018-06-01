@@ -1,4 +1,4 @@
-0.9             nonexequi para restrição de execução em serie
+0.9             decorator @nonexequi para restrição de execução de metodos em serie
 0.8             ll() adicionado
 0.7.2           EXAMPLE.rst
 0.7.1           atualizações no setup, e na apresentação da documentação
