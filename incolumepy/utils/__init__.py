@@ -2,16 +2,16 @@ from functools import wraps
 
 
 def nonexequi(a_func):
-    '''
+    ''' This decorator when apply over def, the def dont work, but return a message informing that skip.
 
-    :param a_func:
-    :return:
+    :param a_func: any function
+    :return: str = "Skip: a_function_name"
     '''
     @wraps(a_func)
-    def wrapTheFunction(self):
-        return ('Skip: {}'.format(a_func.__name__))
+    def wrap_the_function(self):
+        return 'Skip: {}'.format(a_func.__name__)
 
-    return wrapTheFunction
+    return wrap_the_function
 
 
 # See http://peak.telecommunity.com/DevCenter/setuptools#namespace-packages
