@@ -1,6 +1,7 @@
 import os
 
 from setuptools import setup, find_packages
+import incolumepy.utils as package
 
 NAME = 'incolumepy.utils'
 NAMESPACE = NAME.split('.')[:-1]
@@ -27,7 +28,7 @@ CLASSIFIERS = [
 'Topic :: Software Development :: Libraries :: Python Modules',
 'Topic :: Utilities',]
 
-VERSION = open(os.path.join(NAME.replace('.','/'), "version.txt")).read().strip()
+VERSION = package.__version__
 LONG_DESCRIPTION = (
         open('README.md').read()
         + '\n\n'

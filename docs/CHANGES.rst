@@ -1,3 +1,4 @@
+0.9.1           corrigido namespace
 0.9             decorator @nonexequi para restrição de execução de metodos em serie
 0.8             ll() adicionado
 0.7.2           EXAMPLE.rst
