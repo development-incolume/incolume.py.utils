@@ -1,10 +1,10 @@
 import os
-
+from incolumepy.utils.utils import  namespace
 from setuptools import setup, find_packages
 import incolumepy.utils as package
 
 NAME = 'incolumepy.utils'
-NAMESPACE = NAME.split('.')[:-1]
+NAMESPACE = namespace(NAME)
 DESCRIPTION = "package incolumepy utils"
 KEYWORDS = 'python utils incolumepy'
 AUTHOR = '@britodfbr'

@@ -7,7 +7,7 @@ def read(*rnames):
     :param rnames:
     :return:
     >>> read(os.path.dirname(__file__), 'version.txt')
-    '0.7.2'
+    '0.9.4'
 
     >>> read(os.path.dirname(__file__), 'README')
     'incolumepy.utils'
