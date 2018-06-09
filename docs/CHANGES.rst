@@ -1,3 +1,4 @@
+0.9.4           Chamada do pacote utils através do Namespace
 0.9.3           Nova implementação para incolumepy.utils.utils.namespace
 0.9.2           package incolumepy.utils.sequencias remaked into incolumepy.sequencias
 0.9.1           corrigido namespace
