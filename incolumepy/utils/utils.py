@@ -23,8 +23,13 @@ def namespace(package_name):
     :param package_name: str
     :return: list
 
+    >>> namespace('incolumepy.package.subpackage.module')
+    ['incolumepy', 'incolumepy.package', 'incolumepy.package.subpackage']
     >>> namespace('incolumepy.package.module')
     ['incolumepy', 'incolumepy.package']
+
+    >>> namespace('incolumepy.package')
+    ['incolumepy']
 
     >>> namespace('incolumepy')
     ['incolumepy']
@@ -33,17 +38,30 @@ def namespace(package_name):
     s = package_name.split('.')
     #print(s)
     l = []
-    if len(package_name)<=0:
-        raise ValueError('package_name not can be void')
-    elif len(s) == 1:
-        l.append(package_name)
-    else:
+    if len(s) > 2:
+        inanis = ''
         for item in s[:-1]:
-            if l:
-                l.append('{}.{}'.format(l[-1], item))
+            if inanis:
+                inanis = '{}.{}'.format(inanis, item)
             else:
-                l.append(item)
-            #print(l)
+                inanis = item
+            l.append(inanis)
+    elif 0 < len(s) <= 2:
+        l =s[:1]
+    else:
+        raise ValueError('package_name not can be void')
+
+    #if len(package_name)<=0:
+    #elif 0 < len(s) <= 2:
+    #    l = s[1]
+    #else:
+    #    for item in s[:-1]:
+    #        if l:
+    #            l.append('{}.{}'.format(l[-1], item))
+    #        else:
+    #            l.append(item)
+    #            pass
+    #        #print(l)
     return l
 
 def run():
