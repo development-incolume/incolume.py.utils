@@ -8,7 +8,6 @@ def time_it(func):
         start = time()
         result = func(*args, **kwargs)
         end = time()
-        print('{}: {}"'.format(func.__name__, end-start))
+        print('{}: {5:3.2f} ms'.format(func.__name__, 1000*(end-start)))
         return result
     return wrapper
-
