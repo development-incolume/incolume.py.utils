@@ -1,6 +1,8 @@
 from incolumepy.utils.decorators import time_it
 from unittest import TestCase, main
 import sys
+from io import StringIO
+from unittest.mock import patch
 
 
 class DecoratorTests(TestCase):
@@ -23,7 +25,7 @@ class DecoratorTests(TestCase):
         return 'fx'
 
     def setUp(self):
-        pass
+        self.held, sys.stdout = sys.stdout, StringIO()
 
     def test_name(self):
         self.assertEqual('xpto', self.xpto.__name__)
@@ -41,23 +43,31 @@ class DecoratorTests(TestCase):
     def test_output(self):
         self.xpto()
         output = sys.stdout.getvalue().strip()
-        self.assertEqual('', output)
+        self.assertNotEqual('', output)
 
     def test_output_mock0(self):
-        from io import StringIO
-        from unittest.mock import patch
-
         with patch('sys.stdout', new=StringIO()) as fakeOutput:
             self.xpto()
             self.assertRegex(fakeOutput.getvalue().strip(), '^xpto: \d*.?\d+ ms$')
 
     def test_output_mock1(self):
-        from io import StringIO
-        from unittest.mock import patch
-
         with patch('sys.stdout', new=StringIO()) as fakeOutput:
             self.fx()
             self.assertRegex(fakeOutput.getvalue().strip(), '^fx: \d*.?\d+ ms$')
+
+    def test_output0(self):
+        self.xpto()
+        self.assertRegex(sys.stdout.getvalue(), '^xpto: \d*.?\d+ ms$')
+
+    def test_output1(self):
+        this = self.xpto
+        this()
+        self.assertRegex(sys.stdout.getvalue(), '^{}: \d*.?\d+ ms$'.format(this.__name__))
+
+    def test_output2(self):
+        this = self.fx
+        this()
+        self.assertRegex(sys.stdout.getvalue(), '^{}: \d*.?\d+ ms$'.format(this.__name__))
 
 if __name__ == '__main__':
     main()
