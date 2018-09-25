@@ -4,8 +4,8 @@ from incolumepy.utils.fake_cpf import gen_fake_cpf
 
 
 class UtilsTest(unittest.TestCase):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+
+    def setUp(self):
         self.cpf1 = gen_fake_cpf(False)
         self.cpf2 = gen_fake_cpf(True)
 
@@ -17,7 +17,7 @@ class UtilsTest(unittest.TestCase):
 
     def test_fake_cpf3(self):
         cpf = re.split('[.-]', next(self.cpf2))
-        print(cpf)
+        # print(cpf)
         self.assertEqual(len(cpf), 4)
 
     def test_fake_cpf4(self):

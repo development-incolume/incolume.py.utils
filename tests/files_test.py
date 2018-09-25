@@ -6,12 +6,10 @@ from incolumepy.utils.files import realfilename
 from incolumepy.utils.files import ll
 
 class UtilsTest(unittest.TestCase):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def setUp(self):
         self.directories = []
 
-    def __del__(self, *args, **kwargs):
-        #print('init destructor')
+    def tearDown(self):
         for dir in self.directories:
             #print(dir)
             shutil.rmtree(dir, ignore_errors=True)
