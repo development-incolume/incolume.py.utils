@@ -3,6 +3,11 @@ from functools import wraps
 
 
 def time_it(func):
+    '''
+    Retorne a string with execution time
+    :param func: instance of Function
+    :return: string in miliseconds
+    '''
     @wraps(func)
     def wrapper(*args, **kwargs):
         start = time()
