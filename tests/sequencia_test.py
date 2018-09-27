@@ -9,7 +9,7 @@ class UtilsTest(unittest.TestCase):
         for i in range(10):
             l.append(a.__next__())
         self.assertTrue(l == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29])
-        self.assertEqual(a.__next__(), 31)
+        self.assertEqual(next(a), 31)
         self.assertEqual(a.__next__(), 37)
         self.assertEqual(a.__next__(), 41)
         self.assertEqual(a.__next__(), 43)
