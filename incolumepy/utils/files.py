@@ -12,9 +12,11 @@ def ll(path='.', ext=None, string=True, recursive=False):
     string=False return list of tuple(path, file)
 
     :param path: path on Operation System
+    :param ext: extention look for  file
     :param string: Bool
     :param recursive: Bool
     :return: absolute path of file
+
     '''
     if (not string and recursive) and not ext:
         return [(p, file) for p, _, files in os.walk(os.path.abspath(path))for file in files]
@@ -35,7 +37,7 @@ def ll(path='.', ext=None, string=True, recursive=False):
 
 
 def preserve_file(file_orig):
-    pass
+    return file_orig
 
 
 def realfilename(filebase, ext=None, digits=2, separador=True):
