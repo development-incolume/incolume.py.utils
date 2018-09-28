@@ -31,7 +31,12 @@ def ll(path='.', ext=None, string=True, recursive=False):
 
 
 def preserve_file(file_orig):
-    return file_orig
+    '''
+    Get a passed file on parameter and preserve the original content this file
+    :param file_orig: string with path file
+    :return: True if sucess.
+    '''
+    raise NotImplemented('Lançamento futuro..')
 
 
 def realfilename(filebase, ext=None, digits=2, separador=True):
@@ -60,6 +65,7 @@ def realfilename(filebase, ext=None, digits=2, separador=True):
     dir_name = os.path.dirname(filebase)
     # print(dir)
     os.makedirs(os.path.abspath(dir_name), exist_ok=True, mode=0o777)
+
     if separador:
         sep = '_'
     else:
