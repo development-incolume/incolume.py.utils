@@ -3,6 +3,7 @@
 
 import os
 from shutil import rmtree
+import logging
 
 
 def ll(path='.', ext=None, string=True, recursive=False):
@@ -79,10 +80,10 @@ def realfilename(filebase, ext=None, digits=2, separador=True):
                 filename = ('{}{}{:0>%s}.{}' % digits).format(filebase, sep, count, ext)
             if os.path.isfile(filename):
                 raise IOError('Arquivo existente: {}'.format(filename))
-            print('Criado arquivo: {}'.format(filename))
+            logging.debug('Nome sugerido: {}'.format(filename))
             return filename
         except IOError as e:
-            print(e)
+            logging.warning('{}'.format(e))
         finally:
             count += 1
 
