@@ -13,6 +13,7 @@ class DecoratorTests(TestCase):
 
     @time_it
     def xpto(self):
+        '''This ok!'''
         n = 1
         for i in range(100000):
             n *= i**2
@@ -20,6 +21,7 @@ class DecoratorTests(TestCase):
 
     @time_it
     def fx(self):
+        '''This ok!'''
         return 'fx'
 
     def setUp(self):
