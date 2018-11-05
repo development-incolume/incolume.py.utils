@@ -13,7 +13,6 @@ class DecoratorTests(TestCase):
 
     @time_it
     def xpto(self):
-        '''This ok!'''
         n = 1
         for i in range(100000):
             n *= i**2
@@ -21,7 +20,6 @@ class DecoratorTests(TestCase):
 
     @time_it
     def fx(self):
-        '''This ok!'''
         return 'fx'
 
     def setUp(self):
@@ -30,7 +28,6 @@ class DecoratorTests(TestCase):
     def test_name(self):
         self.assertEqual('xpto', self.xpto.__name__)
         self.assertEqual('fx', self.fx.__name__)
-
 
     def test_doc(self):
         self.assertEqual('This ok!', self.xpto.__doc__)
@@ -68,6 +65,7 @@ class DecoratorTests(TestCase):
         this = self.fx
         this()
         self.assertRegex(sys.stdout.getvalue(), '^{}: \d*.?\d+ ms$'.format(this.__name__))
+
 
 if __name__ == '__main__':
     main()
