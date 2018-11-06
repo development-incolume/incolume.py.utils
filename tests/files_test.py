@@ -2,6 +2,7 @@ import os
 import sys
 import unittest
 import shutil
+import logging
 from incolumepy.utils.files import realfilename
 from incolumepy.utils.files import ll
 
@@ -22,14 +23,15 @@ class UtilsTest(unittest.TestCase):
         self.assertTrue(realfilename('README'))
 
     def test_files03(self):
-        self.directories.append(os.path.join('tmp', 'britodfbr','diretorio', 'para', 'teste'))
-        file = realfilename(self.directories[-1],ext='.dat', separador=True)
-        self.assertEqual(sys.stdout.getvalue().strip(), 'Criado arquivo: {}'.format(file))
+        self.directories.append(os.path.join('tmp', 'britodfbr', 'diretorio', 'para', 'teste'))
+        file = realfilename(self.directories[-1], ext='.dat', separador=True)
+        self.assertEqual('root: DEBUG: Nome sugerido: {}'.format(file), sys.stdout.fileno().strip())
 
     def test_files04(self):
         self.directories.append(os.path.join('tmp', 'diretorio', 'para', 'teste'))
-        file = realfilename(self.directories[-1],separador=True, ext='md')
-        self.assertEqual(sys.stdout.getvalue().strip(), 'Criado arquivo: {}'.format(file))
+        file = realfilename(self.directories[-1], separador=True, ext='md')
+        print(type(sys.stdout.getvalue()))
+        self.assertEqual('root: DEBUG: Nome sugerido: {}'.format(file), sys.stdout.getvalue().strip())
 
     def test_files05(self):
         self.directories.append('tmp/teste/test.json')
