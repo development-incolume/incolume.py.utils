@@ -2,6 +2,7 @@
 from rstr import rstr
 from string import digits
 
+
 def gen_fake_cpf(formated=True):
     '''
     Cria um Gerador numeros de CPF com 11 digitos não verificados
@@ -14,6 +15,7 @@ def gen_fake_cpf(formated=True):
             yield "{}.{}.{}-{}".format(cpf[:3], cpf[3:6], cpf[6:9], cpf[-2:])
         else:
             yield cpf
+
 
 if __name__ == '__main__':
     c1 = gen_fake_cpf()
