@@ -1,3 +1,4 @@
+; .editorconfig file
 ; EditorConfig is awesome: http://EditorConfig.org
 
 root = true
@@ -10,7 +11,7 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 charset = utf-8
 
-[*.yml, *.js]
+[*.{yml,yaml,js,toml}]
 indent_size = 2
 
 [Makefile]
