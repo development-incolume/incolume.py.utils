@@ -1,0 +1,57 @@
+[tool.poetry]
+name = "incolumepy.utils"
+version = "1.1.0"
+description = "package incolumepy utils"
+keywords = ['python', 'utils', 'incolumepy']
+authors = ["britodfbr <contato@incolume.com.br>"]
+packages = [
+  {include = "incolumepy" },
+]
+classifiers = [
+  'Development Status :: 5 - Production/Stable',
+  'Operating System :: OS Independent',
+  'Natural Language :: Portuguese (Brazilian)',
+  "Programming Language :: Python",
+  'Topic :: Software Development :: Libraries :: Python Modules',
+  'Topic :: Utilities',
+]
+include = [
+  'README.md',
+  "CHANGELOG.md",
+  "docs/CHANGES.rst",
+  'docs/HISTORY.rst',
+  'docs/EXAMPLES.rst',
+  'docs/CONTRIBUTORS.rst',
+]
+exclude = [
+  "examples/",
+  "ez_setup",
+  "incolumepy/utils/tmp",
+  "my_package/excluded.py",
+  "tests/",
+]
+
+[tool.poetry.urls]
+'Documentation' = 'https://brito.blog.incolume.com.br/search/label/development-incolume'
+'Source' = 'https://gitlab.com/development-incolume/incolumepy.utils'
+'Git' = 'https://gitlab.com/development-incolume/incolumepy.utils.git'
+'Tracker' = 'https://gitlab.com/development-incolume/incolumepy.utils/issues'
+'Oficial' = 'https://pypi.org/project/incolumepy.utils/'
+
+[tool.poetry.scripts]
+incolumepy-utils = 'incolumepy.utils.main:run'
+
+[tool.poetry.dependencies]
+python = "^3.7"
+Deprecated = "^1.2.10"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^3.8.4"
+py3kwarn = "^0.4.4"
+coverage = "^5.3"
+nose = "^1.3.7"
+tox = "^3.20.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
