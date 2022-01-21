@@ -65,3 +65,15 @@ pytest-cov = "^3.0.0"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+addopts = "--cov=incolumepy.utils"
+testpaths = [
+  "tests",
+]
+markers = [
+  "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+  "webtest: marks tests as webtest (deselect with '-m \"not webtest\"')",
+  "fasttest: marks tests as fasttest (deselect with '-m \"not fasttest\"')",
+]
+
