@@ -77,3 +77,7 @@ markers = [
   "fasttest: marks tests as fasttest (deselect with '-m \"not fasttest\"')",
 ]
 
+[PEP8]
+# define para todos os linters compatíveis
+max-line-length = 120
+
