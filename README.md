@@ -1,6 +1,10 @@
+# Python Incolume Utils
+
 --------
-Projeto desenvolvido e administrado incolume.com.br
---------
+
+_Projeto desenvolvido e administrado incolume.com.br_
+
+---
 
 Este pacote disponibiliza diversas funcionalidades para utilização em rotinas com Python.
 
@@ -17,21 +21,39 @@ Dentre elas:
 * Nome único para gravação de arquivos sem sobrescrita;
 
 
-Instalar o pacote
--------
+## Instalar o pacote
 
-    $ pip install incolumepy.utils
+```shell
+pip install incolumepy.utils
+```
+```shell
+pipenv install incolumepy.utils
+```
 
-Atualizar o pacote
--------
-    $ pip install -U incolumepy.utils
+```shell
+poetry add incolumepy.utils
+```
 
-Gerar pacote a partir dos fontes para instalação
-------
+## Atualizar o pacote
+```shell
 
-    $ python setup.py bdist_egg bdist_wheel
+pip install -U incolumepy.utils
+```
+```shell
+pipenv update incolumepy.utils
+```
+```shell
+poetry update incolumepy.utils
+```
 
-Exemplos
--------
-Exemplos disponíveis em docs/EXAMPLES
+## Gerar pacote a partir dos fontes para instalação
+```shell
+python setup.py bdist_egg bdist_wheel
+```
+```shell
+poetry build
+```
+
+## Exemplos
+Exemplos disponíveis em [docs/EXAMPLES]('docs/EXAMPLES.rst')
 
