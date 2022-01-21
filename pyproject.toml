@@ -5,7 +5,7 @@ description = "package incolumepy utils"
 keywords = ['python', 'utils', 'incolumepy']
 authors = ["britodfbr <contato@incolume.com.br>"]
 homepage = "https://pypi.org/project/incolumepy.utils"
-repository = 'https://gitlab.com/development-incolume/incolumepy.utils' 
+repository = 'https://gitlab.com/development-incolume/incolumepy.utils'
 packages = [
   {include = "incolumepy/utils", from=""},
 ]
@@ -62,6 +62,7 @@ black = "^21.12b0"
 pydocstyle = "^6.1.1"
 pytest-cov = "^3.0.0"
 types-toml = "^0.10.3"
+types-Deprecated = "^1.2.5"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -225,7 +226,9 @@ commands = poetry run flake8 --config pyproject.toml incolumepy/ tests/
 deps =
     mypy
     types-toml
-commands = mypy incolumepy/
+    types-Deprecated
+commands =
+    mypy incolumepy/
 
 [testenv:pydocstyle]
 commands = poetry run pydocstyle incolumepy/ tests/
