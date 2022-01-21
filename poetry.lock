@@ -459,6 +459,14 @@ optional = false
 python-versions = ">=3.6"
 
 [[package]]
+name = "types-deprecated"
+version = "1.2.5"
+description = "Typing stubs for Deprecated"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "types-toml"
 version = "0.10.3"
 description = "Typing stubs for toml"
@@ -516,7 +524,7 @@ testing = ["pytest (>=3.5,!=3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "564e7cb35c6b24d848cda6c9ba7b207e72835047371e13d61395e5ae59438bad"
+content-hash = "97b6153d3c2c70aa89a35ba6755c9e72e9232d57c00af2ac4e44431db6fbe483"
 
 [metadata.files]
 appdirs = [
@@ -780,6 +788,10 @@ typed-ast = [
     {file = "typed_ast-1.5.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:a2b8d7007f6280e36fa42652df47087ac7b0a7d7f09f9468f07792ba646aac2d"},
     {file = "typed_ast-1.5.1-cp39-cp39-win_amd64.whl", hash = "sha256:b6d17f37f6edd879141e64a5db17b67488cfeffeedad8c5cec0392305e9bc775"},
     {file = "typed_ast-1.5.1.tar.gz", hash = "sha256:484137cab8ecf47e137260daa20bafbba5f4e3ec7fda1c1e69ab299b75fa81c5"},
+]
+types-deprecated = [
+    {file = "types-Deprecated-1.2.5.tar.gz", hash = "sha256:6f1f3250a80ed5ae9ef1b599adf8ca850324bcd544af2efb655fdf15212a287e"},
+    {file = "types_Deprecated-1.2.5-py3-none-any.whl", hash = "sha256:a86cf8cec2c995410390d640bd0328c5d905d5544d82555dc98deb98ad1e98a4"},
 ]
 types-toml = [
     {file = "types-toml-0.10.3.tar.gz", hash = "sha256:215a7a79198651ec5bdfd66193c1e71eb681a42f3ef7226c9af3123ced62564a"},
