@@ -8,6 +8,7 @@ setup: ## setup environment python with poetry
 	@git config core.hooksPath .git-hooks
 	@poetry shell
 	@poetry install
+	@#poetry run mypy --install-types
 
 #.PHOMY: install
 #install:  ## Install this package using poetry
