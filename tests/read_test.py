@@ -1,14 +1,20 @@
+"""Read test."""
 import unittest
+
 from incolumepy.utils.utils import read
 
 
 class UtilsTest(unittest.TestCase):
+    """Read test."""
+
     def test_read1(self):
-        self.assertTrue(read('version.txt'))
+        """Read test."""
+        self.assertTrue(read("version.txt"))
 
     def test_read2(self):
-        self.assertTrue(read('utils.py'))
+        """Read test."""
+        self.assertTrue(read("utils.py"))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
