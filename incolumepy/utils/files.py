@@ -5,7 +5,6 @@
 
 import logging
 import os
-from shutil import rmtree
 
 
 def ll(path=".", ext=None, string=True, recursive=False):
@@ -212,4 +211,5 @@ def realfilename(filebase, ext=None, digits=2, separador=True):
 
 
 if __name__ == "__main__":
-    run(False)
+    pass
+    # run(False)

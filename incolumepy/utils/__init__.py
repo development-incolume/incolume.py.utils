@@ -1,11 +1,10 @@
 """incolumepy.utils module."""
 from functools import wraps
-from os.path import abspath, dirname, join
 from pathlib import Path
 
 import toml
 
-from incolumepy.utils.utils import namespace, read
+from incolumepy.utils.utils import namespace
 
 confproject = Path(__file__).parents[2] / "pyproject.toml"
 assert confproject.is_file(), "Ops: {}".format(confproject)
