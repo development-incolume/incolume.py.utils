@@ -2,14 +2,14 @@ import logging
 import os
 
 
-def logger(
-    str_format="%(asctime)s;%(levelname)-8s;%(name)s;%(module)s;%(funcName)s;%(message)s",
-    datefmt="%Y/%m/%d %H:%M:%S %z",
-    level=logging.DEBUG,
-):
+def logger(str_format="", datefmt="", level=0, filelog=None):
+    """Logger function for log."""
+    str_format = str_format or "%(asctime)s;%(levelname)-8s;%(name)s;%(module)s;%(funcName)s;%(message)s"
+    datefmt = datefmt or "%Y/%m/%d %H:%M:%S %z",
     # create logger
     # levels = (logging.DEBUG, logging.INFO, logging.WARNING, logging.ERROR, logging.CRITICAL)
-    filelog = os.path.basename(__file__).replace("py", "log")
+    level = level or logging.DEBUG
+    filelog = filelog or Path(__file__).with_suffix(".py")
 
     logging.basicConfig(
         filename=filelog, level=level, format=str_format, datefmt=datefmt
