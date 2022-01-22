@@ -43,9 +43,9 @@ check-black: ## black checking
 	@echo "Black checking .."
 	@poetry run black --check $(DIRECTORIES)
 
-.PHONY: check-docstyle
-check-docstyle: ## docstring checking
-	@echo "docstyle checking .."
+.PHONY: check-pydocstyle
+check-pydocstyle: ## docstring checking
+	@echo "pydocstyle checking .."
 	@poetry run pydocstyle $(DIRECTORIES)
 
 .PHONY: isort
@@ -59,8 +59,8 @@ black:  ##Apply code style black format
 	@echo ">>>  Applied code style Black format automaticly  <<<"
 
 .PHONY: lint
-lint:  ## Run all linters (check-isort, check-black, flake8, pylint, mypy, docstyle)
-lint: check-mypy check-pylint check-flake8 check-docstyle check-isort check-black
+lint:  ## Run all linters (check-isort, check-black, flake8, pylint, mypy, pydocstyle)
+lint: check-mypy check-pylint check-flake8 check-pydocstyle check-isort check-black
 
 .PHONY: test
 test: ## Run all tests avaliable and generate html coverage
