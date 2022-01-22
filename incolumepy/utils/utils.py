@@ -1,5 +1,7 @@
+"""Module incolumepy.utils."""
 import logging
 import os
+from pathlib import Path
 
 
 def logger(str_format="", datefmt="", level=0, filelog=None):
@@ -24,8 +26,8 @@ def logger(str_format="", datefmt="", level=0, filelog=None):
 
 
 def read(*rnames):
-    """
-    return content from file informed in '*rnames'
+    """Return content from file informed in '*rnames'.
+
     :param rnames:
     :return:
     >>> read(os.path.dirname(__file__), 'version.txt')
@@ -40,8 +42,8 @@ def read(*rnames):
 
 
 def namespace(package_name):
-    """
-    return the namespace from package_name='incolumepy.package.module' ['incolumepy','incolumepy.package']
+    """Return the namespace from package_name='incolumepy.package.module' ['incolumepy','incolumepy.package'].
+
     :param package_name: str
     :return: list
 
@@ -85,15 +87,3 @@ def namespace(package_name):
     #             pass
     #         print(l)
     return l
-
-
-def run():
-    print(namespace("incolumepy.package.subpackage.module"))
-    print(namespace("incolumepy.package"))
-    print(namespace("incolumepy"))
-    print(namespace(""))
-
-
-if __name__ == "__main__":
-    pass
-    # run()

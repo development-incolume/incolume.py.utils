@@ -1,10 +1,12 @@
+"""Decorators module."""
+
 from functools import wraps
 from time import time
 
 
 def time_it(func):
-    """
-    Retorne a string with execution time
+    """Retorne a string with execution time.
+
     :param func: instance of Function
     :return: string in miliseconds
     """

@@ -1,4 +1,6 @@
-#!/usr/bin/python
+"""incolumepy.utils.files module."""
+
+# !/usr/bin/python
 # coding: utf-8
 
 import logging
@@ -7,8 +9,8 @@ from shutil import rmtree
 
 
 def ll(path=".", ext=None, string=True, recursive=False):
-    """
-    recursive or single list of file on directory.
+    """Recursive or single list of file on directory.
+
     recursive=True return list recursive, string=True return list of string(path+file),
     string=False return list of tuple(path, file)
 
@@ -46,7 +48,8 @@ def ll(path=".", ext=None, string=True, recursive=False):
 
 def preserve_file(file_orig):
     """
-    Get a passed file on parameter and preserve the original content this file
+    Get a passed file on parameter and preserve the original content this file.
+
     :param file_orig: string with path file
     :return: True if sucess.
     """
@@ -54,6 +57,15 @@ def preserve_file(file_orig):
 
 
 def realfilename(filebase, ext=None, digits=2, separador=True):
+    """
+    Return real file name for filebase.
+
+    :param filebase:
+    :param ext:
+    :param digits:
+    :param separador:
+    :return:
+    """
     count = 0
     sufix = {"default": "txt", 0: "txt", 1: None, 2: None}
 
@@ -101,75 +113,75 @@ def realfilename(filebase, ext=None, digits=2, separador=True):
             count += 1
 
 
-def run(remove=False):
-    with open(
-        realfilename(
-            os.path.join("tmp", "britodfbr", "diretorio", "para", "teste"),
-            ext=".dat",
-            separador=True,
-        ),
-        "w",
-    ) as file:
-        file.write("teste ok")
-
-    with open(
-        realfilename(
-            os.path.join("tmp", "diretorio", "para", "teste"), separador=True, ext="md"
-        ),
-        "w",
-    ) as file:
-        file.write("teste ok")
-
-    with open(
-        realfilename("tmp/teste/test.json", separador=True, ext="bash"), "w"
-    ) as file:
-        file.write("teste ok")
-
-    with open(realfilename("tmp/teste/lll", separador=True), "w") as file:
-        file.write("teste ok")
-
-    with open(realfilename("tmp/teste/jjj.json", separador=True), "w") as file:
-        file.write("teste ok")
-
-    with open(
-        realfilename(
-            os.path.join("tmp", os.path.basename(__file__)),
-            digits=4,
-            ext="log",
-            separador=False,
-        ),
-        "a",
-    ) as file:
-        file.write(file.name)
-
-    with open(
-        realfilename(
-            os.path.join("tmp", os.path.basename(__file__)),
-            digits=5,
-            ext="log",
-            separador=True,
-        ),
-        "a",
-    ) as file:
-        file.write(file.name)
-
-    with open(
-        realfilename(
-            os.path.join("tmp", os.path.basename(__file__)), digits=5, ext="csv"
-        ),
-        "a",
-    ) as file:
-        file.write("{}".format(file.name))
-
-    with open(realfilename("../utils/tmp/registro.xml"), "w") as file:
-        file.write(file.name)
-
-    print(ll())
-
-    if remove:
-        dirlist = ["tmp"]
-        for i in dirlist:
-            rmtree(i)
+# def run(remove=False):
+#     with open(
+#         realfilename(
+#             os.path.join("tmp", "britodfbr", "diretorio", "para", "teste"),
+#             ext=".dat",
+#             separador=True,
+#         ),
+#         "w",
+#     ) as file:
+#         file.write("teste ok")
+#
+#     with open(
+#         realfilename(
+#             os.path.join("tmp", "diretorio", "para", "teste"), separador=True, ext="md"
+#         ),
+#         "w",
+#     ) as file:
+#         file.write("teste ok")
+#
+#     with open(
+#         realfilename("tmp/teste/test.json", separador=True, ext="bash"), "w"
+#     ) as file:
+#         file.write("teste ok")
+#
+#     with open(realfilename("tmp/teste/lll", separador=True), "w") as file:
+#         file.write("teste ok")
+#
+#     with open(realfilename("tmp/teste/jjj.json", separador=True), "w") as file:
+#         file.write("teste ok")
+#
+#     with open(
+#         realfilename(
+#             os.path.join("tmp", os.path.basename(__file__)),
+#             digits=4,
+#             ext="log",
+#             separador=False,
+#         ),
+#         "a",
+#     ) as file:
+#         file.write(file.name)
+#
+#     with open(
+#         realfilename(
+#             os.path.join("tmp", os.path.basename(__file__)),
+#             digits=5,
+#             ext="log",
+#             separador=True,
+#         ),
+#         "a",
+#     ) as file:
+#         file.write(file.name)
+#
+#     with open(
+#         realfilename(
+#             os.path.join("tmp", os.path.basename(__file__)), digits=5, ext="csv"
+#         ),
+#         "a",
+#     ) as file:
+#         file.write("{}".format(file.name))
+#
+#     with open(realfilename("../utils/tmp/registro.xml"), "w") as file:
+#         file.write(file.name)
+#
+#     print(ll())
+#
+#     if remove:
+#         dirlist = ["tmp"]
+#         for i in dirlist:
+#             rmtree(i)
 
 
 if __name__ == "__main__":

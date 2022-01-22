@@ -1,3 +1,4 @@
+"""incolumepy.utils module."""
 from functools import wraps
 from os.path import abspath, dirname, join
 from pathlib import Path
@@ -21,7 +22,7 @@ __name__ = __title__.split(".")[-1]
 
 
 def nonexequi(a_func):
-    """This decorator when apply over def, the def dont work, but return a message informing that skip.
+    """Decorate when apply over def, the def dont work, but return a message informing that skip.
 
     :param a_func: any function
     :return: str = "Skip: a_function_name"
