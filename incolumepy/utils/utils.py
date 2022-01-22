@@ -6,8 +6,11 @@ from pathlib import Path
 
 def logger(str_format="", datefmt="", level=0, filelog=None):
     """Logger function for log."""
-    str_format = str_format or "%(asctime)s;%(levelname)-8s;%(name)s;%(module)s;%(funcName)s;%(message)s"
-    datefmt = datefmt or "%Y/%m/%d %H:%M:%S %z",
+    str_format = (
+        str_format
+        or "%(asctime)s;%(levelname)-8s;%(name)s;%(module)s;%(funcName)s;%(message)s"
+    )
+    datefmt = datefmt or "%Y/%m/%d %H:%M:%S %z"
     # create logger
     # levels = (logging.DEBUG, logging.INFO, logging.WARNING, logging.ERROR, logging.CRITICAL)
     level = level or logging.DEBUG
