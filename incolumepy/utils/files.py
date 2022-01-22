@@ -2,11 +2,12 @@
 
 # !/usr/bin/python
 # coding: utf-8
-
+from deprecated import deprecated
 import logging
 import os
 
 
+@deprecated(version="1.6.0", reason="Replaced for pathlib.Path.glob or pathlib.Path.rglob")
 def ll(path=".", ext=None, string=True, recursive=False):
     """Recursive or single list of file on directory.
 
