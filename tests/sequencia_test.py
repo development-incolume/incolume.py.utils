@@ -1,10 +1,14 @@
+"""Sequences Tests."""
 import unittest
 
 from incolumepy.utils.sequencia import Sequencia
 
 
 class UtilsTest(unittest.TestCase):
+    """Class tests numbers."""
+
     def test_primos(self):
+        """Test primers numbers."""
         a = Sequencia.Primos()
         l = []
 
@@ -38,7 +42,8 @@ class UtilsTest(unittest.TestCase):
                 422469633339230487870672560234148278257985284025068109801028013731430858437013070722412359963914151108844608753890960360764019471164359602927198331259873732625355580260699158591522949245390499872225679531698287448247299226390183371677806060701161549788671987985831146887087626459736908672288402365442229524334796448013951534956297208765265606952980649984197744872015561280266540455417171788193032402520431208251681712513
             )
 
-    def test_fibonatti(self):
+    def test_fibonacci(self):
+        """Test fibonacci numbers."""
         a = Sequencia.Fibonacci()
         l = []
         for i in range(10):
@@ -59,6 +64,7 @@ class UtilsTest(unittest.TestCase):
         )
 
     def test_impares(self):
+        """Test impars numbers."""
         a = Sequencia.Impares()
         l = []
         for i in range(10):
@@ -69,6 +75,7 @@ class UtilsTest(unittest.TestCase):
         self.assertTrue(a.__next__() == 25)
 
     def test_pares(self):
+        """Test pars numbers."""
         b = Sequencia.Pares()
         l = list()
         for i in range(10):
@@ -79,6 +86,7 @@ class UtilsTest(unittest.TestCase):
         self.assertTrue(b.__next__() == 26)
 
     def test_naturais(self):
+        """Test Naturals numbers."""
         print("Naturais ")
         a = Sequencia.Naturais()
         self.assertTrue(a.__next__() == 0)
