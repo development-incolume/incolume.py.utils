@@ -4,6 +4,8 @@ import shutil
 import sys
 import unittest
 
+import pytest
+
 from incolumepy.utils.files import ll, realfilename
 
 
@@ -21,14 +23,20 @@ class UtilsTest(unittest.TestCase):
             shutil.rmtree(dir, ignore_errors=True)
         # print('finish destructor')
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files01(self):
         """Test files permission."""
         self.assertTrue(realfilename("version.txt"))
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files02(self):
         """Test files permission."""
         self.assertTrue(realfilename("README"))
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files03(self):
         """Test files permission."""
         self.directories.append(
@@ -39,6 +47,8 @@ class UtilsTest(unittest.TestCase):
             "root: DEBUG: Nome sugerido: {}".format(file), sys.stdout.fileno().strip()
         )
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files04(self):
         """Test files permission."""
         self.directories.append(os.path.join("tmp", "diretorio", "para", "teste"))
@@ -48,6 +58,8 @@ class UtilsTest(unittest.TestCase):
             "root: DEBUG: Nome sugerido: {}".format(file), sys.stdout.getvalue().strip()
         )
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files05(self):
         """Test files permission."""
         self.directories.append("tmp/teste/test.json")
@@ -56,6 +68,8 @@ class UtilsTest(unittest.TestCase):
             sys.stdout.getvalue().strip(), "Criado arquivo: {}".format(file)
         )
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files06(self):
         """Test files permission."""
         file = realfilename(("tmp/teste/lll"), separador=True)
@@ -63,6 +77,8 @@ class UtilsTest(unittest.TestCase):
             sys.stdout.getvalue().strip(), "Criado arquivo: {}".format(file)
         )
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files07(self):
         """Test files permission."""
         file = realfilename(("tmp/teste/jjj.json"), separador=True)
@@ -70,6 +86,8 @@ class UtilsTest(unittest.TestCase):
             sys.stdout.getvalue().strip(), "Criado arquivo: {}".format(file)
         )
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files08(self):
         """Test files permission."""
         file = realfilename(
@@ -82,6 +100,8 @@ class UtilsTest(unittest.TestCase):
             sys.stdout.getvalue().strip(), "Criado arquivo: {}".format(file)
         )
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files09(self):
         """Test files permission."""
         file = realfilename(
@@ -94,6 +114,8 @@ class UtilsTest(unittest.TestCase):
             sys.stdout.getvalue().strip(), "Criado arquivo: {}".format(file)
         )
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files10(self):
         """Test files permission."""
         file = realfilename(
@@ -103,6 +125,8 @@ class UtilsTest(unittest.TestCase):
             sys.stdout.getvalue().strip(), "Criado arquivo: {}".format(file)
         )
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files11(self):
         """Test files permission."""
         self.directories.append("/tmp/utils/")
@@ -111,6 +135,8 @@ class UtilsTest(unittest.TestCase):
             sys.stdout.getvalue().strip(), "Criado arquivo: {}".format(file)
         )
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files_realfilename01(self):
         """Test files permission."""
         self.directories.append(
@@ -121,6 +147,8 @@ class UtilsTest(unittest.TestCase):
         ) as file:
             file.write("teste ok")
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files_realfilename02(self):
         """Test files permission."""
         self.directories.append(os.path.join("tmp", "diretorio", "para", "teste"))
@@ -129,6 +157,8 @@ class UtilsTest(unittest.TestCase):
         ) as file:
             file.write("teste ok")
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files_realfilename03(self):
         """Test files permission."""
         self.directories.append("tmp/teste/test.json")
@@ -137,24 +167,32 @@ class UtilsTest(unittest.TestCase):
         ) as file:
             file.write("teste ok")
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files_realfilename04(self):
         """Test files permission."""
         self.directories.append("tmp/teste/lll")
         with open(realfilename(self.directories[-1], separador=True), "w") as file:
             file.write("teste ok")
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files_realfilename05(self):
         """Test files permission."""
         self.directories.append("tmp/teste/jjj.json")
         with open(realfilename(self.directories[-1], separador=True), "w") as file:
             file.write("teste ok")
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files_realfilename06(self):
         """Test files permission."""
         self.directories.append("tmp")
         with open(realfilename(("tmp/teste/jjj.json"), separador=True), "w") as file:
             file.write("teste ok")
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files_realfilename07(self):
         """Test files permission."""
         self.directories.append("tmp")
@@ -169,6 +207,8 @@ class UtilsTest(unittest.TestCase):
         ) as file:
             file.write(file.name)
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files_realfilename08(self):
         """Test files permission."""
         self.directories.append("tmp")
@@ -183,6 +223,8 @@ class UtilsTest(unittest.TestCase):
         ) as file:
             file.write(file.name)
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files_realfilename09(self):
         """Test files permission."""
         self.directories.append("tmp")
@@ -197,6 +239,8 @@ class UtilsTest(unittest.TestCase):
         ) as file:
             file.write(file.name)
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files_realfilename10(self):
         """Test files permission."""
         self.directories.append("tmp")
@@ -208,17 +252,21 @@ class UtilsTest(unittest.TestCase):
         ) as file:
             file.write(file.name)
 
+    @pytest.mark.skip(reason="migrage to test_files")
+    @unittest.skip(reason="migrate to test_files")
     def test_files_realfilename11(self):
         """Test files permission."""
         self.directories.append("../teste_utils/")
         with open(realfilename("../teste_utils/tmp/registro.xml"), "w") as file:
             file.write(file.name)
 
+    @unittest.skip(reason="tornate obsolete on 1.6.0")
     def test_files_ll01(self):
         """Test files permission."""
         self.directories.append("tmp/teste1")
         os.mkdir(self.directories[-1], mode=0o777)
 
+    @unittest.skip(reason="tornate obsolete on 1.6.0")
     def test_files_ll02(self):
         """Test files permission."""
         self.directories.append("tmp/teste1")
@@ -235,6 +283,7 @@ class UtilsTest(unittest.TestCase):
         # print('>', result)
         self.assertTrue(result, "['file_01.txt', 'file.txt', 'file_02.txt']")
 
+    @unittest.skip(reason="tornate obsolete on 1.6.0")
     def test_files_ll03(self):
         """Test files permission."""
         pass
