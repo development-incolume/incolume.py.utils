@@ -16,7 +16,7 @@ def time_it(func):
         start = time()
         result = func(*args, **kwargs)
         end = time()
-        print("{}: {:3.5f} ms".format(func.__name__, 1000 * (end - start)))
+        print(f"{func.__name__}: {1000 * (end - start):3.5f} ms")
         return result
 
     return wrapper

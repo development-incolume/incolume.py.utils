@@ -2,12 +2,15 @@
 
 # !/usr/bin/python
 # coding: utf-8
-
+from deprecated import deprecated
 import logging
 import os
 
+__author__ = "@britodfbr"
 
-def ll(path=".", ext=None, string=True, recursive=False):
+
+@deprecated(version="1.6.0", reason="Replaced for pathlib.Path.glob or pathlib.Path.rglob")
+def ll(path=".", ext=None, string=True, recursive=False):  # pragma: no cover
     """Recursive or single list of file on directory.
 
     recursive=True return list recursive, string=True return list of string(path+file),
@@ -103,7 +106,7 @@ def realfilename(filebase, ext=None, digits=2, separador=True):
         filebase, sufix[1] = basename.split(".")
         # print('2: ', filebase, sufix[1])
 
-        filebase = "{}/{}".format(prefix, filebase)
+        filebase = f"{prefix}/{filebase}"
         # print(filebase, sufix[1])
 
     if ext:
@@ -209,7 +212,6 @@ def realfilename(filebase, ext=None, digits=2, separador=True):
 #         for i in dirlist:
 #             rmtree(i)
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':    # pragma: no cover
     pass
     # run(False)

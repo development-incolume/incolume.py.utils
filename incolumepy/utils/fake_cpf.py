@@ -14,7 +14,7 @@ def gen_fake_cpf(formated=True):
     while True:
         cpf = rstr(digits, 11)
         if formated:
-            yield "{}.{}.{}-{}".format(cpf[:3], cpf[3:6], cpf[6:9], cpf[-2:])
+            yield f"{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[-2:]}"
         else:
             yield cpf
 
