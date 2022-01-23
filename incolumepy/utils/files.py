@@ -210,7 +210,6 @@ def realfilename(filebase, ext=None, digits=2, separador=True):
 #         for i in dirlist:
 #             rmtree(i)
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':    # pragma: no cover
     pass
     # run(False)
