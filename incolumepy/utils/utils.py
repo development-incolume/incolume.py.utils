@@ -69,7 +69,7 @@ def namespace(package_name):
         inanis = ""
         for item in s[:-1]:
             if inanis:
-                inanis = "{}.{}".format(inanis, item)
+                inanis = f"{inanis}.{item}"
             else:
                 inanis = item
             l.append(inanis)

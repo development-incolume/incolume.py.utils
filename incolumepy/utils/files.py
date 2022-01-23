@@ -106,7 +106,7 @@ def realfilename(filebase, ext=None, digits=2, separador=True):
         filebase, sufix[1] = basename.split(".")
         # print('2: ', filebase, sufix[1])
 
-        filebase = "{}/{}".format(prefix, filebase)
+        filebase = f"{prefix}/{filebase}"
         # print(filebase, sufix[1])
 
     if ext:
