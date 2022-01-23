@@ -17,7 +17,7 @@ versionfile.write_text(toml.load(confproject)["tool"]["poetry"]["version"] + "\n
 __version__ = versionfile.read_text().strip()
 __title__ = "incolumepy.utils"
 __namespace__ = namespace(__title__)
-__name__ = __title__.split(".")[-1]
+__name__ = __title__.rsplit('.', maxsplit=1)[-1]
 
 
 def nonexequi(a_func):
