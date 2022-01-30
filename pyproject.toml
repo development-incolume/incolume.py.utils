@@ -7,7 +7,8 @@ authors = ["britodfbr <contato@incolume.com.br>"]
 homepage = "https://pypi.org/project/incolumepy.utils"
 repository = 'https://gitlab.com/development-incolume/incolumepy.utils'
 packages = [
-  {include = "incolumepy/utils", from=""},
+  {include = "incolumepy", from=""},
+  {include = "incolumepy/**/*.py", from=""},
 ]
 classifiers = [
   'Development Status :: 5 - Production/Stable',
