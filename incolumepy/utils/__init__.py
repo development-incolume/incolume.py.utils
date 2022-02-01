@@ -7,14 +7,14 @@ import toml
 from incolumepy.utils.utils import namespace
 
 confproject = Path(__file__).parents[2] / "pyproject.toml"
-assert confproject.is_file(), "Ops: {}".format(confproject)
-
 versionfile = Path(__file__).parent / "version.txt"
-assert versionfile.is_file(), "Ops: {}".format(versionfile)
-
-versionfile.write_text(toml.load(confproject)["tool"]["poetry"]["version"] + "\n")
+try:
+    versionfile.write_text(toml.load(confproject)["tool"]["poetry"]["version"] + "\n")
+except FileNotFoundError:
+    pass
 
 __version__ = versionfile.read_text().strip()
+
 __title__ = "incolumepy.utils"
 __namespace__ = namespace(__title__)
 __name__ = __title__.rsplit('.', maxsplit=1)[-1]
