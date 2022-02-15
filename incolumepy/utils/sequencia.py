@@ -1,5 +1,6 @@
 """Nonexequi test."""
 # coding: utf-8
+from functools import lru_cache
 from math import sqrt
 
 from deprecated import deprecated
@@ -150,6 +151,19 @@ class Sequencia:
                 else:
                     self.primos.append(numero)
                     return True
+
+
+@lru_cache()
+def milhar(s: str, sep: str = "") -> str:
+    """
+    Milhar separator.
+
+    :param s: srt number
+    :param sep: separator, default point
+    :return: str with 's' separate with 'sep'
+    """
+    sep = sep or "."
+    return s if len(s) <= 3 else f"{milhar(s[:-3], sep)}{sep}{s[-3:]}"
 
 
 # def Main():
