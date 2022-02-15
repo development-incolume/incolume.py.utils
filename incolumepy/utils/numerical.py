@@ -6,7 +6,10 @@ from math import sqrt
 from deprecated import deprecated
 
 
-@deprecated(version="0.9.2", reason="Replaced for incolumepy.sequencias")
+@deprecated(
+    version="0.9.2",
+    reason="Replaced for incolumepy.sequencias. WARNNING: will be removed 2.0.0",
+)
 class Sequencia:
     """Sequence classe."""
 
