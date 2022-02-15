@@ -2,9 +2,14 @@
 # coding: utf-8
 from string import digits
 
+from deprecated import deprecated
 from rstr import rstr
 
 
+@deprecated(
+    reason="Descontinued, Use Fake package.WARNNING: will be removed 2.0.0 ",
+    version="1.6.4",
+)
 def gen_fake_cpf(formated=True):
     """Cria um Gerador numeros de CPF com 11 digitos não verificados.
 
