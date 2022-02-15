@@ -21,20 +21,6 @@ __namespace__ = namespace(__title__)
 __name__ = __title__.rsplit('.', maxsplit=1)[-1]
 
 
-def nonexequi(a_func):
-    """Decorate when apply over def, the def dont work, but return a message informing that skip.
-
-    :param a_func: any function
-    :return: str = "Skip: a_function_name"
-    """
-
-    @wraps(a_func)
-    def wrap_the_function(self):
-        return "Skip: {}".format(a_func.__name__)
-
-    return wrap_the_function
-
-
 def key_versions_2_sort(x: (tuple, list)):
     qdig = 5
     assert isinstance(x, (tuple, list))
