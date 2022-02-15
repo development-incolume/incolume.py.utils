@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "incolumepy.utils"
-version = "2.0.0-alpha.2"
+version = "2.0.0-alpha.3"
 description = "package incolumepy utils"
 keywords = ['python', 'utils', 'incolumepy']
 authors = ["britodfbr <contato@incolume.com.br>"]
