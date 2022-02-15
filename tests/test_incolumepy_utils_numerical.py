@@ -1,8 +1,8 @@
 """Sequences Tests."""
 import unittest
 import pytest
-from incolumepy.utils.sequencia import Sequencia
-from incolumepy.utils.sequencia import milhar
+from incolumepy.utils.numerical import Sequencia
+from incolumepy.utils.numerical import milhar
 
 
 @pytest.mark.parametrize(
