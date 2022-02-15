@@ -10,6 +10,7 @@ def nonexequi(a_func):
     :param a_func: any function
     :return: str = "Skip: a_function_name"
     """
+
     @wraps(a_func)
     def wrap_the_function(self):
         return "Skip: {}".format(a_func.__name__)

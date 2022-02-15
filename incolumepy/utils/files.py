@@ -2,14 +2,18 @@
 
 # !/usr/bin/python
 # coding: utf-8
-from deprecated import deprecated
 import logging
 import os
+
+from deprecated import deprecated
 
 __author__ = "@britodfbr"
 
 
-@deprecated(version="1.6.0", reason="Replaced for pathlib.Path.glob or pathlib.Path.rglob")
+@deprecated(
+    version="1.6.0",
+    reason="Replaced for pathlib.Path.glob or pathlib.Path.rglob. WARNNING: will be removed 2.0.0",
+)
 def ll(path=".", ext=None, string=True, recursive=False):  # pragma: no cover
     """Recursive or single list of file on directory.
 
@@ -185,6 +189,6 @@ def realfilename(filebase, ext=None, digits=2, separador=True):
 #         for i in dirlist:
 #             rmtree(i)
 
-if __name__ == '__main__':    # pragma: no cover
+if __name__ == "__main__":  # pragma: no cover
     pass
     # run(False)
