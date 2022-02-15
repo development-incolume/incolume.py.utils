@@ -1,7 +1,29 @@
 """Sequences Tests."""
 import unittest
-
+import pytest
 from incolumepy.utils.sequencia import Sequencia
+from incolumepy.utils.sequencia import milhar
+
+
+@pytest.mark.parametrize(
+    ["entrance", "expected"],
+    [
+        ({"s": "1"}, "1"),
+        ({"s": "100"}, "100"),
+        ({"s": "1000"}, "1.000"),
+        ({"s": "10000"}, "10.000"),
+        ({"s": f"{10 ** 7}"}, "10.000.000"),
+        ({"s": f"{10 ** 7}", "sep": ","}, "10,000,000"),
+        ({"s": f"{10 ** 11}", "sep": "-"}, "100-000-000-000"),
+        ({"s": f"{10 ** 23}"}, "100.000.000.000.000.000.000.000"),
+        ({"s": f"{10 ** 23}", "sep": None}, "100.000.000.000.000.000.000.000"),
+        ({"s": f"{10 ** 23}", "sep": ""}, "100.000.000.000.000.000.000.000"),
+        ({"s": f"{10 ** 23}", "sep": ","}, "100,000,000,000,000,000,000,000"),
+        ({"s": f"{10 ** 23}", "sep": "-"}, "100-000-000-000-000-000-000-000"),
+    ],
+)
+def test_milhar(entrance, expected):
+    assert milhar(**entrance) == expected
 
 
 class UtilsTest(unittest.TestCase):
