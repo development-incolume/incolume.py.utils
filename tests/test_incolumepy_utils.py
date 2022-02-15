@@ -3,7 +3,12 @@
 # -*- coding: utf-8 -*-
 import pytest
 
-from incolumepy.utils import __version__, confproject, versionfile, key_versions_2_sort
+from incolumepy.utils import (
+    __version__,
+    confproject,
+    key_versions_2_sort,
+    versionfile,
+)
 
 __author__ = "@britodfbr"  # pragma: no cover
 
