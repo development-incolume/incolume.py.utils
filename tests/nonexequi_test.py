@@ -2,7 +2,7 @@
 # coding: utf-8
 import unittest
 
-from incolumepy.utils import nonexequi
+from incolumepy.utils.decorators import nonexequi
 
 
 class UtilsTest(unittest.TestCase):
