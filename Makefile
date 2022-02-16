@@ -4,7 +4,7 @@ PKGNAME := "incolumepy.utils"
 
 .PHOMY: setup
 setup: ## setup environment python with poetry
-	@poetry env use 3.7
+	@poetry env use 3.6
 	@git config core.hooksPath .git-hooks
 	@poetry shell
 	@poetry install
