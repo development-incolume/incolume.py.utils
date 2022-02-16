@@ -1,6 +1,8 @@
+import re
+
 import pytest
 
-from incolumepy.utils.url import check_url
+from incolumepy.utils.url import check_url, identify_dom_url
 
 __author__ = "@britodfbr"  # pragma: no cover
 
@@ -44,3 +46,108 @@ class TestUtilURL:
     )
     def test_check_url(self, entrance, expected):
         assert check_url(entrance) == expected
+
+    @pytest.mark.parametrize(
+        "entrance expected".split(),
+        [
+            (
+                {
+                    "url": "https://www2.camara.leg.br/legin/fed/carreg_sn/anterioresa1824/"
+                    "cartaregia-39331-10-julho-1818-569289-publicacaooriginal-92518-pe.html",
+                },
+                "camara",
+            ),
+            (
+                {
+                    "url": "https://www.planalto.gov.br/ccivil_03/leis/lim/lim-26-8-1826.htm",
+                },
+                "planalto",
+            ),
+            (
+                {
+                    "url": "https://www.presidencia.gov.br/ccivil_03/leis/lim/lim-26-8-1826.htm",
+                    "lista_dominio": ["presidencia", "planalto"],
+                },
+                "presidencia",
+            ),
+            (
+                {
+                    "url": "http://legis.senado.leg.br/norma/416863/publicacao/15637291",
+                },
+                "senado",
+            ),
+            (
+                {
+                    "url": "https://www.google.com.br",
+                },
+                '',
+            ),
+            (
+                {
+                    "url": "https://www.google.com.br",
+                    "lista_dominio": ["google"],
+                },
+                "google",
+            ),
+            (
+                {
+                    "url": "https://google.com",
+                    "lista_dominio": ["planalto", "camara", "senado"],
+                },
+                '',
+            ),
+            (
+                {
+                    "url": "https://google.com",
+                    "lista_dominio": ["google", "planalto", "camara", "senado"],
+                },
+                "google",
+            ),
+        ],
+    )
+    def test_identify_dom_url_return(self, entrance, expected):
+        assert identify_dom_url(**entrance) == expected
+
+    @pytest.mark.parametrize(
+        'entrance expected'.split(),
+        [
+            ({'url': "https://google.com", 'verboso': True}, ''),
+            (
+                {
+                    'url': "https://google.com",
+                    'lista_dominio': ["google"],
+                    'verboso': True,
+                },
+                'google',
+            ),
+            (
+                {
+                    'url': "https://www.planalto.gov.br/ccivil_03/leis/lim/lim-26-8-1826.htm",
+                    'lista_dominio': ["planalto"],
+                    'verboso': True,
+                },
+                'planalto',
+            ),
+            (
+                {
+                    'url': "https://www.planalto.gov.br/ccivil_03/leis/lim/lim-26-8-1826.htm",
+                    'lista_dominio': ["incolume"],
+                    'verboso': True,
+                },
+                '',
+            ),
+            (
+                {
+                    'url': "https://blog.incolume.com.br",
+                    'lista_dominio': ["incolume"],
+                    'verboso': True,
+                },
+                'incolume',
+            ),
+        ],
+    )
+    def test_identify_dom_url_verbose(self, entrance, expected, capfd):
+        assert identify_dom_url(**entrance) == expected
+        out, err = capfd.readouterr()
+        assert err == ''
+        assert re.compile(r".*url.*(?:lista_dominio|verboso).*").search(out)
