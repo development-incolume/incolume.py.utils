@@ -28,10 +28,11 @@ class TestUtilURL:
             ("https://planalto.gov.br/CCIVIL_03/", True),
             ("https://www.planalto.gov.br/CCIVIL_03/", True),
             ("http://www.planalto.gov.br/ccivil_03/decreto-lei/del2848.htm", True),
-            ("https://www2.camara.leg.br/legin/fed/declei/1940-1949/decreto-lei-2848-7-"
-             "dezembro-1940-412868-publicacaooriginal-1-pe.html",
-             True,
-             ),
+            (
+                "https://www2.camara.leg.br/legin/fed/declei/1940-1949/decreto-lei-2848-7-"
+                "dezembro-1940-412868-publicacaooriginal-1-pe.html",
+                True,
+            ),
             ("https://legis.senado.leg.br/norma/527942/publicacao/15636360", True),
             ("https://www.google.com.br", True),
             ("https://www.google.com", True),
