@@ -25,7 +25,6 @@ def key_versions_2_sort(x: (tuple, list)):
     """
     Sort by SemVer notation.
 
-
     :param x:
     :return:
     """
