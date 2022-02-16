@@ -2,14 +2,14 @@
 
 from pathlib import Path
 from shutil import rmtree
-from tempfile import tempdir
+from tempfile import gettempdir
 
 import pytest
 
 from incolumepy.utils.files import preserve_file, realfilename
 
 __author__ = "@britodfbr"  # pragma: no cover
-test_dir = Path(tempdir) / Path(__file__).stem
+test_dir = Path(gettempdir()) / Path(__file__).stem
 # rmtree(test_dir.as_posix(), ignore_errors=True)
 # test_dir.mkdir(exist_ok=True, parents=True)
 
