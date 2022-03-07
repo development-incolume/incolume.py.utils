@@ -80,7 +80,7 @@ class TestUtilURL:
                 {
                     "url": "https://www.google.com.br",
                 },
-                '',
+                "",
             ),
             (
                 {
@@ -94,7 +94,7 @@ class TestUtilURL:
                     "url": "https://google.com",
                     "lista_dominio": ["planalto", "camara", "senado"],
                 },
-                '',
+                "",
             ),
             (
                 {
@@ -109,45 +109,45 @@ class TestUtilURL:
         assert identify_dom_url(**entrance) == expected
 
     @pytest.mark.parametrize(
-        'entrance expected'.split(),
+        "entrance expected".split(),
         [
-            ({'url': "https://google.com", 'verboso': True}, ''),
+            ({"url": "https://google.com", "verboso": True}, ""),
             (
                 {
-                    'url': "https://google.com",
-                    'lista_dominio': ["google"],
-                    'verboso': True,
+                    "url": "https://google.com",
+                    "lista_dominio": ["google"],
+                    "verboso": True,
                 },
-                'google',
+                "google",
             ),
             (
                 {
-                    'url': "https://www.planalto.gov.br/ccivil_03/leis/lim/lim-26-8-1826.htm",
-                    'lista_dominio': ["planalto"],
-                    'verboso': True,
+                    "url": "https://www.planalto.gov.br/ccivil_03/leis/lim/lim-26-8-1826.htm",
+                    "lista_dominio": ["planalto"],
+                    "verboso": True,
                 },
-                'planalto',
+                "planalto",
             ),
             (
                 {
-                    'url': "https://www.planalto.gov.br/ccivil_03/leis/lim/lim-26-8-1826.htm",
-                    'lista_dominio': ["incolume"],
-                    'verboso': True,
+                    "url": "https://www.planalto.gov.br/ccivil_03/leis/lim/lim-26-8-1826.htm",
+                    "lista_dominio": ["incolume"],
+                    "verboso": True,
                 },
-                '',
+                "",
             ),
             (
                 {
-                    'url': "https://blog.incolume.com.br",
-                    'lista_dominio': ["incolume"],
-                    'verboso': True,
+                    "url": "https://blog.incolume.com.br",
+                    "lista_dominio": ["incolume"],
+                    "verboso": True,
                 },
-                'incolume',
+                "incolume",
             ),
         ],
     )
     def test_identify_dom_url_verbose(self, entrance, expected, capfd):
         assert identify_dom_url(**entrance) == expected
         out, err = capfd.readouterr()
-        assert err == ''
+        assert err == ""
         assert re.compile(r".*url.*(?:lista_dominio|verboso).*").search(out)
