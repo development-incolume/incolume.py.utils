@@ -23,7 +23,7 @@ __title__ = "incolumepy.utils"
 __name__ = __title__.rsplit(".", maxsplit=1)[-1]
 
 
-def key_versions_2_sort(x: (tuple, list), qdig: int = 0, regex: str = '') -> str:
+def key_versions_2_sort(x: (tuple, list), qdig: int = 0, regex: str = "") -> str:
     """
     Sort by SemVer notation.
 
@@ -52,9 +52,9 @@ def key_versions_2_sort(x: (tuple, list), qdig: int = 0, regex: str = '') -> str
     build = values.group(6)
     # pegar build, se não tiver colocar uma alta 99999
     build = build or "9" * qdig
-    logging.debug(f'values.group(5): {values.group(5)}')
+    logging.debug(f"values.group(5): {values.group(5)}")
     plus = classifies.get(re.sub(r"[-.]", "", str(values.group(5)).lower()), 0)
-    logging.debug(f'plus: {plus}')
+    logging.debug(f"plus: {plus}")
     build = int(build) + plus
     result = f"{major:0>4}{minor:0>2}{patch:0>2}.{build:0>6}"
     return result
@@ -68,7 +68,9 @@ def update_changelog(changelog_file: (str, Path), reverse: bool = True):
     :param changelog_file:  changelog full filename.
     :return:
     """
-    changelog_file = changelog_file if isinstance(changelog_file, Path) else Path(changelog_file)
+    changelog_file = (
+        changelog_file if isinstance(changelog_file, Path) else Path(changelog_file)
+    )
     conteudo = subprocess.getoutput("git tag -ln")
     logging.info("registros encontrados ..")
     d = OrderedDict()
