@@ -2,6 +2,8 @@
 import logging
 import os
 import re
+import subprocess
+from collections import OrderedDict
 from functools import wraps
 from pathlib import Path
 
@@ -56,6 +58,31 @@ def key_versions_2_sort(x: (tuple, list), qdig: int = 0, regex: str = '') -> str
     build = int(build) + plus
     result = f"{major:0>4}{minor:0>2}{patch:0>2}.{build:0>6}"
     return result
+
+
+def update_changelog(changelog_file: (str, Path), reverse: bool = True):
+    """
+    Update Changelog.md file.
+
+    :param reverse: reverse list.
+    :param changelog_file:  changelog full filename.
+    :return:
+    """
+    changelog_file = changelog_file if isinstance(changelog_file, Path) else Path(changelog_file)
+    conteudo = subprocess.getoutput("git tag -ln")
+    logging.info("registros encontrados ..")
+    d = OrderedDict()
+    for i in conteudo.split(sep="\n"):
+        q = i.split()
+        d[q[0].strip()] = " ".join(q[1:]).strip()
+    logging.info("registros catalogados ..")
+    with changelog_file.open("w") as f:
+        f.write(f"# CHANGELOG")
+        f.write("\n\n")
+        f.write("---\n")
+        for i in sorted(d.items(), reverse=reverse, key=key_versions_2_sort):
+            f.write("- **{}**: {}\n".format(*i))
+        f.write("---\n\n")
 
 
 def logger(str_format="", datefmt="", level=0, filelog=None):
