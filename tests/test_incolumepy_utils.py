@@ -1,6 +1,7 @@
 """ """
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
+import re
 from collections import OrderedDict
 
 import pytest
@@ -10,6 +11,7 @@ from incolumepy.utils import (
     confproject,
     key_versions_2_sort,
     versionfile,
+    update_changelog,
 )
 
 __author__ = "@britodfbr"  # pragma: no cover
@@ -197,3 +199,47 @@ def test_key_versions_2_sort(entrance, expected):
 def test_apply_key_versions_2_sort(entrance, reverse, expected):
     result = sorted(entrance.items(), key=key_versions_2_sort, reverse=reverse)
     assert result == expected
+
+@pytest.mark.parametrize(
+    'reverse expected'.split(),
+    [
+        (
+            True,
+            ('# CHANGELOG\n'
+             '\n'
+             '---\n'
+             '- **0.2.0**: Fake record\n'
+             '- **0.1.1**: Fake record\n'
+             '- **0.1.1-rc.1**: Fake record\n'
+             '- **0.1.1-rc.0**: Fake record\n'
+             '- **0.1.1-alpha.0**: Fake record\n'
+             '- **0.1.0**: system\n'
+             '- **0.0.1**: Fake record\n'
+             '---\n'
+             '\n'),
+        ),
+        (
+            False,
+            ('# CHANGELOG\n'
+             '\n'
+             '---\n'
+             '- **0.0.1**: Fake record\n'
+             '- **0.1.0**: system\n'
+             '- **0.1.1-alpha.0**: Fake record\n'
+             '- **0.1.1-rc.0**: Fake record\n'
+             '- **0.1.1-rc.1**: Fake record\n'
+             '- **0.1.1**: Fake record\n'
+             '- **0.2.0**: Fake record\n'
+             '---\n'
+             '\n'),
+        ),
+    ],
+)
+def test_update_changelog(class_mocker, temp_file_name, reverse, expected):
+    file = temp_file_name.with_suffix('.md')
+    str_testing = '0.1.0 system\n0.1.1 Fake record\n0.1.1-alpha.0 Fake record\n0.1.1-rc.0 Fake record\n0.1.1-rc.1 ' \
+                  'Fake record\n0.2.0 Fake record\n0.0.1 Fake record'
+    entrance = {'changelog_file': file, 'reverse': reverse}
+    class_mocker.patch("subprocess.getoutput", return_value=str_testing)
+    update_changelog(**entrance)
+    assert file.read_text() == expected
