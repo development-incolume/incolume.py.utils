@@ -3,17 +3,14 @@ DIRECTORIES = $$(find -wholename ./src -o -wholename ./incolumepy -o -wholename 
 PKGNAME := "incolumepy.utils"
 
 .PHOMY: setup
-setup: ## setup environment python with poetry
-	@poetry env use 3.6
+setup: install    ## setup environment python with poetry
 	@git config core.hooksPath .git-hooks
-	@poetry shell
-	@poetry install
 	@#poetry run mypy --install-types
 
-#.PHOMY: install
-#install:  ## Install this package using poetry
-#install: setup
-#	@poetry add $(PKGNAME)
+.PHOMY: install
+install:  ## Install this package using poetry
+	@poetry env use 3.10
+	@poetry install
 
 .PHONY: help
 help:  ## Show this instructions

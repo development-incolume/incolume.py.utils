@@ -2,6 +2,8 @@
 import logging
 import os
 import re
+import subprocess
+from collections import OrderedDict
 from functools import wraps
 from pathlib import Path
 
@@ -21,14 +23,16 @@ __title__ = "incolumepy.utils"
 __name__ = __title__.rsplit(".", maxsplit=1)[-1]
 
 
-def key_versions_2_sort(x: (tuple, list)):
+def key_versions_2_sort(x: (tuple, list), qdig: int = 0, regex: str = "") -> str:
     """
     Sort by SemVer notation.
 
-    :param x:
-    :return:
+    :param regex: regex to version format.
+    :param qdig: Quantity digits to sort.
+    :param x: 'git tag -ln' output
+    :return: list sorted
     """
-    qdig = 5
+    qdig = qdig or 5
     assert isinstance(x, (tuple, list))
     classifies = {
         "post": 4 * 10 ** qdig,
@@ -36,9 +40,10 @@ def key_versions_2_sort(x: (tuple, list)):
         "alpha": 2 * 10 ** (qdig - 1),
         "dev": 0,
     }
-    regex = r"(\d{1,4})\.(\d{1,2})\.(\d{1,2})((-\D+)(\d+))?"
+    # regex = regex or r"(\d{1,4})\.(\d{1,2})\.(\d{1,2})((-\D+)(\d+))?"
+    regex = regex or r"(\d+)\.(\d+)\.(\d+)((-\D+)(\d+))?"
     get_major_minor_patch_build = re.compile(regex)
-    # print(get_major_minor_patch_build)
+    logging.debug(get_major_minor_patch_build)
     # pegar major, minor e patch
     values = get_major_minor_patch_build.search(x[0])
     major = values.group(1)
@@ -47,12 +52,39 @@ def key_versions_2_sort(x: (tuple, list)):
     build = values.group(6)
     # pegar build, se não tiver colocar uma alta 99999
     build = build or "9" * qdig
-    # print(f'{values.group(5)=}')
+    logging.debug(f"values.group(5): {values.group(5)}")
     plus = classifies.get(re.sub(r"[-.]", "", str(values.group(5)).lower()), 0)
-    # print(f'{plus=}')
+    logging.debug(f"plus: {plus}")
     build = int(build) + plus
     result = f"{major:0>4}{minor:0>2}{patch:0>2}.{build:0>6}"
     return result
+
+
+def update_changelog(changelog_file: (str, Path), reverse: bool = True):
+    """
+    Update Changelog.md file.
+
+    :param reverse: reverse list.
+    :param changelog_file:  changelog full filename.
+    :return:
+    """
+    changelog_file = (
+        changelog_file if isinstance(changelog_file, Path) else Path(changelog_file)
+    )
+    conteudo = subprocess.getoutput("git tag -ln")
+    logging.info("registros encontrados ..")
+    d = OrderedDict()
+    for i in conteudo.split(sep="\n"):
+        q = i.split()
+        d[q[0].strip()] = " ".join(q[1:]).strip()
+    logging.info("registros catalogados ..")
+    with changelog_file.open("w") as f:
+        f.write(f"# CHANGELOG")
+        f.write("\n\n")
+        f.write("---\n")
+        for i in sorted(d.items(), reverse=reverse, key=key_versions_2_sort):
+            f.write("- **{}**: {}\n".format(*i))
+        f.write("---\n\n")
 
 
 def logger(str_format="", datefmt="", level=0, filelog=None):

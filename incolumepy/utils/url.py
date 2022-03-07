@@ -42,7 +42,9 @@ def check_url(url: str) -> bool:
     return True if re.match(regex, url) else False
 
 
-def identify_dom_url(url: str, lista_dominio: list = None, verboso: bool = False) -> str:
+def identify_dom_url(
+    url: str, lista_dominio: list = None, verboso: bool = False
+) -> str:
     """
     Locate match standard on url by lista_dominio, ideal for use into pandas.
 
