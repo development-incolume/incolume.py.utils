@@ -202,9 +202,11 @@ def test_apply_key_versions_2_sort(entrance, reverse, expected):
 
 
 @pytest.mark.parametrize(
-    "reverse expected".split(),
+    'str_testing reverse expected'.split(),
     [
-        (
+        pytest.param(
+            "0.1.0 system\n0.1.1 Fake record\n0.1.1-alpha.0 Fake record\n0.1.1-rc.0 Fake record"
+            "\n0.1.1-rc.1 Fake record\n0.2.0 Fake record\n0.0.1 Fake record",
             True,
             (
                 "# CHANGELOG\n"
@@ -220,8 +222,11 @@ def test_apply_key_versions_2_sort(entrance, reverse, expected):
                 "---\n"
                 "\n"
             ),
+            # marks=pytest.mark.skip
         ),
-        (
+        pytest.param(
+            "0.1.0 system\n0.1.1 Fake record\n0.1.1-alpha.0 Fake record\n0.1.1-rc.0 Fake record"
+            "\n0.1.1-rc.1 Fake record\n0.2.0 Fake record\n0.0.1 Fake record",
             False,
             (
                 "# CHANGELOG\n"
@@ -240,12 +245,9 @@ def test_apply_key_versions_2_sort(entrance, reverse, expected):
         ),
     ],
 )
-def test_update_changelog(class_mocker, temp_file_name, reverse, expected):
+def test_update_changelog(class_mocker, temp_file_name, str_testing, reverse, expected):
     file = temp_file_name.with_suffix(".md")
-    str_testing = (
-        "0.1.0 system\n0.1.1 Fake record\n0.1.1-alpha.0 Fake record\n0.1.1-rc.0 Fake record\n0.1.1-rc.1 "
-        "Fake record\n0.2.0 Fake record\n0.0.1 Fake record"
-    )
+    # print(file)
     entrance = {"changelog_file": file, "reverse": reverse}
     class_mocker.patch("subprocess.getoutput", return_value=str_testing)
     update_changelog(**entrance)
