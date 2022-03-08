@@ -44,20 +44,24 @@ def key_versions_2_sort(x: (tuple, list), qdig: int = 0, regex: str = "") -> str
     regex = regex or r"(\d+)\.(\d+)\.(\d+)((-\D+)(\d+))?"
     get_major_minor_patch_build = re.compile(regex)
     logging.debug(get_major_minor_patch_build)
-    # pegar major, minor e patch
-    values = get_major_minor_patch_build.search(x[0])
-    major = values.group(1)
-    minor = values.group(2)
-    patch = values.group(3)
-    build = values.group(6)
-    # pegar build, se não tiver colocar uma alta 99999
-    build = build or "9" * qdig
-    logging.debug(f"values.group(5): {values.group(5)}")
-    plus = classifies.get(re.sub(r"[-.]", "", str(values.group(5)).lower()), 0)
-    logging.debug(f"plus: {plus}")
-    build = int(build) + plus
-    result = f"{major:0>4}{minor:0>2}{patch:0>2}.{build:0>6}"
-    return result
+    try:
+        # pegar major, minor e patch
+        values = get_major_minor_patch_build.search(x[0])
+        major = values.group(1)
+        minor = values.group(2)
+        patch = values.group(3)
+        build = values.group(6)
+        # pegar build, se não tiver colocar uma alta 99999
+        build = build or "9" * qdig
+        logging.debug(f"values.group(5): {values.group(5)}")
+        plus = classifies.get(re.sub(r"[-.]", "", str(values.group(5)).lower()), 0)
+        logging.debug(f"plus: {plus}")
+        build = int(build) + plus
+        result = f"{major:0>4}{minor:0>2}{patch:0>2}.{build:0>6}"
+        return result
+    except AttributeError:
+        pass
+    return x[0]
 
 
 def update_changelog(changelog_file: (str, Path), reverse: bool = True):
@@ -71,12 +75,17 @@ def update_changelog(changelog_file: (str, Path), reverse: bool = True):
     changelog_file = (
         changelog_file if isinstance(changelog_file, Path) else Path(changelog_file)
     )
+    reverse = reverse if isinstance(reverse, bool) else False
     conteudo = subprocess.getoutput("git tag -ln")
     logging.info("registros encontrados ..")
     d = OrderedDict()
     for i in conteudo.split(sep="\n"):
-        q = i.split()
-        d[q[0].strip()] = " ".join(q[1:]).strip()
+        if re.compile(r'^v?\d.+', flags=re.I).search(i):
+            q = i.split()
+            try:
+                d[q[0].strip()] = " ".join(q[1:]).strip()
+            except IndexError:
+                pass
     logging.info("registros catalogados ..")
     with changelog_file.open("w") as f:
         f.write(f"# CHANGELOG")
