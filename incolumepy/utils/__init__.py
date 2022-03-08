@@ -71,12 +71,17 @@ def update_changelog(changelog_file: (str, Path), reverse: bool = True):
     changelog_file = (
         changelog_file if isinstance(changelog_file, Path) else Path(changelog_file)
     )
+    reverse = reverse if isinstance(reverse, bool) else False
     conteudo = subprocess.getoutput("git tag -ln")
     logging.info("registros encontrados ..")
     d = OrderedDict()
     for i in conteudo.split(sep="\n"):
-        q = i.split()
-        d[q[0].strip()] = " ".join(q[1:]).strip()
+        if re.compile(r'^v?\d.+', flags=re.I).search(i):
+            q = i.split()
+            try:
+                d[q[0].strip()] = " ".join(q[1:]).strip()
+            except IndexError:
+                pass
     logging.info("registros catalogados ..")
     with changelog_file.open("w") as f:
         f.write(f"# CHANGELOG")
