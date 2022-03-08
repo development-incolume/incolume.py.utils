@@ -242,6 +242,74 @@ def test_apply_key_versions_2_sort(entrance, reverse, expected):
                 "---\n"
                 "\n"
             ),
+            # marks=pytest.mark.skip
+        ),
+        pytest.param(
+            '',
+            False,
+            (
+                "# CHANGELOG\n"
+                "\n"
+                "---\n"
+                "---\n"
+                "\n"
+            ),
+            # marks=pytest.mark.skip
+        ),
+        pytest.param(
+            '',
+            None,
+            (
+                "# CHANGELOG\n"
+                "\n"
+                "---\n"
+                "---\n"
+                "\n"
+            ),
+            # marks=pytest.mark.skip
+        ),
+        pytest.param(
+            '0.0.1 initial\nwip fake record\nWIP nihil\nquisquiliae fake\n0.1.0-alpha.0 dev fake\nv0.1.0 record',
+            True,
+            (
+                "# CHANGELOG\n"
+                "\n"
+                "---\n"
+                '- **v0.1.0**: record\n'
+                '- **0.1.0-alpha.0**: dev fake\n'
+                '- **0.0.1**: initial\n'
+                "---\n"
+                "\n"
+            ),
+            # marks=pytest.mark.skip
+        ),
+        pytest.param(
+            'v0.0.1 initial\nv0.1.0 record\nv0.1.0-alpha.0 dev fake\nv0.1.0-alpha.1 ass\nv0.0.1-rc.0 as'
+            '\nv0.0.1-alpha.0 as\nv0.0.1-beta.0 a\nv0.0.1-dev.0 asd\nv0.0.1-rc.1 as\nv0.0.1-rc.2 as'
+            '\nv0.0.1-rc.11 as\nv0.0.1-rc.3 as\nv0.0.1-rc.12 as\nv0.0.1-rc.21 as\n',
+            True,
+            (
+                "# CHANGELOG\n"
+                "\n"
+                "---\n"
+                '- **v0.1.0**: record\n'
+                '- **v0.1.0-alpha.1**: ass\n'
+                '- **v0.1.0-alpha.0**: dev fake\n'
+                '- **v0.0.1**: initial\n'
+                '- **v0.0.1-rc.21**: as\n'
+                '- **v0.0.1-rc.12**: as\n'
+                '- **v0.0.1-rc.11**: as\n'
+                '- **v0.0.1-rc.3**: as\n'
+                '- **v0.0.1-rc.2**: as\n'
+                '- **v0.0.1-rc.1**: as\n'
+                '- **v0.0.1-rc.0**: as\n'
+                '- **v0.0.1-alpha.0**: as\n'
+                '- **v0.0.1-beta.0**: a\n'
+                '- **v0.0.1-dev.0**: asd\n'
+                "---\n"
+                "\n"
+            ),
+            # marks=pytest.mark.skip
         ),
     ],
 )
