@@ -80,7 +80,7 @@ def update_changelog(changelog_file: (str, Path), reverse: bool = True):
     logging.info("registros encontrados ..")
     d = OrderedDict()
     for i in conteudo.split(sep="\n"):
-        if re.compile(r'^v?\d.+', flags=re.I).search(i):
+        if re.compile(r"^v?\d.+", flags=re.I).search(i):
             q = i.split()
             try:
                 d[q[0].strip()] = " ".join(q[1:]).strip()
@@ -88,7 +88,20 @@ def update_changelog(changelog_file: (str, Path), reverse: bool = True):
                 pass
     logging.info("registros catalogados ..")
     with changelog_file.open("w") as f:
-        f.write(f"# CHANGELOG")
+        f.write("# CHANGELOG\n")
+        f.write(
+            "All notable changes to this project will be documented in this file.\n"
+        )
+        f.write(
+            "The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), "
+        )
+        f.write(
+            "and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). "
+        )
+        f.write(
+            f"This file was automatically generated for "
+            f"[{__version__}@{__title__}](https://gitlab.com/development-incolume/incolumepy.utils))"
+        )
         f.write("\n\n")
         f.write("---\n")
         for i in sorted(d.items(), reverse=reverse, key=key_versions_2_sort):
