@@ -2,9 +2,11 @@
 
 
 All notable changes to this project will be documented in this file.
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). This file was automatically generated for [2.5.0@incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils))
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). This file was automatically generated for [2.5.1@incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils))
 
 ---
+## [2.5.1]	2022-03-12:
+	Removed: Pacotes obsoletos removidos.
 ## [2.5.0]	2022-03-12:
 	Added: Geração do CHANGELOG, padronizado de acordo com 'keep a changelog'; e geração automática com entradas extraídas de git/tags.
 ## [2.4.1]	2022-03-08:
@@ -126,3 +128,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 [2.4.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.3.0...2.4.0
 [2.4.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.4.0...2.4.1
 [2.5.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.4.1...2.5.0
+[2.5.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.5.0...2.5.1

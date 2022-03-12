@@ -14,7 +14,6 @@ class DecoratorTests(TestCase):
     @classmethod
     def setUpClass(cls):
         """Class setup."""
-        pass
 
     @time_it
     def xpto(self):
