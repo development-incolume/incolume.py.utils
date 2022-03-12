@@ -43,7 +43,9 @@ class UtilsTest(unittest.TestCase):
         """Nonexequi test."""
         a = UtilsTest()
         a.id()
-        for i in ["truncus{:0>2}".format(x) for x in range(1, 5) if x % 2 == 0]:
+        for i in [
+            "truncus{:0>2}".format(x) for x in range(1, 5) if x % 2 == 0
+        ]:
             # self.assertEqual(sys.stdout.getvalue().strip(), 'Skip: %s' %i)
             self.assertEqual(eval("a.{}".format(i))(), True)
 

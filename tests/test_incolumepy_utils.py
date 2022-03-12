@@ -1,8 +1,10 @@
 """ """
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
+import datetime as dt
 import re
 from collections import OrderedDict
+from itertools import cycle, repeat
 
 import pytest
 
@@ -202,7 +204,7 @@ def test_apply_key_versions_2_sort(entrance, reverse, expected):
 
 
 @pytest.mark.parametrize(
-    'str_testing reverse expected'.split(),
+    "str_testing reverse expected".split(),
     [
         pytest.param(
             "0.1.0 system\n0.1.1 Fake record\n0.1.1-alpha.0 Fake record\n0.1.1-rc.0 Fake record"
@@ -210,17 +212,30 @@ def test_apply_key_versions_2_sort(entrance, reverse, expected):
             True,
             (
                 "# CHANGELOG\n"
-                "\n"
-                "---\n"
-                "- **0.2.0**: Fake record\n"
-                "- **0.1.1**: Fake record\n"
-                "- **0.1.1-rc.1**: Fake record\n"
-                "- **0.1.1-rc.0**: Fake record\n"
-                "- **0.1.1-alpha.0**: Fake record\n"
-                "- **0.1.0**: system\n"
-                "- **0.0.1**: Fake record\n"
-                "---\n"
-                "\n"
+                "\n\n"
+                "All notable changes to this project will be documented in this file.\n"
+                "The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), "
+                "and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). "
+                "This file was automatically generated for "
+                f"[{__version__}@incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils))\n"
+                "\n---\n"
+                f"## [0.2.0]\t{dt.datetime.now().strftime('%F')}:\n\tFake record\n"
+                f"## [0.1.1]\t{dt.datetime.now().strftime('%F')}:\n\tFake record\n"
+                f"## [0.1.1-rc.1]\t{dt.datetime.now().strftime('%F')}:\n\tFake record\n"
+                f"## [0.1.1-rc.0]\t{dt.datetime.now().strftime('%F')}:\n\tFake record\n"
+                f"## [0.1.1-alpha.0]\t{dt.datetime.now().strftime('%F')}:\n\tFake record\n"
+                f"## [0.1.0]\t{dt.datetime.now().strftime('%F')}:\n\tsystem\n"
+                f"## [0.0.1]\t{dt.datetime.now().strftime('%F')}:\n\tFake record\n"
+                "---\n\n"
+                "[0.1.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.1.0...0.1.1\n"
+                "[0.1.1-alpha.0]: https://gitlab.com/development-incolume/incolumepy.utils/-"
+                "/compare/0.1.1...0.1.1-alpha.0\n"
+                "[0.1.1-rc.0]: https://gitlab.com/development-incolume/incolumepy.utils/-"
+                "/compare/0.1.1-alpha.0...0.1.1-rc.0\n"
+                "[0.1.1-rc.1]: https://gitlab.com/development-incolume/incolumepy.utils/-"
+                "/compare/0.1.1-rc.0...0.1.1-rc.1\n"
+                "[0.2.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.1.1-rc.1...0.2.0\n"
+                "[0.0.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.2.0...0.0.1\n"
             ),
             # marks=pytest.mark.skip
         ),
@@ -229,94 +244,201 @@ def test_apply_key_versions_2_sort(entrance, reverse, expected):
             "\n0.1.1-rc.1 Fake record\n0.2.0 Fake record\n0.0.1 Fake record",
             False,
             (
-                "# CHANGELOG\n"
-                "\n"
+                "# CHANGELOG\n\n\n"
+                "All notable changes to this project will be documented in this file.\n"
+                "The format is based on [Keep a "
+                "Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres "
+                "to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). This file was "
+                "automatically generated for "
+                f"[{__version__}@incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils))\n"
+                "\n---\n"
+                f'## [0.0.1]\t{dt.datetime.now().strftime("%F")}:\n'
+                "\tFake record\n"
+                f'## [0.1.0]\t{dt.datetime.now().strftime("%F")}:\n'
+                "\tsystem\n"
+                f'## [0.1.1-alpha.0]\t{dt.datetime.now().strftime("%F")}:\n'
+                "\tFake record\n"
+                f'## [0.1.1-rc.0]\t{dt.datetime.now().strftime("%F")}:\n'
+                "\tFake record\n"
+                f'## [0.1.1-rc.1]\t{dt.datetime.now().strftime("%F")}:\n'
+                "\tFake record\n"
+                f'## [0.1.1]\t{dt.datetime.now().strftime("%F")}:\n'
+                "\tFake record\n"
+                f'## [0.2.0]\t{dt.datetime.now().strftime("%F")}:\n'
+                "\tFake record\n"
                 "---\n"
-                "- **0.0.1**: Fake record\n"
-                "- **0.1.0**: system\n"
-                "- **0.1.1-alpha.0**: Fake record\n"
-                "- **0.1.1-rc.0**: Fake record\n"
-                "- **0.1.1-rc.1**: Fake record\n"
-                "- **0.1.1**: Fake record\n"
-                "- **0.2.0**: Fake record\n"
-                "---\n"
                 "\n"
+                "[0.1.1]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.1.0...0.1.1\n"
+                "[0.1.1-alpha.0]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.1.1...0.1.1-alpha.0\n"
+                "[0.1.1-rc.0]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.1.1-alpha.0...0.1.1-rc.0\n"
+                "[0.1.1-rc.1]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.1.1-rc.0...0.1.1-rc.1\n"
+                "[0.2.0]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.1.1-rc.1...0.2.0\n"
+                "[0.0.1]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.2.0...0.0.1\n"
             ),
-            # marks=pytest.mark.skip
+            # marks=pytest.mark.skip,
         ),
         pytest.param(
-            '',
+            "",
             False,
             (
-                "# CHANGELOG\n"
+                "# CHANGELOG\n\n\n"
+                "All notable changes to this project will be documented in this file.\n"
+                "The format is based on [Keep a "
+                "Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres "
+                "to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). This file was "
+                "automatically generated for "
+                f"[{__version__}@incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils))\n"
                 "\n"
                 "---\n"
                 "---\n"
                 "\n"
             ),
-            # marks=pytest.mark.skip
+            # marks=pytest.mark.skip,
         ),
         pytest.param(
-            '',
+            "",
             None,
             (
-                "# CHANGELOG\n"
+                "# CHANGELOG\n\n\n"
+                "All notable changes to this project will be documented in this file.\n"
+                "The format is based on [Keep a "
+                "Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres "
+                "to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). This file was "
+                "automatically generated for "
+                f"[{__version__}@incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils))\n"
                 "\n"
                 "---\n"
                 "---\n"
                 "\n"
             ),
-            # marks=pytest.mark.skip
+            # marks=pytest.mark.skip,
         ),
         pytest.param(
-            '0.0.1 initial\nwip fake record\nWIP nihil\nquisquiliae fake\n0.1.0-alpha.0 dev fake\nv0.1.0 record',
+            "0.0.1 initial\nwip fake record\nWIP nihil\nquisquiliae fake\n0.1.0-alpha.0 dev fake\nv0.1.0 record",
             True,
             (
                 "# CHANGELOG\n"
                 "\n"
+                "\n"
+                "All notable changes to this project will be documented in this file.\n"
+                "The format is based on [Keep a "
+                "Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres "
+                "to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). This file was "
+                "automatically generated for "
+                f"[{__version__}@incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils))\n"
+                "\n"
                 "---\n"
-                '- **v0.1.0**: record\n'
-                '- **0.1.0-alpha.0**: dev fake\n'
-                '- **0.0.1**: initial\n'
+                f"## [v0.1.0]\t{dt.datetime.now().strftime('%F')}:\n"
+                "\trecord\n"
+                f"## [0.1.0-alpha.0]\t{dt.datetime.now().strftime('%F')}:\n"
+                "\tdev fake\n"
+                f"## [0.0.1]\t{dt.datetime.now().strftime('%F')}:\n"
+                "\tinitial\n"
                 "---\n"
                 "\n"
+                "[0.1.0-alpha.0]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.0.1...0.1.0-alpha.0\n"
+                "[v0.1.0]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.1.0-alpha.0...v0.1.0\n"
             ),
-            # marks=pytest.mark.skip
+            # marks=pytest.mark.skip,
         ),
         pytest.param(
-            'v0.0.1 initial\nv0.1.0 record\nv0.1.0-alpha.0 dev fake\nv0.1.0-alpha.1 ass\nv0.0.1-rc.0 as'
-            '\nv0.0.1-alpha.0 as\nv0.0.1-beta.0 a\nv0.0.1-dev.0 asd\nv0.0.1-rc.1 as\nv0.0.1-rc.2 as'
-            '\nv0.0.1-rc.11 as\nv0.0.1-rc.3 as\nv0.0.1-rc.12 as\nv0.0.1-rc.21 as\n',
+            "v0.0.1 Added: initial\nv0.1.0 Added: record\nv0.1.0-alpha.0 Changed: dev fake"
+            "\nv0.1.0-alpha.1 Deprecated: ass\nv0.0.1-rc.0 Fixed: as"
+            "\nv0.0.1-alpha.0 Security: as\nv0.0.1-beta.0 Added: a\nv0.0.1-dev.0 Changed: asd"
+            "\nv0.0.1-rc.1 as\nv0.0.1-rc.2 Fixed: as\nv0.0.1-rc.11 Changed: as"
+            "\nv0.0.1-rc.3 Added: as\nv0.0.1-rc.12 Removed: as\nv0.0.1-rc.21 Deprecated: as\n",
             True,
             (
-                "# CHANGELOG\n"
+                "# CHANGELOG\n\n\n"
+                "All notable changes to this project will be documented in this file.\n"
+                "The format is based on [Keep a "
+                "Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres "
+                "to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). This file was "
+                "automatically generated for "
+                f"[{__version__}@incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils))\n"
                 "\n"
                 "---\n"
-                '- **v0.1.0**: record\n'
-                '- **v0.1.0-alpha.1**: ass\n'
-                '- **v0.1.0-alpha.0**: dev fake\n'
-                '- **v0.0.1**: initial\n'
-                '- **v0.0.1-rc.21**: as\n'
-                '- **v0.0.1-rc.12**: as\n'
-                '- **v0.0.1-rc.11**: as\n'
-                '- **v0.0.1-rc.3**: as\n'
-                '- **v0.0.1-rc.2**: as\n'
-                '- **v0.0.1-rc.1**: as\n'
-                '- **v0.0.1-rc.0**: as\n'
-                '- **v0.0.1-alpha.0**: as\n'
-                '- **v0.0.1-beta.0**: a\n'
-                '- **v0.0.1-dev.0**: asd\n'
+                f"## [v0.1.0]\t{dt.datetime.now().strftime('%F')}:\n"
+                "\tAdded: record\n"
+                f"## [v0.1.0-alpha.1]\t{dt.datetime.now().strftime('%F')}:\n"
+                "\tDeprecated: ass\n"
+                f"## [v0.1.0-alpha.0]\t{dt.datetime.now().strftime('%F')}:\n"
+                "\tChanged: dev fake\n"
+                f"## [v0.0.1]\t{dt.datetime.now().strftime('%F')}:\n"
+                "\tAdded: initial\n"
+                f"## [v0.0.1-rc.21]\t{dt.datetime.now().strftime('%F')}:\n"
+                "\tDeprecated: as\n"
+                f"## [v0.0.1-rc.12]\t{dt.datetime.now().strftime('%F')}:\n"
+                "\tRemoved: as\n"
+                f"## [v0.0.1-rc.11]\t{dt.datetime.now().strftime('%F')}:\n"
+                "\tChanged: as\n"
+                f"## [v0.0.1-rc.3]\t{dt.datetime.now().strftime('%F')}:\n"
+                "\tAdded: as\n"
+                f"## [v0.0.1-rc.2]\t{dt.datetime.now().strftime('%F')}:\n"
+                "\tFixed: as\n"
+                f"## [v0.0.1-rc.1]\t{dt.datetime.now().strftime('%F')}:\n"
+                "\tas\n"
+                f"## [v0.0.1-rc.0]\t{dt.datetime.now().strftime('%F')}:\n"
+                "\tFixed: as\n"
+                f"## [v0.0.1-alpha.0]\t{dt.datetime.now().strftime('%F')}:\n"
+                "\tSecurity: as\n"
+                f"## [v0.0.1-beta.0]\t{dt.datetime.now().strftime('%F')}:\n"
+                "\tAdded: a\n"
+                f"## [v0.0.1-dev.0]\t{dt.datetime.now().strftime('%F')}:\n"
+                "\tChanged: asd\n"
                 "---\n"
                 "\n"
+                "[v0.1.0]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/v0.0.1...v0.1.0\n"
+                "[v0.1.0-alpha.0]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/v0.1.0...v0.1.0-alpha.0\n"
+                "[v0.1.0-alpha.1]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/v0.1.0-alpha.0...v0.1.0-alpha.1\n"
+                "[v0.0.1-rc.0]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/v0.1.0-alpha.1...v0.0.1-rc.0\n"
+                "[v0.0.1-alpha.0]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/v0.0.1-rc.0...v0.0.1-alpha.0\n"
+                "[v0.0.1-beta.0]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/v0.0.1-alpha.0...v0.0.1-beta.0\n"
+                "[v0.0.1-dev.0]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/v0.0.1-beta.0...v0.0.1-dev.0\n"
+                "[v0.0.1-rc.1]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/v0.0.1-dev.0...v0.0.1-rc.1\n"
+                "[v0.0.1-rc.2]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/v0.0.1-rc.1...v0.0.1-rc.2\n"
+                "[v0.0.1-rc.11]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/v0.0.1-rc.2...v0.0.1-rc.11\n"
+                "[v0.0.1-rc.3]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/v0.0.1-rc.11...v0.0.1-rc.3\n"
+                "[v0.0.1-rc.12]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/v0.0.1-rc.3...v0.0.1-rc.12\n"
+                "[v0.0.1-rc.21]: "
+                "https://gitlab.com/development-incolume/incolumepy.utils/-/compare/v0.0.1-rc.12...v0.0.1-rc.21\n"
             ),
-            # marks=pytest.mark.skip
+            # marks=pytest.mark.skip,
         ),
     ],
 )
-def test_update_changelog(class_mocker, temp_file_name, str_testing, reverse, expected):
+def test_update_changelog(
+    class_mocker, temp_file_name, str_testing, reverse, expected
+):
     file = temp_file_name.with_suffix(".md")
     # print(file)
     entrance = {"changelog_file": file, "reverse": reverse}
-    class_mocker.patch("subprocess.getoutput", return_value=str_testing)
+    class_mocker.patch(
+        "subprocess.getoutput",
+        side_effect=[
+            str_testing,
+            *repeat(dt.datetime.now().strftime("%F"), 20),
+        ],
+    )
     update_changelog(**entrance)
     assert file.read_text() == expected

@@ -6,13 +6,16 @@ import subprocess
 from collections import OrderedDict
 from functools import wraps
 from pathlib import Path
+from typing import Callable, Dict, List, Tuple, Union
 
 import toml
 
 confproject = Path(__file__).parents[2] / "pyproject.toml"
 versionfile = Path(__file__).parent / "version.txt"
 try:
-    versionfile.write_text(toml.load(confproject)["tool"]["poetry"]["version"] + "\n")
+    versionfile.write_text(
+        toml.load(confproject)["tool"]["poetry"]["version"] + "\n"
+    )
 except FileNotFoundError:
     pass
 
@@ -20,16 +23,16 @@ __version__ = versionfile.read_text().strip()
 
 __title__ = "incolumepy.utils"
 # __namespace__ = namespace(__title__)
-__name__ = __title__.rsplit(".", maxsplit=1)[-1]
+# __name__ = __title__.rsplit(".", maxsplit=1)[-1]
 
 
-def key_versions_2_sort(x: (tuple, list), qdig: int = 0, regex: str = "") -> str:
+def key_versions_2_sort(x, qdig: int = 0, regex: str = "") -> str:
     """
     Sort by SemVer notation.
 
     :param regex: regex to version format.
     :param qdig: Quantity digits to sort.
-    :param x: 'git tag -ln' output
+    :param x: x[key, value] -> 'git tag -ln' output
     :return: list sorted
     """
     qdig = qdig or 5
@@ -47,53 +50,88 @@ def key_versions_2_sort(x: (tuple, list), qdig: int = 0, regex: str = "") -> str
     try:
         # pegar major, minor e patch
         values = get_major_minor_patch_build.search(x[0])
-        major = values.group(1)
-        minor = values.group(2)
-        patch = values.group(3)
-        build = values.group(6)
+        major = values.group(1)  # type: ignore
+        minor = values.group(2)  # type: ignore
+        patch = values.group(3)  # type: ignore
+        build = values.group(6)  # type: ignore
         # pegar build, se não tiver colocar uma alta 99999
         build = build or "9" * qdig
-        logging.debug(f"values.group(5): {values.group(5)}")
-        plus = classifies.get(re.sub(r"[-.]", "", str(values.group(5)).lower()), 0)
-        logging.debug(f"plus: {plus}")
+        logging.debug("values.group(5): %s", values.group(5))  # type: ignore
+        plus = classifies.get(re.sub(r"[-.]", "", str(values.group(5)).lower()), 0)  # type: ignore
+        logging.debug("plus: %s", plus)
         build = int(build) + plus
         result = f"{major:0>4}{minor:0>2}{patch:0>2}.{build:0>6}"
         return result
     except AttributeError:
         pass
-    return x[0]
+    return str(x[0])
 
 
-def update_changelog(changelog_file: (str, Path), reverse: bool = True):
+def update_changelog(
+    changelog_file: Union[str, Path],
+    reverse: bool = True,
+    urlcompare: str = "",
+):
     """
     Update Changelog.md file.
 
-    :param reverse: reverse list.
+    :param urlcompare: url compare from repository of project.
+    :param reverse: bool.
     :param changelog_file:  changelog full filename.
     :return:
     """
     changelog_file = (
-        changelog_file if isinstance(changelog_file, Path) else Path(changelog_file)
+        changelog_file
+        if isinstance(changelog_file, Path)
+        else Path(changelog_file)
     )
     reverse = reverse if isinstance(reverse, bool) else False
+    urlcompare = (
+        urlcompare
+        or "https://gitlab.com/development-incolume/incolumepy.utils/-/compare"
+    )
     conteudo = subprocess.getoutput("git tag -ln")
     logging.info("registros encontrados ..")
-    d = OrderedDict()
-    for i in conteudo.split(sep="\n"):
-        if re.compile(r'^v?\d.+', flags=re.I).search(i):
-            q = i.split()
-            try:
-                d[q[0].strip()] = " ".join(q[1:]).strip()
-            except IndexError:
-                pass
+    logging.debug(conteudo)
+
+    entradas = OrderedDict()
+    for linha in conteudo.split("\n"):
+        if re.compile(r"^v?\d.+", flags=re.I).match(linha):
+            q = linha.split()
+            key = q[0].strip()
+            msg = " ".join(q[1:]).strip()
+            date = subprocess.getoutput(
+                "git show -s --format=%%cs %s^{commit}"
+                % key  # pylint: disable=C0209
+            )
+            entradas[key] = {"key": key, "date": date, "msg": msg}
     logging.info("registros catalogados ..")
     with changelog_file.open("w") as f:
-        f.write(f"# CHANGELOG")
-        f.write("\n\n")
-        f.write("---\n")
-        for i in sorted(d.items(), reverse=reverse, key=key_versions_2_sort):
-            f.write("- **{}**: {}\n".format(*i))
+        f.writelines(
+            [
+                "# CHANGELOG\n\n\n",
+                "All notable changes to this project will be documented in this file.\n",
+                "The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ",
+                "and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). ",
+                "This file was automatically generated for",
+                f" [{__version__}@{__title__}](https://gitlab.com/development-incolume/incolumepy.utils))",
+                "\n\n---\n",
+            ]
+        )
+        for _, entrada in sorted(
+            entradas.items(), reverse=reverse, key=key_versions_2_sort
+        ):
+            f.write(
+                f"## [{entrada['key']}]\t{entrada['date']}:\n\t{entrada.get('msg')}\n"
+            )
         f.write("---\n\n")
+        y: Dict[str, str] = {}
+        for x in entradas.values():
+            if y:
+                f.write(
+                    f'[{x["key"]}]: ' f'{urlcompare}/{y["key"]}...{x["key"]}\n'
+                )
+            y = x
 
 
 def logger(str_format="", datefmt="", level=0, filelog=None):
