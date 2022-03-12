@@ -71,11 +71,15 @@ def test_realfilename_not_null(entrance, expected):
         # filebase sem extensão > .md
         (
             {
-                "filebase": (test_dir / "diretorio" / "para" / "teste").as_posix(),
+                "filebase": (
+                    test_dir / "diretorio" / "para" / "teste"
+                ).as_posix(),
                 "ext": ".md",
                 "separador": True,
             },
-            (test_dir / "diretorio" / "para" / "teste").with_suffix(".md").as_posix(),
+            (test_dir / "diretorio" / "para" / "teste")
+            .with_suffix(".md")
+            .as_posix(),
         ),
         # filebase .json > .bash
         (

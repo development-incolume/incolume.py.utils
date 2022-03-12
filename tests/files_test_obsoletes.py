@@ -44,18 +44,22 @@ class UtilsTest(unittest.TestCase):
         )
         file = realfilename(self.directories[-1], ext=".dat", separador=True)
         self.assertEqual(
-            "root: DEBUG: Nome sugerido: {}".format(file), sys.stdout.fileno().strip()
+            "root: DEBUG: Nome sugerido: {}".format(file),
+            sys.stdout.fileno().strip(),
         )
 
     @pytest.mark.skip(reason="migrage to test_files")
     @unittest.skip(reason="migrate to test_files")
     def test_files04(self):
         """Test files permission."""
-        self.directories.append(os.path.join("tmp", "diretorio", "para", "teste"))
+        self.directories.append(
+            os.path.join("tmp", "diretorio", "para", "teste")
+        )
         file = realfilename(self.directories[-1], separador=True, ext="md")
         print(type(sys.stdout.getvalue()))
         self.assertEqual(
-            "root: DEBUG: Nome sugerido: {}".format(file), sys.stdout.getvalue().strip()
+            "root: DEBUG: Nome sugerido: {}".format(file),
+            sys.stdout.getvalue().strip(),
         )
 
     @pytest.mark.skip(reason="migrage to test_files")
@@ -119,7 +123,9 @@ class UtilsTest(unittest.TestCase):
     def test_files10(self):
         """Test files permission."""
         file = realfilename(
-            os.path.join("tmp", os.path.basename(__file__)), digits=5, ext="log"
+            os.path.join("tmp", os.path.basename(__file__)),
+            digits=5,
+            ext="log",
         )
         self.assertEqual(
             sys.stdout.getvalue().strip(), "Criado arquivo: {}".format(file)
@@ -151,7 +157,9 @@ class UtilsTest(unittest.TestCase):
     @unittest.skip(reason="migrate to test_files")
     def test_files_realfilename02(self):
         """Test files permission."""
-        self.directories.append(os.path.join("tmp", "diretorio", "para", "teste"))
+        self.directories.append(
+            os.path.join("tmp", "diretorio", "para", "teste")
+        )
         with open(
             realfilename(self.directories[-1], separador=True, ext="md"), "w"
         ) as file:
@@ -172,7 +180,9 @@ class UtilsTest(unittest.TestCase):
     def test_files_realfilename04(self):
         """Test files permission."""
         self.directories.append("tmp/teste/lll")
-        with open(realfilename(self.directories[-1], separador=True), "w") as file:
+        with open(
+            realfilename(self.directories[-1], separador=True), "w"
+        ) as file:
             file.write("teste ok")
 
     @pytest.mark.skip(reason="migrage to test_files")
@@ -180,7 +190,9 @@ class UtilsTest(unittest.TestCase):
     def test_files_realfilename05(self):
         """Test files permission."""
         self.directories.append("tmp/teste/jjj.json")
-        with open(realfilename(self.directories[-1], separador=True), "w") as file:
+        with open(
+            realfilename(self.directories[-1], separador=True), "w"
+        ) as file:
             file.write("teste ok")
 
     @pytest.mark.skip(reason="migrage to test_files")
@@ -188,7 +200,9 @@ class UtilsTest(unittest.TestCase):
     def test_files_realfilename06(self):
         """Test files permission."""
         self.directories.append("tmp")
-        with open(realfilename(("tmp/teste/jjj.json"), separador=True), "w") as file:
+        with open(
+            realfilename(("tmp/teste/jjj.json"), separador=True), "w"
+        ) as file:
             file.write("teste ok")
 
     @pytest.mark.skip(reason="migrage to test_files")
@@ -246,7 +260,9 @@ class UtilsTest(unittest.TestCase):
         self.directories.append("tmp")
         with open(
             realfilename(
-                os.path.join("tmp", os.path.basename(__file__)), digits=5, ext="csv"
+                os.path.join("tmp", os.path.basename(__file__)),
+                digits=5,
+                ext="csv",
             ),
             "a",
         ) as file:
@@ -257,7 +273,9 @@ class UtilsTest(unittest.TestCase):
     def test_files_realfilename11(self):
         """Test files permission."""
         self.directories.append("../teste_utils/")
-        with open(realfilename("../teste_utils/tmp/registro.xml"), "w") as file:
+        with open(
+            realfilename("../teste_utils/tmp/registro.xml"), "w"
+        ) as file:
             file.write(file.name)
 
     @unittest.skip(reason="tornate obsolete on 1.6.0")

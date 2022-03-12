@@ -108,7 +108,9 @@ def realfilename(filebase, ext=None, digits=2, separador=True):
             if count <= 0:
                 filename = "{}.{}".format(filebase, ext)
             else:
-                filename = ("{}{}{:0>%s}.{}" % digits).format(filebase, sep, count, ext)
+                filename = ("{}{}{:0>%s}.{}" % digits).format(
+                    filebase, sep, count, ext
+                )
             if os.path.isfile(filename):
                 raise IOError("Arquivo existente: {}".format(filename))
             logging.debug("Nome sugerido: {}".format(filename))
