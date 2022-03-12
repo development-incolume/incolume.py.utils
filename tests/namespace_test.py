@@ -26,7 +26,11 @@ class UtilsTest(unittest.TestCase):
         """Assert correct namespace with level 4."""
         self.assertTrue(
             namespace("incolumepy.package.subpackage.module")
-            == ["incolumepy", "incolumepy.package", "incolumepy.package.subpackage"]
+            == [
+                "incolumepy",
+                "incolumepy.package",
+                "incolumepy.package.subpackage",
+            ]
         )
 
 
