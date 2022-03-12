@@ -5,8 +5,6 @@
 import logging
 import os
 
-from deprecated import deprecated
-
 __author__ = "@britodfbr"
 
 
@@ -119,78 +117,3 @@ def realfilename(filebase, ext=None, digits=2, separador=True):
             logging.warning("{}".format(e))
         finally:
             count += 1
-
-
-# def run(remove=False):
-#     with open(
-#         realfilename(
-#             os.path.join("tmp", "britodfbr", "diretorio", "para", "teste"),
-#             ext=".dat",
-#             separador=True,
-#         ),
-#         "w",
-#     ) as file:
-#         file.write("teste ok")
-#
-#     with open(
-#         realfilename(
-#             os.path.join("tmp", "diretorio", "para", "teste"), separador=True, ext="md"
-#         ),
-#         "w",
-#     ) as file:
-#         file.write("teste ok")
-#
-#     with open(
-#         realfilename("tmp/teste/test.json", separador=True, ext="bash"), "w"
-#     ) as file:
-#         file.write("teste ok")
-#
-#     with open(realfilename("tmp/teste/lll", separador=True), "w") as file:
-#         file.write("teste ok")
-#
-#     with open(realfilename("tmp/teste/jjj.json", separador=True), "w") as file:
-#         file.write("teste ok")
-#
-#     with open(
-#         realfilename(
-#             os.path.join("tmp", os.path.basename(__file__)),
-#             digits=4,
-#             ext="log",
-#             separador=False,
-#         ),
-#         "a",
-#     ) as file:
-#         file.write(file.name)
-#
-#     with open(
-#         realfilename(
-#             os.path.join("tmp", os.path.basename(__file__)),
-#             digits=5,
-#             ext="log",
-#             separador=True,
-#         ),
-#         "a",
-#     ) as file:
-#         file.write(file.name)
-#
-#     with open(
-#         realfilename(
-#             os.path.join("tmp", os.path.basename(__file__)), digits=5, ext="csv"
-#         ),
-#         "a",
-#     ) as file:
-#         file.write("{}".format(file.name))
-#
-#     with open(realfilename("../utils/tmp/registro.xml"), "w") as file:
-#         file.write(file.name)
-#
-#     print(ll())
-#
-#     if remove:
-#         dirlist = ["tmp"]
-#         for i in dirlist:
-#             rmtree(i)
-
-if __name__ == "__main__":  # pragma: no cover
-    pass
-    # run(False)

@@ -1,6 +1,4 @@
 """Sequences Tests."""
-import unittest
-
 import pytest
 
 from incolumepy.utils.numerical import milhar
