@@ -11,10 +11,6 @@ class UtilsTest(unittest.TestCase):
         """Read test."""
         self.assertTrue(read("version.txt"))
 
-    def test_read2(self):
-        """Read test."""
-        self.assertTrue(read("utils.py"))
-
 
 if __name__ == "__main__":
     unittest.main()
