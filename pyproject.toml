@@ -73,7 +73,10 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
-addopts = "--cov=incolumepy.utils"
+#log_format = '%(asctime)s %(levelname)s %(message)s'
+log_format = '%(asctime)s; %(levelname)-8s; %(name)s; %(module)s; %(funcName)s; %(message)s'
+log_date_format ='%F@%T'
+addopts = "--cov=incolumepy"
 testpaths = [
   "tests",
 ]
@@ -83,7 +86,41 @@ markers = [
   "fasttest: marks tests as fasttest (deselect with '-m \"not fasttest\"')",
 ]
 
+[tool.coverage.html]
+directory = "coverage_report/html"
+
+[tool.coverage.xml]
+
+[tool.coverage.run]
+omit = [
+  # omit anything in a .local directory anywhere
+  "*/.local/*",
+  # omit everything in /usr
+  "/usr/*",
+  # omit this single file
+  "configure/truncus.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+  "if __name__ == .__main__.:",
+  "logger.debug",
+  "logger.info",
+  "logger.warning",
+  "logger.error",
+  "except ImportError",
+  "except (ModuleNotFoundError, ImportError)",
+  "except ModuleNotFoundError",
+  "__package__ =",
+#  "def run",
+  "def terminal.",
+  "__author__",
+  "class IElements"
+]
+
+
 [PEP8]
+# Detalhes em https://pep8.org/
 # define para todos os linters compatíveis
 max-line-length = 79
 
@@ -107,12 +144,12 @@ data
 '''
 
 [flake8]
-#max-line-length = 79
+#max-line-length = 120
 max-complexity = 5
 
 [tool.pylint.format]
 # Maximum number of characters on a single line.
-#max-line-length = 120
+max-line-length = 79
 
 [tool.pylint.basic]
 # Allow shorter and longer variable names than the default.
@@ -195,15 +232,15 @@ include_trailing_comma = true
 [tool.tox]
 legacy_tox_ini = """
 [tox]
-minversion = 3.3.0
+minversion = 3.1.0
 isolated_build = True
 envlist =
     clean
     black
-    flake8
     isort
-    mypy
     pydocstyle
+    flake8
+    mypy
     pylint
     py36
     py37
@@ -225,7 +262,19 @@ commands =
 [testenv:clean]
 deps = coverage
 commands =
-  coverage erase
+  poetry run coverage erase
+
+[testenv:linters]
+commands =
+  {[testenv:black]commands}
+  {[testenv:isort]commands}
+  {[testenv:flake8]commands}
+  {[testenv:pydocstyle]commands}
+  {[testenv:mypy]commands}
+  {[testenv:pylint]commands}
+
+[testenv:stats]
+commands = poetry run pytest -xv --cov-report html:coverage_report/html --cov-report xml:coverage_report/cov.xml
 
 [testenv:flake8]
 deps = flake8
@@ -236,8 +285,7 @@ deps =
     mypy
     types-toml
     types-Deprecated
-commands =
-    mypy incolumepy/
+commands = poetry run mypy incolumepy/
 
 [testenv:pydocstyle]
 commands = poetry run pydocstyle incolumepy/ tests/
@@ -250,4 +298,7 @@ commands = poetry run pylint incolumepy/ tests/
 
 [testenv:black]
 commands = poetry run black --check incolumepy/ tests/
+
+[testenv:safety]
+commands = poetry run safety check
 """
