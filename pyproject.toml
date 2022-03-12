@@ -84,10 +84,10 @@ markers = [
 
 [PEP8]
 # define para todos os linters compatíveis
-max-line-length = 120
+max-line-length = 79
 
 [tool.black]
-#line-length = 120
+line-length = 79
 #target-version = ['py38']
 # include = '\.pyi?$'
 extend-exclude = '''
@@ -106,11 +106,12 @@ data
 '''
 
 [flake8]
-max-line-length = 120
+#max-line-length = 79
+max-complexity = 5
 
 [tool.pylint.format]
 # Maximum number of characters on a single line.
-max-line-length = 120
+#max-line-length = 120
 
 [tool.pylint.basic]
 # Allow shorter and longer variable names than the default.
