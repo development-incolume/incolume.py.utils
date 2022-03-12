@@ -58,13 +58,17 @@ class DecoratorTests(TestCase):
         """Test output with mock."""
         with patch("sys.stdout", new=StringIO()) as fakeOutput:
             self.xpto()
-            self.assertRegex(fakeOutput.getvalue().strip(), r"^xpto: \d*.?\d+ ms$")
+            self.assertRegex(
+                fakeOutput.getvalue().strip(), r"^xpto: \d*.?\d+ ms$"
+            )
 
     def test_output_mock1(self):
         """Test output with mock."""
         with patch("sys.stdout", new=StringIO()) as fakeOutput:
             self.fx()
-            self.assertRegex(fakeOutput.getvalue().strip(), r"^fx: \d*.?\d+ ms$")
+            self.assertRegex(
+                fakeOutput.getvalue().strip(), r"^fx: \d*.?\d+ ms$"
+            )
 
     def test_output0(self):
         """Test output."""

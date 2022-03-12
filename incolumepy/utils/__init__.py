@@ -13,7 +13,9 @@ import toml
 confproject = Path(__file__).parents[2] / "pyproject.toml"
 versionfile = Path(__file__).parent / "version.txt"
 try:
-    versionfile.write_text(toml.load(confproject)["tool"]["poetry"]["version"] + "\n")
+    versionfile.write_text(
+        toml.load(confproject)["tool"]["poetry"]["version"] + "\n"
+    )
 except FileNotFoundError:
     pass
 
@@ -66,7 +68,9 @@ def key_versions_2_sort(x, qdig: int = 0, regex: str = "") -> str:
 
 
 def update_changelog(
-    changelog_file: Union[str, Path], reverse: bool = True, urlcompare: str = ""
+    changelog_file: Union[str, Path],
+    reverse: bool = True,
+    urlcompare: str = "",
 ):
     """
     Update Changelog.md file.
@@ -77,7 +81,9 @@ def update_changelog(
     :return:
     """
     changelog_file = (
-        changelog_file if isinstance(changelog_file, Path) else Path(changelog_file)
+        changelog_file
+        if isinstance(changelog_file, Path)
+        else Path(changelog_file)
     )
     reverse = reverse if isinstance(reverse, bool) else False
     urlcompare = (
@@ -95,7 +101,8 @@ def update_changelog(
             key = q[0].strip()
             msg = " ".join(q[1:]).strip()
             date = subprocess.getoutput(
-                "git show -s --format=%%cs %s^{commit}" % key  # pylint: disable=C0209
+                "git show -s --format=%%cs %s^{commit}"
+                % key  # pylint: disable=C0209
             )
             entradas[key] = {"key": key, "date": date, "msg": msg}
     logging.info("registros catalogados ..")
@@ -121,7 +128,9 @@ def update_changelog(
         y: Dict[str, str] = {}
         for x in entradas.values():
             if y:
-                f.write(f'[{x["key"]}]: ' f'{urlcompare}/{y["key"]}...{x["key"]}\n')
+                f.write(
+                    f'[{x["key"]}]: ' f'{urlcompare}/{y["key"]}...{x["key"]}\n'
+                )
             y = x
 
 
