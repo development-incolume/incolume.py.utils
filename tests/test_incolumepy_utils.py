@@ -1,10 +1,10 @@
-""" """
+"""Utils tests."""
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 import datetime as dt
 import re
 from collections import OrderedDict
-from itertools import cycle, repeat
+from itertools import repeat
 
 import pytest
 
