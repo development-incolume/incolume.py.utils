@@ -6,38 +6,12 @@ from tempfile import gettempdir
 
 import pytest
 
-from incolumepy.utils.files import preserve_file, realfilename
+from incolumepy.utils.files import realfilename
 
 __author__ = "@britodfbr"  # pragma: no cover
 test_dir = Path(gettempdir()) / Path(__file__).stem
 # rmtree(test_dir.as_posix(), ignore_errors=True)
 # test_dir.mkdir(exist_ok=True, parents=True)
-
-
-@pytest.mark.parametrize(
-    ("entrance", "expected", "raises"),
-    [
-        pytest.param(
-            test_dir / "file.xml",
-            None,
-            (TypeError, "'NotImplementedType' object is not callable"),
-            # marks=pytest.mark.skip(reason="Not Implemented!"),
-        ),
-        pytest.param(
-            test_dir / "file.xml",
-            None,
-            (TypeError, None),
-            # marks=pytest.mark.skip(reason="Not Implemented!"),
-        ),
-    ],
-)
-def test_preserve_file(entrance, expected, raises):
-    """Ran tests with parametrize, mark.skip, mark.skipif, mark.xfail and raises on same structure."""
-    if raises is None:
-        assert preserve_file(entrance) == expected
-    else:
-        with pytest.raises(raises[0], match=raises[1]):
-            preserve_file(entrance)
 
 
 @pytest.mark.parametrize(
@@ -149,7 +123,7 @@ def test_realfilename_with_exists_files(entrance, filebase, fileoutput):
     rmtree(test_dir.as_posix(), ignore_errors=True)
     filebase.parent.mkdir(exist_ok=True, parents=True)
     file = ""
-    for x in range(6):
+    for _ in range(6):
         file = Path(realfilename(**dict(entrance)))
         file.write_text(".")
     fileout = filebase.with_name(f"{fileoutput}").with_suffix(filebase.suffix)
