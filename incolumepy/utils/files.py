@@ -4,11 +4,34 @@
 # coding: utf-8
 import logging
 import os
+from pathlib import Path
+
+from deprecated import deprecated
 
 __author__ = "@britodfbr"
 
 
-def realfilename(filebase, ext=None, digits=2, separador=True):
+def realfilename(
+    filebase, ext: str = "", digits: int = 2, separador: bool = True
+) -> Path:
+    """
+    Return real file name for filebase.
+
+    :param filebase: str|pathlib.Path: filename or filebase name or full path
+    :param ext: str: extension desert, default (txt)
+    :param digits: int: digits of sequence, default 2
+    :param separador: bool: default (True)
+    :return: pathlib.Path: real filename tip.
+    """
+
+@deprecated(
+    reason="Hight complexity ciclomatic;"
+    " pylint C0209; will be removed in future.",
+    version="2.5.3",
+)
+def realfilename0(
+    filebase, ext=None, digits=2, separador=True
+):  # pragma: no cover
     """
     Return real file name for filebase.
 
