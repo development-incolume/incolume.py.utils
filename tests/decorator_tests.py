@@ -24,9 +24,9 @@ class DecoratorTests(TestCase):
         return n
 
     @time_it
-    def fx(self):
+    def func_x(self):
         """Test always ok!."""
-        return "fx"
+        return "func_x"
 
     def setUp(self):
         """Session setup."""
@@ -35,17 +35,17 @@ class DecoratorTests(TestCase):
     def test_name(self):
         """Test name."""
         self.assertEqual("xpto", self.xpto.__name__)
-        self.assertEqual("fx", self.fx.__name__)
+        self.assertEqual("func_x", self.func_x.__name__)
 
     def test_doc(self):
         """Test doc."""
         self.assertEqual("This ok!", self.xpto.__doc__)
-        self.assertEqual("This ok!", self.fx.__doc__)
+        self.assertEqual("This ok!", self.func_x.__doc__)
 
     def test_return(self):
         """Test return."""
         self.assertEqual(0, self.xpto())
-        self.assertEqual("fx", self.fx())
+        self.assertEqual("func_x", self.func_x())
 
     def test_output(self):
         """Test output."""
@@ -55,18 +55,18 @@ class DecoratorTests(TestCase):
 
     def test_output_mock0(self):
         """Test output with mock."""
-        with patch("sys.stdout", new=StringIO()) as fakeOutput:
+        with patch("sys.stdout", new=StringIO()) as fakeoutput:
             self.xpto()
             self.assertRegex(
-                fakeOutput.getvalue().strip(), r"^xpto: \d*.?\d+ ms$"
+                fakeoutput.getvalue().strip(), r"^xpto: \d*.?\d+ ms$"
             )
 
     def test_output_mock1(self):
         """Test output with mock."""
-        with patch("sys.stdout", new=StringIO()) as fakeOutput:
-            self.fx()
+        with patch("sys.stdout", new=StringIO()) as fakeoutput:
+            self.func_x()
             self.assertRegex(
-                fakeOutput.getvalue().strip(), r"^fx: \d*.?\d+ ms$"
+                fakeoutput.getvalue().strip(), r"^func_x: \d*.?\d+ ms$"
             )
 
     def test_output0(self):
@@ -79,15 +79,15 @@ class DecoratorTests(TestCase):
         this = self.xpto
         this()
         self.assertRegex(
-            sys.stdout.getvalue(), r"^{}: \d*.?\d+ ms$".format(this.__name__)
+            sys.stdout.getvalue(), rf"^{this.__name__}: \d*.?\d+ ms$"
         )
 
     def test_output2(self):
         """Test output."""
-        this = self.fx
+        this = self.func_x
         this()
         self.assertRegex(
-            sys.stdout.getvalue(), r"^{}: \d*.?\d+ ms$".format(this.__name__)
+            sys.stdout.getvalue(), rf"^{this.__name__}: \d*.?\d+ ms$"
         )
 
 

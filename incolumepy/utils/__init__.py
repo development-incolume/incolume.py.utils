@@ -21,6 +21,8 @@ except FileNotFoundError:
 __version__ = versionfile.read_text().strip()
 
 __title__ = "incolumepy.utils"
+
+
 # __namespace__ = namespace(__title__)
 # __name__ = __title__.rsplit(".", maxsplit=1)[-1]
 
@@ -103,8 +105,8 @@ def update_changelog(
             key = q[0].strip()
             msg = " ".join(q[1:]).strip()
             date = subprocess.getoutput(
-                "git show -s --format=%%cs %s^{commit}"
-                % key  # pylint: disable=C0209
+                "git show -s --format=%%cs "  # pylint: disable=C0209
+                "%s^{commit}" % key
             )
             entradas[key] = {"key": key, "date": date, "msg": msg}
     logging.info("registros catalogados ..")
