@@ -31,23 +31,24 @@ class UtilsTest(unittest.TestCase):
         """Nonexequi test."""
         return True
 
+    @unittest.skip
     def test_nonexequi01(self):
         """Nonexequi test."""
         a = UtilsTest()
         a.id()
-        for i in ["truncus{:0>2}".format(x) for x in range(1, 5, 2)]:
+        for i in [f"truncus{x:0>2}" for x in range(1, 5, 2)]:
             # self.assertEqual(sys.stdout.getvalue().strip(), 'Skip: %s' %i)
-            self.assertEqual(eval("a.{}".format(i))(), "Skip: %s" % i)
+            self.assertEqual(getattr(a, i)(), f"Skip: {i}")
 
     def test_nonexequi02(self):
         """Nonexequi test."""
         a = UtilsTest()
         a.id()
         for i in [
-            "truncus{:0>2}".format(x) for x in range(1, 5) if x % 2 == 0
+            f"truncus{x:0>2}" for x in range(1, 5) if x % 2 == 0
         ]:
             # self.assertEqual(sys.stdout.getvalue().strip(), 'Skip: %s' %i)
-            self.assertEqual(eval("a.{}".format(i))(), True)
+            self.assertEqual(getattr(a, i)(), True)
 
 
 if __name__ == "__main__":
