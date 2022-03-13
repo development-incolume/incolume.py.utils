@@ -1,5 +1,7 @@
 """Module pytest for files module."""
 
+import logging
+import re
 from pathlib import Path
 from shutil import rmtree
 from tempfile import gettempdir
@@ -18,12 +20,39 @@ test_dir = Path(gettempdir()) / Path(__file__).stem
     ("entrance", "expected"),
     [
         ("version.txt", True),
-        ("README", True),
+        ("README.md", True),
     ],
 )
-def test_realfilename_not_null(entrance, expected):
+def test_realfilename_not_null(entrance, expected, caplog):
     """Verify realfilename is not None."""
     assert realfilename(entrance) is not None
+
+
+@pytest.mark.parametrize(
+    ("entrance", "expected"),
+    [
+        ("version.txt", True),
+        ("README.txt", True),
+    ],
+)
+def test_realfilename_suggested_name(entrance, expected, caplog):
+    """Verify realfilename suggested name on log."""
+    caplog.set_level(logging.INFO)
+    assert realfilename(entrance)
+    assert caplog.messages == []
+
+    with caplog.at_level(logging.ERROR):
+        realfilename(entrance)
+        assert caplog.messages == []
+
+    with caplog.at_level(logging.DEBUG):
+        realfilename(entrance)
+        assert caplog.messages == [f"Suggested name: {entrance}"]
+        assert re.compile(
+            r"\d{4}(-\d{2}){2}@\d{2}(:\d{2}){2}; DEBUG\s+; root; files; "
+            r"realfilename; Suggested name: .+\n",
+            flags=re.I,
+        ).fullmatch(caplog.text)
 
 
 @pytest.mark.parametrize(
@@ -76,7 +105,7 @@ def test_realfilename_not_null(entrance, expected):
 )
 def test_realfilename_sugestion_name(entrance, expected):
     """Verify realfilename with parameters."""
-    assert realfilename(**entrance) == expected
+    assert realfilename(**entrance).as_posix() == expected
 
 
 @pytest.mark.parametrize(

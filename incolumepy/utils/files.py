@@ -4,11 +4,51 @@
 # coding: utf-8
 import logging
 import os
+from pathlib import Path
+
+from deprecated import deprecated
 
 __author__ = "@britodfbr"
 
 
-def realfilename(filebase, ext=None, digits=2, separador=True):
+def realfilename(
+    filebase, ext: str = "", digits: int = 2, separador: bool = True
+) -> Path:
+    """
+    Return real file name for filebase.
+
+    :param filebase: str|pathlib.Path: filename or filebase name or full path
+    :param ext: str: extension desert, default (txt)
+    :param digits: int: digits of sequence, default 2
+    :param separador: bool: default (True)
+    :return: pathlib.Path: real filename tip.
+    """
+    filebase = Path(filebase)
+    ext = ext or filebase.suffix or ".txt"
+    ext = f".{ext.lstrip('.')}"
+    sep = "_" if separador else ""
+    filename = filebase.with_name(f"{filebase.stem}{ext}")
+    result = filename
+    count = 1
+    while True:
+        result.parent.mkdir(parents=True, exist_ok=True, mode=0o755)
+        if not result.is_file():
+            logging.debug("Suggested name: %s", result)
+            return Path(result)
+        dig = f"{count}".zfill(digits)
+        result = filename.with_name(f"{filebase.stem}{sep}{dig}{ext}")
+        count += 1
+
+
+@deprecated(
+    reason="Hight complexity ciclomatic;"
+    " pylint C0209; will be removed in future.",
+    version="2.5.3",
+)
+# flake8: noqa: C0209
+def realfilename0(
+    filebase, ext=None, digits=2, separador=True
+):  # pragma: no cover
     """
     Return real file name for filebase.
 
@@ -52,16 +92,16 @@ def realfilename(filebase, ext=None, digits=2, separador=True):
     while True:
         try:
             if count <= 0:
-                filename = "{}.{}".format(filebase, ext)
+                filename = f"{filebase}.{ext}"
             else:
-                filename = ("{}{}{:0>%s}.{}" % digits).format(
-                    filebase, sep, count, ext
-                )
+                filename = (
+                    "{}{}{:0>%s}.{}" % digits  # pylint: disable=C0209
+                ).format(filebase, sep, count, ext)
             if os.path.isfile(filename):
-                raise IOError("Arquivo existente: {}".format(filename))
-            logging.debug("Nome sugerido: {}".format(filename))
+                raise IOError("Arquivo existente: ", filename)
+            logging.debug("Nome sugerido: %s", filebase)
             return filename
         except IOError as e:
-            logging.warning("{}".format(e))
+            logging.warning(e)
         finally:
             count += 1
