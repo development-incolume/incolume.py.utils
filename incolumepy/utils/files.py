@@ -23,12 +23,29 @@ def realfilename(
     :param separador: bool: default (True)
     :return: pathlib.Path: real filename tip.
     """
+    filebase = Path(filebase)
+    ext = ext or filebase.suffix or ".txt"
+    ext = f".{ext.lstrip('.')}"
+    sep = "_" if separador else ""
+    filename = filebase.with_name(f"{filebase.stem}{ext}")
+    result = filename
+    count = 1
+    while True:
+        result.parent.mkdir(parents=True, exist_ok=True, mode=0o755)
+        if not result.is_file():
+            logging.debug("Suggested name: %s", result)
+            return Path(result)
+        dig = f"{count}".zfill(digits)
+        result = filename.with_name(f"{filebase.stem}{sep}{dig}{ext}")
+        count += 1
+
 
 @deprecated(
     reason="Hight complexity ciclomatic;"
     " pylint C0209; will be removed in future.",
     version="2.5.3",
 )
+# flake8: noqa: C0209
 def realfilename0(
     filebase, ext=None, digits=2, separador=True
 ):  # pragma: no cover
