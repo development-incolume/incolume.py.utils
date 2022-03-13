@@ -4,9 +4,8 @@ import os
 import re
 import subprocess
 from collections import OrderedDict
-from functools import wraps
 from pathlib import Path
-from typing import Callable, Dict, List, Tuple, Union
+from typing import Dict, Union
 
 import toml
 
@@ -22,6 +21,8 @@ except FileNotFoundError:
 __version__ = versionfile.read_text().strip()
 
 __title__ = "incolumepy.utils"
+
+
 # __namespace__ = namespace(__title__)
 # __name__ = __title__.rsplit(".", maxsplit=1)[-1]
 
@@ -57,7 +58,10 @@ def key_versions_2_sort(x, qdig: int = 0, regex: str = "") -> str:
         # pegar build, se não tiver colocar uma alta 99999
         build = build or "9" * qdig
         logging.debug("values.group(5): %s", values.group(5))  # type: ignore
-        plus = classifies.get(re.sub(r"[-.]", "", str(values.group(5)).lower()), 0)  # type: ignore
+        plus = classifies.get(
+            re.sub(r"[-.]", "", str(values.group(5)).lower()),  # type: ignore
+            0,
+        )
         logging.debug("plus: %s", plus)
         build = int(build) + plus
         result = f"{major:0>4}{minor:0>2}{patch:0>2}.{build:0>6}"
@@ -101,8 +105,8 @@ def update_changelog(
             key = q[0].strip()
             msg = " ".join(q[1:]).strip()
             date = subprocess.getoutput(
-                "git show -s --format=%%cs %s^{commit}"
-                % key  # pylint: disable=C0209
+                "git show -s --format=%%cs "  # pylint: disable=C0209
+                "%s^{commit}" % key
             )
             entradas[key] = {"key": key, "date": date, "msg": msg}
     logging.info("registros catalogados ..")
@@ -110,11 +114,15 @@ def update_changelog(
         f.writelines(
             [
                 "# CHANGELOG\n\n\n",
-                "All notable changes to this project will be documented in this file.\n",
-                "The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ",
-                "and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). ",
+                "All notable changes to this project",
+                " will be documented in this file.\n\n",
+                "The format is based on ",
+                "[Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ",
+                "and this project adheres to [Semantic Versioning]"
+                "(https://semver.org/spec/v2.0.0.html).\n\n",
                 "This file was automatically generated for",
-                f" [{__version__}@{__title__}](https://gitlab.com/development-incolume/incolumepy.utils))",
+                f" [{__title__}](https://gitlab.com/development-incolume/"
+                f"incolumepy.utils/-/tree/{__version__})",
                 "\n\n---\n",
             ]
         )
@@ -122,7 +130,8 @@ def update_changelog(
             entradas.items(), reverse=reverse, key=key_versions_2_sort
         ):
             f.write(
-                f"## [{entrada['key']}]\t{entrada['date']}:\n\t{entrada.get('msg')}\n"
+                f"## [{entrada['key']}]\t{entrada['date']}:"
+                f"\n\t{entrada.get('msg')}\n"
             )
         f.write("---\n\n")
         y: Dict[str, str] = {}
@@ -135,14 +144,21 @@ def update_changelog(
 
 
 def logger(str_format="", datefmt="", level=0, filelog=None):
-    """Logger function for log."""
+    """Logger function for log.
+
+    :str_format:
+    :datefmt:
+    :level: can be (logging.DEBUG, logging.INFO, logging.WARNING,
+       logging.ERROR, logging.CRITICAL)
+    :filelog:
+    """
     str_format = (
         str_format
-        or "%(asctime)s;%(levelname)-8s;%(name)s;%(module)s;%(funcName)s;%(message)s"
+        or "%(asctime)s;%(levelname)-8s;%(name)s;"
+        "%(module)s;%(funcName)s;%(message)s"
     )
     datefmt = datefmt or "%Y/%m/%d %H:%M:%S %z"
     # create logger
-    # levels = (logging.DEBUG, logging.INFO, logging.WARNING, logging.ERROR, logging.CRITICAL)
     level = level or logging.DEBUG
     filelog = filelog or Path(__file__).with_suffix(".py")
 
@@ -175,7 +191,11 @@ def read(*rnames):
 
 
 def namespace(package_name):
-    """Return the namespace from package_name='incolumepy.package.module' ['incolumepy','incolumepy.package'].
+    """Return the namespace.
+
+    Example:
+    package_name='incolumepy.package.module'
+    ['incolumepy','incolumepy.package'].
 
     :param package_name: str
     :return: list
@@ -194,7 +214,7 @@ def namespace(package_name):
     # print(package_name)
     s = package_name.split(".")
     # print(s)
-    l = []
+    nspace = []
     if len(s) > 2:
         inanis = ""
         for item in s[:-1]:
@@ -202,9 +222,9 @@ def namespace(package_name):
                 inanis = f"{inanis}.{item}"
             else:
                 inanis = item
-            l.append(inanis)
+            nspace.append(inanis)
     elif 0 < len(s) <= 2:
-        l = s[:1]
+        nspace = s[:1]
     else:
         raise ValueError("package_name not can be void")
 
@@ -219,4 +239,4 @@ def namespace(package_name):
     #             l.append(item)
     #             pass
     #         print(l)
-    return l
+    return nspace
