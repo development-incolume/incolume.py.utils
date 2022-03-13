@@ -5,8 +5,9 @@ from time import time
 
 
 def nonexequi(a_func):
-    """Decorate when apply over def, the def dont work,
-    but return a message informing that skip.
+    """Decorate when apply over def.
+
+    the def dont work, but return a message informing that skip.
 
     :param a_func: any function
     :return: str = "Skip: a_function_name"

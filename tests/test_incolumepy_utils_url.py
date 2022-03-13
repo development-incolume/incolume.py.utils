@@ -60,22 +60,22 @@ class TestUtilURL:
             (
                 {
                     "url": "https://www2.camara.leg.br/legin/fed/carreg_sn"
-                           "/anterioresa1824/cartaregia-39331-10-julho-1818"
-                           "-569289-publicacaooriginal-92518-pe.html",
+                    "/anterioresa1824/cartaregia-39331-10-julho-1818"
+                    "-569289-publicacaooriginal-92518-pe.html",
                 },
                 "camara",
             ),
             (
                 {
                     "url": "https://www.planalto.gov.br/ccivil_03"
-                           "/leis/lim/lim-26-8-1826.htm",
+                    "/leis/lim/lim-26-8-1826.htm",
                 },
                 "planalto",
             ),
             (
                 {
                     "url": "https://www.presidencia.gov.br/ccivil_03"
-                           "/leis/lim/lim-26-8-1826.htm",
+                    "/leis/lim/lim-26-8-1826.htm",
                     "lista_dominio": ["presidencia", "planalto"],
                 },
                 "presidencia",
@@ -83,7 +83,7 @@ class TestUtilURL:
             (
                 {
                     "url": "http://legis.senado.leg.br/norma/416863"
-                           "/publicacao/15637291",
+                    "/publicacao/15637291",
                 },
                 "senado",
             ),
@@ -139,7 +139,7 @@ class TestUtilURL:
             (
                 {
                     "url": "https://www.planalto.gov.br/ccivil_03/leis/"
-                           "lim/lim-26-8-1826.htm",
+                    "lim/lim-26-8-1826.htm",
                     "lista_dominio": ["planalto"],
                     "verboso": True,
                 },
@@ -148,7 +148,7 @@ class TestUtilURL:
             (
                 {
                     "url": "https://www.planalto.gov.br/ccivil_03/leis/"
-                           "lim/lim-26-8-1826.htm",
+                    "lim/lim-26-8-1826.htm",
                     "lista_dominio": ["incolume"],
                     "verboso": True,
                 },

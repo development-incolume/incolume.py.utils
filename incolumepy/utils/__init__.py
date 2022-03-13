@@ -60,7 +60,7 @@ def key_versions_2_sort(x, qdig: int = 0, regex: str = "") -> str:
         logging.debug("values.group(5): %s", values.group(5))  # type: ignore
         plus = classifies.get(
             re.sub(r"[-.]", "", str(values.group(5)).lower()),  # type: ignore
-            0
+            0,
         )
         logging.debug("plus: %s", plus)
         build = int(build) + plus
@@ -155,7 +155,7 @@ def logger(str_format="", datefmt="", level=0, filelog=None):
     str_format = (
         str_format
         or "%(asctime)s;%(levelname)-8s;%(name)s;"
-           "%(module)s;%(funcName)s;%(message)s"
+        "%(module)s;%(funcName)s;%(message)s"
     )
     datefmt = datefmt or "%Y/%m/%d %H:%M:%S %z"
     # create logger
@@ -191,7 +191,9 @@ def read(*rnames):
 
 
 def namespace(package_name):
-    """Return the namespace from
+    """Return the namespace.
+
+    Example:
     package_name='incolumepy.package.module'
     ['incolumepy','incolumepy.package'].
 

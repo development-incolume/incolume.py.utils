@@ -56,9 +56,7 @@ def realfilename(filebase, ext=None, digits=2, separador=True):
             else:
                 filename = (
                     "{}{}{:0>%s}.{}" % digits  # pylint: disable=C0209
-                ).format(
-                    filebase, sep, count, ext
-                )
+                ).format(filebase, sep, count, ext)
             if os.path.isfile(filename):
                 raise IOError("Arquivo existente: ", filename)
             logging.debug("Nome sugerido: %s", filebase)
