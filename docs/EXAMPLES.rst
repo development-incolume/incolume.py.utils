@@ -1,3 +1,6 @@
+EXAMPLES
+==========
+
 Atualizações disponíveis em:
 https://brito.blog.incolume.com.br/search/label/development-incolume
 

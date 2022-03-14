@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "incolumepy.utils"
-version = "2.5.2"
+version = "2.5.4"
 description = "package incolumepy utils"
 keywords = ['python', 'utils', 'incolumepy']
 authors = ["britodfbr <contato@incolume.com.br>"]
@@ -67,6 +67,9 @@ types-Deprecated = "^1.2.5"
 pytest-mock = "^3.6.0"
 jupyter = "^1.0.0"
 safety = "^1.10.3"
+Sphinx = "^4.4.0"
+furo = "^2022.3.4"
+myst-parser = "^0.16"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
