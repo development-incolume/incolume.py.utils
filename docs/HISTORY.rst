@@ -1,3 +1,6 @@
+HISTORY
+========
+
 This package came from personal needs and has evolved in a way that was surprising.
 Faced with this incredible evolution I decided to share it via pypi.org.
 
