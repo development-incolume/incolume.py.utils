@@ -71,13 +71,14 @@ check-pydocstyle: ## docstring checking
 changelog:   ## Update changelog file
 	@poetry run python -c "from incolumepy.utils import update_changelog; \
 	update_changelog('CHANGELOG.md')"
-	@echo 'Atualização de CHANGESLOG realizada com sucesso.'
+	@echo 'Atualização de CHANGELOG realizada com sucesso.'
 
 .PHONY: docsgen
 docsgen: clean changelog    ## Generate documentation
 	@ cd docs; make html; cd -
 	@ git config core.hooksPath None
-	@ git commit -m "docs: Updated documentation (`date +%F@%T`)" docs/
+	@ git commit -m "docs: Updated documentation \
+ (`date +%F@%T`)" docs/ CHANGELOG.md
 	@ git config core.hooksPath .git-hooks
 
 .PHONY: format

@@ -26,8 +26,6 @@ Contents
     prefacio
     usage
     api
-    HISTORY
-    EXAMPLES
     CONTRIBUTORS
     CHANGESLOG
     development
