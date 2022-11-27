@@ -6,7 +6,7 @@ import subprocess
 from collections import OrderedDict
 from pathlib import Path
 from typing import Dict, Union
-
+from deprecated import deprecated
 import toml
 
 confproject = Path(__file__).parents[2] / "pyproject.toml"
@@ -94,7 +94,7 @@ def update_changelog(
         urlcompare
         or "https://gitlab.com/development-incolume/incolumepy.utils/-/compare"
     )
-    conteudo = subprocess.getoutput("git tag -ln")
+    conteudo = subprocess.getoutput("git tag -n")
     logging.info("registros encontrados ..")
     logging.debug(conteudo)
 
@@ -130,8 +130,8 @@ def update_changelog(
             entradas.items(), reverse=reverse, key=key_versions_2_sort
         ):
             f.write(
-                f"## [{entrada['key']}]\t{entrada['date']}:"
-                f"\n\t{entrada.get('msg')}\n"
+                f"## [{entrada['key']}]\t &#8212; \t{entrada['date']}:"
+                f"\n  - {entrada.get('msg')}\n"
             )
         f.write("---\n\n")
         y: Dict[str, str] = {}
@@ -174,6 +174,10 @@ def logger(str_format="", datefmt="", level=0, filelog=None):
     return logging.getLogger()
 
 
+@deprecated(
+    reason="Use pathlib.Path.read_text or pathlib.Path.read_bytes.",
+    version="2.6.0a0",
+)
 def read(*rnames):
     """Return content from file informed in '*rnames'.
 
