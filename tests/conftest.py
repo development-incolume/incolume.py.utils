@@ -11,3 +11,9 @@ import rstr
 def temp_file_name():
     """Generate aleatory filename into tempdir for tests."""
     return Path(gettempdir()) / rstr.letters(15)
+
+
+@pytest.fixture(scope="function")
+def changelog_stamps():
+    """"""
+    return "Added Changed Deprecated Removed Fixed Security".upper().strip()
