@@ -30,7 +30,6 @@ def test_file_exist(entrance):
     assert entrance.is_file()
 
 
-
 @pytest.mark.parametrize(
     "entrance expected".split(),
     [
@@ -50,6 +49,8 @@ def test_file_exist(entrance):
         (("0.5.1-alpha.0", "aaa"), "00000501.020000"),
         (("0.5.1-post.0", "aaa"), "00000501.400000"),
         (("1.5.1-post0", "aaa"), "00010501.400000"),
+        # (("1.5.1rc0", "aaa"), "00010501.030000"),
+        # (("1.5.1a0", "aaa"), "00010501.000500"),
     ],
 )
 def test_key_versions_2_sort(entrance, expected):

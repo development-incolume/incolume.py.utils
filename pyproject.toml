@@ -1,13 +1,14 @@
 [tool.poetry]
 name = "incolumepy.utils"
 version = "2.6.0a0"
-description = "package incolumepy utils"
+description = "package incolume python utils"
 keywords = ['python', 'utils', 'incolumepy']
 authors = ["britodfbr <contato@incolume.com.br>"]
 homepage = "https://pypi.org/project/incolumepy.utils"
 repository = 'https://gitlab.com/development-incolume/incolumepy.utils'
 packages = [
   {include = "incolumepy", from=""},
+  {include = "incolume/py", from=""},
   {include = "incolumepy/**/*.py", from=""},
 ]
 classifiers = [

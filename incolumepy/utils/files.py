@@ -12,8 +12,11 @@ __author__ = "@britodfbr"
 
 
 def realfilename(
-    filebase, ext: str = "", digits: int = 2, separador: bool = True
-) -> Path:
+    filebase,
+    ext: str = "",
+    digits: int = 2,
+    separador: bool = True
+    ) -> Path:
     """
     Return real file name for filebase.
 
