@@ -116,7 +116,7 @@ exclude_lines = [
   "except (ModuleNotFoundError, ImportError)",
   "except ModuleNotFoundError",
   "__package__ =",
-#  "def run",
+  "def run",
   "def terminal.",
   "__author__",
   "class IElements"
@@ -154,6 +154,9 @@ max-complexity = 5
 [tool.pylint.format]
 # Maximum number of characters on a single line.
 max-line-length = 79
+# Format style used to check logging format string. `old` means using %
+# formatting, `new` is for `{}` formatting,and `fstr` is for f-strings.
+logging-format-style = 'old'
 
 [tool.pylint.basic]
 # Allow shorter and longer variable names than the default.

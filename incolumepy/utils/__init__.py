@@ -6,8 +6,9 @@ import subprocess
 from collections import OrderedDict
 from pathlib import Path
 from typing import Dict, Union
-from deprecated import deprecated
+
 import toml
+from deprecated import deprecated
 
 confproject = Path(__file__).parents[2] / "pyproject.toml"
 versionfile = Path(__file__).parent / "version.txt"
