@@ -4,7 +4,6 @@ import logging
 import re
 import subprocess
 from pathlib import Path
-from types import NoneType
 from typing import Any, Dict
 
 from incolumepy.utils import __title__, __version__, key_versions_2_sort
@@ -136,7 +135,7 @@ def update_changelog(**kwargs):
     changelog_file = kwargs.get("changelog_file")
     if isinstance(changelog_file, str):
         changelog_file = Path(kwargs.get("changelog_file"))
-    elif isinstance(changelog_file, NoneType):
+    elif isinstance(changelog_file, type(None)):
         changelog_file = Path(__file__).parents[2] / "CHANGELOG.md"
     logging.debug("changelog_file=%s", changelog_file)
 
