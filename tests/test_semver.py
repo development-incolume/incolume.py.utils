@@ -1,10 +1,12 @@
 """Testes para validação versionamento semântico."""
 
-import pytest
-from incolumepy.utils import __version__
 import re
 
-__author__ = '@britodfbr'  # pragma: no cover
+import pytest
+
+from incolumepy.utils import __version__
+
+__author__ = "@britodfbr"  # pragma: no cover
 
 
 @pytest.mark.parametrize(
@@ -37,5 +39,5 @@ def test_version(entrance, expected):
     assert re.fullmatch(r"\d(\.\d){2}(-?\w+\.?\d+)?", __version__, flags=re.I)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     ...
