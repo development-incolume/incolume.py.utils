@@ -116,7 +116,7 @@ exclude_lines = [
   "except (ModuleNotFoundError, ImportError)",
   "except ModuleNotFoundError",
   "__package__ =",
-#  "def run",
+  "def run",
   "def terminal.",
   "__author__",
   "class IElements"
