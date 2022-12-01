@@ -1,7 +1,7 @@
 """Configurate tests."""
 # -*- coding: utf-8 -*-
 from pathlib import Path
-from tempfile import gettempdir, NamedTemporaryFile
+from tempfile import NamedTemporaryFile, gettempdir
 
 import pytest
 import rstr
@@ -30,5 +30,5 @@ def return_git_tag():
 
 @pytest.fixture
 def ftemp():
-    """return NamedTemporaryFile."""
+    """Return NamedTemporaryFile."""
     return NamedTemporaryFile(delete=False).name
