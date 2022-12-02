@@ -2,10 +2,8 @@
 import logging
 import os
 import re
-import subprocess
-from collections import OrderedDict
 from pathlib import Path
-from typing import Dict, Union
+from typing import Union
 
 import toml
 from deprecated import deprecated
@@ -20,12 +18,7 @@ except FileNotFoundError:
     pass
 
 __version__ = versionfile.read_text().strip()
-
 __title__ = "incolumepy.utils"
-
-
-# __namespace__ = namespace(__title__)
-# __name__ = __title__.rsplit(".", maxsplit=1)[-1]
 
 
 def key_versions_2_sort(x, qdig: int = 0, regex: str = "") -> str:
@@ -72,6 +65,10 @@ def key_versions_2_sort(x, qdig: int = 0, regex: str = "") -> str:
     return str(x[0])
 
 
+@deprecated(
+    reason="Use incolumepy.utils.changelog.update_changelog",
+    version="2.6.0-alpha.4",
+)
 def update_changelog(
     changelog_file: Union[str, Path],
     reverse: bool = True,
@@ -85,63 +82,10 @@ def update_changelog(
     :param changelog_file:  changelog full filename.
     :return:
     """
-    changelog_file = (
-        changelog_file
-        if isinstance(changelog_file, Path)
-        else Path(changelog_file)
+    raise NotImplementedError(
+        "This function was replaced. "
+        "Use incolumepy.utils.changelog.update_changelog"
     )
-    reverse = reverse if isinstance(reverse, bool) else False
-    urlcompare = (
-        urlcompare
-        or "https://gitlab.com/development-incolume/incolumepy.utils/-/compare"
-    )
-    conteudo = subprocess.getoutput("git tag -n")
-    logging.info("registros encontrados ..")
-    logging.debug(conteudo)
-
-    entradas = OrderedDict()
-    for linha in conteudo.split("\n"):
-        if re.compile(r"^v?\d.+", flags=re.I).match(linha):
-            q = linha.split()
-            key = q[0].strip()
-            msg = " ".join(q[1:]).strip()
-            date = subprocess.getoutput(
-                "git show -s --format=%%cs "  # pylint: disable=C0209
-                "%s^{commit}" % key
-            )
-            entradas[key] = {"key": key, "date": date, "msg": msg}
-    logging.info("registros catalogados ..")
-    with changelog_file.open("w") as f:
-        f.writelines(
-            [
-                "# CHANGELOG\n\n\n",
-                "All notable changes to this project",
-                " will be documented in this file.\n\n",
-                "The format is based on ",
-                "[Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ",
-                "and this project adheres to [Semantic Versioning]"
-                "(https://semver.org/spec/v2.0.0.html).\n\n",
-                "This file was automatically generated for",
-                f" [{__title__}](https://gitlab.com/development-incolume/"
-                f"incolumepy.utils/-/tree/{__version__})",
-                "\n\n---\n",
-            ]
-        )
-        for _, entrada in sorted(
-            entradas.items(), reverse=reverse, key=key_versions_2_sort
-        ):
-            f.write(
-                f"## [{entrada['key']}]\t &#8212; \t{entrada['date']}:"
-                f"\n  - {entrada.get('msg')}\n"
-            )
-        f.write("---\n\n")
-        y: Dict[str, str] = {}
-        for x in entradas.values():
-            if y:
-                f.write(
-                    f'[{x["key"]}]: ' f'{urlcompare}/{y["key"]}...{x["key"]}\n'
-                )
-            y = x
 
 
 def logger(str_format="", datefmt="", level=0, filelog=None):

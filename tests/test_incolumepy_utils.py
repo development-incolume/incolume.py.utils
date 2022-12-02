@@ -174,6 +174,7 @@ def test_apply_key_versions_2_sort(entrance, reverse, expected):
     assert result == expected
 
 
+@pytest.mark.skip(reason="Deprecated on 2.6.0a4.")
 @pytest.mark.parametrize(
     "str_testing reverse expected".split(),
     [
