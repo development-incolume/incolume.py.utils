@@ -3,99 +3,198 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Conventional Commit](https://www.conventionalcommits.org/pt-br/v1.0.0/).
 
 This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.6.0a3)
 
 ---
+
+
 ## [2.5.4]	 &#8212; 	2022-03-13:
-  - Added: Documentação automatizada com sphinx
+### Added
+  - Documentação automatizada com sphinx
+
 ## [2.5.3]	 &#8212; 	2022-03-13:
-  - Changed: utils.files.realfilename Fatorado para sanar complexidade ciclomática.
+### Changed
+  - utils.files.realfilename Fatorado para sanar complexidade ciclomática.
+
 ## [2.5.2]	 &#8212; 	2022-03-13:
-  - Changed: Correções lint style; Visual CHANGELOG
+### Changed
+  - Correções lint style
+  -  Visual CHANGELOG
+
 ## [2.5.1]	 &#8212; 	2022-03-12:
-  - Removed: Pacotes obsoletos removidos.
+### Removed
+  - Pacotes obsoletos removidos.
+
 ## [2.5.0]	 &#8212; 	2022-03-12:
-  - Added: Geração do CHANGELOG, padronizado de acordo com 'keep a changelog'; e geração automática com entradas extraídas de git/tags.
+### Added
+  - Geração do CHANGELOG, padronizado de acordo com 'keep a changelog'
+  -  e geração automática com entradas extraídas de git/tags.
+
 ## [2.4.1]	 &#8212; 	2022-03-08:
-  - Fixed: Correções em update_changelog
+### Fixed
+  - Correções em update_changelog
+
 ## [2.4.0]	 &#8212; 	2022-03-07:
-  - Added: Método update_changelog acrescentado
+### Added
+  - Método update_changelog acrescentado
+
 ## [2.3.0]	 &#8212; 	2022-02-16:
-  - Added: Acrescentado Método identify_dom_url_verbose
+### Added
+  - Acrescentado Método identify_dom_url_verbose
+
 ## [2.2.0]	 &#8212; 	2022-02-16:
-  - Added: retrocompatibilidade Python3.6+ garantida.
+### Added
+  - retrocompatibilidade Python3.6+ garantida.
+
 ## [2.1.0]	 &#8212; 	2022-02-16:
-  - Added: Módulo 'incolumepy.utils.url' acrescentado
+### Added
+  - Módulo 'incolumepy.utils.url' acrescentado
+
 ## [2.0.0]	 &#8212; 	2022-02-16:
-  - Removed: Módulo incolumepy.utils.sequences deixou de existir; Changed: Gerenciador de pacotes alterado para poetry; Changed: Switch de testes alterado para pytest; Changed: Redefinição de estrutura; Deprecated: Funcionalidades obsoletas sinalizadas como deprecated. Changed: Atualização de teste para key_sort_2_versions
+### Removed
+  - Módulo incolumepy.utils.sequences deixou de existir
+### Changed
+  - Gerenciador de pacotes alterado para poetry
+  - Switch de testes alterado para pytest
+  - Redefinição de estrutura
+  - Atualização de teste para key_sort_2_versions
+### Deprecated
+  - Funcionalidades obsoletas sinalizadas como deprecated.
+
 ## [2.0.0-rc.2]	 &#8212; 	2022-02-15:
-  - Changed: Atualização de teste para key_sort_2_versions
+### Changed
+  - Atualização de teste para key_sort_2_versions
+
 ## [2.0.0-rc.1]	 &#8212; 	2022-02-15:
-  - Deprecated: Funcionalidades obsoletas sinalizadas como deprecated.
+### Deprecated
+  - Funcionalidades obsoletas sinalizadas como deprecated.
+
 ## [2.0.0-rc.0]	 &#8212; 	2022-02-15:
-  - Changed: Redefinição de estrutura
+### Changed
+  - Redefinição de estrutura
+
 ## [1.7.0]	 &#8212; 	2022-02-15:
-  - Added: Acrescentado milhar e key_sort_2_versions
+### Added
+  - Acrescentado milhar e key_sort_2_versions
+
 ## [1.6.3]	 &#8212; 	2022-02-01:
-  - Fixed: Correção de pane FileNotFoundError
+### Fixed
+  - Correção de pane FileNotFoundError
+
 ## [1.6.2]	 &#8212; 	2022-01-30:
-  - Changed: Refactor espectro de busca para namespace
+### Changed
+  - Refactor espectro de busca para namespace
+
 ## [1.6.1]	 &#8212; 	2022-01-24:
-  - Fixed: Diversas pequenas Correções
+### Fixed
+  - Diversas pequenas Correções
+
 ## [1.6.0]	 &#8212; 	2022-01-23:
-  - Removed: Metodos obsoletos desativados
+### Removed
+  - Metodos obsoletos desativados
+
 ## [1.5.0]	 &#8212; 	2022-01-22:
-  - Added: Aplicado utilização de linters, e integrado ao tox e Makefile
+### Added
+  - Aplicado utilização de linters, e integrado ao tox e Makefile
+
 ## [1.4.0]	 &#8212; 	2022-01-21:
-  - Added: Makefile adicionado com funções básicas
+### Added
+  - Makefile adicionado com funções básicas
+
 ## [1.3.2]	 &#8212; 	2022-01-21:
-  - Changed: Atualização do README
+### Changed
+  - Atualização do README
+
 ## [1.3.1]	 &#8212; 	2022-01-21:
-  - Fixed: filemode para githooks corrigidos
+### Fixed
+  - filemode para githooks corrigidos
+
 ## [1.3.0]	 &#8212; 	2022-01-21:
-  - Added: githooks acrescentados
+### Added
+  - githooks acrescentados
+
 ## [1.2.0]	 &#8212; 	2022-01-21:
-  - Changed: Unificado versionamento com pyproject.toml
+### Changed
+  - Unificado versionamento com pyproject.toml
+
 ## [1.1.1]	 &#8212; 	2020-12-03:
-  - Changed: Atualização de configurações
+### Changed
+  - Atualização de configurações
+
 ## [1.1.0]	 &#8212; 	2018-11-22:
-  - Added: Novas funcionalidades acrescentadas
+### Added
+  - Novas funcionalidades acrescentadas
+
 ## [1.0.1]	 &#8212; 	2018-10-19:
-  - Added: acrescentado o logging para realfilename
+### Added
+  - acrescentado o logging para realfilename
+
 ## [1.0.0]	 &#8212; 	2018-10-19:
-  - Added: acrescentado o modulo decorator
+### Added
+  - acrescentado o modulo decorator
+
 ## [0.9.4]	 &#8212; 	2018-06-09:
-  - Fixed: Chamada do pacote utils através do Namespace
+### Fixed
+  - Chamada do pacote utils através do Namespace
+
 ## [0.9.3]	 &#8212; 	2018-06-08:
-  - Fixed: Nova implementação para incolumepy.utils.utils.namespace
+### Fixed
+  - Nova implementação para incolumepy.utils.utils.namespace
+
 ## [0.9.2]	 &#8212; 	2018-06-08:
-  - Fixed: package incolumepy.utils.sequencias remaked into incolumepy.sequencias
+### Fixed
+  - package incolumepy.utils.sequencias remaked into incolumepy.sequencias
+
 ## [0.9.1]	 &#8212; 	2018-06-01:
-  - Fixed: corrigido namespace
+### Fixed
+  - corrigido namespace
+
 ## [0.9.0]	 &#8212; 	2018-05-31:
-  - Added: nonexequi para restrição de execução em serie
+### Added
+  - nonexequi para restrição de execução em serie
+
 ## [0.8.0]	 &#8212; 	2018-05-22:
-  - Added: ll() adicionado
+### Added
+  - ll() adicionado
+
 ## [0.7.2]	 &#8212; 	2018-05-12:
-  - Changed: atualização EXAMPLE.rst
+### Changed
+  - atualização EXAMPLE.rst
+
 ## [0.7.1]	 &#8212; 	2018-05-12:
-  - Fixed: atualizações no setup; Evolução na apresentação da documentação
+### Fixed
+  - atualizações no setup
+  -  Evolução na apresentação da documentação
+
 ## [0.7.0]	 &#8212; 	2018-05-12:
-  - Added: added incolumepy.utils.files.ll
+### Added
+  - added incolumepy.utils.files.ll
+
 ## [0.6.0]	 &#8212; 	2018-05-05:
-  - Added: automatic tests adding
+### Added
+  - automatic tests adding
+
 ## [0.5.0]	 &#8212; 	2018-05-04:
-  - Added: incolumepy.utils.files adding
+### Added
+  - incolumepy.utils.files adding
+
 ## [0.4.0]	 &#8212; 	2018-05-04:
-  - Added: incolumepy.utils.fake_cpf adding
+### Added
+  - incolumepy.utils.fake_cpf adding
+
 ## [0.3.0]	 &#8212; 	2018-05-04:
-  - Added: incolumepy.utils.sequencia
+### Added
+  - incolumepy.utils.sequencia
+
 ## [0.2.0]	 &#8212; 	2018-05-04:
-  - Added: implementação para def namespace
+### Added
+  - implementação para def namespace
+
 ## [0.1.0]	 &#8212; 	2018-05-04:
-  - Added: initial Commit
+### Added
+  - initial Commit
 ---
 
 [0.2.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.1.0...0.2.0
@@ -127,11 +226,11 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 [1.6.2]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.6.1...1.6.2
 [1.6.3]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.6.2...1.6.3
 [1.7.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.6.3...1.7.0
-[2.0.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.7.0...2.0.0
-[2.0.0-rc.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.0.0...2.0.0-rc.0
+[2.0.0-rc.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.7.0...2.0.0-rc.0
 [2.0.0-rc.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.0.0-rc.0...2.0.0-rc.1
 [2.0.0-rc.2]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.0.0-rc.1...2.0.0-rc.2
-[2.1.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.0.0-rc.2...2.1.0
+[2.0.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.0.0-rc.2...2.0.0
+[2.1.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.0.0...2.1.0
 [2.2.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.1.0...2.2.0
 [2.3.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.2.0...2.3.0
 [2.4.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.3.0...2.4.0
