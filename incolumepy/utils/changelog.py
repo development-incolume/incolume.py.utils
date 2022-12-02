@@ -1,11 +1,11 @@
 """Changelog Module."""
 
+import inspect
 import logging
 import re
 import subprocess
 from pathlib import Path
-from types import NoneType
-from typing import Any, Dict
+from typing import Any, Dict, List, Tuple
 
 from incolumepy.utils import __title__, __version__, key_versions_2_sort
 
@@ -16,7 +16,7 @@ logging.basicConfig(
 )
 
 
-def msg_classify(msg: str) -> Dict:
+def msg_classify(msg: str) -> Dict[str, Any]:
     """
     Classify and sort one record for messages git tag.
 
@@ -47,7 +47,7 @@ def msg_classify(msg: str) -> Dict:
 
 def changelog_messages(
     *, text: str, start: Any = None, end: Any = None
-) -> list:
+) -> List[Tuple[str, Dict[str, Any]]]:
     """
     Changelog messages sort and classify.
 
@@ -63,23 +63,25 @@ def changelog_messages(
         logging.debug("record=%s", record)
         # records.setdefault(record['key']).update(**record)
         records.append((record["key"], record))
-    logging.debug("type(records)=%s", type(records))
+    logging.debug("type return %s=%s", inspect.stack()[0][3], type(records))
+    logging.debug("return %s=%s", inspect.stack()[0][3], records)
     return records
 
 
-def changelog_write(**kwargs):
+def changelog_write(
+    *, content: List[Tuple[str, Dict[str, Any]]], **kwargs
+) -> bool:
     """Write CHANGELOG.md file formatted.
 
-    :param kwargs changelog_file(str, pathlib):
-    :param kwargs urlcompare(str):
-    :param kwargs content(str):
+    :param content: List[Tuple[str, Dict[str, Any]]]
+    :param changelog_file: str, pathlib
+    :param urlcompare: str
     :return: bool. True if success.
     """
     changelog_file = Path(
         kwargs.get("changelog_file")
         or Path(__file__).parents[2] / "CHANGELOG.md"
     )
-    content = kwargs.get("content")
     urlcompare = (
         kwargs.get("urlcompare")
         or "https://gitlab.com/development-incolume/incolumepy.utils/-/compare"
@@ -123,7 +125,12 @@ def changelog_write(**kwargs):
         return True
 
 
-def update_changelog(**kwargs):
+def update_changelog(
+    *,
+    changelog_file: Any = None,
+    reverse: bool = True,
+    **kwargs,
+):
     """
     Update Changelog.md file.
 
@@ -133,23 +140,17 @@ def update_changelog(**kwargs):
     :return:
     """
     logging.debug(kwargs)
-    changelog_file = kwargs.get("changelog_file")
     if isinstance(changelog_file, str):
-        changelog_file = Path(kwargs.get("changelog_file"))
-    elif isinstance(changelog_file, NoneType):
+        changelog_file = Path(changelog_file)
+    elif isinstance(changelog_file, type(None)):
         changelog_file = Path(__file__).parents[2] / "CHANGELOG.md"
     logging.debug("changelog_file=%s", changelog_file)
 
-    reverse = (
-        kwargs.get("reverse")
-        if isinstance(kwargs.get("reverse"), bool)
-        else True
-    )
-    urlcompare = (
+    urlcompare: str = (
         kwargs.get("urlcompare")
         or "https://gitlab.com/development-incolume/incolumepy.utils/-/compare"
     )
-    content = kwargs.get("content", subprocess.getoutput("git tag -n"))
+    content: str = kwargs.get("content", subprocess.getoutput("git tag -n"))
     logging.info("registros encontrados ..")
     logging.debug("content=%s", content)
 
@@ -181,7 +182,7 @@ def run():
     """
     msg = subprocess.getoutput("git tag -n").splitlines()[-14]
     logging.debug(msg)
-    logging.debug(msg_classify(msg=msg))
+    logging.debug("msg_classify=%s", msg_classify(msg=msg))
 
     msg = subprocess.getoutput("git tag -n")
     result = changelog_messages(text=msg)
@@ -189,7 +190,7 @@ def run():
     logging.debug("result=%s", result)
     logging.debug("type(result)=%s", type(result))
     result = sorted(result, reverse=True, key=key_versions_2_sort)
-    logging.debug("result=%s", result)
+    logging.debug("result = %s; result type = %s", result, type(result))
 
     changelog_write(content=result)
     update_changelog()
