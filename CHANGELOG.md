@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.6.0a2)
+This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.6.0a3)
 
 ---
 ## [2.5.4]	 &#8212; 	2022-03-13:
@@ -29,7 +29,7 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ## [2.1.0]	 &#8212; 	2022-02-16:
   - Added: Módulo 'incolumepy.utils.url' acrescentado
 ## [2.0.0]	 &#8212; 	2022-02-16:
-  - Removed: Módulo incolumepy.utils.sequences deixou de existir; Changed: Gerenciador de pacotes alterado para poetry; Changed: Switch de testes alterado para pytest
+  - Removed: Módulo incolumepy.utils.sequences deixou de existir; Changed: Gerenciador de pacotes alterado para poetry; Changed: Switch de testes alterado para pytest; Changed: Redefinição de estrutura; Deprecated: Funcionalidades obsoletas sinalizadas como deprecated. Changed: Atualização de teste para key_sort_2_versions
 ## [2.0.0-rc.2]	 &#8212; 	2022-02-15:
   - Changed: Atualização de teste para key_sort_2_versions
 ## [2.0.0-rc.1]	 &#8212; 	2022-02-15:
@@ -39,11 +39,11 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ## [1.7.0]	 &#8212; 	2022-02-15:
   - Added: Acrescentado milhar e key_sort_2_versions
 ## [1.6.3]	 &#8212; 	2022-02-01:
-  - Fix: Correção de pane FileNotFoundError
+  - Fixed: Correção de pane FileNotFoundError
 ## [1.6.2]	 &#8212; 	2022-01-30:
   - Changed: Refactor espectro de busca para namespace
 ## [1.6.1]	 &#8212; 	2022-01-24:
-  - Fix: Diversas pequenas Correções
+  - Fixed: Diversas pequenas Correções
 ## [1.6.0]	 &#8212; 	2022-01-23:
   - Removed: Metodos obsoletos desativados
 ## [1.5.0]	 &#8212; 	2022-01-22:
@@ -67,13 +67,13 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ## [1.0.0]	 &#8212; 	2018-10-19:
   - Added: acrescentado o modulo decorator
 ## [0.9.4]	 &#8212; 	2018-06-09:
-  - Fix: Chamada do pacote utils através do Namespace
+  - Fixed: Chamada do pacote utils através do Namespace
 ## [0.9.3]	 &#8212; 	2018-06-08:
-  - Fix: Nova implementação para incolumepy.utils.utils.namespace
+  - Fixed: Nova implementação para incolumepy.utils.utils.namespace
 ## [0.9.2]	 &#8212; 	2018-06-08:
-  - Fix: package incolumepy.utils.sequencias remaked into incolumepy.sequencias
+  - Fixed: package incolumepy.utils.sequencias remaked into incolumepy.sequencias
 ## [0.9.1]	 &#8212; 	2018-06-01:
-  - Fix: corrigido namespace
+  - Fixed: corrigido namespace
 ## [0.9.0]	 &#8212; 	2018-05-31:
   - Added: nonexequi para restrição de execução em serie
 ## [0.8.0]	 &#8212; 	2018-05-22:
@@ -81,7 +81,7 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ## [0.7.2]	 &#8212; 	2018-05-12:
   - Changed: atualização EXAMPLE.rst
 ## [0.7.1]	 &#8212; 	2018-05-12:
-  - Fix: atualizações no setup, e na apresentação da documentação
+  - Fixed: atualizações no setup; Evolução na apresentação da documentação
 ## [0.7.0]	 &#8212; 	2018-05-12:
   - Added: added incolumepy.utils.files.ll
 ## [0.6.0]	 &#8212; 	2018-05-05:
@@ -95,7 +95,7 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ## [0.2.0]	 &#8212; 	2018-05-04:
   - Added: implementação para def namespace
 ## [0.1.0]	 &#8212; 	2018-05-04:
-  - :D
+  - Added: initial Commit
 ---
 
 [0.2.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.1.0...0.2.0
