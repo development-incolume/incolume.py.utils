@@ -38,7 +38,6 @@ def key_versions_2_sort(x, qdig: int = 0, regex: str = "") -> str:
         "alpha": 2 * 10 ** (qdig - 1),
         "dev": 0,
     }
-    # regex = regex or r"(\d{1,4})\.(\d{1,2})\.(\d{1,2})((-\D+)(\d+))?"
     regex = regex or r"(\d+)\.(\d+)\.(\d+)((-\D+)(\d+))?"
     get_major_minor_patch_build = re.compile(regex)
     logging.debug(get_major_minor_patch_build)
@@ -160,9 +159,9 @@ def namespace(package_name):
     >>> namespace('incolumepy')
     ['incolumepy']
     """
-    # print(package_name)
+    logging.debug(package_name)
     s = package_name.split(".")
-    # print(s)
+    logging.debug(s)
     nspace = []
     if len(s) > 2:
         inanis = ""
@@ -177,15 +176,4 @@ def namespace(package_name):
     else:
         raise ValueError("package_name not can be void")
 
-    # if len(package_name)<=0:
-    # elif 0 < len(s) <= 2:
-    #     l = s[1]
-    # else:
-    #     for item in s[:-1]:
-    #         if l:
-    #             l.append('{}.{}'.format(l[-1], item))
-    #         else:
-    #             l.append(item)
-    #             pass
-    #         print(l)
     return nspace
