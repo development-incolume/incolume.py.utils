@@ -30,14 +30,14 @@ def msg_classify(msg: str) -> Dict[str, Any]:
     logging.debug("key=%s; date=%s; msg=%s", key, date, msg)
     txt = re.sub(
         "(Added|Changed|Deprecated|Removed|Fixed|Security):",
-        r"§\1:",
+        r"§§\1§:",
         msg,
         flags=re.I,
     )
     logging.debug("txt=%s", txt)
     dct: Dict[str, Any] = {}
     for i, j in (
-        x.rstrip().rstrip(";").split(":") for x in txt.strip().split("§") if x
+        x.strip().rstrip(";").split("§:") for x in txt.strip().split("§§") if x
     ):
         dct.setdefault(i, []).extend(j.strip().split(";"))
 
