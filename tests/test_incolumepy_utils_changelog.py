@@ -105,6 +105,34 @@ class TestCase1:
                     ),
                 ],
             ),
+            (
+                {
+                    "text": "1.0.0 Security: a;b;c; "
+                    "Removed: 1;2;3; Changed: a;b;c;d;e; "
+                    "Fixed: http://example.com; http://httpbin.com;"
+                    "Deprecated: 1;2;3;a;s;b; Added: a1;a2;a3."
+                },
+                [
+                    (
+                        "1.0.0",
+                        {
+                            "key": "1.0.0",
+                            "date": "2018-10-19",
+                            "messages": {
+                                "Added": "a1 a2 a3.".split(),
+                                "Changed": "a;b;c;d;e".split(";"),
+                                "Deprecated": "1;2;3;a;s;b".split(";"),
+                                "Fixed": [
+                                    "http://example.com",
+                                    " http://httpbin.com",
+                                ],
+                                "Removed": ["1", "2", "3"],
+                                "Security": ["a", "b", "c"],
+                            },
+                        },
+                    )
+                ],
+            ),
         ),
     )
     def test_changelog_messages(self, entrance, expected):
