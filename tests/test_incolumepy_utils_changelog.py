@@ -30,9 +30,11 @@ class TestCase1:
         "entrance",
         (
             "1.0.0 Added: Fake record; other fake record; Fixed: Fake fixed",
-            "1.3.0 Fixed: Fake record; other fake record; Changed: Fake fixed",
-            "2.2.1 Security: Fake record; other fake record; Fake fixed",
             "1.0.5 Added: Fake record; other fake record; Fixed: Fake fixed",
+            "1.3.0 Fixed: Fake record; other fake record; Changed: Fake fixed",
+            "2.0.0 Security: "
+            "Aderência a https://keepachangelog.com/pt-BR/1.0.0/",
+            "2.2.1 Security: Fake record; other fake record; Fake fixed",
         ),
     )
     def test_msg_classify_value(self, entrance):
