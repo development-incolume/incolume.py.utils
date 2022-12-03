@@ -36,7 +36,7 @@ def msg_classify(msg: str) -> Dict[str, Any]:
     )
     logging.debug("txt=%s", txt)
     dct: Dict[str, Any] = {}
-    for i, j in (
+    for i, j in sorted(
         x.strip().rstrip(";").split("§:") for x in txt.strip().split("§§") if x
     ):
         dct.setdefault(i, []).extend(j.strip().split(";"))
@@ -171,8 +171,6 @@ def update_changelog(
 
 class Changelog:
     """Changelog class."""
-
-    ...
 
 
 def run():
