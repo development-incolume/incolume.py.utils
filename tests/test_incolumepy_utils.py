@@ -2,6 +2,7 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 import datetime as dt
+import logging
 from collections import OrderedDict
 from itertools import repeat
 
@@ -11,6 +12,8 @@ from incolumepy.utils import (
     __version__,
     confproject,
     key_versions_2_sort,
+    logger,
+    namespace,
     update_changelog,
     versionfile,
 )
@@ -48,6 +51,7 @@ def test_file_exist(entrance):
         (("0.5.1-alpha.0", "aaa"), "00000501.020000"),
         (("0.5.1-post.0", "aaa"), "00000501.400000"),
         (("1.5.1-post0", "aaa"), "00010501.400000"),
+        (("1.5", "aaa"), "1.5"),
         # (("1.5.1rc0", "aaa"), "00010501.030000"),
         # (("1.5.1a0", "aaa"), "00010501.000500"),
     ],
@@ -499,3 +503,69 @@ def test_update_changelog(
     )
     update_changelog(**entrance)
     assert file.read_text() == expected
+
+
+def test_update_changelog_deprecated(temp_file_name):
+    with pytest.raises(
+        expected_exception=NotImplementedError,
+        match="This function was replaced. "
+              "Use incolumepy.utils.changelog.update_changelog"
+    ):
+        update_changelog(changelog_file=temp_file_name)
+
+
+@pytest.mark.parametrize(
+    'entrance expected'.split(),
+    (
+        ('incolumepy.package.module', ['incolumepy', 'incolumepy.package']),
+        (
+            'incolumepy.package.subpackage.module',
+            [
+                'incolumepy', 'incolumepy.package',
+                'incolumepy.package.subpackage'
+            ]
+        ),
+        ('incolumepy.package.module', ['incolumepy', 'incolumepy.package']),
+        ('incolumepy.package', ['incolumepy']),
+        ('incolumepy', ['incolumepy']),
+        (None, None),
+    ),
+)
+def test_namespace(entrance, expected):
+    if entrance:
+        assert namespace(entrance) == expected
+    else:
+        with pytest.raises(expected_exception=ValueError, match=''):
+            namespace(entrance)
+
+
+def test_logger(temp_file_name):
+    LOGGER = logger(filelog=temp_file_name)
+    assert isinstance(LOGGER, logging.Logger)
+
+
+#def test_logger(caplog, temp_file_name):
+#    l = logger(filelog=temp_file_name)
+#    l.debug('debug')
+#    l.info('info')
+#    l.error('error')
+#    l.warn('warn')
+#    assert temp_file_name.exists()
+#
+#
+#def test_func(temp_file_name, caplog):
+#    LOGGER = logger(filelog=temp_file_name)
+#    LOGGER.debug('Testing now.')
+#    assert 'Testing now.' in caplog.text
+#
+#
+#class SpamTest:
+#    @pytest.fixture(autouse=True)
+#    def inject_fixtures(self, caplog):
+#        self._caplog = caplog
+#
+#    def test_eggs(self, temp_file_name):
+#        LOGGER = logger(filelog=temp_file_name)
+#        with self._caplog.at_level(logging.INFO):
+#            LOGGER.info('info bacon')
+#            assert self._caplog.records[0].message == 'bacon'

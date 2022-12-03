@@ -3,25 +3,24 @@ import logging
 import os
 import re
 from pathlib import Path
-from typing import Union
+from typing import Collection, Union
 
 import toml
 from deprecated import deprecated
 
 confproject = Path(__file__).parents[2] / "pyproject.toml"
 versionfile = Path(__file__).parent / "version.txt"
-try:
-    versionfile.write_text(
-        toml.load(confproject)["tool"]["poetry"]["version"] + "\n"
-    )
-except FileNotFoundError:
-    pass
+versionfile.write_text(
+    toml.load(confproject)["tool"]["poetry"]["version"] + "\n"
+)
 
 __version__ = versionfile.read_text().strip()
 __title__ = "incolumepy.utils"
 
 
-def key_versions_2_sort(x, qdig: int = 0, regex: str = "") -> str:
+def key_versions_2_sort(
+    x: Collection[str], qdig: int = 0, regex: str = ""
+) -> str:
     """
     Sort by SemVer notation.
 
@@ -31,14 +30,13 @@ def key_versions_2_sort(x, qdig: int = 0, regex: str = "") -> str:
     :return: list sorted
     """
     qdig = qdig or 5
-    assert isinstance(x, (tuple, list))
+    assert isinstance(x, (tuple, list)), "'x' must be tuple or list."
     classifies = {
         "post": 4 * 10 ** qdig,
         "rc": 3 * 10 ** (qdig - 1),
         "alpha": 2 * 10 ** (qdig - 1),
         "dev": 0,
     }
-    # regex = regex or r"(\d{1,4})\.(\d{1,2})\.(\d{1,2})((-\D+)(\d+))?"
     regex = regex or r"(\d+)\.(\d+)\.(\d+)((-\D+)(\d+))?"
     get_major_minor_patch_build = re.compile(regex)
     logging.debug(get_major_minor_patch_build)
@@ -59,10 +57,9 @@ def key_versions_2_sort(x, qdig: int = 0, regex: str = "") -> str:
         logging.debug("plus: %s", plus)
         build = int(build) + plus
         result = f"{major:0>4}{minor:0>2}{patch:0>2}.{build:0>6}"
-        return result
     except AttributeError:
-        pass
-    return str(x[0])
+        result = str(x[0])
+    return result
 
 
 @deprecated(
@@ -160,11 +157,18 @@ def namespace(package_name):
     >>> namespace('incolumepy')
     ['incolumepy']
     """
-    # print(package_name)
-    s = package_name.split(".")
-    # print(s)
+    logging.debug(package_name)
     nspace = []
-    if len(s) > 2:
+    try:
+        s = package_name.split(".")
+        logging.debug(s)
+        quantia = len(s)
+    except AttributeError:
+        raise ValueError("package_name not can be void")
+
+    if 0 < quantia <= 2:
+        nspace = s[:1]
+    else:
         inanis = ""
         for item in s[:-1]:
             if inanis:
@@ -172,20 +176,5 @@ def namespace(package_name):
             else:
                 inanis = item
             nspace.append(inanis)
-    elif 0 < len(s) <= 2:
-        nspace = s[:1]
-    else:
-        raise ValueError("package_name not can be void")
 
-    # if len(package_name)<=0:
-    # elif 0 < len(s) <= 2:
-    #     l = s[1]
-    # else:
-    #     for item in s[:-1]:
-    #         if l:
-    #             l.append('{}.{}'.format(l[-1], item))
-    #         else:
-    #             l.append(item)
-    #             pass
-    #         print(l)
     return nspace
