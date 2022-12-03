@@ -65,15 +65,15 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
   - Módulo 'incolumepy.utils.url' acrescentado
 
 ## [2.0.0]	 &#8212; 	2022-02-16:
-### Removed
-  - Módulo incolumepy.utils.sequences deixou de existir
 ### Changed
-  - Gerenciador de pacotes alterado para poetry
-  - Switch de testes alterado para pytest
-  - Redefinição de estrutura
   - Atualização de teste para key_sort_2_versions
+  - Gerenciador de pacotes alterado para poetry
+  - Redefinição de estrutura
+  - Switch de testes alterado para pytest
 ### Deprecated
   - Funcionalidades obsoletas sinalizadas como deprecated.
+### Removed
+  - Módulo incolumepy.utils.sequences deixou de existir
 
 ## [2.0.0-rc.2]	 &#8212; 	2022-02-15:
 ### Changed
