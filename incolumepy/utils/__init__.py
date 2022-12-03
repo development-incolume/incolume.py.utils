@@ -3,25 +3,24 @@ import logging
 import os
 import re
 from pathlib import Path
-from typing import Union
+from typing import Collection, Union
 
 import toml
 from deprecated import deprecated
 
 confproject = Path(__file__).parents[2] / "pyproject.toml"
 versionfile = Path(__file__).parent / "version.txt"
-try:
-    versionfile.write_text(
-        toml.load(confproject)["tool"]["poetry"]["version"] + "\n"
-    )
-except FileNotFoundError:
-    pass
+versionfile.write_text(
+    toml.load(confproject)["tool"]["poetry"]["version"] + "\n"
+)
 
 __version__ = versionfile.read_text().strip()
 __title__ = "incolumepy.utils"
 
 
-def key_versions_2_sort(x, qdig: int = 0, regex: str = "") -> str:
+def key_versions_2_sort(
+    x: Collection[str], qdig: int = 0, regex: str = ""
+) -> str:
     """
     Sort by SemVer notation.
 
@@ -31,7 +30,7 @@ def key_versions_2_sort(x, qdig: int = 0, regex: str = "") -> str:
     :return: list sorted
     """
     qdig = qdig or 5
-    assert isinstance(x, (tuple, list))
+    assert isinstance(x, (tuple, list)), "'x' must be tuple or list."
     classifies = {
         "post": 4 * 10 ** qdig,
         "rc": 3 * 10 ** (qdig - 1),
@@ -58,10 +57,9 @@ def key_versions_2_sort(x, qdig: int = 0, regex: str = "") -> str:
         logging.debug("plus: %s", plus)
         build = int(build) + plus
         result = f"{major:0>4}{minor:0>2}{patch:0>2}.{build:0>6}"
-        return result
     except AttributeError:
-        pass
-    return str(x[0])
+        result = str(x[0])
+    return result
 
 
 @deprecated(
@@ -160,10 +158,17 @@ def namespace(package_name):
     ['incolumepy']
     """
     logging.debug(package_name)
-    s = package_name.split(".")
-    logging.debug(s)
     nspace = []
-    if len(s) > 2:
+    try:
+        s = package_name.split(".")
+        logging.debug(s)
+        quantia = len(s)
+    except AttributeError:
+        raise ValueError("package_name not can be void")
+
+    if 0 < quantia <= 2:
+        nspace = s[:1]
+    else:
         inanis = ""
         for item in s[:-1]:
             if inanis:
@@ -171,9 +176,5 @@ def namespace(package_name):
             else:
                 inanis = item
             nspace.append(inanis)
-    elif 0 < len(s) <= 2:
-        nspace = s[:1]
-    else:
-        raise ValueError("package_name not can be void")
 
     return nspace

@@ -25,6 +25,7 @@ include = [
   'docs/HISTORY.rst',
   'docs/EXAMPLES.rst',
   'docs/CONTRIBUTORS.rst',
+  'pyproject.toml',
 ]
 exclude = [
   "examples/",
