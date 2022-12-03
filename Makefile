@@ -69,8 +69,8 @@ check-pydocstyle: ## docstring checking
 
 .PHONY: changelog
 changelog:   ## Update changelog file
-	@poetry run python -c "from incolumepy.utils import update_changelog; \
-	update_changelog('CHANGELOG.md')"
+	@poetry run python -c "from incolumepy.utils.changelog import update_changelog; \
+	update_changelog(changelog_file='CHANGELOG.md')"
 	@echo 'Atualização de CHANGELOG realizada com sucesso.'
 
 .PHONY: docsgen

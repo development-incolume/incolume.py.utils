@@ -2,32 +2,25 @@
 import logging
 import os
 import re
-import subprocess
-from collections import OrderedDict
 from pathlib import Path
-from typing import Dict, Union
+from typing import Collection, Union
 
 import toml
+from deprecated import deprecated
 
 confproject = Path(__file__).parents[2] / "pyproject.toml"
 versionfile = Path(__file__).parent / "version.txt"
-try:
-    versionfile.write_text(
-        toml.load(confproject)["tool"]["poetry"]["version"] + "\n"
-    )
-except FileNotFoundError:
-    pass
+versionfile.write_text(
+    toml.load(confproject)["tool"]["poetry"]["version"] + "\n"
+)
 
 __version__ = versionfile.read_text().strip()
-
 __title__ = "incolumepy.utils"
 
 
-# __namespace__ = namespace(__title__)
-# __name__ = __title__.rsplit(".", maxsplit=1)[-1]
-
-
-def key_versions_2_sort(x, qdig: int = 0, regex: str = "") -> str:
+def key_versions_2_sort(
+    x: Collection[str], qdig: int = 0, regex: str = ""
+) -> str:
     """
     Sort by SemVer notation.
 
@@ -37,14 +30,13 @@ def key_versions_2_sort(x, qdig: int = 0, regex: str = "") -> str:
     :return: list sorted
     """
     qdig = qdig or 5
-    assert isinstance(x, (tuple, list))
+    assert isinstance(x, (tuple, list)), "'x' must be tuple or list."
     classifies = {
         "post": 4 * 10 ** qdig,
         "rc": 3 * 10 ** (qdig - 1),
         "alpha": 2 * 10 ** (qdig - 1),
         "dev": 0,
     }
-    # regex = regex or r"(\d{1,4})\.(\d{1,2})\.(\d{1,2})((-\D+)(\d+))?"
     regex = regex or r"(\d+)\.(\d+)\.(\d+)((-\D+)(\d+))?"
     get_major_minor_patch_build = re.compile(regex)
     logging.debug(get_major_minor_patch_build)
@@ -65,12 +57,15 @@ def key_versions_2_sort(x, qdig: int = 0, regex: str = "") -> str:
         logging.debug("plus: %s", plus)
         build = int(build) + plus
         result = f"{major:0>4}{minor:0>2}{patch:0>2}.{build:0>6}"
-        return result
     except AttributeError:
-        pass
-    return str(x[0])
+        result = str(x[0])
+    return result
 
 
+@deprecated(
+    reason="Use incolumepy.utils.changelog.update_changelog",
+    version="2.6.0-alpha.4",
+)
 def update_changelog(
     changelog_file: Union[str, Path],
     reverse: bool = True,
@@ -84,63 +79,10 @@ def update_changelog(
     :param changelog_file:  changelog full filename.
     :return:
     """
-    changelog_file = (
-        changelog_file
-        if isinstance(changelog_file, Path)
-        else Path(changelog_file)
+    raise NotImplementedError(
+        "This function was replaced. "
+        "Use incolumepy.utils.changelog.update_changelog"
     )
-    reverse = reverse if isinstance(reverse, bool) else False
-    urlcompare = (
-        urlcompare
-        or "https://gitlab.com/development-incolume/incolumepy.utils/-/compare"
-    )
-    conteudo = subprocess.getoutput("git tag -ln")
-    logging.info("registros encontrados ..")
-    logging.debug(conteudo)
-
-    entradas = OrderedDict()
-    for linha in conteudo.split("\n"):
-        if re.compile(r"^v?\d.+", flags=re.I).match(linha):
-            q = linha.split()
-            key = q[0].strip()
-            msg = " ".join(q[1:]).strip()
-            date = subprocess.getoutput(
-                "git show -s --format=%%cs "  # pylint: disable=C0209
-                "%s^{commit}" % key
-            )
-            entradas[key] = {"key": key, "date": date, "msg": msg}
-    logging.info("registros catalogados ..")
-    with changelog_file.open("w") as f:
-        f.writelines(
-            [
-                "# CHANGELOG\n\n\n",
-                "All notable changes to this project",
-                " will be documented in this file.\n\n",
-                "The format is based on ",
-                "[Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ",
-                "and this project adheres to [Semantic Versioning]"
-                "(https://semver.org/spec/v2.0.0.html).\n\n",
-                "This file was automatically generated for",
-                f" [{__title__}](https://gitlab.com/development-incolume/"
-                f"incolumepy.utils/-/tree/{__version__})",
-                "\n\n---\n",
-            ]
-        )
-        for _, entrada in sorted(
-            entradas.items(), reverse=reverse, key=key_versions_2_sort
-        ):
-            f.write(
-                f"## [{entrada['key']}]\t{entrada['date']}:"
-                f"\n\t{entrada.get('msg')}\n"
-            )
-        f.write("---\n\n")
-        y: Dict[str, str] = {}
-        for x in entradas.values():
-            if y:
-                f.write(
-                    f'[{x["key"]}]: ' f'{urlcompare}/{y["key"]}...{x["key"]}\n'
-                )
-            y = x
 
 
 def logger(str_format="", datefmt="", level=0, filelog=None):
@@ -174,6 +116,10 @@ def logger(str_format="", datefmt="", level=0, filelog=None):
     return logging.getLogger()
 
 
+@deprecated(
+    reason="Use pathlib.Path.read_text or pathlib.Path.read_bytes.",
+    version="2.6.0a0",
+)
 def read(*rnames):
     """Return content from file informed in '*rnames'.
 
@@ -211,11 +157,18 @@ def namespace(package_name):
     >>> namespace('incolumepy')
     ['incolumepy']
     """
-    # print(package_name)
-    s = package_name.split(".")
-    # print(s)
+    logging.debug(package_name)
     nspace = []
-    if len(s) > 2:
+    try:
+        s = package_name.split(".")
+        logging.debug(s)
+        quantia = len(s)
+    except AttributeError:
+        raise ValueError("package_name not can be void")
+
+    if 0 < quantia <= 2:
+        nspace = s[:1]
+    else:
         inanis = ""
         for item in s[:-1]:
             if inanis:
@@ -223,20 +176,5 @@ def namespace(package_name):
             else:
                 inanis = item
             nspace.append(inanis)
-    elif 0 < len(s) <= 2:
-        nspace = s[:1]
-    else:
-        raise ValueError("package_name not can be void")
 
-    # if len(package_name)<=0:
-    # elif 0 < len(s) <= 2:
-    #     l = s[1]
-    # else:
-    #     for item in s[:-1]:
-    #         if l:
-    #             l.append('{}.{}'.format(l[-1], item))
-    #         else:
-    #             l.append(item)
-    #             pass
-    #         print(l)
     return nspace
