@@ -55,7 +55,6 @@ toml = {extras = ["tomli"], version = "^0.10.2"}
 flake8 = "^3.8.4"
 py3kwarn = "^0.4.4"
 coverage = "^5.3"
-nose = "^1.3.7"
 tox = "^3.20.1"
 mypy = "^0.931"
 isort = "^5.10.1"
