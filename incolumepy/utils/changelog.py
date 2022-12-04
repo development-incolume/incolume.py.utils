@@ -81,10 +81,12 @@ def changelog_write(
     :return: bool. True if success.
     """
     changelog_file = Path(kwargs.get("changelog_file") or CHANGELOG_FILE)
+    logging.debug("changelog_file=%s", changelog_file)
     urlcompare = (
         kwargs.get("urlcompare")
         or "https://gitlab.com/development-incolume/incolumepy.utils/-/compare"
     )
+    logging.debug("urlcompare=%s", urlcompare)
     content_formated = [
         "# CHANGELOG\n\n\n",
         "All notable changes to this project",
@@ -138,12 +140,11 @@ def update_changelog(
     :param changelog_file:  changelog full filename.
     :return:
     """
-    logging.debug(kwargs)
+    logging.debug("argumentos=%s,%s,%s", changelog_file, reverse, kwargs)
     # if isinstance(changelog_file, str):
     #     changelog_file = Path(changelog_file)
     # elif isinstance(changelog_file, type(None)):
     #     changelog_file = CHANGELOG_FILE
-    logging.debug("changelog_file=%s", changelog_file)
 
     urlcompare: str = (
         kwargs.get("urlcompare")
