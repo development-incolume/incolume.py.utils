@@ -97,62 +97,62 @@ isort:  ## isort apply
 lint:  ## Run all linters (check-isort, check-black, flake8, pylint, mypy, pydocstyle)
 lint: check-mypy check-pylint check-flake8 check-pydocstyle check-isort check-black
 
-.PHONY: premajor
-premajor:   ## Generate new premajor commit version default semver
-	@ git config core.hooksPath None
-	@v=$$(poetry version premajor); poetry run pytest tests/ && git commit -m "$$v" pyproject.toml $$(find -name version.txt)  #sem tag
-	@ git config core.hooksPath .git-hooks
-
-.PHONY: premajor-force
-premajor-force:    ## Generate new premajor commit version default semver and your tag forcing merge into main branch
-	@ git config core.hooksPath None
-	@msg=$$(poetry version premajor); poetry run pytest tests/; \
-git commit -m "$$msg" pyproject.toml $$(find -name version.txt) \
-&& git tag -f $$(poetry version -s) -m "$$msg"; \
-git checkout main; git merge --no-ff dev -m "$$msg" \
-&& git tag -f $$(poetry version -s) -m "$$msg" \
-&& git checkout dev    #com tag
-	@ git config core.hooksPath .git-hooks
-
-.PHONY: preminor
-preminor:  ## Generate new preminor commit version default semver
-	@ git config core.hooksPath None
-	@v=$$(poetry version preminor); poetry run pytest -m "not slow" tests/ && git commit -m "$$v" pyproject.toml $$(find -name version.txt)  #sem tag
-	@ git config core.hooksPath .git-hooks
-
-.PHONY: preminor-force
-preminor-force:    ## Generate new preminor commit version default semver and your tag forcing merge into main branch
-	@ git config core.hooksPath None
-	@msg=$$(poetry version preminor); poetry run pytest tests/; \
-git commit -m "$$msg" pyproject.toml $$(find -name version.txt) \
-&& git tag -f $$(poetry version -s) -m "$$msg"; \
-git checkout main; git merge --no-ff dev -m "$$msg" \
-&& git tag -f $$(poetry version -s) -m "$$msg" \
-&& git checkout dev    #com tag
-	@ git config core.hooksPath .git-hooks
-
-.PHONY: prepatch
-prepatch:  ## Generate new prepatch commit version default semver
-	@ git config core.hooksPath None
-	@v=$$(poetry version prepatch); poetry run pytest -m "not slow" tests/ && git commit -m "$$v" pyproject.toml $$(find -name version.txt)  #sem tag
-	@ git config core.hooksPath .git-hooks
-
-.PHONY: prerelease
-prerelease:   ## Generate new prerelease commit version default semver
-	@ git config core.hooksPath None
-	@v=$$(poetry version prerelease); poetry run pytest tests/test_incolumepy_lex.py::test_version && git commit -m "$$v" pyproject.toml $$(find -name version.txt)  #sem tag
-	@ git config core.hooksPath .git-hooks
-
-.PHONY: prerelease-force
-prerelease-force:   ## Generate new prerelease commit version default semver and your tag forcing merge into main branch
-	@ git config core.hooksPath None
-	@msg=$$(poetry version prerelease); poetry run pytest tests/; \
-git commit -m "$$msg" pyproject.toml $$(find -name version.txt) \
-&& git tag -f $$(poetry version -s) -m "$$msg"; \
-git checkout main; git merge --no-ff dev -m "$$msg" \
-&& git tag -f $$(poetry version -s) -m "$$msg" \
-&& git checkout dev    #com tag
-	@ git config core.hooksPath .git-hooks
+#.PHONY: premajor
+#premajor:   ## Generate new premajor commit version default semver
+#	@ git config core.hooksPath None
+#	@v=$$(poetry version premajor); poetry run pytest tests/ && git commit -m "$$v" pyproject.toml $$(find -name version.txt)  #sem tag
+#	@ git config core.hooksPath .git-hooks
+#
+#.PHONY: premajor-force
+#premajor-force:    ## Generate new premajor commit version default semver and your tag forcing merge into main branch
+#	@ git config core.hooksPath None
+#	@msg=$$(poetry version premajor); poetry run pytest tests/; \
+#git commit -m "$$msg" pyproject.toml $$(find -name version.txt) \
+#&& git tag -f $$(poetry version -s) -m "$$msg"; \
+#git checkout main; git merge --no-ff dev -m "$$msg" \
+#&& git tag -f $$(poetry version -s) -m "$$msg" \
+#&& git checkout dev    #com tag
+#	@ git config core.hooksPath .git-hooks
+#
+#.PHONY: preminor
+#preminor:  ## Generate new preminor commit version default semver
+#	@ git config core.hooksPath None
+#	@v=$$(poetry version preminor); poetry run pytest -m "not slow" tests/ && git commit -m "$$v" pyproject.toml $$(find -name version.txt)  #sem tag
+#	@ git config core.hooksPath .git-hooks
+#
+#.PHONY: preminor-force
+#preminor-force:    ## Generate new preminor commit version default semver and your tag forcing merge into main branch
+#	@ git config core.hooksPath None
+#	@msg=$$(poetry version preminor); poetry run pytest tests/; \
+#git commit -m "$$msg" pyproject.toml $$(find -name version.txt) \
+#&& git tag -f $$(poetry version -s) -m "$$msg"; \
+#git checkout main; git merge --no-ff dev -m "$$msg" \
+#&& git tag -f $$(poetry version -s) -m "$$msg" \
+#&& git checkout dev    #com tag
+#	@ git config core.hooksPath .git-hooks
+#
+#.PHONY: prepatch
+#prepatch:  ## Generate new prepatch commit version default semver
+#	@ git config core.hooksPath None
+#	@v=$$(poetry version prepatch); poetry run pytest -m "not slow" tests/ && git commit -m "$$v" pyproject.toml $$(find -name version.txt)  #sem tag
+#	@ git config core.hooksPath .git-hooks
+#
+#.PHONY: prerelease
+#prerelease:   ## Generate new prerelease commit version default semver
+#	@ git config core.hooksPath None
+#	@v=$$(poetry version prerelease); poetry run pytest tests/test_incolumepy_lex.py::test_version && git commit -m "$$v" pyproject.toml $$(find -name version.txt)  #sem tag
+#	@ git config core.hooksPath .git-hooks
+#
+#.PHONY: prerelease-force
+#prerelease-force:   ## Generate new prerelease commit version default semver and your tag forcing merge into main branch
+#	@ git config core.hooksPath None
+#	@msg=$$(poetry version prerelease); poetry run pytest tests/; \
+#git commit -m "$$msg" pyproject.toml $$(find -name version.txt) \
+#&& git tag -f $$(poetry version -s) -m "$$msg"; \
+#git checkout main; git merge --no-ff dev -m "$$msg" \
+#&& git tag -f $$(poetry version -s) -m "$$msg" \
+#&& git checkout dev    #com tag
+#	@ git config core.hooksPath .git-hooks
 
 .PHONY: publish-testing
 publish-testing: ## Publish on test.pypi.org
