@@ -16,7 +16,7 @@ class TestCase0:
 
     def test_mock_write_files(self, mocker, temp_file_name):
         mock_save_file = mocker.Mock(
-            spec=incolumepy.utils.changelog.changelog_write
+            spec=incolumepy.utils.changelog._changelog_write
         )
         content = [
             (

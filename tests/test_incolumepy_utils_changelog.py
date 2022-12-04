@@ -5,8 +5,8 @@ import pytest
 
 import incolumepy.utils.changelog
 from incolumepy.utils.changelog import (
-    changelog_messages,
-    msg_classify,
+    _changelog_messages,
+    _msg_classify,
     update_changelog,
 )
 
@@ -24,7 +24,7 @@ class TestCase:
         ),
     )
     def test_msg_classify_type(self, entrance):
-        assert isinstance(msg_classify(entrance), dict)
+        assert isinstance(_msg_classify(entrance), dict)
 
     @pytest.mark.parametrize(
         "entrance",
@@ -38,7 +38,7 @@ class TestCase:
         ),
     )
     def test_msg_classify_value(self, entrance):
-        result = msg_classify(entrance)
+        result = _msg_classify(entrance)
         assert "key" in result
         assert "date" in result
         assert "messages" in result
@@ -136,7 +136,7 @@ class TestCase:
         ),
     )
     def test_changelog_messages(self, entrance, expected):
-        assert changelog_messages(**entrance) == expected
+        assert _changelog_messages(**entrance) == expected
 
     @pytest.mark.parametrize(
         "entrance",
@@ -153,12 +153,12 @@ class TestCase:
         ),
     )
     def test_changelog_write(self, entrance, ftemp, return_git_tag, mocker):
-        result = changelog_messages(text=return_git_tag)
+        result = _changelog_messages(text=return_git_tag)
         entrance.update({"content": result})
         if "changelog_file" not in entrance:
             entrance.update({"changelog_file": ftemp})
 
-        mocked = mocker.Mock(spec=incolumepy.utils.changelog.changelog_write)
+        mocked = mocker.Mock(spec=incolumepy.utils.changelog._changelog_write)
         result = mocked(**entrance)
         esperado = mocker.call(**entrance)
         assert esperado == mocked.call_args  # cobertura QA
