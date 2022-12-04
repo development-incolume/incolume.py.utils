@@ -3,9 +3,9 @@ from tempfile import gettempdir
 
 import pytest
 
+import incolumepy.utils.changelog
 from incolumepy.utils.changelog import (
     changelog_messages,
-    changelog_write,
     msg_classify,
     update_changelog,
 )
@@ -144,16 +144,25 @@ class TestCase:
             {"changelog_file": Path(gettempdir()) / "CHANGELOG.md"},
             pytest.param(
                 {"changelog_file": None},
-                marks=pytest.mark.skip(reason='need mock to write CHANGELOG.md')),
-            pytest.param({}, ),
+                # marks=pytest.mark.skip(
+                #     reason='need mock to write CHANGELOG.md')
+            ),
+            pytest.param(
+                {},
+            ),
         ),
     )
-    def test_changelog_write(self, entrance, ftemp, return_git_tag):
+    def test_changelog_write(self, entrance, ftemp, return_git_tag, mocker):
         result = changelog_messages(text=return_git_tag)
         entrance.update({"content": result})
         if "changelog_file" not in entrance:
             entrance.update({"changelog_file": ftemp})
-        assert changelog_write(**entrance)
+
+        mocked = mocker.Mock(spec=incolumepy.utils.changelog.changelog_write)
+        result = mocked(**entrance)
+        esperado = mocker.call(**entrance)
+        assert esperado == mocked.call_args  # cobertura QA
+        assert result  # Resultado
 
     @pytest.mark.parametrize(
         "entrance",
