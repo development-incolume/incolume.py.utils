@@ -15,6 +15,12 @@ classifiers = [
   'Operating System :: OS Independent',
   'Natural Language :: Portuguese (Brazilian)',
   "Programming Language :: Python",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.6",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
   'Topic :: Software Development :: Libraries :: Python Modules',
   'Topic :: Utilities',
 ]
@@ -253,6 +259,7 @@ envlist =
     py38
     py39
     py310
+    py311
 
 ;[tox:.package]
 ;basepython = python3
