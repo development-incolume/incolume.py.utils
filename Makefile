@@ -88,11 +88,6 @@ format: isort black   ## Formate project code with code style (isort, black)
 help:  ## Show this instructions
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-.PHOMY: install
-install: setup  ## Install this package using poetry and all dependences
-	@poetry install
-#	@poetry add $(PKGNAME)
-
 .PHONY: isort
 isort:  ## isort apply
 	@poetry run isort --atomic --py all $(DIRECTORIES) && git commit -m "style: Applied Code style isort format automaticly at `date +%F@%T`" . || echo
@@ -183,10 +178,10 @@ safety:  ## Check safety of packages into project.
 	@poetry run safety check --full-report
 
 .PHOMY: setup
-setup: ## setup environment python with poetry
+setup: ## setup environment python with poetry end install all dependences
 	@poetry env use $(PYTHON_VERSION)
 	@git config core.hooksPath .git-hooks
-#	@poetry shell
+	@poetry install
 
 .PHONY: stats
 stats: lint ## Run all tests avaliable and generate html coverage
