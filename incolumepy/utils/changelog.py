@@ -15,6 +15,8 @@ logging.basicConfig(
     "%(module)s;%(funcName)s;%(message)s",
 )
 
+CHANGELOG_FILE = Path(__file__).parents[2] / "CHANGELOG.md"
+
 
 def msg_classify(msg: str) -> Dict[str, Any]:
     """
@@ -78,14 +80,13 @@ def changelog_write(
     :param urlcompare: str
     :return: bool. True if success.
     """
-    changelog_file = Path(
-        kwargs.get("changelog_file")
-        or Path(__file__).parents[2] / "CHANGELOG.md"
-    )
+    changelog_file = Path(kwargs.get("changelog_file") or CHANGELOG_FILE)
+    logging.debug("changelog_file=%s", changelog_file)
     urlcompare = (
         kwargs.get("urlcompare")
         or "https://gitlab.com/development-incolume/incolumepy.utils/-/compare"
     )
+    logging.debug("urlcompare=%s", urlcompare)
     content_formated = [
         "# CHANGELOG\n\n\n",
         "All notable changes to this project",
@@ -139,12 +140,11 @@ def update_changelog(
     :param changelog_file:  changelog full filename.
     :return:
     """
-    logging.debug(kwargs)
-    if isinstance(changelog_file, str):
-        changelog_file = Path(changelog_file)
-    elif isinstance(changelog_file, type(None)):
-        changelog_file = Path(__file__).parents[2] / "CHANGELOG.md"
-    logging.debug("changelog_file=%s", changelog_file)
+    logging.debug("argumentos=%s,%s,%s", changelog_file, reverse, kwargs)
+    # if isinstance(changelog_file, str):
+    #     changelog_file = Path(changelog_file)
+    # elif isinstance(changelog_file, type(None)):
+    #     changelog_file = CHANGELOG_FILE
 
     urlcompare: str = (
         kwargs.get("urlcompare")
