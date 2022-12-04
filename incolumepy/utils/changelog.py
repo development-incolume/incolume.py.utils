@@ -138,7 +138,16 @@ def update_changelog(
     :param urlcompare: url compare from repository of project.
     :param reverse: bool.
     :param changelog_file:  changelog full filename.
-    :return:
+    :return: bool. True if success
+
+    >>> update_changelog()
+    True
+
+    >>> update_changelog(changelog_file='/tmp/CHANGELOG.md')
+    True
+
+    >>> update_changelog(urlcompare='https://example.com/compare')
+    True
     """
     logging.debug("argumentos=%s,%s,%s", changelog_file, reverse, kwargs)
     # if isinstance(changelog_file, str):

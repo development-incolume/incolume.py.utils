@@ -76,10 +76,8 @@ changelog:   ## Update changelog file
 .PHONY: docsgen
 docsgen: clean changelog    ## Generate documentation
 	@ cd docs; make html; cd -
-	@ git config core.hooksPath None
 	@ git commit -m "docs: Updated documentation \
  (`date +%FT%T%z`)" docs/ CHANGELOG.md
-	@ git config core.hooksPath .git-hooks
 
 .PHONY: format
 format: isort black   ## Formate project code with code style (isort, black)
@@ -155,12 +153,12 @@ lint: check-mypy check-pylint check-flake8 check-pydocstyle check-isort check-bl
 #	@ git config core.hooksPath .git-hooks
 
 .PHONY: patch
-patch:   ## Generate a build, new patch commit version, default semver
-	@v=$$(poetry version patch); poetry run pytest tests/ && make changelog && git commit -m "$$v" pyproject.toml CHANGELOG.md $$(find incolume* -name version.txt)  #sem tag
+patch: changelog   ## Generate a build, new patch commit version, default semver
+	@v=$$(poetry version patch); poetry run pytest tests/ && git commit -m "$$v" pyproject.toml CHANGELOG.md $$(find incolume* -name version.txt)  #sem tag
 
 .PHONY: prerelease
-prerelease:   ## Generate a prebuild, new prerelease commit version, default semver
-	@v=$$(poetry version prerelease); poetry run pytest tests/ && make changelog && git commit -m "$$v" pyproject.toml CHANGELOG.md $$(find incolume* -name version.txt)  #sem tag
+prerelease: changelog   ## Generate a prebuild, new prerelease commit version, default semver
+	@v=$$(poetry version prerelease); poetry run pytest tests/ && git commit -m "$$v" pyproject.toml CHANGELOG.md $$(find incolume* -name version.txt)  #sem tag
 
 .PHONY: publish-testing
 publish-testing: ## Publish on test.pypi.org

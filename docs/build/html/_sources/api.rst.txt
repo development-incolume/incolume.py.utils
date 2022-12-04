@@ -15,13 +15,6 @@ incolumepy.utils
     :show-inheritance:
 
 
-incolumepy.utils.changelog
----------------------------------------------
-.. automodule:: incolumepy.utils.changelog
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 incolumepy.utils.decorators
 ---------------------------------------------
 .. automodule:: incolumepy.utils.decorators
