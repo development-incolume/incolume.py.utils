@@ -18,7 +18,7 @@ logging.basicConfig(
 CHANGELOG_FILE = Path(__file__).parents[2] / "CHANGELOG.md"
 
 
-def _msg_classify(msg: str) -> Dict[str, Any]:
+def msg_classify(msg: str) -> Dict[str, Any]:
     """
     Classify and sort one record for messages git tag.
 
@@ -47,7 +47,7 @@ def _msg_classify(msg: str) -> Dict[str, Any]:
     return result
 
 
-def _changelog_messages(
+def changelog_messages(
     *, text: str, start: Any = None, end: Any = None
 ) -> List[Tuple[str, Dict[str, Any]]]:
     """
@@ -61,7 +61,7 @@ def _changelog_messages(
     records = []
     for msg in text.strip().splitlines()[start:end]:
         logging.debug("msg=%s", msg)
-        record = _msg_classify(msg)
+        record = msg_classify(msg)
         logging.debug("record=%s", record)
         # records.setdefault(record['key']).update(**record)
         records.append((record["key"], record))
@@ -70,7 +70,7 @@ def _changelog_messages(
     return records
 
 
-def _changelog_write(
+def changelog_write(
     *, content: List[Tuple[str, Dict[str, Any]]], **kwargs
 ) -> bool:
     """Write CHANGELOG.md file formatted.
@@ -163,9 +163,9 @@ def update_changelog(
     logging.info("registros encontrados ..")
     logging.debug("content=%s", content)
 
-    return _changelog_write(
+    return changelog_write(
         content=sorted(
-            _changelog_messages(
+            changelog_messages(
                 text=content,
                 start=kwargs.get("start", None),
                 end=kwargs.get("end", None),
@@ -189,17 +189,17 @@ def run():
     """
     msg = subprocess.getoutput("git tag -n").splitlines()[-14]
     logging.debug(msg)
-    logging.debug("_msg_classify=%s", _msg_classify(msg=msg))
+    logging.debug("msg_classify=%s", msg_classify(msg=msg))
 
     msg = subprocess.getoutput("git tag -n")
-    result = _changelog_messages(text=msg)
+    result = changelog_messages(text=msg)
 
     logging.debug("result=%s", result)
     logging.debug("type(result)=%s", type(result))
     result = sorted(result, reverse=True, key=key_versions_2_sort)
     logging.debug("result = %s; result type = %s", result, type(result))
 
-    _changelog_write(content=result)
+    changelog_write(content=result)
     update_changelog()
 
 
