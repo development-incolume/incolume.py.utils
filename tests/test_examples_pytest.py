@@ -18,8 +18,8 @@ class TestCaseExamples:
     """Test Case Examples."""
 
     def test_mock_builtins(self, mocker):
-        mocker.patch('__main__.ord', return_value=67)
-        print(ord('c'))
+        mocker.patch("__main__.ord", return_value=67)
+        print(ord("c"))
 
     def test_sum1(self, mocker):
         mocker.patch(__name__ + ".sum", return_value=9)
@@ -28,5 +28,6 @@ class TestCaseExamples:
     def test_sum2(self, mocker):
         def crazy_sum(a, b):
             return b + b
+
         mocker.patch(__name__ + ".sum", side_effect=crazy_sum)
         assert sum(2, 3) == 6
