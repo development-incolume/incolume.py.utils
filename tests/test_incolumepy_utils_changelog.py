@@ -142,8 +142,10 @@ class TestCase:
         "entrance",
         (
             {"changelog_file": Path(gettempdir()) / "CHANGELOG.md"},
-            # {"changelog_file": None},
-            {},
+            pytest.param(
+                {"changelog_file": None},
+                marks=pytest.mark.skip(reason='need mock to write CHANGELOG.md')),
+            pytest.param({}, ),
         ),
     )
     def test_changelog_write(self, entrance, ftemp, return_git_tag):
