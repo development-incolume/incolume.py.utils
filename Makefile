@@ -5,7 +5,7 @@ PYTHON_VERSION := 3.10
 
 .PHONY: black
 black:   ##Apply code style black format
-	@poetry run black $(DIRECTORIES) && git commit -m "style: Applied Code style Black format automaticly at `date +"%F %T"`" . || echo
+	@poetry run black $(DIRECTORIES) && git commit -m "style: Applied Code style Black format automaticly at `date +"%FT%T%z"`" . || echo
 	@echo ">>>  Checked code style Black format automaticly  <<<"
 
 .PHONY: clean
