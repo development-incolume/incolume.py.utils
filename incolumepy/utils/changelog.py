@@ -80,9 +80,7 @@ def changelog_write(
     :param urlcompare: str
     :return: bool. True if success.
     """
-    changelog_file = Path(
-        kwargs.get("changelog_file") or CHANGELOG_FILE
-    )
+    changelog_file = Path(kwargs.get("changelog_file") or CHANGELOG_FILE)
     urlcompare = (
         kwargs.get("urlcompare")
         or "https://gitlab.com/development-incolume/incolumepy.utils/-/compare"
