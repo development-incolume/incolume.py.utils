@@ -13,7 +13,7 @@ from incolumepy.utils.changelog import (
 __author__ = "@britodfbr"  # pragma: no cover
 
 
-class TestCase1:
+class TestCase:
     @pytest.mark.parametrize(
         "entrance",
         (
@@ -142,6 +142,7 @@ class TestCase1:
         "entrance",
         (
             {"changelog_file": Path(gettempdir()) / "CHANGELOG.md"},
+            # {"changelog_file": None},
             {},
         ),
     )
@@ -156,7 +157,6 @@ class TestCase1:
         "entrance",
         (
             {},
-            {"changelog_file": None},
             {
                 "changelog_file": Path(gettempdir())
                 .joinpath("xpto.md")

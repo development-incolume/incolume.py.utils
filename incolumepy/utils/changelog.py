@@ -15,6 +15,8 @@ logging.basicConfig(
     "%(module)s;%(funcName)s;%(message)s",
 )
 
+CHANGELOG_FILE = Path(__file__).parents[2] / "CHANGELOG.md"
+
 
 def msg_classify(msg: str) -> Dict[str, Any]:
     """
@@ -79,8 +81,7 @@ def changelog_write(
     :return: bool. True if success.
     """
     changelog_file = Path(
-        kwargs.get("changelog_file")
-        or Path(__file__).parents[2] / "CHANGELOG.md"
+        kwargs.get("changelog_file") or CHANGELOG_FILE
     )
     urlcompare = (
         kwargs.get("urlcompare")
@@ -140,10 +141,10 @@ def update_changelog(
     :return:
     """
     logging.debug(kwargs)
-    if isinstance(changelog_file, str):
-        changelog_file = Path(changelog_file)
-    elif isinstance(changelog_file, type(None)):
-        changelog_file = Path(__file__).parents[2] / "CHANGELOG.md"
+    # if isinstance(changelog_file, str):
+    #     changelog_file = Path(changelog_file)
+    # elif isinstance(changelog_file, type(None)):
+    #     changelog_file = CHANGELOG_FILE
     logging.debug("changelog_file=%s", changelog_file)
 
     urlcompare: str = (
