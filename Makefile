@@ -76,10 +76,8 @@ changelog:   ## Update changelog file
 .PHONY: docsgen
 docsgen: clean changelog    ## Generate documentation
 	@ cd docs; make html; cd -
-	@ git config core.hooksPath None
 	@ git commit -m "docs: Updated documentation \
  (`date +%FT%T%z`)" docs/ CHANGELOG.md
-	@ git config core.hooksPath .git-hooks
 
 .PHONY: format
 format: isort black   ## Formate project code with code style (isort, black)
