@@ -300,6 +300,102 @@ package_name=’incolumepy.package.module’
 </dl>
 </dd></dl>
 </section>
+<section id="module-incolumepy.utils.changelog">
+<span id="incolumepy-utils-changelog"></span><h3>incolumepy.utils.changelog<a class="headerlink" href="#module-incolumepy.utils.changelog" title="Link permanente para este título">#</a></h3>
+<p>Changelog Module.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="incolumepy.utils.changelog.Changelog">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">incolumepy.utils.changelog.</span></span><span class="sig-name descname"><span class="pre">Changelog</span></span><a class="headerlink" href="#incolumepy.utils.changelog.Changelog" title="Link permanente para esta definição">#</a></dt>
+<dd><p>Base: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Changelog class.</p>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="incolumepy.utils.changelog.changelog_messages">
+<span class="sig-prename descclassname"><span class="pre">incolumepy.utils.changelog.</span></span><span class="sig-name descname"><span class="pre">changelog_messages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#incolumepy.utils.changelog.changelog_messages" title="Link permanente para esta definição">#</a></dt>
+<dd><p>Changelog messages sort and classify.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> – str</p></li>
+<li><p><strong>start</strong> – (int, str, None)</p></li>
+<li><p><strong>end</strong> – (int, str, None)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="incolumepy.utils.changelog.changelog_write">
+<span class="sig-prename descclassname"><span class="pre">incolumepy.utils.changelog.</span></span><span class="sig-name descname"><span class="pre">changelog_write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#incolumepy.utils.changelog.changelog_write" title="Link permanente para esta definição">#</a></dt>
+<dd><p>Write CHANGELOG.md file formatted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>content</strong> – List[Tuple[str, Dict[str, Any]]]</p></li>
+<li><p><strong>changelog_file</strong> – str, pathlib</p></li>
+<li><p><strong>urlcompare</strong> – str</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>bool. True if success.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="incolumepy.utils.changelog.msg_classify">
+<span class="sig-prename descclassname"><span class="pre">incolumepy.utils.changelog.</span></span><span class="sig-name descname"><span class="pre">msg_classify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#incolumepy.utils.changelog.msg_classify" title="Link permanente para esta definição">#</a></dt>
+<dd><p>Classify and sort one record for messages git tag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><p><strong>msg</strong> – str</p>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="incolumepy.utils.changelog.run">
+<span class="sig-prename descclassname"><span class="pre">incolumepy.utils.changelog.</span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#incolumepy.utils.changelog.run" title="Link permanente para esta definição">#</a></dt>
+<dd><p>Examples ran.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Retorna</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="incolumepy.utils.changelog.update_changelog">
+<span class="sig-prename descclassname"><span class="pre">incolumepy.utils.changelog.</span></span><span class="sig-name descname"><span class="pre">update_changelog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">changelog_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#incolumepy.utils.changelog.update_changelog" title="Link permanente para esta definição">#</a></dt>
+<dd><p>Update Changelog.md file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parâmetros</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>urlcompare</strong> – url compare from repository of project.</p></li>
+<li><p><strong>reverse</strong> – bool.</p></li>
+<li><p><strong>changelog_file</strong> – changelog full filename.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Retorna</dt>
+<dd class="field-even"><p>bool. True if success</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">update_changelog</span><span class="p">()</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">update_changelog</span><span class="p">(</span><span class="n">changelog_file</span><span class="o">=</span><span class="s1">'/tmp/CHANGELOG.md'</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">update_changelog</span><span class="p">(</span><span class="n">urlcompare</span><span class="o">=</span><span class="s1">'https://example.com/compare'</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+</section>
 <section id="module-incolumepy.utils.decorators">
 <span id="incolumepy-utils-decorators"></span><h3>incolumepy.utils.decorators<a class="headerlink" href="#module-incolumepy.utils.decorators" title="Link permanente para este título">#</a></h3>
 <p>Decorators module.</p>
@@ -528,6 +624,7 @@ default [‘planalto’, ‘camara’, ‘senado’]</p></li>
 <li><a class="reference internal" href="#">API Modules</a><ul>
 <li><a class="reference internal" href="#modules">Modules</a><ul>
 <li><a class="reference internal" href="#module-incolumepy.utils">incolumepy.utils</a></li>
+<li><a class="reference internal" href="#module-incolumepy.utils.changelog">incolumepy.utils.changelog</a></li>
 <li><a class="reference internal" href="#module-incolumepy.utils.decorators">incolumepy.utils.decorators</a></li>
 <li><a class="reference internal" href="#module-incolumepy.utils.files">incolumepy.utils.files</a></li>
 <li><a class="reference internal" href="#module-incolumepy.utils.numerical">incolumepy.utils.numerical</a></li>
