@@ -90,7 +90,7 @@ help:  ## Show this instructions
 
 .PHONY: isort
 isort:  ## isort apply
-	@poetry run isort --atomic --py all $(DIRECTORIES) && git commit -m "style: Applied Code style isort format automaticly at `date +%F@%T`" . || echo
+	@poetry run isort --atomic --py all $(DIRECTORIES) && git commit -m "style: Applied Code style isort format automaticly at `date +%FT%T%z`" . || echo
 	@echo ">>>  Checked code style isort format automaticly  <<<"
 
 .PHONY: lint
