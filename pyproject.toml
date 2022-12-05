@@ -15,6 +15,12 @@ classifiers = [
   'Operating System :: OS Independent',
   'Natural Language :: Portuguese (Brazilian)',
   "Programming Language :: Python",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.6",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
   'Topic :: Software Development :: Libraries :: Python Modules',
   'Topic :: Utilities',
 ]
@@ -55,7 +61,6 @@ toml = {extras = ["tomli"], version = "^0.10.2"}
 flake8 = "^3.8.4"
 py3kwarn = "^0.4.4"
 coverage = "^5.3"
-nose = "^1.3.7"
 tox = "^3.20.1"
 mypy = "^0.931"
 isort = "^5.10.1"
@@ -254,6 +259,7 @@ envlist =
     py38
     py39
     py310
+    py311
 
 ;[tox:.package]
 ;basepython = python3
