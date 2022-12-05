@@ -75,6 +75,9 @@ Sphinx = "^4.4.0"
 furo = "^2022.3.4"
 myst-parser = "^0.16"
 
+[tool.poetry.group.dev.dependencies]
+pylama = "^8.4.1"
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
