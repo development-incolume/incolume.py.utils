@@ -2,7 +2,7 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 import datetime as dt
-import re
+import logging
 from collections import OrderedDict
 from itertools import repeat
 
@@ -12,6 +12,8 @@ from incolumepy.utils import (
     __version__,
     confproject,
     key_versions_2_sort,
+    logger,
+    namespace,
     update_changelog,
     versionfile,
 )
@@ -28,36 +30,6 @@ __author__ = "@britodfbr"  # pragma: no cover
 )
 def test_file_exist(entrance):
     assert entrance.is_file()
-
-
-@pytest.mark.parametrize(
-    ["entrance", "expected"],
-    (
-        (__version__, True),
-        ("0.0.1", True),
-        ("0.1.0", True),
-        ("1.0.0", True),
-        ("1.0.1", True),
-        ("1.1.1", True),
-        ("1.1.1-rc0", True),
-        ("1.1.1-rc.0", True),
-        ("1.1.1-rc-0", True),
-        ("1.0.1-dev0", True),
-        ("1.0.1-dev.0", True),
-        ("1.0.1-dev.1", True),
-        ("1.0.1-dev.2", True),
-        ("1.0.1-alpha.0", True),
-        ("1.0.1-alpha.266", True),
-        ("1.0.1-dev.0", True),
-        ("1.0.1-beta.0", True),
-        ("1.1.1-alpha.99999", True),
-        ("1.1.1-rc.99999", True),
-        ("1.1.99999", True),
-        ("1.999999.1", True),
-    ),
-)
-def test_version(entrance, expected):
-    assert re.fullmatch(r"\d\.\d\.\d(-\w+\.\d+)?", __version__, flags=re.I)
 
 
 @pytest.mark.parametrize(
@@ -79,6 +51,9 @@ def test_version(entrance, expected):
         (("0.5.1-alpha.0", "aaa"), "00000501.020000"),
         (("0.5.1-post.0", "aaa"), "00000501.400000"),
         (("1.5.1-post0", "aaa"), "00010501.400000"),
+        (("1.5", "aaa"), "1.5"),
+        # (("1.5.1rc0", "aaa"), "00010501.030000"),
+        # (("1.5.1a0", "aaa"), "00010501.000500"),
     ],
 )
 def test_key_versions_2_sort(entrance, expected):
@@ -203,6 +178,7 @@ def test_apply_key_versions_2_sort(entrance, reverse, expected):
     assert result == expected
 
 
+@pytest.mark.skip(reason="Deprecated on 2.6.0a4.")
 @pytest.mark.parametrize(
     "str_testing reverse expected".split(),
     [
@@ -224,19 +200,20 @@ def test_apply_key_versions_2_sort(entrance, reverse, expected):
                 f"[incolumepy.utils](https://gitlab.com/development-incolume/"
                 f"incolumepy.utils/-/tree/{__version__})\n"
                 "\n---\n"
-                f"## [0.2.0]\t"
-                f"{dt.datetime.now().strftime('%F')}:\n\tFake record\n"
-                f"## [0.1.1]\t"
-                f"{dt.datetime.now().strftime('%F')}:\n\tFake record\n"
-                f"## [0.1.1-rc.1]\t"
-                f"{dt.datetime.now().strftime('%F')}:\n\tFake record\n"
-                f"## [0.1.1-rc.0]\t"
-                f"{dt.datetime.now().strftime('%F')}:\n\tFake record\n"
-                f"## [0.1.1-alpha.0]\t"
-                f"{dt.datetime.now().strftime('%F')}:\n\tFake record\n"
-                f"## [0.1.0]\t{dt.datetime.now().strftime('%F')}:\n\tsystem\n"
-                f"## [0.0.1]\t"
-                f"{dt.datetime.now().strftime('%F')}:\n\tFake record\n"
+                f"## [0.2.0]\t &#8212; \t"
+                f"{dt.datetime.now().strftime('%F')}:\n  - Fake record\n"
+                f"## [0.1.1]\t &#8212; \t"
+                f"{dt.datetime.now().strftime('%F')}:\n  - Fake record\n"
+                f"## [0.1.1-rc.1]\t &#8212; \t"
+                f"{dt.datetime.now().strftime('%F')}:\n  - Fake record\n"
+                f"## [0.1.1-rc.0]\t &#8212; \t"
+                f"{dt.datetime.now().strftime('%F')}:\n  - Fake record\n"
+                f"## [0.1.1-alpha.0]\t &#8212; \t"
+                f"{dt.datetime.now().strftime('%F')}:\n  - Fake record\n"
+                f"## [0.1.0]\t &#8212; \t{dt.datetime.now().strftime('%F')}:"
+                f"\n  - system\n"
+                f"## [0.0.1]\t &#8212; \t"
+                f"{dt.datetime.now().strftime('%F')}:\n  - Fake record\n"
                 "---\n\n"
                 "[0.1.1]: https://gitlab.com/development-incolume"
                 "/incolumepy.utils/-/compare/0.1.0...0.1.1\n"
@@ -273,20 +250,23 @@ def test_apply_key_versions_2_sort(entrance, reverse, expected):
                 f"[incolumepy.utils](https://gitlab.com/development-incolume/"
                 f"incolumepy.utils/-/tree/{__version__})\n"
                 "\n---\n"
-                f'## [0.0.1]\t{dt.datetime.now().strftime("%F")}:\n'
-                "\tFake record\n"
-                f'## [0.1.0]\t{dt.datetime.now().strftime("%F")}:\n'
-                "\tsystem\n"
-                f'## [0.1.1-alpha.0]\t{dt.datetime.now().strftime("%F")}:\n'
-                "\tFake record\n"
-                f'## [0.1.1-rc.0]\t{dt.datetime.now().strftime("%F")}:\n'
-                "\tFake record\n"
-                f'## [0.1.1-rc.1]\t{dt.datetime.now().strftime("%F")}:\n'
-                "\tFake record\n"
-                f'## [0.1.1]\t{dt.datetime.now().strftime("%F")}:\n'
-                "\tFake record\n"
-                f'## [0.2.0]\t{dt.datetime.now().strftime("%F")}:\n'
-                "\tFake record\n"
+                f'## [0.0.1]\t &#8212; \t{dt.datetime.now().strftime("%F")}:\n'
+                "  - Fake record\n"
+                f'## [0.1.0]\t &#8212; \t{dt.datetime.now().strftime("%F")}:\n'
+                "  - system\n"
+                f"## [0.1.1-alpha.0]\t &#8212; "
+                f'\t{dt.datetime.now().strftime("%F")}:\n'
+                "  - Fake record\n"
+                f"## [0.1.1-rc.0]\t &#8212; "
+                f'\t{dt.datetime.now().strftime("%F")}:\n'
+                "  - Fake record\n"
+                f"## [0.1.1-rc.1]\t &#8212; "
+                f'\t{dt.datetime.now().strftime("%F")}:\n'
+                "  - Fake record\n"
+                f'## [0.1.1]\t &#8212; \t{dt.datetime.now().strftime("%F")}:\n'
+                "  - Fake record\n"
+                f'## [0.2.0]\t &#8212; \t{dt.datetime.now().strftime("%F")}:\n'
+                "  - Fake record\n"
                 "---\n"
                 "\n"
                 "[0.1.1]: "
@@ -372,12 +352,14 @@ def test_apply_key_versions_2_sort(entrance, reverse, expected):
                 f"incolumepy.utils/-/tree/{__version__})\n"
                 "\n"
                 "---\n"
-                f"## [v0.1.0]\t{dt.datetime.now().strftime('%F')}:\n"
-                "\trecord\n"
-                f"## [0.1.0-alpha.0]\t{dt.datetime.now().strftime('%F')}:\n"
-                "\tdev fake\n"
-                f"## [0.0.1]\t{dt.datetime.now().strftime('%F')}:\n"
-                "\tinitial\n"
+                f"## [v0.1.0]\t &#8212; "
+                f"\t{dt.datetime.now().strftime('%F')}:\n"
+                "  - record\n"
+                f"## [0.1.0-alpha.0]\t &#8212; "
+                f"\t{dt.datetime.now().strftime('%F')}:\n"
+                "  - dev fake\n"
+                f"## [0.0.1]\t &#8212; \t{dt.datetime.now().strftime('%F')}:\n"
+                "  - initial\n"
                 "---\n"
                 "\n"
                 "[0.1.0-alpha.0]: "
@@ -390,13 +372,19 @@ def test_apply_key_versions_2_sort(entrance, reverse, expected):
             # marks=pytest.mark.skip,
         ),
         pytest.param(
-            "v0.0.1 Added: initial\nv0.1.0 Added: record"
+            "v0.0.1 Added: initial"
+            "\nv0.1.0 Added: record"
             "\nv0.1.0-alpha.0 Changed: dev fake"
-            "\nv0.1.0-alpha.1 Deprecated: ass\nv0.0.1-rc.0 Fixed: as"
-            "\nv0.0.1-alpha.0 Security: as\nv0.0.1-beta.0 Added: a"
-            "\nv0.0.1-dev.0 Changed: asd\nv0.0.1-rc.1 as"
-            "\nv0.0.1-rc.2 Fixed: as\nv0.0.1-rc.11 Changed: as"
-            "\nv0.0.1-rc.3 Added: as\nv0.0.1-rc.12 Removed: as"
+            "\nv0.1.0-alpha.1 Deprecated: ass"
+            "\nv0.0.1-rc.0 Fixed: as"
+            "\nv0.0.1-alpha.0 Security: as"
+            "\nv0.0.1-beta.0 Added: a"
+            "\nv0.0.1-dev.0 Changed: asd"
+            "\nv0.0.1-rc.1 as"
+            "\nv0.0.1-rc.2 Fixed: as"
+            "\nv0.0.1-rc.11 Changed: as"
+            "\nv0.0.1-rc.3 Added: as"
+            "\nv0.0.1-rc.12 Removed: as"
             "\nv0.0.1-rc.21 Deprecated: as\n",
             True,
             (
@@ -412,34 +400,48 @@ def test_apply_key_versions_2_sort(entrance, reverse, expected):
                 f"incolumepy.utils/-/tree/{__version__})\n"
                 "\n"
                 "---\n"
-                f"## [v0.1.0]\t{dt.datetime.now().strftime('%F')}:\n"
-                "\tAdded: record\n"
-                f"## [v0.1.0-alpha.1]\t{dt.datetime.now().strftime('%F')}:\n"
-                "\tDeprecated: ass\n"
-                f"## [v0.1.0-alpha.0]\t{dt.datetime.now().strftime('%F')}:\n"
-                "\tChanged: dev fake\n"
-                f"## [v0.0.1]\t{dt.datetime.now().strftime('%F')}:\n"
-                "\tAdded: initial\n"
-                f"## [v0.0.1-rc.21]\t{dt.datetime.now().strftime('%F')}:\n"
-                "\tDeprecated: as\n"
-                f"## [v0.0.1-rc.12]\t{dt.datetime.now().strftime('%F')}:\n"
-                "\tRemoved: as\n"
-                f"## [v0.0.1-rc.11]\t{dt.datetime.now().strftime('%F')}:\n"
-                "\tChanged: as\n"
-                f"## [v0.0.1-rc.3]\t{dt.datetime.now().strftime('%F')}:\n"
-                "\tAdded: as\n"
-                f"## [v0.0.1-rc.2]\t{dt.datetime.now().strftime('%F')}:\n"
-                "\tFixed: as\n"
-                f"## [v0.0.1-rc.1]\t{dt.datetime.now().strftime('%F')}:\n"
-                "\tas\n"
-                f"## [v0.0.1-rc.0]\t{dt.datetime.now().strftime('%F')}:\n"
-                "\tFixed: as\n"
-                f"## [v0.0.1-alpha.0]\t{dt.datetime.now().strftime('%F')}:\n"
-                "\tSecurity: as\n"
-                f"## [v0.0.1-beta.0]\t{dt.datetime.now().strftime('%F')}:\n"
-                "\tAdded: a\n"
-                f"## [v0.0.1-dev.0]\t{dt.datetime.now().strftime('%F')}:\n"
-                "\tChanged: asd\n"
+                f"## [v0.1.0]\t &#8212; "
+                f"\t{dt.datetime.now().strftime('%F')}:\n"
+                "  - Added: record\n"
+                f"## [v0.1.0-alpha.1]\t &#8212; "
+                f"\t{dt.datetime.now().strftime('%F')}:\n"
+                "  - Deprecated: ass\n"
+                f"## [v0.1.0-alpha.0]\t &#8212; "
+                f"\t{dt.datetime.now().strftime('%F')}:\n"
+                "  - Changed: dev fake\n"
+                f"## [v0.0.1]\t &#8212; "
+                f"\t{dt.datetime.now().strftime('%F')}:\n"
+                "  - Added: initial\n"
+                f"## [v0.0.1-rc.21]\t &#8212; "
+                f"\t{dt.datetime.now().strftime('%F')}:\n"
+                "  - Deprecated: as\n"
+                f"## [v0.0.1-rc.12]\t &#8212; "
+                f"\t{dt.datetime.now().strftime('%F')}:\n"
+                "  - Removed: as\n"
+                f"## [v0.0.1-rc.11]\t &#8212; "
+                f"\t{dt.datetime.now().strftime('%F')}:\n"
+                "  - Changed: as\n"
+                f"## [v0.0.1-rc.3]\t &#8212; "
+                f"\t{dt.datetime.now().strftime('%F')}:\n"
+                "  - Added: as\n"
+                f"## [v0.0.1-rc.2]\t &#8212; "
+                f"\t{dt.datetime.now().strftime('%F')}:\n"
+                "  - Fixed: as\n"
+                f"## [v0.0.1-rc.1]\t &#8212; "
+                f"\t{dt.datetime.now().strftime('%F')}:\n"
+                "  - as\n"
+                f"## [v0.0.1-rc.0]\t &#8212; "
+                f"\t{dt.datetime.now().strftime('%F')}:\n"
+                "  - Fixed: as\n"
+                f"## [v0.0.1-alpha.0]\t &#8212; "
+                f"\t{dt.datetime.now().strftime('%F')}:\n"
+                "  - Security: as\n"
+                f"## [v0.0.1-beta.0]\t &#8212; "
+                f"\t{dt.datetime.now().strftime('%F')}:\n"
+                "  - Added: a\n"
+                f"## [v0.0.1-dev.0]\t &#8212; "
+                f"\t{dt.datetime.now().strftime('%F')}:\n"
+                "  - Changed: asd\n"
                 "---\n"
                 "\n"
                 "[v0.1.0]: "
@@ -501,3 +503,69 @@ def test_update_changelog(
     )
     update_changelog(**entrance)
     assert file.read_text() == expected
+
+
+def test_update_changelog_deprecated(temp_file_name):
+    with pytest.raises(
+        expected_exception=NotImplementedError,
+        match="This function was replaced. "
+              "Use incolumepy.utils.changelog.update_changelog"
+    ):
+        update_changelog(changelog_file=temp_file_name)
+
+
+@pytest.mark.parametrize(
+    'entrance expected'.split(),
+    (
+        ('incolumepy.package.module', ['incolumepy', 'incolumepy.package']),
+        (
+            'incolumepy.package.subpackage.module',
+            [
+                'incolumepy', 'incolumepy.package',
+                'incolumepy.package.subpackage'
+            ]
+        ),
+        ('incolumepy.package.module', ['incolumepy', 'incolumepy.package']),
+        ('incolumepy.package', ['incolumepy']),
+        ('incolumepy', ['incolumepy']),
+        (None, None),
+    ),
+)
+def test_namespace(entrance, expected):
+    if entrance:
+        assert namespace(entrance) == expected
+    else:
+        with pytest.raises(expected_exception=ValueError, match=''):
+            namespace(entrance)
+
+
+def test_logger(temp_file_name):
+    LOGGER = logger(filelog=temp_file_name)
+    assert isinstance(LOGGER, logging.Logger)
+
+
+#def test_logger(caplog, temp_file_name):
+#    l = logger(filelog=temp_file_name)
+#    l.debug('debug')
+#    l.info('info')
+#    l.error('error')
+#    l.warn('warn')
+#    assert temp_file_name.exists()
+#
+#
+#def test_func(temp_file_name, caplog):
+#    LOGGER = logger(filelog=temp_file_name)
+#    LOGGER.debug('Testing now.')
+#    assert 'Testing now.' in caplog.text
+#
+#
+#class SpamTest:
+#    @pytest.fixture(autouse=True)
+#    def inject_fixtures(self, caplog):
+#        self._caplog = caplog
+#
+#    def test_eggs(self, temp_file_name):
+#        LOGGER = logger(filelog=temp_file_name)
+#        with self._caplog.at_level(logging.INFO):
+#            LOGGER.info('info bacon')
+#            assert self._caplog.records[0].message == 'bacon'
