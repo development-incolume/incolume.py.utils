@@ -37,7 +37,7 @@ def key_versions_2_sort(
         "alpha": 2 * 10 ** (qdig - 1),
         "dev": 0,
     }
-    regex = regex or r"(\d+)\.(\d+)\.(\d+)((-\D+)(\d+))?"
+    regex = regex or r"(\d+)\.(\d+)\.(\d+)((-?\D+)(\d+))?"
     get_major_minor_patch_build = re.compile(regex)
     logging.debug(get_major_minor_patch_build)
     try:
