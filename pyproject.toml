@@ -157,6 +157,25 @@ data
 #max-line-length = 120
 max-complexity = 5
 
+[tool.pylama]
+format = "pylint"
+skip = "*/.tox/*,*/.env/*"
+linters = "pylint,mccabe"
+ignore = "F0401,C0111,E731"
+
+[tool.pylama.linter.pyflakes]
+builtins = "_"
+
+[tool.pylama.linter.pycodestyle]
+max_line_length = 79
+
+[tool.pylama.linter.pylint]
+max_line_length = 79
+disable = "R"
+
+[tool.pylama.linter.mccabe]
+max-complexity=5
+
 [tool.pylint.format]
 # Maximum number of characters on a single line.
 max-line-length = 79
@@ -252,8 +271,8 @@ envlist =
     black
     isort
     pydocstyle
-    flake8
     mypy
+    pylama
     pylint
     py37
     py38
@@ -305,6 +324,10 @@ commands = poetry run pydocstyle incolumepy/ tests/
 
 [testenv:isort]
 commands = poetry run isort --check --atomic --py all incolumepy/ tests/
+
+[testenv:pylama]
+deps = pylama
+commands = poetry run pylama incolumepy/ tests/
 
 [testenv:pylint]
 commands = poetry run pylint incolumepy/ tests/
