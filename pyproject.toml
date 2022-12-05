@@ -289,7 +289,7 @@ skip_install = true
 commands =
     poetry env use {envpython}
     poetry install -vv --no-root
-    poetry run pytest {posargs} tests/ -m \"not(slow or webtest)\"
+    poetry run pytest --pylama {posargs} tests/ -m \"not(slow or webtest)\"
 
 [testenv:clean]
 deps = coverage
