@@ -509,25 +509,26 @@ def test_update_changelog_deprecated(temp_file_name):
     with pytest.raises(
         expected_exception=NotImplementedError,
         match="This function was replaced. "
-              "Use incolumepy.utils.changelog.update_changelog"
+        "Use incolumepy.utils.changelog.update_changelog",
     ):
         update_changelog(changelog_file=temp_file_name)
 
 
 @pytest.mark.parametrize(
-    'entrance expected'.split(),
+    "entrance expected".split(),
     (
-        ('incolumepy.package.module', ['incolumepy', 'incolumepy.package']),
+        ("incolumepy.package.module", ["incolumepy", "incolumepy.package"]),
         (
-            'incolumepy.package.subpackage.module',
+            "incolumepy.package.subpackage.module",
             [
-                'incolumepy', 'incolumepy.package',
-                'incolumepy.package.subpackage'
-            ]
+                "incolumepy",
+                "incolumepy.package",
+                "incolumepy.package.subpackage",
+            ],
         ),
-        ('incolumepy.package.module', ['incolumepy', 'incolumepy.package']),
-        ('incolumepy.package', ['incolumepy']),
-        ('incolumepy', ['incolumepy']),
+        ("incolumepy.package.module", ["incolumepy", "incolumepy.package"]),
+        ("incolumepy.package", ["incolumepy"]),
+        ("incolumepy", ["incolumepy"]),
         (None, None),
     ),
 )
@@ -535,16 +536,16 @@ def test_namespace(entrance, expected):
     if entrance:
         assert namespace(entrance) == expected
     else:
-        with pytest.raises(expected_exception=ValueError, match=''):
+        with pytest.raises(expected_exception=ValueError, match=""):
             namespace(entrance)
 
 
 def test_logger(temp_file_name):
-    LOGGER = logger(filelog=temp_file_name)
-    assert isinstance(LOGGER, logging.Logger)
+    logg = logger(filelog=temp_file_name)
+    assert isinstance(logg, logging.Logger)
 
 
-#def test_logger(caplog, temp_file_name):
+# def test_logger(caplog, temp_file_name):
 #    l = logger(filelog=temp_file_name)
 #    l.debug('debug')
 #    l.info('info')
@@ -553,13 +554,13 @@ def test_logger(temp_file_name):
 #    assert temp_file_name.exists()
 #
 #
-#def test_func(temp_file_name, caplog):
+# def test_func(temp_file_name, caplog):
 #    LOGGER = logger(filelog=temp_file_name)
 #    LOGGER.debug('Testing now.')
 #    assert 'Testing now.' in caplog.text
 #
 #
-#class SpamTest:
+# class SpamTest:
 #    @pytest.fixture(autouse=True)
 #    def inject_fixtures(self, caplog):
 #        self._caplog = caplog

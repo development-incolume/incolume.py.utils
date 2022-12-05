@@ -163,8 +163,8 @@ def namespace(package_name):
         s = package_name.split(".")
         logging.debug(s)
         quantia = len(s)
-    except AttributeError:
-        raise ValueError("package_name not can be void")
+    except AttributeError as e:
+        raise ValueError("package_name not can be void") from e
 
     if 0 < quantia <= 2:
         nspace = s[:1]

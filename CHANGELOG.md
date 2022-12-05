@@ -10,6 +10,18 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ---
 
 
+## [2.6.0-rc.0]	 &#8212; 	2022-12-03:
+### Added
+  - módulo incolumepy.utils.changelog para tratar de recuros do changelog
+  -   Aderência a convensão de commit disponível em https://www.conventionalcommits.org/pt-br/v1.0.0/
+  -  Aderência a Keep a Changelog disponível em https://keepachangelog.com/pt-BR/1.0.0/
+### Changed
+  - Estilização do CHANGELOG.md
+  -  Cobertura de 100% em incolumepy.utils.__init__.py
+  -  Alteração nas regras githooks para melhoria de gerenciamento do projeto e garantir o versionamento semântico disponível em https://semver.org/lang/pt-BR/
+### Deprecated
+  - função "incolumepy.utils.update_changelog" tornada obsoleta em favor "incolumepy.utils.changelog.update_changelog"
+
 ## [2.5.4]	 &#8212; 	2022-03-13:
 ### Added
   - Documentação automatizada com sphinx
@@ -53,15 +65,15 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
   - Módulo 'incolumepy.utils.url' acrescentado
 
 ## [2.0.0]	 &#8212; 	2022-02-16:
-### Removed
-  - Módulo incolumepy.utils.sequences deixou de existir
 ### Changed
-  - Gerenciador de pacotes alterado para poetry
-  - Switch de testes alterado para pytest
-  - Redefinição de estrutura
   - Atualização de teste para key_sort_2_versions
+  - Gerenciador de pacotes alterado para poetry
+  - Redefinição de estrutura
+  - Switch de testes alterado para pytest
 ### Deprecated
   - Funcionalidades obsoletas sinalizadas como deprecated.
+### Removed
+  - Módulo incolumepy.utils.sequences deixou de existir
 
 ## [2.0.0-rc.2]	 &#8212; 	2022-02-15:
 ### Changed
@@ -240,3 +252,4 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 [2.5.2]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.5.1...2.5.2
 [2.5.3]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.5.2...2.5.3
 [2.5.4]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.5.3...2.5.4
+[2.6.0-rc.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.5.4...2.6.0-rc.0
