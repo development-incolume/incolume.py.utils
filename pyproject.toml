@@ -16,7 +16,6 @@ classifiers = [
   'Natural Language :: Portuguese (Brazilian)',
   "Programming Language :: Python",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.6",
   "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
@@ -52,7 +51,7 @@ exclude = [
 incolumepy-utils = 'incolumepy.utils.main:run'
 
 [tool.poetry.dependencies]
-python = "^3.6.2"
+python = "^3.7"
 Deprecated = "^1.2.10"
 rstr = "^2.2.6"
 toml = {extras = ["tomli"], version = "^0.10.2"}
@@ -254,7 +253,6 @@ envlist =
     flake8
     mypy
     pylint
-    py36
     py37
     py38
     py39
