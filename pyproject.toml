@@ -57,7 +57,6 @@ rstr = "^2.2.6"
 toml = {extras = ["tomli"], version = "^0.10.2"}
 
 [tool.poetry.dev-dependencies]
-flake8 = "^3.8.4"
 py3kwarn = "^0.4.4"
 coverage = "^5.3"
 tox = "^3.20.1"
