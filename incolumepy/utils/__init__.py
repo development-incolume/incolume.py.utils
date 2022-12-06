@@ -32,12 +32,13 @@ def key_versions_2_sort(
     qdig = qdig or 5
     assert isinstance(x, (tuple, list)), "'x' must be tuple or list."
     classifies = {
-        "post": 4 * 10 ** qdig,
-        "rc": 3 * 10 ** (qdig - 1),
+        "post": 9 * 10 ** qdig,
+        "rc": 8 * 10 ** (qdig - 1),
         "alpha": 2 * 10 ** (qdig - 1),
+        "a": 2 * 10 ** (qdig - 1),
         "dev": 0,
     }
-    regex = regex or r"(\d+)\.(\d+)\.(\d+)((-\D+)(\d+))?"
+    regex = regex or r"(\d+)\.(\d+)\.(\d+)((-?\D+)(\d+))?"
     get_major_minor_patch_build = re.compile(regex)
     logging.debug(get_major_minor_patch_build)
     try:

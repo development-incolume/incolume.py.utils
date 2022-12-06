@@ -30,3 +30,4 @@ Contents
     CHANGESLOG
     development
     COMMITS
+    EXAMPLES
