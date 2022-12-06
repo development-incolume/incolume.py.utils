@@ -10,6 +10,15 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ---
 
 
+## [2.6.0rc2]	 &#8212; 	2022-12-06:
+### Added
+  - Lint pylama
+  -  Compatibilidade com Python 3.11
+  -  Documentação no formato HTML
+### Removed
+  - Lint flake8 substituído por lint pylama
+  -  Compatibilidade com Python 3.6
+
 ## [2.6.0rc1]	 &#8212; 	2022-12-05:
 ### Added
   - Ampliado abrangência para Python3.11
@@ -267,3 +276,4 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 [2.5.4]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.5.3...2.5.4
 [2.6.0-rc.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.5.4...2.6.0-rc.0
 [2.6.0rc1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0-rc.0...2.6.0rc1
+[2.6.0rc2]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0rc1...2.6.0rc2
