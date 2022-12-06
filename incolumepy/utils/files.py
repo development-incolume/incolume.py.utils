@@ -45,8 +45,8 @@ def realfilename(
     " pylint C0209; will be removed in future.",
     version="2.5.3",
 )
-# flake8: noqa: C0209
 # pylama:ignore=C901
+# flake8: noqa: C0209
 def realfilename0(
     filebase, ext=None, digits=2, separador=True
 ):  # pragma: no cover
@@ -106,4 +106,6 @@ def realfilename0(
             logging.warning(e)
         finally:
             count += 1
+
+
 # pylama:select=C901
