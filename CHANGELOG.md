@@ -10,6 +10,19 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ---
 
 
+## [2.6.0rc1]	 &#8212; 	2022-12-05:
+### Added
+  - Ampliado abrangência para Python3.11
+  -  Documentação compilada acrescentada ao versionamento
+  - Ordenação de etiquetas no CHANGELOG.md
+  -  Encapsulamento Mock em testes de acesso a arquivos
+### Changed
+  - 'make setup' aperfeisoado para configuração do ambiente em apenas um comando
+  -  Aplicado ISO8601 para data em registros automatizados via comando make
+  -  Automação de script para gerar release e patch via comando make
+### Removed
+  - Suite de testes nose desativada permanentemente
+
 ## [2.6.0-rc.0]	 &#8212; 	2022-12-03:
 ### Added
   - módulo incolumepy.utils.changelog para tratar de recuros do changelog
@@ -253,3 +266,4 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 [2.5.3]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.5.2...2.5.3
 [2.5.4]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.5.3...2.5.4
 [2.6.0-rc.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.5.4...2.6.0-rc.0
+[2.6.0rc1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0-rc.0...2.6.0rc1
