@@ -300,17 +300,18 @@ commands =
 commands =
   {[testenv:black]commands}
   {[testenv:isort]commands}
-  {[testenv:flake8]commands}
+;  {[testenv:flake8]commands}
   {[testenv:pydocstyle]commands}
   {[testenv:mypy]commands}
+  {[testenv:pylama]commands}
   {[testenv:pylint]commands}
 
 [testenv:stats]
 commands = poetry run pytest -xv --cov-report html:coverage_report/html --cov-report xml:coverage_report/cov.xml
 
-[testenv:flake8]
-deps = flake8
-commands = poetry run flake8 --config pyproject.toml incolumepy/ tests/
+;[testenv:flake8]
+;deps = flake8
+;commands = poetry run flake8 --config pyproject.toml incolumepy/ tests/
 
 [testenv:mypy]
 deps =
