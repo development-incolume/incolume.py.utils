@@ -1,7 +1,8 @@
 """Tests for decorator."""
 
 import sys
-from io import StringIO
+import io
+
 from unittest import TestCase, main
 from unittest.mock import patch
 
@@ -30,7 +31,7 @@ class DecoratorTests(TestCase):
 
     def setUp(self):
         """Session setup."""
-        self.held, sys.stdout = sys.stdout, StringIO()
+        self.held, sys.stdout = sys.stdout, io.StringIO()
 
     def test_name(self):
         """Test name."""
@@ -55,7 +56,7 @@ class DecoratorTests(TestCase):
 
     def test_output_mock0(self):
         """Test output with mock."""
-        with patch("sys.stdout", new=StringIO()) as fakeoutput:
+        with patch("sys.stdout", new=io.StringIO()) as fakeoutput:
             self.xpto()
             self.assertRegex(
                 fakeoutput.getvalue().strip(), r"^xpto: \d*.?\d+ ms$"
@@ -63,7 +64,7 @@ class DecoratorTests(TestCase):
 
     def test_output_mock1(self):
         """Test output with mock."""
-        with patch("sys.stdout", new=StringIO()) as fakeoutput:
+        with patch("sys.stdout", new=io.StringIO()) as fakeoutput:
             self.func_x()
             self.assertRegex(
                 fakeoutput.getvalue().strip(), r"^func_x: \d*.?\d+ ms$"

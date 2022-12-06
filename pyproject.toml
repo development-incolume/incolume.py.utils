@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "incolumepy.utils"
-version = "2.6.0rc2"
+version = "2.6.0rc3"
 description = "package incolume python utils"
 keywords = ['python', 'utils', 'incolumepy']
 authors = ["britodfbr <contato@incolume.com.br>"]
@@ -162,6 +162,11 @@ format = "pylint"
 skip = "*/.tox/*,*/.env/*"
 linters = "pylint,mccabe"
 ignore = "F0401,C0111,E731"
+
+#[[tools.pylama.files]]
+#path = "incolumepy/utils/files.py"
+#ignore = "C901"
+#skip = 1
 
 [tool.pylama.linter.pyflakes]
 builtins = "_"
