@@ -536,15 +536,16 @@ def test_update_changelog_deprecated(temp_file_name):
         ("incolumepy.package.module", ["incolumepy", "incolumepy.package"]),
         ("incolumepy.package", ["incolumepy"]),
         ("incolumepy", ["incolumepy"]),
-        (None, None),
+        (None, []),
     ),
 )
 def test_namespace(entrance, expected):
-    if entrance:
-        assert namespace(entrance) == expected
-    else:
-        with pytest.raises(expected_exception=ValueError, match=""):
-            namespace(entrance)
+    assert namespace(entrance) == expected
+    # if entrance:
+    #     assert namespace(entrance) == expected
+    # else:
+    #     with pytest.raises(expected_exception=ValueError, match=""):
+    #         namespace(entrance)
 
 
 def test_logger(temp_file_name):
