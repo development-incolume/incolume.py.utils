@@ -137,7 +137,7 @@ def read(*rnames):
         return f.read().strip()
 
 
-def namespace(package_name):
+def namespace(package_name: str) -> list:
     """Return the namespace.
 
     Example:
