@@ -3,7 +3,7 @@ import logging
 import os
 import re
 from pathlib import Path
-from typing import Any, Collection, Union, List
+from typing import Any, Collection, List, Union
 
 import toml
 from deprecated import deprecated
