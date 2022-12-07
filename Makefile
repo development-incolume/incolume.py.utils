@@ -20,7 +20,7 @@ clean:   ## Shallow clean into environment (.pyc, .cache, .egg, .log, et all)
 	@find ./ -name "*.egg-info" -exec rm -rf {} \;
 	@find ./ -name "*.coverage" -exec rm -rf {} \;
 	@find ./ -maxdepth 1 -type d -name "*cov*" -exec rm -rf {} \;
-	@rm -fv cov.xml
+	@rm -fv cov.xml poetry.toml
 	@rm -rf docs/_build
 	@echo " finished!"
 
@@ -168,7 +168,7 @@ publish-testing: ## Publish on test.pypi.org
 release:    ## Generate new release commit with version/tag default semver
 	@ git config core.hooksPath None
 	@msg=$$(poetry version patch); poetry run pytest tests/; \
-git commit -m "$$msg" pyproject.toml $$(find -name version.txt) \
+git commit -m "$$msg" pyproject.toml $$(find incolume* -name version.txt) \
 && git tag -f $$(poetry version -s) -m "$$msg"; \
 git checkout main; git merge --no-ff dev -m "$$msg" \
 && git tag -f $$(poetry version -s) -m "$$msg" \
@@ -177,7 +177,7 @@ git checkout main; git merge --no-ff dev -m "$$msg" \
 
 .PHONY: retrocompatibility
 retrocompatibility: ## Run tox and check retrompatibility betwen python versions
-	@poetry run tox -e py36,py37,py38,py39,py310
+	@poetry run tox -e py36,py37,py38,py39,py310,py311
 
 .PHONY: safety
 safety:  ## Check safety of packages into project.
@@ -199,5 +199,5 @@ test:   ## Tun all tests on venv
 
 .PHONY: tox
 tox: ## Run tox completly
-	@poetry run tox
+	@poetry run tox -e ALL
 
