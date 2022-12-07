@@ -3,7 +3,7 @@ import logging
 import os
 import re
 from pathlib import Path
-from typing import Collection, Union
+from typing import Collection, Union, List
 
 import toml
 from deprecated import deprecated
@@ -137,7 +137,7 @@ def read(*rnames):
         return f.read().strip()
 
 
-def namespace(package_name: str) -> list:
+def namespace(package_name: str) -> List[str]:
     """Return the namespace.
 
     Example:
@@ -160,9 +160,9 @@ def namespace(package_name: str) -> list:
     """
     logging.debug("package_name=%s", package_name)
     result = []
-    temp = ''
+    temp = ""
     try:
-        bits = package_name.split('.')
+        bits = package_name.split(".")
     except AttributeError:
         return result
 
@@ -171,7 +171,7 @@ def namespace(package_name: str) -> list:
         return bits
 
     for bit in bits[:-1]:
-        temp = f'{temp}.{bit}' if temp else bit
+        temp = f"{temp}.{bit}" if temp else bit
         logging.debug("temp=%s", temp)
         result.append(temp)
     logging.debug("result=%s", result)
