@@ -3,7 +3,7 @@ import logging
 import os
 import re
 from pathlib import Path
-from typing import Collection, Union
+from typing import Any, Collection, List, Union
 
 import toml
 from deprecated import deprecated
@@ -137,7 +137,7 @@ def read(*rnames):
         return f.read().strip()
 
 
-def namespace(package_name):
+def namespace(package_name: str) -> List[str]:
     """Return the namespace.
 
     Example:
@@ -158,24 +158,21 @@ def namespace(package_name):
     >>> namespace('incolumepy')
     ['incolumepy']
     """
-    logging.debug(package_name)
-    nspace = []
+    logging.debug("package_name=%s", package_name)
+    result: List[Any] = []
+    temp = ""
     try:
-        s = package_name.split(".")
-        logging.debug(s)
-        quantia = len(s)
-    except AttributeError as e:
-        raise ValueError("package_name not can be void") from e
+        bits = package_name.split(".")
+    except AttributeError:
+        return result
 
-    if 0 < quantia <= 2:
-        nspace = s[:1]
-    else:
-        inanis = ""
-        for item in s[:-1]:
-            if inanis:
-                inanis = f"{inanis}.{item}"
-            else:
-                inanis = item
-            nspace.append(inanis)
+    if len(bits) <= 1:
+        logging.debug("bits=%s", bits)
+        return bits
 
-    return nspace
+    for bit in bits[:-1]:
+        temp = f"{temp}.{bit}" if temp else bit
+        logging.debug("temp=%s", temp)
+        result.append(temp)
+    logging.debug("result=%s", result)
+    return result
