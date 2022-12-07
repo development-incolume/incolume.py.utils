@@ -1,8 +1,7 @@
 """Tests for decorator."""
 
-import sys
 import io
-
+import sys
 from unittest import TestCase, main
 from unittest.mock import patch
 
