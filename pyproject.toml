@@ -58,7 +58,6 @@ toml = {extras = ["tomli"], version = "^0.10.2"}
 
 [tool.poetry.dev-dependencies]
 py3kwarn = "^0.4.4"
-coverage = "^5.3"
 tox = "^3.20.1"
 mypy = "^0.931"
 isort = "^5.10.1"
