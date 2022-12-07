@@ -32,7 +32,7 @@ def key_versions_2_sort(
     qdig = qdig or 5
     assert isinstance(x, (tuple, list)), "'x' must be tuple or list."
     classifies = {
-        "post": 9 * 10 ** qdig,
+        "post": 9 * 10**qdig,
         "rc": 8 * 10 ** (qdig - 1),
         "alpha": 2 * 10 ** (qdig - 1),
         "a": 2 * 10 ** (qdig - 1),

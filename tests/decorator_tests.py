@@ -1,8 +1,7 @@
 """Tests for decorator."""
 
-import sys
 import io
-
+import sys
 from unittest import TestCase, main
 from unittest.mock import patch
 
@@ -21,7 +20,7 @@ class DecoratorTests(TestCase):
         """Test for xpto."""
         n = 1
         for i in range(100000):
-            n *= i ** 2
+            n *= i**2
         return n
 
     @time_it
