@@ -1,11 +1,11 @@
 .DEFAULT_GOAL := help
-DIRECTORIES = $$(find -wholename ./src -o -wholename ./incolumepy -o -wholename ./tests)
+DIRECTORIES = $$(find -wholename ./src -o -wholename ./incolume* -o -wholename ./tests)
 PKGNAME := "incolumepy"
 PYTHON_VERSION := 3.10
 
 .PHONY: black
 black:   ##Apply code style black format
-	@poetry run black $(DIRECTORIES) && git commit -m "style: Applied Code style Black format automaticly at `date +"%FT%T%z"`" . || echo
+	@poetry run black $(DIRECTORIES) && git commit -m "style(lint): Applied Code style black automaticly at `date +"%FT%T%z"`" . || echo
 	@echo ">>>  Checked code style Black format automaticly  <<<"
 
 .PHONY: clean
@@ -88,7 +88,7 @@ help:  ## Show this instructions
 
 .PHONY: isort
 isort:  ## isort apply
-	@poetry run isort --atomic --py all $(DIRECTORIES) && git commit -m "style: Applied Code style isort format automaticly at `date +%FT%T%z`" . || echo
+	@poetry run isort --atomic --py all $(DIRECTORIES) && git commit -m "style(lint): Applied Code style isort automaticly at `date +%FT%T%z`" . || echo
 	@echo ">>>  Checked code style isort format automaticly  <<<"
 
 .PHONY: lint
