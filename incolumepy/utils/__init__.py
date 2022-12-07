@@ -3,7 +3,7 @@ import logging
 import os
 import re
 from pathlib import Path
-from typing import Collection, List, Union
+from typing import Any, Collection, Union, List
 
 import toml
 from deprecated import deprecated
@@ -159,7 +159,7 @@ def namespace(package_name: str) -> List[str]:
     ['incolumepy']
     """
     logging.debug("package_name=%s", package_name)
-    result = []
+    result: List[Any] = []
     temp = ""
     try:
         bits = package_name.split(".")
