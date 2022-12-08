@@ -1,9 +1,7 @@
 """Tests for decorator."""
 
-import io
 import logging
 import re
-import sys
 import tempfile
 from inspect import stack
 from pathlib import Path
@@ -12,6 +10,8 @@ import pytest
 
 from incolumepy.utils.decorators import nonexequi, time_it
 
+# import io
+# import sys
 # from unittest import TestCase, main
 # from unittest.mock import patch
 
@@ -21,11 +21,11 @@ class TestCaseDecoratorNonexequi:
 
     @nonexequi
     def func_x(self):
-        f"""Test for {stack()[0][3]}."""
+        """Test for func_x."""
         return stack()[0][3]
 
     def func_y(self):
-        f"""Test for {stack()[0][3]}."""
+        """Test for func_y."""
         return stack()[0][3]
 
     @pytest.mark.parametrize(
@@ -124,9 +124,10 @@ class TestCaseDecoratorTimeIt:
         ),
     )
     def test_output(self, entrance, capsys):
-        result = getattr(self, entrance)()
+        getattr(self, entrance)()
         out, err = capsys.readouterr()
         assert re.match(rf"^{entrance}: \d*.?\d+ ms$", out, re.I)
+        assert err == ""
 
 
 # class DecoratorTests(TestCase):

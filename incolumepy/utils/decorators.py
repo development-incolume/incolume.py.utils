@@ -15,7 +15,7 @@ def nonexequi(a_func):
 
     @wraps(a_func)
     def wrap_the_function(*args, **kwargs):
-        logging.debug(f"{a_func.__name__}({args}, {kwargs}).")
+        logging.debug("%s(%s, %s).", a_func.__name__, args, kwargs)
         return f"Skiped: {a_func.__name__}"
 
     return wrap_the_function
