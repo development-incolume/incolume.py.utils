@@ -1,15 +1,70 @@
 """Tests for decorator."""
 
 import io
-import sys
+import logging
 import re
-import pytest
+import sys
+import tempfile
 from inspect import stack
-from incolumepy.utils.decorators import time_it
+from pathlib import Path
+
+import pytest
+
+from incolumepy.utils.decorators import nonexequi, time_it
 
 # from unittest import TestCase, main
 # from unittest.mock import patch
 
+
+class TestCaseDecoratorNonexequi:
+    """Class test for decorator nonexequi."""
+
+    @nonexequi
+    def func_x(self):
+        f"""Test for {stack()[0][3]}."""
+        return stack()[0][3]
+
+    def func_y(self):
+        f"""Test for {stack()[0][3]}."""
+        return stack()[0][3]
+
+    @pytest.mark.parametrize(
+        "entrance",
+        (
+            "func_x",
+            "func_y",
+        ),
+    )
+    def test_name(self, entrance):
+        """Test name."""
+        assert entrance == getattr(self, entrance).__name__
+
+    @pytest.mark.parametrize(
+        "entrance expected".split(),
+        (
+            ("func_x", "Skiped: func_x"),
+            ("func_y", "func_y"),
+        ),
+    )
+    def test_return(self, entrance, expected):
+        """Test return."""
+        assert getattr(self, entrance)() == expected
+
+    @pytest.mark.parametrize(
+        "entrance expected".split(),
+        (
+            ("func_x", "Skiped: func_x"),
+            ("func_y", "func_y"),
+        ),
+    )
+    def test_output(self, entrance, expected, caplog):
+        with caplog.at_level(
+            logging.DEBUG,
+            logger=Path(tempfile.gettempdir()).joinpath("reg.log").as_posix(),
+        ):
+            result = getattr(self, entrance)()
+            assert result == expected
+        # assert expected in caplog.text
 
 
 class TestCaseDecoratorTimeIt:
@@ -62,17 +117,16 @@ class TestCaseDecoratorTimeIt:
         assert getattr(self, entrance)() == expected
 
     @pytest.mark.parametrize(
-        'entrance',
+        "entrance",
         (
-            'xpto',
-            'func_x',
+            "xpto",
+            "func_x",
         ),
     )
-    def test_output_timeit(self, entrance, capsys):
+    def test_output(self, entrance, capsys):
         result = getattr(self, entrance)()
         out, err = capsys.readouterr()
         assert re.match(rf"^{entrance}: \d*.?\d+ ms$", out, re.I)
-
 
 
 # class DecoratorTests(TestCase):
