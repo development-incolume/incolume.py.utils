@@ -149,6 +149,7 @@ def namespace(package_name: str) -> List[str]:
 
     >>> namespace('incolumepy.package.subpackage.module')
     ['incolumepy', 'incolumepy.package', 'incolumepy.package.subpackage']
+
     >>> namespace('incolumepy.package.module')
     ['incolumepy', 'incolumepy.package']
 

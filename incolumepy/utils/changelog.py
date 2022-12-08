@@ -70,23 +70,8 @@ def changelog_messages(
     return records
 
 
-def changelog_write(
-    *, content: List[Tuple[str, Dict[str, Any]]], **kwargs
-) -> bool:
-    """Write CHANGELOG.md file formatted.
-
-    :param content: List[Tuple[str, Dict[str, Any]]]
-    :param changelog_file: str, pathlib
-    :param urlcompare: str
-    :return: bool. True if success.
-    """
-    changelog_file = Path(kwargs.get("changelog_file") or CHANGELOG_FILE)
-    logging.debug("changelog_file=%s", changelog_file)
-    urlcompare = (
-        kwargs.get("urlcompare")
-        or "https://gitlab.com/development-incolume/incolumepy.utils/-/compare"
-    )
-    logging.debug("urlcompare=%s", urlcompare)
+def changelog_header() -> List[str]:
+    """Header of changelog file."""
     content_formated = [
         "# CHANGELOG\n\n\n",
         "All notable changes to this project",
@@ -102,6 +87,15 @@ def changelog_write(
         f"incolumepy.utils/-/tree/{__version__})",
         "\n\n---\n",
     ]
+    return content_formated
+
+
+def changelog_body(
+    content: List[Tuple[str, Dict[str, Any]]],
+    content_formated: List[str],
+    **kwargs,
+) -> List[str]:
+    """Body of changelog file."""
     for _, entrada in content:
         logging.debug(entrada)
         content_formated.append(
@@ -111,7 +105,20 @@ def changelog_write(
             content_formated.append(f"\n### {label}")
             for msg in msgs:
                 content_formated.append(f"\n  - {msg}")
+    return content_formated
 
+
+def changelog_footer(
+    content: List[Tuple[str, Dict[str, Any]]],
+    content_formated: List[str],
+    **kwargs,
+) -> List[str]:
+    """Footer of changelog file."""
+    urlcompare = (
+        kwargs.get("urlcompare")
+        or "https://gitlab.com/development-incolume/incolumepy.utils/-/compare"
+    )
+    logging.debug("urlcompare=%s", urlcompare)
     content_formated.append("\n---\n\n")
     y: Dict[str, Any] = {}
     for _, x in content[::-1]:
@@ -120,6 +127,25 @@ def changelog_write(
                 f'[{x["key"]}]: {urlcompare}/{y["key"]}...{x["key"]}\n'
             )
         y = x
+    return content_formated
+
+
+def changelog_write(
+    *, content: List[Tuple[str, Dict[str, Any]]], **kwargs
+) -> bool:
+    """Write CHANGELOG.md file formatted.
+
+    :param content: List[Tuple[str, Dict[str, Any]]]
+    :param changelog_file: str, pathlib
+    :param urlcompare: str
+    :return: bool. True if success.
+    """
+    changelog_file = Path(kwargs.get("changelog_file") or CHANGELOG_FILE)
+    logging.debug("changelog_file=%s", changelog_file)
+
+    content_formated = changelog_header()
+    content_formated = changelog_body(content, content_formated, **kwargs)
+    content_formated = changelog_footer(content, content_formated, **kwargs)
 
     with changelog_file.open("w") as f:
         f.writelines(content_formated)
@@ -142,11 +168,11 @@ def update_changelog(
 
     >>> update_changelog()
     True
-
     >>> update_changelog(changelog_file='/tmp/CHANGELOG.md')
     True
-
-    >>> update_changelog(urlcompare='https://example.com/compare')
+    >>> update_changelog(changelog_file=Path('CHANGELOG.md'),
+    urlcompare="https://gitlab.com/development-incolume
+    /incolumepy.utils/-/compare")
     True
     """
     logging.debug("argumentos=%s,%s,%s", changelog_file, reverse, kwargs)
