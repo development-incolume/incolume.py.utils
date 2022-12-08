@@ -5,10 +5,22 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Conventional Commit](https://www.conventionalcommits.org/pt-br/v1.0.0/).
 
-This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.6.0rc3)
+This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.6.0rc4)
 
 ---
 
+
+## [2.6.0rc4]	 &#8212; 	2022-12-08:
+### Changed
+  - 100% de cobertura atingido
+  -  Complexidade ciclomática limitada (5)
+  -  Aualizado pacotes de dependências do projeto
+  -  Melhoria nos processos automatizados
+  -  Refinamento na configuração do pylint
+  -  Refinamento na configuração do pylama
+### Removed
+  - Pacote coverage
+  -  Pacote jupyter
 
 ## [2.6.0rc3]	 &#8212; 	2022-12-06:
 ### Changed
@@ -282,3 +294,4 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 [2.6.0rc1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0-rc.0...2.6.0rc1
 [2.6.0rc2]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0rc1...2.6.0rc2
 [2.6.0rc3]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0rc2...2.6.0rc3
+[2.6.0rc4]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0rc3...2.6.0rc4
