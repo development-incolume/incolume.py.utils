@@ -1,5 +1,5 @@
 """Decorators module."""
-
+import logging
 from functools import wraps
 from time import time
 
@@ -14,8 +14,9 @@ def nonexequi(a_func):
     """
 
     @wraps(a_func)
-    def wrap_the_function():
-        return f"Skip: {a_func.__name__}"
+    def wrap_the_function(*args, **kwargs):
+        logging.debug("%s(%s, %s).", a_func.__name__, args, kwargs)
+        return f"Skiped: {a_func.__name__}"
 
     return wrap_the_function
 

@@ -48,11 +48,8 @@ def realfilename(
 # pylama:ignore=C901
 # flake8: noqa: C0209
 def realfilename0(
-    filebase,
-    ext=None,
-    digits=2,
-    separador=True
-):   # pragma: no cover
+    filebase, ext=None, digits=2, separador=True
+):  # pragma: no cover
     """
     Return real file name for filebase.
 
