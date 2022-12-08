@@ -57,26 +57,24 @@ rstr = "^2.2.6"
 toml = {extras = ["tomli"], version = "^0.10.2"}
 
 [tool.poetry.dev-dependencies]
-py3kwarn = "^0.4.4"
-coverage = "^5.3"
-tox = "^3.20.1"
-mypy = "^0.931"
-isort = "^5.10.1"
-pylint = "^2.12.2"
-black = "^21.12b0"
-pydocstyle = "^6.1.1"
-pytest-cov = "^3.0.0"
-types-toml = "^0.10.3"
-types-Deprecated = "^1.2.5"
-pytest-mock = "^3.6.0"
-jupyter = "^1.0.0"
-safety = "^1.10.3"
-Sphinx = "^4.4.0"
+black = "^22.10.0"
 furo = "^2022.3.4"
+isort = "^5.10.1"
+mypy = "^0.931"
 myst-parser = "^0.16"
+py3kwarn = "^0.4.4"
+pydocstyle = "^6.1.1"
+pylama = "^8.4.1"
+pylint = "^2.12.2"
+pytest-cov = "^3.0.0"
+pytest-mock = "^3.6.0"
+safety = "^2.2.0"
+Sphinx = "^4.4.0"
+tox = "^3.20.1"
+types-Deprecated = "^1.2.5"
+types-toml = "^0.10.3"
 
 [tool.poetry.group.dev.dependencies]
-pylama = "^8.4.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -113,6 +111,7 @@ omit = [
 
 [tool.coverage.report]
 exclude_lines = [
+  "pragma: no cover",
   "if __name__ == .__main__.:",
   "logger.debug",
   "logger.info",
@@ -180,6 +179,9 @@ disable = "R"
 
 [tool.pylama.linter.mccabe]
 max-complexity=5
+
+[tool.pylint.master]
+init-hook = 'import sys; sys.path.append(".")'    # força carregamento do PYTHONPATH no pylint. Necessário no Windows.
 
 [tool.pylint.format]
 # Maximum number of characters on a single line.
