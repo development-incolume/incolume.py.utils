@@ -50,4 +50,5 @@
 # 	fi
 # done
 #
+make docsgen
 exit 0
