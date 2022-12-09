@@ -1,5 +1,4 @@
 #!/bin/sh
-
 # An example hook script to verify what is about to be pushed.  Called by "git
 # push" after it has checked the remote status, but before anything has been
 # pushed.  If this script exits with a non-zero status nothing will be pushed.
@@ -50,6 +49,26 @@
 # 	fi
 # done
 # exit 0
+
+set -e
+
+# https://stackoverflow.com/a/64564810/5132101
+while read local_ref local_sha remote_ref remote_sha
+do
+    case $rref in
+        refs/tags/*)
+            if echo "$remote_ref" | \
+                grep -qsE '(^refs/tags/\d+(\.\d+){2}(-?\w+\.?\d+)?$)'
+            then
+                echo "matched"
+            else
+                echo "not matched"
+                exit 1
+            fi;;
+        *)
+            ;;
+    esac
+done
 
 protected_branch='refactor#92'
 
