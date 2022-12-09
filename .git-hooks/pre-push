@@ -49,5 +49,22 @@
 # 		fi
 # 	fi
 # done
-#
-exit 0
+# exit 0
+
+protected_branch='refactor#92'
+
+if read local_ref local_sha remote_ref remote_sha; then
+    if [[ "$remote_ref" == *"$protected_branch"* ]]; then
+        echo -en "\033[1;33mYou're about to push to ${protected_branch}, is that what you intended? [y|n] \033[0m"
+        echo -en "\033[1m"
+        read -n 1 -r < /dev/tty
+        echo -en "\033[0m"
+
+        echo
+        if echo $REPLY | grep -E '^[Yy]$' > /dev/null; then
+            exit 0 # push will execute
+        fi
+        exit 1 # push will not execute
+    fi
+fi
+
