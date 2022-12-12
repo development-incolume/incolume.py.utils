@@ -5,10 +5,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Conventional Commit](https://www.conventionalcommits.org/pt-br/v1.0.0/).
 
-This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.6.0rc4)
+This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.6.0rc5)
 
 ---
 
+
+## [2.6.0rc5]	 &#8212; 	2022-12-12:
+### Changed
+  - Estilização em cores para resposta de commits
+  -  Branches main/master protegido contra alterações indevidas
+  -  Politica de validação com Black e isort diretamente via git hooks
+  -  Mensagens geradas pela ferramenta poetry autenticadas na execução
 
 ## [2.6.0rc4]	 &#8212; 	2022-12-08:
 ### Changed
@@ -295,3 +302,4 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 [2.6.0rc2]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0rc1...2.6.0rc2
 [2.6.0rc3]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0rc2...2.6.0rc3
 [2.6.0rc4]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0rc3...2.6.0rc4
+[2.6.0rc5]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0rc4...2.6.0rc5
