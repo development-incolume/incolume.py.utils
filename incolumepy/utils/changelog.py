@@ -104,7 +104,7 @@ def changelog_body(
         for label, msgs in entrada["messages"].items():
             content_formated.append(f"\n### {label}")
             for msg in msgs:
-                content_formated.append(f"\n  - {msg}")
+                content_formated.append(f"\n  - {msg.strip()}")
     return content_formated
 
 
