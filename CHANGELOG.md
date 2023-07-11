@@ -5,22 +5,29 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Conventional Commit](https://www.conventionalcommits.org/pt-br/v1.0.0/).
 
-This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.6.0a24)
+This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.6.0a25)
 
 ---
 
 
+## [2.6.0rc5]	 &#8212; 	2022-12-12:
+### Changed
+  - Estilização em cores para resposta de commits
+  - Branches main/master protegido contra alterações indevidas
+  - Politica de validação com Black e isort diretamente via git hooks
+  - Mensagens geradas pela ferramenta poetry autenticadas na execução
+
 ## [2.6.0rc4]	 &#8212; 	2022-12-08:
 ### Changed
   - 100% de cobertura atingido
-  -  Complexidade ciclomática limitada (5)
-  -  Aualizado pacotes de dependências do projeto
-  -  Melhoria nos processos automatizados
-  -  Refinamento na configuração do pylint
-  -  Refinamento na configuração do pylama
+  - Complexidade ciclomática limitada (5)
+  - Aualizado pacotes de dependências do projeto
+  - Melhoria nos processos automatizados
+  - Refinamento na configuração do pylint
+  - Refinamento na configuração do pylama
 ### Removed
   - Pacote coverage
-  -  Pacote jupyter
+  - Pacote jupyter
 
 ## [2.6.0rc3]	 &#8212; 	2022-12-06:
 ### Changed
@@ -29,34 +36,34 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ## [2.6.0rc2]	 &#8212; 	2022-12-06:
 ### Added
   - Lint pylama
-  -  Compatibilidade com Python 3.11
-  -  Documentação no formato HTML
+  - Compatibilidade com Python 3.11
+  - Documentação no formato HTML
 ### Removed
   - Lint flake8 substituído por lint pylama
-  -  Compatibilidade com Python 3.6
+  - Compatibilidade com Python 3.6
 
 ## [2.6.0rc1]	 &#8212; 	2022-12-05:
 ### Added
   - Ampliado abrangência para Python3.11
-  -  Documentação compilada acrescentada ao versionamento
+  - Documentação compilada acrescentada ao versionamento
   - Ordenação de etiquetas no CHANGELOG.md
-  -  Encapsulamento Mock em testes de acesso a arquivos
+  - Encapsulamento Mock em testes de acesso a arquivos
 ### Changed
   - 'make setup' aperfeisoado para configuração do ambiente em apenas um comando
-  -  Aplicado ISO8601 para data em registros automatizados via comando make
-  -  Automação de script para gerar release e patch via comando make
+  - Aplicado ISO8601 para data em registros automatizados via comando make
+  - Automação de script para gerar release e patch via comando make
 ### Removed
   - Suite de testes nose desativada permanentemente
 
 ## [2.6.0-rc.0]	 &#8212; 	2022-12-03:
 ### Added
   - módulo incolumepy.utils.changelog para tratar de recuros do changelog
-  -   Aderência a convensão de commit disponível em https://www.conventionalcommits.org/pt-br/v1.0.0/
-  -  Aderência a Keep a Changelog disponível em https://keepachangelog.com/pt-BR/1.0.0/
+  - Aderência a convensão de commit disponível em https://www.conventionalcommits.org/pt-br/v1.0.0/
+  - Aderência a Keep a Changelog disponível em https://keepachangelog.com/pt-BR/1.0.0/
 ### Changed
   - Estilização do CHANGELOG.md
-  -  Cobertura de 100% em incolumepy.utils.__init__.py
-  -  Alteração nas regras githooks para melhoria de gerenciamento do projeto e garantir o versionamento semântico disponível em https://semver.org/lang/pt-BR/
+  - Cobertura de 100% em incolumepy.utils.__init__.py
+  - Alteração nas regras githooks para melhoria de gerenciamento do projeto e garantir o versionamento semântico disponível em https://semver.org/lang/pt-BR/
 ### Deprecated
   - função "incolumepy.utils.update_changelog" tornada obsoleta em favor "incolumepy.utils.changelog.update_changelog"
 
@@ -71,7 +78,7 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ## [2.5.2]	 &#8212; 	2022-03-13:
 ### Changed
   - Correções lint style
-  -  Visual CHANGELOG
+  - Visual CHANGELOG
 
 ## [2.5.1]	 &#8212; 	2022-03-12:
 ### Removed
@@ -80,7 +87,7 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ## [2.5.0]	 &#8212; 	2022-03-12:
 ### Added
   - Geração do CHANGELOG, padronizado de acordo com 'keep a changelog'
-  -  e geração automática com entradas extraídas de git/tags.
+  - e geração automática com entradas extraídas de git/tags.
 
 ## [2.4.1]	 &#8212; 	2022-03-08:
 ### Fixed
@@ -216,7 +223,7 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ## [0.7.1]	 &#8212; 	2018-05-12:
 ### Fixed
   - atualizações no setup
-  -  Evolução na apresentação da documentação
+  - Evolução na apresentação da documentação
 
 ## [0.7.0]	 &#8212; 	2018-05-12:
 ### Added
@@ -295,3 +302,4 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 [2.6.0rc2]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0rc1...2.6.0rc2
 [2.6.0rc3]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0rc2...2.6.0rc3
 [2.6.0rc4]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0rc3...2.6.0rc4
+[2.6.0rc5]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0rc4...2.6.0rc5
