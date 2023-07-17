@@ -86,14 +86,14 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
   - Lint flake8 substituído por lint pylama;
   - Compatibilidade com Python 3.6;
 
-## [2.6.0rc1]	 &#8212; 	2022-12-05:
+## [2.6.0rc1]	 &#8212; 	2023-07-17:
 ### Added
   - Ampliado abrangência para Python3.11;
   - Documentação compilada acrescentada ao versionamento;
   - Ordenação de etiquetas no CHANGELOG.md;
   - Encapsulamento Mock em testes de acesso a arquivos;
 ### Changed
-  - 'make setup' aperfeisoado para configuração do ambiente em apenas um comando;
+  - Aperfeiçoado o camando 'make setup' para configuração do ambiente em apenas uma execução;
   - Aplicado ISO8601 para data em registros automatizados via comando make;
   - Automação de script para gerar release e patch via comando make;
 ### Removed
