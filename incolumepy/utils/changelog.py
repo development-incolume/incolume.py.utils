@@ -104,7 +104,9 @@ def changelog_body(
         for label, msgs in entrada["messages"].items():
             content_formated.append(f"\n### {label.capitalize()}")
             for msg in msgs:
-                content_formated.append(f"\n  - {msg.strip()}")
+                frase = msg.strip()
+                frase = frase[0].upper() + frase[1:]
+                content_formated.append(f"\n  - {frase};")
     return content_formated
 
 
