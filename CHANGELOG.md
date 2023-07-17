@@ -10,6 +10,10 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ---
 
 
+## [2.7.0-rc.0]	 &#8212; 	2023-07-17:
+### Changed
+  - Adequação da formatação visual do arquivo CHANGELOG.md com https://keepachangelog.com/pt-BR/1.0.0/;
+
 ## [2.6.0]	 &#8212; 	2023-07-11:
 ### Added
   - Ampliado abrangência para Python3.11;
@@ -254,7 +258,7 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 
 ## [0.8.0]	 &#8212; 	2018-05-22:
 ### Added
-  - Ll() adicionado;
+  - Adicionado a função ll();
 
 ## [0.7.2]	 &#8212; 	2018-05-12:
 ### Changed
@@ -344,3 +348,4 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 [2.6.0rc4]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0rc3...2.6.0rc4
 [2.6.0rc5]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0rc4...2.6.0rc5
 [2.6.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0rc5...2.6.0
+[2.7.0-rc.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0...2.7.0-rc.0
