@@ -102,9 +102,9 @@ def changelog_body(
             f"\n\n## [{entrada['key']}]\t &#8212; \t{entrada['date']}:"
         )
         for label, msgs in entrada["messages"].items():
-            content_formated.append(f"\n### {label}")
+            content_formated.append(f"\n### {label.capitalize()}")
             for msg in msgs:
-                content_formated.append(f"\n  - {msg}")
+                content_formated.append(f"\n  - {msg.strip()}")
     return content_formated
 
 
