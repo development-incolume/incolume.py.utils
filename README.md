@@ -34,6 +34,10 @@ pipenv install incolumepy.utils
 poetry add incolumepy.utils
 ```
 
+```shell
+poetry add git+https://gitlab.com/development-incolume/incolumepy.utils.git#main
+```
+
 ## Atualizar o pacote
 ```shell
 
@@ -44,6 +48,10 @@ pipenv update incolumepy.utils
 ```
 ```shell
 poetry update incolumepy.utils
+```
+
+```shell
+poetry update git+https://gitlab.com/development-incolume/incolumepy.utils.git#main
 ```
 
 ## Gerar pacote a partir dos fontes para instalação

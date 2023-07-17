@@ -41,7 +41,7 @@ def msg_classify(msg: str) -> Dict[str, Any]:
     for i, j in sorted(
         x.strip().rstrip(";").split("§:") for x in txt.strip().split("§§") if x
     ):
-        dct.setdefault(i, []).extend(j.strip().split(";"))
+        dct.setdefault(i.capitalize(),[]).extend(j.strip().split(";"))
 
     result = {"key": key, "date": date, "messages": dct}
     return result
@@ -104,7 +104,9 @@ def changelog_body(
         for label, msgs in entrada["messages"].items():
             content_formated.append(f"\n### {label.capitalize()}")
             for msg in msgs:
-                content_formated.append(f"\n  - {msg.strip()}")
+                frase = msg.strip()
+                frase = frase[0].upper() + frase[1:]
+                content_formated.append(f"\n  - {frase};")
     return content_formated
 
 
