@@ -50,14 +50,14 @@ class TestCaseExamples:
         print(ord("c"))
 
     def test_sum1(self, mocker):
-        mocker.patch(__name__ + ".sum", return_value=9)
+        mocker.patch(__name__ + ".my_sum", return_value=9)
         assert my_sum(2, 3) == 9
 
     def test_sum2(self, mocker):
         def crazy_sum(a, b):
             return b + b
 
-        mocker.patch(__name__ + ".sum", side_effect=crazy_sum)
+        mocker.patch(__name__ + ".my_sum", side_effect=crazy_sum)
         assert my_sum(2, 3) == 6
 
     @pytest.mark.xfail(reason="Decorator not available!")
