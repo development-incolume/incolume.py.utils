@@ -55,6 +55,7 @@ python = "^3.7"
 Deprecated = "^1.2.10"
 rstr = "^2.2.6"
 toml = {extras = ["tomli"], version = "^0.10.2"}
+click = "^8.1.5"
 
 [tool.poetry.dev-dependencies]
 black = "^22.10.0"
