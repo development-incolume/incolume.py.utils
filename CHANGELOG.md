@@ -5,10 +5,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Conventional Commit](https://www.conventionalcommits.org/pt-br/v1.0.0/).
 
-This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.7.0a1)
+This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.7.0a2)
 
 ---
 
+
+## [2.7.0-rc.1]	 &#8212; 	2023-07-17:
+### Changed
+  - Atualização da documetação inicial via README;
 
 ## [2.7.0-rc.0]	 &#8212; 	2023-07-17:
 ### Changed
@@ -86,7 +90,7 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
   - Lint flake8 substituído por lint pylama;
   - Compatibilidade com Python 3.6;
 
-## [2.6.0rc1]	 &#8212; 	2023-07-17:
+## [2.6.0rc1]	 &#8212; 	2022-12-05:
 ### Added
   - Ampliado abrangência para Python3.11;
   - Documentação compilada acrescentada ao versionamento;
@@ -349,3 +353,4 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 [2.6.0rc5]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0rc4...2.6.0rc5
 [2.6.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0rc5...2.6.0
 [2.7.0-rc.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0...2.7.0-rc.0
+[2.7.0-rc.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0-rc.0...2.7.0-rc.1
