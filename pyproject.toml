@@ -49,6 +49,7 @@ exclude = [
 
 [tool.poetry.scripts]
 incolumepy-utils = 'incolumepy.utils.main:run'
+gchangelog = 'incolumepy.utils.cli:changelog'
 
 [tool.poetry.dependencies]
 python = "^3.7"
