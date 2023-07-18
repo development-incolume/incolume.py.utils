@@ -47,6 +47,11 @@ check-flake8: ## flake8 checking
 	@echo "flake8 checking .."
 	@poetry run flake8 --config pyproject.toml $(DIRECTORIES)
 
+.PHONY: check-pylama
+check-pylama: ## pylama checking
+	@echo "pylama checking .."
+	@poetry run pylama $(DIRECTORIES)
+
 .PHONY: check-isort
 check-isort:  ## check isort
 	@echo "isort checking .."
@@ -92,8 +97,8 @@ isort:  ## isort apply
 	@echo ">>>  Checked code style isort format automaticly  <<<"
 
 .PHONY: lint
-lint:  ## Run all linters (check-isort, check-black, flake8, pylint, mypy, pydocstyle)
-lint: check-mypy check-pylint check-flake8 check-pydocstyle check-isort check-black
+lint:  ## Run all linters (check-isort, check-black, flake8, pylama, pylint, mypy, pydocstyle)
+lint: check-mypy check-pylint check-pylama check-pydocstyle check-isort check-black
 
 #.PHONY: premajor
 #premajor:   ## Generate new premajor commit version default semver
