@@ -10,6 +10,10 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ---
 
 
+## [2.7.0-rc.1]	 &#8212; 	2023-07-17:
+### Changed
+  - Atualização da documetação inicial via README;
+
 ## [2.7.0-rc.0]	 &#8212; 	2023-07-17:
 ### Changed
   - Adequação da formatação visual do arquivo CHANGELOG.md com https://keepachangelog.com/pt-BR/1.0.0/;
@@ -86,7 +90,7 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
   - Lint flake8 substituído por lint pylama;
   - Compatibilidade com Python 3.6;
 
-## [2.6.0rc1]	 &#8212; 	2023-07-17:
+## [2.6.0rc1]	 &#8212; 	2022-12-05:
 ### Added
   - Ampliado abrangência para Python3.11;
   - Documentação compilada acrescentada ao versionamento;
@@ -349,3 +353,4 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 [2.6.0rc5]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0rc4...2.6.0rc5
 [2.6.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0rc5...2.6.0
 [2.7.0-rc.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0...2.7.0-rc.0
+[2.7.0-rc.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0-rc.0...2.7.0-rc.1
