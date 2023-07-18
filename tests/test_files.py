@@ -151,7 +151,7 @@ def test_realfilename_with_exists_files(entrance, filebase, fileoutput):
 
     rmtree(test_dir.as_posix(), ignore_errors=True)
     filebase.parent.mkdir(exist_ok=True, parents=True)
-    file = ""
+    file: Path = Path()
     for _ in range(6):
         file = Path(realfilename(**dict(entrance)))
         file.write_text(".")
