@@ -31,7 +31,7 @@ class UtilsTest(unittest.TestCase):
         """Nonexequi test."""
         return True
 
-    @unittest.skip
+    @unittest.skip(reason="skiped.")
     def test_nonexequi01(self):
         """Nonexequi test."""
         a = UtilsTest()

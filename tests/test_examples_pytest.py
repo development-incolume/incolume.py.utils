@@ -38,6 +38,10 @@ class TestCase0:
         assert esperado == mock_save_file.call_args
 
 
+def my_sum(x, y):
+    return x + y
+
+
 class TestCaseExamples:
     """Test Case Examples."""
 
@@ -47,14 +51,14 @@ class TestCaseExamples:
 
     def test_sum1(self, mocker):
         mocker.patch(__name__ + ".sum", return_value=9)
-        assert sum(2, 3) == 9
+        assert my_sum(2, 3) == 9
 
     def test_sum2(self, mocker):
         def crazy_sum(a, b):
             return b + b
 
         mocker.patch(__name__ + ".sum", side_effect=crazy_sum)
-        assert sum(2, 3) == 6
+        assert my_sum(2, 3) == 6
 
     @pytest.mark.xfail(reason="Decorator not available!")
     def test_only_unix_exception(self, mocker):
