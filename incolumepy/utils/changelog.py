@@ -70,18 +70,29 @@ def changelog_messages(
     return records
 
 
-def changelog_header() -> List[str]:
+def changelog_header(
+    url_keepachangelog: str = "",
+    url_semver: str = "",
+    url_convetional_commit: str = "",
+) -> List[str]:
     """Header of changelog file."""
+    url_keepachangelog = (
+        url_keepachangelog or "https://keepachangelog.com/en/1.0.0/"
+    )
+    url_semver = url_semver or "https://semver.org/spec/v2.0.0.html"
+    url_convetional_commit = (
+        url_convetional_commit
+        or "https://www.conventionalcommits.org/pt-br/v1.0.0/"
+    )
     content_formated = [
         "# CHANGELOG\n\n\n",
         "All notable changes to this project",
         " will be documented in this file.\n\n",
         "The format is based on ",
-        "[Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ",
+        f"[Keep a Changelog]({url_keepachangelog}), ",
         "this project adheres to "
-        "[Semantic Versioning](https://semver.org/spec/v2.0.0.html) "
-        "and [Conventional Commit]"
-        "(https://www.conventionalcommits.org/pt-br/v1.0.0/).\n\n",
+        f"[Semantic Versioning]({url_semver}) "
+        f"and [Conventional Commit]({url_convetional_commit}).\n\n",
         "This file was automatically generated for",
         f" [{__title__}](https://gitlab.com/development-incolume/"
         f"incolumepy.utils/-/tree/{__version__})",
@@ -208,6 +219,50 @@ def update_changelog(
 
 class Changelog:
     """Changelog class."""
+
+    def __init__(
+        self,
+        *,
+        file_output: Path | str = "",
+        url_compare: str = "",
+        reverse: bool = True,
+        **kwargs,
+    ):
+        """Initialize from Changelog class."""
+        self.file_output = file_output
+        self.url_compare = url_compare
+        self.reverse = reverse
+        self.url_principal = kwargs.get(
+            "url_pricipal",
+            "https://gitlab.com/development-incolume/incolumepy.utils",
+        )
+        self.url_keepachangelog = kwargs.get(
+            "url_keepachangelog", "https://keepachangelog.com/en/1.0.0/"
+        )
+        self.url_semver = kwargs.get(
+            "url_semver", "https://semver.org/spec/v2.0.0.html"
+        )
+        self.url_convetional_commit = kwargs.get(
+            "url_convetional_commit",
+            "https://www.conventionalcommits.org/pt-br/v1.0.0/",
+        )
+
+    def header(self) -> List[str]:
+        """Header of changelog file."""
+        content_formated = [
+            "# CHANGELOG\n\n\n",
+            "All notable changes to this project",
+            " will be documented in this file.\n\n",
+            "The format is based on ",
+            f"[Keep a Changelog]({self.url_keepachangelog}), ",
+            "this project adheres to "
+            f"[Semantic Versioning]({self.url_semver}) "
+            f"and [Conventional Commit]({self.url_convetional_commit}).\n\n",
+            "This file was automatically generated for",
+            f" [{__title__}]({self.url_principal}/-/tree/{__version__})",
+            "\n\n---\n",
+        ]
+        return content_formated
 
 
 def run():
