@@ -5,6 +5,7 @@ import pytest
 
 import incolumepy.utils.changelog
 from incolumepy.utils.changelog import (
+    Changelog,
     changelog_messages,
     msg_classify,
     update_changelog,
@@ -180,3 +181,55 @@ class TestCase:
         if "changelog_file" not in entrance:
             entrance.update({"changelog_file": ftemp})
         assert update_changelog(**entrance)
+
+
+class TestClassChangelog:
+    @pytest.mark.parametrize(
+        "entrance",
+        (
+            {},
+            {'reverse': False},
+        )
+    )
+    def test_init(self, entrance):
+        """Test for init class."""
+        o = Changelog(**entrance)
+        assert isinstance(o, Changelog)
+
+    @pytest.mark.parametrize(
+        "entrance expected".split(),
+        (
+            (
+                {},
+                ['# CHANGELOG\n\n\n', 'All notable changes to this project',
+                 ' will be documented in this file.\n\n',
+                 'The format is based on ',
+                 '[Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ',
+                 'this project adheres to [Semantic Versioning]'
+                 '(https://semver.org/spec/v2.0.0.html) and '
+                 '[Conventional Commit](https://www.conventionalcommits.org/'
+                 'pt-br/v1.0.0/).\n\n',
+                 'This file was automatically generated for',
+                 ' [incolumepy.utils](https://gitlab.com/development-incolume/'
+                 'incolumepy.utils/-/tree/2.7.1)', '\n\n---\n']
+            ),
+            (
+                {'reverse': False},
+                ['# CHANGELOG\n\n\n', 'All notable changes to this project',
+                 ' will be documented in this file.\n\n',
+                 'The format is based on ',
+                 '[Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ',
+                 'this project adheres to [Semantic Versioning]'
+                 '(https://semver.org/spec/v2.0.0.html) and '
+                 '[Conventional Commit](https://www.conventionalcommits.org/'
+                 'pt-br/v1.0.0/).\n\n',
+                 'This file was automatically generated for',
+                 ' [incolumepy.utils](https://gitlab.com/development-incolume/'
+                 'incolumepy.utils/-/tree/2.7.1)', '\n\n---\n']
+            ),
+        )
+    )
+    def test_header(self, entrance, expected):
+        """Test for header file."""
+        o = Changelog(**entrance)
+        assert o.header() == expected
