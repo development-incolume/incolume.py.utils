@@ -9,6 +9,7 @@ from incolumepy.utils.changelog import (
     changelog_messages,
     msg_classify,
     update_changelog,
+    __version__,
 )
 
 __author__ = "@britodfbr"  # pragma: no cover
@@ -216,7 +217,7 @@ class TestClassChangelog:
                     "This file was automatically generated for",
                     " [incolumepy.utils]"
                     "(https://gitlab.com/development-incolume/"
-                    "incolumepy.utils/-/tree/2.7.1)",
+                    f"incolumepy.utils/-/tree/{__version__})",
                     "\n\n---\n",
                 ],
             ),
@@ -237,7 +238,7 @@ class TestClassChangelog:
                     "This file was automatically generated for",
                     " [incolumepy.utils]"
                     "(https://gitlab.com/development-incolume/"
-                    "incolumepy.utils/-/tree/2.7.1)",
+                    f"incolumepy.utils/-/tree/{__version__})",
                     "\n\n---\n",
                 ],
             ),
