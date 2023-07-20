@@ -248,3 +248,44 @@ class TestClassChangelog:
         """Test for header file."""
         o = Changelog(**entrance)
         assert o.header() == expected
+
+    @pytest.mark.parametrize(
+        'entrance expected'.split(),
+        (
+            (
+                {'content': [("1.0.0a1",
+                              {
+                                  "date": "2023-7-19",
+                                  "key": "1.0.0a1",
+                                  "messages": {
+                                      "Added": ["Fake record", " other fake"],
+                                      "Fixed": ['Fake fixed",'],
+                                  },
+                              },
+                              ),
+                             ], 'linked': False},
+                ['\n\n## 1.0.0a1\t &#8212; \t2023-7-19:', '\n### Added',
+                 '\n  - Fake record;', '\n  - Other fake;', '\n### Fixed',
+                 '\n  - Fake fixed",;']
+            ),
+            (
+                {'content': [("1.0.0a0",
+                        {
+                            "date": "2023-7-19",
+                            "key": "1.0.0a0",
+                            "messages": {
+                                "Added": ["Fake record", " other fake"],
+                                "Fixed": ['Fake fixed",'],
+                            },
+                        },
+                    ),
+                ],},
+                ['\n\n## [1.0.0a0]\t &#8212; \t2023-7-19:', '\n### Added',
+                 '\n  - Fake record;', '\n  - Other fake;', '\n### Fixed',
+                 '\n  - Fake fixed",;']
+            ),
+        ),
+    )
+    def test_iter_logs(self, entrance, expected):
+        """Test for iter_logs"""
+        assert Changelog.iter_logs(**entrance) == expected
