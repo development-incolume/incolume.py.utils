@@ -229,7 +229,7 @@ class Changelog:
         **kwargs,
     ):
         """Initialize from Changelog class."""
-        self.file_output = file_output
+        self.file_output = file_output or Path('CHANGELOG.md')
         self.url_compare = url_compare
         self.reverse = reverse
         self.url_principal = kwargs.get(
