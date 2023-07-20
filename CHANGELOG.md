@@ -5,10 +5,28 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Conventional Commit](https://www.conventionalcommits.org/pt-br/v1.0.0/).
 
-This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.7.1)
+This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.8.0a1)
 
 ---
 
+
+## [Unreleased]	 &#8212; 	2023-07-19:
+### Added
+  - Unreleased/Não publicado para o número de versão e adicionar uma nova seção Unreleased/Não publicado no topo;
+  - Tradução para labels ptBR -> enUS;
+  - Implementado nova função iter_logs();
+### Changed
+  - Fatorado código para changelog_body();
+### Fixed
+  - Formatação visual para CHANGELOG.md retirado link quebrado para 1ª release;
+### Security
+  - Em caso de vulnerabilidades.;
+  - Adicionado: para novos recursos.;
+  - Modificado: para alterações em recursos existentes.;
+  - Obsoleto: para recursos que serão removidos nas próximas versões.;
+  - Removido :para recursos removidos nesta versão.;
+  - Corrigido :para qualquer correção de bug.;
+  - Segurança :em caso de vulnerabilidades.;
 
 ## [2.7.1]	 &#8212; 	2023-07-18:
 ### Fixed
@@ -305,7 +323,7 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ### Added
   - Implementação para def namespace;
 
-## [0.1.0]	 &#8212; 	2018-05-04:
+## 0.1.0	 &#8212; 	2018-05-04:
 ### Added
   - Initial Commit;
 ---
@@ -364,3 +382,4 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 [2.7.0-rc.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0-rc.0...2.7.0-rc.1
 [2.7.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0-rc.1...2.7.0
 [2.7.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0...2.7.1
+[Unreleased]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.1...Unreleased
