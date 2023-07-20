@@ -101,37 +101,14 @@ def changelog_header(
     return content_formated
 
 
-def iter_logs(
-    content: List[Tuple[str, Dict[str, Any]]],
-    linked:bool=True) -> List[str]:
-    """Iterador de registros git"""
-    result = []
-    for _, entrada in content:
-        logging.debug(entrada)
-        if linked:
-            result.append(
-                f"\n\n## [{entrada['key']}]\t &#8212; \t{entrada['date']}:")
-        else:
-            result.append(
-                f"\n\n## {entrada['key']}\t &#8212; \t{entrada['date']}:")
-
-        for label, msgs in entrada["messages"].items():
-            result.append(f"\n### {label.capitalize()}")
-            for msg in msgs:
-                frase = msg.strip()
-                frase = frase[0].upper() + frase[1:]
-                result.append(f"\n  - {frase};")
-    return result
-
-
 def changelog_body(
     content: List[Tuple[str, Dict[str, Any]]],
     content_formated: List[str],
     **kwargs,
 ) -> List[str]:
     """Body of changelog file."""
-    content_formated.extend(iter_logs(content[:-1]))
-    content_formated.extend(iter_logs(content[-1:], False))
+    content_formated.extend(Changelog.iter_logs(content[:-1]))
+    content_formated.extend(Changelog.iter_logs(content[-1:], False))
     return content_formated
 
 
@@ -260,6 +237,29 @@ class Changelog:
             "url_convetional_commit",
             "https://www.conventionalcommits.org/pt-br/v1.0.0/",
         )
+
+    @staticmethod
+    def iter_logs(
+        content: List[Tuple[str, Dict[str, Any]]],
+        linked: bool = True) -> List[str]:
+        """Iterador de registros git"""
+        result = []
+        for _, entrada in content:
+            logging.debug(entrada)
+            if linked:
+                result.append(
+                    f"\n\n## [{entrada['key']}]\t &#8212; \t{entrada['date']}:")
+            else:
+                result.append(
+                    f"\n\n## {entrada['key']}\t &#8212; \t{entrada['date']}:")
+
+            for label, msgs in entrada["messages"].items():
+                result.append(f"\n### {label.capitalize()}")
+                for msg in msgs:
+                    frase = msg.strip()
+                    frase = frase[0].upper() + frase[1:]
+                    result.append(f"\n  - {frase};")
+        return result
 
     def header(self) -> List[str]:
         """Header of changelog file."""
