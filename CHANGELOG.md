@@ -10,6 +10,10 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ---
 
 
+## [wip]	 &#8212; 	2022-12-09:
+### Fixed
+  - Revert "Revert "feat: #92 wip Fake log"";
+
 ## [Unreleased]	 &#8212; 	2023-07-19:
 ### Added
   - Unreleased/Não publicado para o número de versão e adicionar uma nova seção Unreleased/Não publicado no topo;
@@ -35,6 +39,9 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ## [2.7.0]	 &#8212; 	2023-07-18:
 ### Added
   - Acrescentado CLI - Command Line Interface, para o módulo incolumepy.utils.changelog (gcl, gchangelog, gencl, changelog);
+### Changed
+  - Adequação da formatação visual do arquivo CHANGELOG.md com https://keepachangelog.com/pt-BR/1.0.0/;
+  - Atualização da documetação inicial via README;
 
 ## [2.7.0-rc.1]	 &#8212; 	2023-07-17:
 ### Changed
@@ -383,3 +390,4 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 [2.7.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0-rc.1...2.7.0
 [2.7.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0...2.7.1
 [Unreleased]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.1...Unreleased
+[wip]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/Unreleased...wip
