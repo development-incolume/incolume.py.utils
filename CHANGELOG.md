@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Conventional Commit](https://www.conventionalcommits.org/pt-br/v1.0.0/).
 
-This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.8.0a1)
+This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.8.0a2)
 
 ---
 
@@ -35,6 +35,9 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ## [2.7.0]	 &#8212; 	2023-07-18:
 ### Added
   - Acrescentado CLI - Command Line Interface, para o módulo incolumepy.utils.changelog (gcl, gchangelog, gencl, changelog);
+### Changed
+  - Adequação da formatação visual do arquivo CHANGELOG.md com https://keepachangelog.com/pt-BR/1.0.0/;
+  - Atualização da documetação inicial via README;
 
 ## [2.7.0-rc.1]	 &#8212; 	2023-07-17:
 ### Changed
