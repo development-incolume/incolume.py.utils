@@ -220,7 +220,7 @@ class Changelog:
         **kwargs,
     ):
         """Initialize from Changelog class."""
-        self.file_output = file_output or Path('CHANGELOG.md')
+        self.file_output = file_output or Path("CHANGELOG.md")
         self.url_compare = url_compare
         self.reverse = reverse
         self.url_principal = kwargs.get(
@@ -240,18 +240,20 @@ class Changelog:
 
     @staticmethod
     def iter_logs(
-        content: List[Tuple[str, Dict[str, Any]]],
-        linked: bool = True) -> List[str]:
+        content: List[Tuple[str, Dict[str, Any]]], linked: bool = True
+    ) -> List[str]:
         """Iterador de registros git"""
         result = []
         for _, entrada in content:
             logging.debug(entrada)
             if linked:
                 result.append(
-                    f"\n\n## [{entrada['key']}]\t &#8212; \t{entrada['date']}:")
+                    f"\n\n## [{entrada['key']}]\t &#8212; \t{entrada['date']}:"
+                )
             else:
                 result.append(
-                    f"\n\n## {entrada['key']}\t &#8212; \t{entrada['date']}:")
+                    f"\n\n## {entrada['key']}\t &#8212; \t{entrada['date']}:"
+                )
 
             for label, msgs in entrada["messages"].items():
                 result.append(f"\n### {label.capitalize()}")
