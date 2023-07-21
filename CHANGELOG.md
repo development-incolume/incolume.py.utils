@@ -5,10 +5,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Conventional Commit](https://www.conventionalcommits.org/pt-br/v1.0.0/).
 
-This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.8.0a1)
+This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.8.0a2)
 
 ---
 
+
+## [wip]	 &#8212; 	2022-12-09:
+### Fixed
+  - Revert "Revert "feat: #92 wip Fake log"";
 
 ## [Unreleased]	 &#8212; 	2023-07-19:
 ### Added
@@ -35,6 +39,9 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ## [2.7.0]	 &#8212; 	2023-07-18:
 ### Added
   - Acrescentado CLI - Command Line Interface, para o módulo incolumepy.utils.changelog (gcl, gchangelog, gencl, changelog);
+### Changed
+  - Adequação da formatação visual do arquivo CHANGELOG.md com https://keepachangelog.com/pt-BR/1.0.0/;
+  - Atualização da documetação inicial via README;
 
 ## [2.7.0-rc.1]	 &#8212; 	2023-07-17:
 ### Changed
@@ -383,3 +390,4 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 [2.7.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0-rc.1...2.7.0
 [2.7.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0...2.7.1
 [Unreleased]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.1...Unreleased
+[wip]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/Unreleased...wip
