@@ -35,6 +35,9 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ## [2.7.0]	 &#8212; 	2023-07-18:
 ### Added
   - Acrescentado CLI - Command Line Interface, para o módulo incolumepy.utils.changelog (gcl, gchangelog, gencl, changelog);
+### Changed
+  - Adequação da formatação visual do arquivo CHANGELOG.md com https://keepachangelog.com/pt-BR/1.0.0/;
+  - Atualização da documetação inicial via README;
 
 ## [2.7.0-rc.1]	 &#8212; 	2023-07-17:
 ### Changed
