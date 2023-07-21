@@ -18,20 +18,40 @@ logging.basicConfig(
 CHANGELOG_FILE = Path(__file__).parents[2] / "CHANGELOG.md"
 
 
-def msg_classify(msg: str) -> Dict[str, Any]:
+def msg_classify(msg: str, lang: str = 'en-US') -> Dict[str, Any]:
     """
     Classify and sort one record for messages git tag.
 
     :param msg: str
     :return: dict
     """
+    logging.debug(lang)
+    suport_lang = {
+        'en-US': {
+            'Added': 'Added',
+            'Changed': 'Changed',
+            'Removed': 'Removed',
+            'Fixed': 'Fixed',
+            'Security': 'Security'
+        },
+        'pt-BR': {
+            'Adicionado': 'Added',
+            'Modificado': 'Changed',
+            'Removido': 'Removed',
+            'Corrigido': 'Fixed',
+            'Segurança': 'Security'
+        }
+    }
+    if lang not in suport_lang.keys():
+        raise ValueError(f'{lang} not suported! Use {suport_lang.keys()}')
+
     key, msg = msg.split(maxsplit=1)
     date = subprocess.getoutput(
         "git show -s --format=%%cs %s^{commit}" % key  # pylint: disable=C0209
     )
     logging.debug("key=%s; date=%s; msg=%s", key, date, msg)
     txt = re.sub(
-        "(Added|Changed|Deprecated|Removed|Fixed|Security):",
+        f"(({'|'.join(suport_lang.get(lang).keys())})\s?):",
         r"§§\1§:",
         msg,
         flags=re.I,
