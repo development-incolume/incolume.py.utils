@@ -18,7 +18,7 @@ logging.basicConfig(
 CHANGELOG_FILE = Path(__file__).parents[2] / "CHANGELOG.md"
 
 
-def msg_classify(msg: str, lang: str = "en-US") -> Dict[str, Any]:
+def msg_classify(msg: str, lang: str = "") -> Dict[str, Any]:
     """
     Classify and sort one record for messages git tag -n.
 
@@ -45,6 +45,9 @@ def msg_classify(msg: str, lang: str = "en-US") -> Dict[str, Any]:
             "Segurança": "Security",
         },
     }
+    suport_lang.update(
+        {"all": {k: v for d in suport_lang.values() for k, v in d.items()}}
+    )
     if lang not in suport_lang:
         logging.error(
             ValueError(f"{lang} not suported! Use {suport_lang.keys()}")
@@ -56,7 +59,7 @@ def msg_classify(msg: str, lang: str = "en-US") -> Dict[str, Any]:
     )
     logging.debug("key=%s; date=%s; msg=%s", key, date, msg)
     # regex = "(Added|Changed|Deprecated|Removed|Fixed|Security):"
-    selected_lang = suport_lang.get(lang, suport_lang['en-US'])
+    selected_lang = suport_lang.get(lang, suport_lang["all"])
     regex: str = rf"({'|'.join(selected_lang.keys())})\s?:"
 
     txt = re.sub(
@@ -70,7 +73,9 @@ def msg_classify(msg: str, lang: str = "en-US") -> Dict[str, Any]:
     for i, j in sorted(
         x.strip().rstrip(";").split("§:") for x in txt.strip().split("§§") if x
     ):
-        dct.setdefault(selected_lang[i.capitalize()], []).extend(j.strip().split(";"))
+        dct.setdefault(selected_lang[i.capitalize()], []).extend(
+            j.strip().split(";")
+        )
 
     result = {"key": key, "date": date, "messages": dct}
     return result
@@ -87,9 +92,8 @@ def changelog_messages(
     :param end: (int, str, None)
     :return: list
     """
-
-    logging.debug('paramiters:', text, start, end, kwargs)
-    lang = kwargs.get('lang')
+    logging.debug("parameters: (%s %s %s %s)", text, start, end, kwargs)
+    lang = kwargs.get("lang", "")
 
     records = []
     for msg in text.strip().splitlines()[start:end]:
