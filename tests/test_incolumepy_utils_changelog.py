@@ -45,113 +45,157 @@ class TestCase:
         assert "date" in result
         assert "messages" in result
 
-
     @pytest.mark.parametrize(
         "entrance expected".split(),
         (
             pytest.param(
                 {
                     "msg": "1.0.0 Added: Fake record; other "
-                           "fakrecord; Fixed: Fake fixed"
+                    "fakrecord; Fixed: Fake fixed"
                 },
                 {
-                    'key': '1.0.0', 'date': '2018-10-19',
-                    'messages': {
-                        'Added': ['Fake record', ' other fakrecord'],
-                        'Fixed': ['Fake fixed']
-                    }
-                 },
+                    "key": "1.0.0",
+                    "date": "2018-10-19",
+                    "messages": {
+                        "Added": ["Fake record", " other fakrecord"],
+                        "Fixed": ["Fake fixed"],
+                    },
+                },
                 # marks=pytest.mark.skip(reason='skiped')
             ),
             pytest.param(
-                {"msg": "1.5.0 Added: Fake record; "
-                        "other fake record; Fixed: Fake fixed",
-                 "lang": 'en-US',
-                 },
                 {
-                    'key': '1.5.0', 'date': '2022-01-22',
-                    'messages': {
-                        'Added': ['Fake record', ' other fake record'],
-                        'Fixed': ['Fake fixed']
-                    }
+                    "msg": "1.5.0 Added: Fake record; "
+                    "other fake record; Fixed: Fake fixed",
+                    "lang": "en-US",
+                },
+                {
+                    "key": "1.5.0",
+                    "date": "2022-01-22",
+                    "messages": {
+                        "Added": ["Fake record", " other fake record"],
+                        "Fixed": ["Fake fixed"],
+                    },
                 },
                 # marks=pytest.mark.skip(reason='skiped')
             ),
             pytest.param(
                 {
                     "msg": "2.0.0 Segurança: Aderência a "
-                           "https://keepachangelog.com/pt-BR/1.0.0/",
-                    "lang": 'pt-BR',
-                 },
+                    "https://keepachangelog.com/pt-BR/1.0.0/",
+                    "lang": "pt-BR",
+                },
                 {
-                    'key': '2.0.0',
-                    'date': '2022-02-16',
-                    'messages': {
-                        'Security': [
-                            'Aderência a '
-                            'https://keepachangelog.com/pt-BR/1.0.0/'
+                    "key": "2.0.0",
+                    "date": "2022-02-16",
+                    "messages": {
+                        "Security": [
+                            "Aderência a "
+                            "https://keepachangelog.com/pt-BR/1.0.0/"
                         ]
-                    }
+                    },
                 },
                 # marks=pytest.mark.skip(reason='skiped')
             ),
             pytest.param(
                 {
                     "msg": "2.4.1 Obsoleto: Fakerecord; "
-                           "other fkrecord; Fak fixd",
-                    "lang": 'pt-BR',
-                },
-                {
-                    'key': '2.4.1',
-                    'date': '2022-03-08',
-                    'messages': {
-                        'Deprecated': [
-                            'Fakerecord', ' other fkrecord', ' Fak fixd'
-                        ]
-                    }
-                },
-                # marks=pytest.mark.skip(reason='skiped')
-            ),
-            pytest.param(
-                {
-                    "msg": "1.0.1 deprecated: Fake record; Removed: other fake; ab; cd; ef;gh; ij; kl; mn; op; Fixed: Fake fixed",
-                    # "lang": "pt-BR",
-                },
-                {
-                    'key': '1.0.1',
-                    'date': '2018-10-19',
-                    'messages': {
-                        'Fixed': ['Fake fixed'],
-                        'Removed': [
-                            'other fake', ' ab', ' cd', ' ef', 'gh',
-                            ' ij', ' kl', ' mn', ' op'
-                        ],
-                        'Deprecated': ['Fake record']
-                    }
-                },
-                # marks=pytest.mark.skip(reason='skiped')
-            ),
-            pytest.param(
-                {
-                    "msg": """Unreleased      Adicionado: Unreleased/
-                    Não publicado para o número de versão e adicionar uma nova
-                     seção Unreleased/Não publicado no topo; Tradução para
-                     labels ptBR -> enUS; Implementado nova função
-                     iter_logs(); Fixed: Formatação visual para CHANGELOG.md
-                     retirado link quebrado para 1ª release; Changed: Fatorado
-                      código para changelog_body(); Security: em caso de
-                    vulnerabilidades.;Adicionado: para novos recursos.;
-                    Modificado: para alterações em recursos existentes.;
-                    Obsoleto: para recursos que serão removidos nas próximas
-                    versões.;Removido :para recursos removidos nesta versão.;
-                    Corrigido :para qualquer correção de bug.; Segurança :em
-                    caso de vulnerabilidades.;""",
+                    "other fkrecord; Fak fixd",
                     "lang": "pt-BR",
                 },
                 {
-
+                    "key": "2.4.1",
+                    "date": "2022-03-08",
+                    "messages": {
+                        "Deprecated": [
+                            "Fakerecord",
+                            " other fkrecord",
+                            " Fak fixd",
+                        ]
+                    },
                 },
-                marks=pytest.mark.skip(reason='skiped')
+                # marks=pytest.mark.skip(reason='skiped')
+            ),
+            pytest.param(
+                {
+                    "msg": "1.0.1 deprecated: Fake record; "
+                    "Removed: other fake; ab; cd; ef;gh; ij; kl; "
+                    "mn; op; Fixed: Fake fixed",
+                    # "lang": "pt-BR",
+                },
+                {
+                    "key": "1.0.1",
+                    "date": "2018-10-19",
+                    "messages": {
+                        "Fixed": ["Fake fixed"],
+                        "Removed": [
+                            "other fake",
+                            " ab",
+                            " cd",
+                            " ef",
+                            "gh",
+                            " ij",
+                            " kl",
+                            " mn",
+                            " op",
+                        ],
+                        "Deprecated": ["Fake record"],
+                    },
+                },
+                # marks=pytest.mark.skip(reason='skiped')
+            ),
+            pytest.param(
+                {
+                    "msg": "Unreleased      Adicionado: Unreleased/"
+                    "Não publicado para o número de versão e adicionar "
+                    "uma nova seção Unreleased/Não publicado no topo; "
+                    "Tradução para labels ptBR -> enUS; "
+                    "Implementado nova função iter_logs(); Fixed: "
+                    "Formatação visual para CHANGELOG.md retirado link"
+                    " quebrado para 1ª release; Changed: Fatorado "
+                    "código para changelog_body(); Security: em caso de"
+                    " vulnerabilidades.;Adicionado: para novos "
+                    "recursos.; Modificado: para alterações em "
+                    "recursos existentes.; "
+                    "Obsoleto: para recursos que serão "
+                    "removidos nas próximas versões.;Removido :para "
+                    "recursos removidos nesta versão.; Corrigido :para "
+                    "qualquer correção de bug.; Segurança :em caso de "
+                    "vulnerabilidades.;",
+                },
+                {
+                    "key": "Unreleased",
+                    "date": "2023-07-19",
+                    "messages": {
+                        "Added": [
+                            "Unreleased/Não publicado para o número de versão "
+                            "e adicionar uma nova seção Unreleased/Não "
+                            "publicado no topo",
+                            " Tradução para labels ptBR -> enUS",
+                            " Implementado nova função iter_logs()",
+                            "para novos recursos.",
+                        ],
+                        "Changed": [
+                            "Fatorado código para changelog_body()",
+                            "para alterações em recursos existentes.",
+                        ],
+                        "Fixed": [
+                            "para qualquer correção de bug.",
+                            "Formatação visual para CHANGELOG.md retirado "
+                            "link quebrado para 1ª release",
+                        ],
+                        "Deprecated": [
+                            "para recursos que serão removidos "
+                            "nas próximas versões."
+                        ],
+                        "Removed": ["para recursos removidos nesta versão."],
+                        "Security": [
+                            "em caso de vulnerabilidades.",
+                            "em caso de vulnerabilidades.",
+                        ],
+                    },
+                }
+                # marks=pytest.mark.skip(reason='skiped')
             ),
         ),
     )
@@ -164,15 +208,76 @@ class TestCase:
         (
             pytest.param(
                 {
-                    "text": """
-                    1.0.1 Obsoleted: Fake record; Removed: other fake; ab; cd; ef;gh; ij; kl; mn; op; Fixed: Fake fixed,
-                    Unreleased      Added: Unreleased/Não publicado para o número de versão e adicionar uma nova seção Unreleased/Não publicado no topo; Tradução para labels ptBR -> enUS; Implementado nova função iter_logs(); Fixed: Formatação visual para CHANGELOG.md retirado link quebrado para 1ª release; Changed: Fatorado código para changelog_body(); Security: em caso de vulnerabilidades.;Adicionado: para novos recursos.; Modificado: para alterações em recursos existentes.; Obsoleto: para recursos que serão removidos nas próximas versões.;Removido :para recursos removidos nesta versão.; Corrigido :para qualquer correção de bug.; Segurança :em caso de vulnerabilidades.;""",
-                    "lang": "pt-BR",
-            },
+                    "text": "1.0.1 Obsoleto: Fake record; Removed: other fake;"
+                    " ab; cd; ef;gh; ij; kl; mn;op; Fixed: Fake fixed,"
+                    "Unreleased    Added: Unreleased/Não publicado "
+                    "para o número de versão e adicionar uma nova "
+                    "seção Unreleased/Não publicado no topo; Tradução "
+                    "para labels ptBR -> enUS; Implementado nova "
+                    "função iter_logs(); Fixed: Formatação visual "
+                    "para CHANGELOG.md retirado link quebrado para 1ª "
+                    "release; Changed: Fatorado código para "
+                    "changelog_body(); Security: em caso de "
+                    "vulnerabilidades.;Adicionado: para novos "
+                    "recursos.; Modificado: para alterações em "
+                    "recursos existentes.; Obsoleto: para recursos que"
+                    " serão removidos nas próximas versões.;Removido"
+                    " :para recursos removidos nesta versão.; "
+                    "Corrigido :para qualquer correção de bug.; "
+                    "Segurança :em caso de vulnerabilidades.;",
+                    "lang": None,
+                },
                 [
-                    (),
-                    (),
+                    (
+                        "1.0.1",
+                        {
+                            "key": "1.0.1",
+                            "date": "2018-10-19",
+                            "messages": {
+                                "Added": [
+                                    "Unreleased/Não publicado para o número "
+                                    "de versão e adicionar uma nova seção "
+                                    "Unreleased/Não publicado no topo",
+                                    " Tradução para labels ptBR -> enUS",
+                                    " Implementado nova função iter_logs()",
+                                    "para novos recursos.",
+                                ],
+                                "Changed": [
+                                    "Fatorado código para changelog_body()",
+                                    "para alterações em recursos existentes.",
+                                ],
+                                "Fixed": [
+                                    "para qualquer correção de bug.",
+                                    "Fake fixed,Unreleased",
+                                    "Formatação visual para CHANGELOG.md "
+                                    "retirado link quebrado para 1ª release",
+                                ],
+                                "Deprecated": [
+                                    "Fake record",
+                                    "para recursos que serão removidos "
+                                    "nas próximas versões.",
+                                ],
+                                "Removed": [
+                                    "other fake",
+                                    " ab",
+                                    " cd",
+                                    " ef",
+                                    "gh",
+                                    " ij",
+                                    " kl",
+                                    " mn",
+                                    "op",
+                                    "para recursos removidos nesta versão.",
+                                ],
+                                "Security": [
+                                    "em caso de vulnerabilidades.",
+                                    "em caso de vulnerabilidades.",
+                                ],
+                            },
+                        },
+                    ),
                 ],
+                # marks=pytest.mark.skip(reason='skiped')
             ),
             (
                 {

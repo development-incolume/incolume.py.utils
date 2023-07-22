@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Conventional Commit](https://www.conventionalcommits.org/pt-br/v1.0.0/).
 
-This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.8.0a3)
+This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.8.0a4)
 
 ---
 
@@ -15,18 +15,20 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
   - Unreleased/Não publicado para o número de versão e adicionar uma nova seção Unreleased/Não publicado no topo;
   - Tradução para labels ptBR -> enUS;
   - Implementado nova função iter_logs();
+  - Para novos recursos.;
 ### Changed
   - Fatorado código para changelog_body();
+  - Para alterações em recursos existentes.;
 ### Fixed
+  - Para qualquer correção de bug.;
   - Formatação visual para CHANGELOG.md retirado link quebrado para 1ª release;
+### Deprecated
+  - Para recursos que serão removidos nas próximas versões.;
+### Removed
+  - Para recursos removidos nesta versão.;
 ### Security
   - Em caso de vulnerabilidades.;
-  - Adicionado: para novos recursos.;
-  - Modificado: para alterações em recursos existentes.;
-  - Obsoleto: para recursos que serão removidos nas próximas versões.;
-  - Removido :para recursos removidos nesta versão.;
-  - Corrigido :para qualquer correção de bug.;
-  - Segurança :em caso de vulnerabilidades.;
+  - Em caso de vulnerabilidades.;
 
 ## [2.7.1]	 &#8212; 	2023-07-18:
 ### Fixed
