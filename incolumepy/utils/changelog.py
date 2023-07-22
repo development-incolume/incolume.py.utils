@@ -20,7 +20,7 @@ CHANGELOG_FILE = Path(__file__).parents[2] / "CHANGELOG.md"
 
 def msg_classify(msg: str, lang: str = 'en-US') -> Dict[str, Any]:
     """
-    Classify and sort one record for messages git tag.
+    Classify and sort one record for messages git tag -n.
 
     :param msg: str
     :return: dict
