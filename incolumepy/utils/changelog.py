@@ -18,40 +18,49 @@ logging.basicConfig(
 CHANGELOG_FILE = Path(__file__).parents[2] / "CHANGELOG.md"
 
 
-def msg_classify(msg: str, lang: str = 'en-US') -> Dict[str, Any]:
+def msg_classify(msg: str, lang: str = "en-US") -> Dict[str, Any]:
     """
-    Classify and sort one record for messages git tag.
+    Classify and sort one record for messages git tag -n.
 
+    :param lang:
     :param msg: str
     :return: dict
     """
     logging.debug(lang)
-    suport_lang = {
-        'en-US': {
-            'Added': 'Added',
-            'Changed': 'Changed',
-            'Removed': 'Removed',
-            'Fixed': 'Fixed',
-            'Security': 'Security'
+    suport_lang: Dict[Any, Any] = {
+        "en-US": {
+            "Added": "Added",
+            "Changed": "Changed",
+            "Deprecated": "Deprecated",
+            "Removed": "Removed",
+            "Fixed": "Fixed",
+            "Security": "Security",
         },
-        'pt-BR': {
-            'Adicionado': 'Added',
-            'Modificado': 'Changed',
-            'Removido': 'Removed',
-            'Corrigido': 'Fixed',
-            'Segurança': 'Security'
-        }
+        "pt-BR": {
+            "Adicionado": "Added",
+            "Modificado": "Changed",
+            "Obsoleto": "Deprecated",
+            "Removido": "Removed",
+            "Corrigido": "Fixed",
+            "Segurança": "Security",
+        },
     }
-    if lang not in suport_lang.keys():
-        raise ValueError(f'{lang} not suported! Use {suport_lang.keys()}')
+    if lang not in suport_lang:
+        logging.error(
+            ValueError(f"{lang} not suported! Use {suport_lang.keys()}")
+        )
 
     key, msg = msg.split(maxsplit=1)
     date = subprocess.getoutput(
         "git show -s --format=%%cs %s^{commit}" % key  # pylint: disable=C0209
     )
     logging.debug("key=%s; date=%s; msg=%s", key, date, msg)
+    # regex = "(Added|Changed|Deprecated|Removed|Fixed|Security):"
+    selected_lang = suport_lang.get(lang, suport_lang['en-US'])
+    regex: str = rf"({'|'.join(selected_lang.keys())})\s?:"
+
     txt = re.sub(
-        f"(({'|'.join(suport_lang.get(lang).keys())})\s?):",
+        regex,
         r"§§\1§:",
         msg,
         flags=re.I,
@@ -61,14 +70,14 @@ def msg_classify(msg: str, lang: str = 'en-US') -> Dict[str, Any]:
     for i, j in sorted(
         x.strip().rstrip(";").split("§:") for x in txt.strip().split("§§") if x
     ):
-        dct.setdefault(i.capitalize(), []).extend(j.strip().split(";"))
+        dct.setdefault(selected_lang[i.capitalize()], []).extend(j.strip().split(";"))
 
     result = {"key": key, "date": date, "messages": dct}
     return result
 
 
 def changelog_messages(
-    *, text: str, start: Any = None, end: Any = None
+    *, text: str, start: Any = None, end: Any = None, **kwargs
 ) -> List[Tuple[str, Dict[str, Any]]]:
     """
     Changelog messages sort and classify.
@@ -78,10 +87,14 @@ def changelog_messages(
     :param end: (int, str, None)
     :return: list
     """
+
+    logging.debug('paramiters:', text, start, end, kwargs)
+    lang = kwargs.get('lang')
+
     records = []
     for msg in text.strip().splitlines()[start:end]:
         logging.debug("msg=%s", msg)
-        record = msg_classify(msg)
+        record = msg_classify(msg=msg, lang=lang)
         logging.debug("record=%s", record)
         # records.setdefault(record['key']).update(**record)
         records.append((record["key"], record))
@@ -262,7 +275,7 @@ class Changelog:
     def iter_logs(
         content: List[Tuple[str, Dict[str, Any]]], linked: bool = True
     ) -> List[str]:
-        """Iterador de registros git"""
+        """Iterador de registros git."""
         result = []
         for _, entrada in content:
             logging.debug(entrada)
