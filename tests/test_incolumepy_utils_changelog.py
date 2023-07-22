@@ -6,10 +6,10 @@ import pytest
 import incolumepy.utils.changelog
 from incolumepy.utils.changelog import (
     Changelog,
+    __version__,
     changelog_messages,
     msg_classify,
     update_changelog,
-    __version__,
 )
 
 __author__ = "@britodfbr"  # pragma: no cover
@@ -45,9 +45,135 @@ class TestCase:
         assert "date" in result
         assert "messages" in result
 
+
     @pytest.mark.parametrize(
         "entrance expected".split(),
         (
+            pytest.param(
+                {
+                    "msg": "1.0.0 Added: Fake record; other "
+                           "fakrecord; Fixed: Fake fixed"
+                },
+                {
+                    'key': '1.0.0', 'date': '2018-10-19',
+                    'messages': {
+                        'Added': ['Fake record', ' other fakrecord'],
+                        'Fixed': ['Fake fixed']
+                    }
+                 },
+                # marks=pytest.mark.skip(reason='skiped')
+            ),
+            pytest.param(
+                {"msg": "1.5.0 Added: Fake record; "
+                        "other fake record; Fixed: Fake fixed",
+                 "lang": 'en-US',
+                 },
+                {
+                    'key': '1.5.0', 'date': '2022-01-22',
+                    'messages': {
+                        'Added': ['Fake record', ' other fake record'],
+                        'Fixed': ['Fake fixed']
+                    }
+                },
+                # marks=pytest.mark.skip(reason='skiped')
+            ),
+            pytest.param(
+                {
+                    "msg": "2.0.0 Segurança: Aderência a "
+                           "https://keepachangelog.com/pt-BR/1.0.0/",
+                    "lang": 'pt-BR',
+                 },
+                {
+                    'key': '2.0.0',
+                    'date': '2022-02-16',
+                    'messages': {
+                        'Security': [
+                            'Aderência a '
+                            'https://keepachangelog.com/pt-BR/1.0.0/'
+                        ]
+                    }
+                },
+                # marks=pytest.mark.skip(reason='skiped')
+            ),
+            pytest.param(
+                {
+                    "msg": "2.4.1 Obsoleto: Fakerecord; "
+                           "other fkrecord; Fak fixd",
+                    "lang": 'pt-BR',
+                },
+                {
+                    'key': '2.4.1',
+                    'date': '2022-03-08',
+                    'messages': {
+                        'Deprecated': [
+                            'Fakerecord', ' other fkrecord', ' Fak fixd'
+                        ]
+                    }
+                },
+                # marks=pytest.mark.skip(reason='skiped')
+            ),
+            pytest.param(
+                {
+                    "msg": "1.0.1 deprecated: Fake record; Removed: other fake; ab; cd; ef;gh; ij; kl; mn; op; Fixed: Fake fixed",
+                    # "lang": "pt-BR",
+                },
+                {
+                    'key': '1.0.1',
+                    'date': '2018-10-19',
+                    'messages': {
+                        'Fixed': ['Fake fixed'],
+                        'Removed': [
+                            'other fake', ' ab', ' cd', ' ef', 'gh',
+                            ' ij', ' kl', ' mn', ' op'
+                        ],
+                        'Deprecated': ['Fake record']
+                    }
+                },
+                # marks=pytest.mark.skip(reason='skiped')
+            ),
+            pytest.param(
+                {
+                    "msg": """Unreleased      Adicionado: Unreleased/
+                    Não publicado para o número de versão e adicionar uma nova
+                     seção Unreleased/Não publicado no topo; Tradução para
+                     labels ptBR -> enUS; Implementado nova função
+                     iter_logs(); Fixed: Formatação visual para CHANGELOG.md
+                     retirado link quebrado para 1ª release; Changed: Fatorado
+                      código para changelog_body(); Security: em caso de
+                    vulnerabilidades.;Adicionado: para novos recursos.;
+                    Modificado: para alterações em recursos existentes.;
+                    Obsoleto: para recursos que serão removidos nas próximas
+                    versões.;Removido :para recursos removidos nesta versão.;
+                    Corrigido :para qualquer correção de bug.; Segurança :em
+                    caso de vulnerabilidades.;""",
+                    "lang": "pt-BR",
+                },
+                {
+
+                },
+                marks=pytest.mark.skip(reason='skiped')
+            ),
+        ),
+    )
+    def test_msg_classify_result(self, entrance, expected):
+        result = msg_classify(**entrance)
+        assert expected == result
+
+    @pytest.mark.parametrize(
+        "entrance expected".split(),
+        (
+            pytest.param(
+                {
+                    "text": """
+                    1.0.1 Obsoleted: Fake record; Removed: other fake; ab; cd; ef;gh; ij; kl; mn; op; Fixed: Fake fixed,
+                    Unreleased      Added: Unreleased/Não publicado para o número de versão e adicionar uma nova seção Unreleased/Não publicado no topo; Tradução para labels ptBR -> enUS; Implementado nova função iter_logs(); Fixed: Formatação visual para CHANGELOG.md retirado link quebrado para 1ª release; Changed: Fatorado código para changelog_body(); Security: em caso de vulnerabilidades.;Adicionado: para novos recursos.; Modificado: para alterações em recursos existentes.; Obsoleto: para recursos que serão removidos nas próximas versões.;Removido :para recursos removidos nesta versão.; Corrigido :para qualquer correção de bug.; Segurança :em caso de vulnerabilidades.;""",
+                    "lang": "pt-BR",
+            },
+                [
+                    (),
+                    (),
+                ],
+            ),
             (
                 {
                     "text": """
