@@ -146,7 +146,7 @@ class TestCase:
             ),
             pytest.param(
                 {
-                    "msg": "Unreleased      Adicionado: Unreleased/"
+                    "msg": "2.8.0      Adicionado: Unreleased/"
                     "Não publicado para o número de versão e adicionar "
                     "uma nova seção Unreleased/Não publicado no topo; "
                     "Tradução para labels ptBR -> enUS; "
@@ -164,8 +164,8 @@ class TestCase:
                     "vulnerabilidades.;",
                 },
                 {
-                    "key": "Unreleased",
-                    "date": "2023-07-19",
+                    "key": "2.8.0",
+                    "date": "2023-07-22",
                     "messages": {
                         "Added": [
                             "Unreleased/Não publicado para o número de versão "

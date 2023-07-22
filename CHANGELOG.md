@@ -33,6 +33,7 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
   - Implementado tradução automática em labels de mudança pt-BR -> en-US;
   - Implementado nova função iter_logs();
 ### Changed
+  - Permitido o uso de labels (Added|Changed|Deprecated|Removed|Fixed|Security) em pt-BR;
   - Fatorado código para changelog_body();
 ### Fixed
   - Formatação visual para CHANGELOG.md retirado link quebrado para 1ª release;
