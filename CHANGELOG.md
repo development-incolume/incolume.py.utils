@@ -37,18 +37,6 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ### Fixed
   - Formatação visual para CHANGELOG.md retirado link quebrado para 1ª release;
 
-## [2.8.0a4]	 &#8212; 	2023-07-22:
-### Added
-  - Adicionado Unreleased/Não publicado para o número de versão conforme indicado por https://keepachangelog.com/en/1.1.0/;
-  - Adicionado uma nova seção Unreleased/Não publicado no topo baseado nas tags registradas no git;
-  - Implementado a tradução para labels de mudanças ptBR -> enUS;
-  - Implementado tradução automática em labels de mudança pt-BR -> en-US;
-  - Implementado nova função iter_logs();
-### Changed
-  - Fatorado código para changelog_body();
-### Fixed
-  - Formatação visual para CHANGELOG.md retirado link quebrado para 1ª release;
-
 ## [2.7.1]	 &#8212; 	2023-07-18:
 ### Fixed
   - Acrescentados parametros ausentes para os comandos (gcl, gchangelog, gencl, changelog);
@@ -406,6 +394,5 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 [2.7.0-rc.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0-rc.0...2.7.0-rc.1
 [2.7.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0-rc.1...2.7.0
 [2.7.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0...2.7.1
-[2.8.0a4]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.1...2.8.0a4
-[2.8.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.8.0a4...2.8.0
+[2.8.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.1...2.8.0
 [Unreleased]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.8.0...Unreleased
