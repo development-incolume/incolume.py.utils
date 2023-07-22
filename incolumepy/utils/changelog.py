@@ -30,6 +30,7 @@ def msg_classify(msg: str, lang: str = 'en-US') -> Dict[str, Any]:
         'en-US': {
             'Added': 'Added',
             'Changed': 'Changed',
+            'Deprecated': 'Deprecated',
             'Removed': 'Removed',
             'Fixed': 'Fixed',
             'Security': 'Security'
@@ -37,6 +38,7 @@ def msg_classify(msg: str, lang: str = 'en-US') -> Dict[str, Any]:
         'pt-BR': {
             'Adicionado': 'Added',
             'Modificado': 'Changed',
+            'Obsoleto': 'Deprecated',
             'Removido': 'Removed',
             'Corrigido': 'Fixed',
             'Segurança': 'Security'
@@ -50,8 +52,11 @@ def msg_classify(msg: str, lang: str = 'en-US') -> Dict[str, Any]:
         "git show -s --format=%%cs %s^{commit}" % key  # pylint: disable=C0209
     )
     logging.debug("key=%s; date=%s; msg=%s", key, date, msg)
+    # regex = "(Added|Changed|Deprecated|Removed|Fixed|Security):"
+    regex = f"({'|'.join(suport_lang.get(lang).keys())})\s?:"
+
     txt = re.sub(
-        f"(({'|'.join(suport_lang.get(lang).keys())})\s?):",
+        regex,
         r"§§\1§:",
         msg,
         flags=re.I,
