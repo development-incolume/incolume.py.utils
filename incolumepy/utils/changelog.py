@@ -18,20 +18,52 @@ logging.basicConfig(
 CHANGELOG_FILE = Path(__file__).parents[2] / "CHANGELOG.md"
 
 
-def msg_classify(msg: str) -> Dict[str, Any]:
+def msg_classify(msg: str, lang: str = "") -> Dict[str, Any]:
     """
-    Classify and sort one record for messages git tag.
+    Classify and sort one record for messages git tag -n.
 
+    :param lang:
     :param msg: str
     :return: dict
     """
+    logging.debug(lang)
+    suport_lang: Dict[Any, Any] = {
+        "en-US": {
+            "Added": "Added",
+            "Changed": "Changed",
+            "Deprecated": "Deprecated",
+            "Removed": "Removed",
+            "Fixed": "Fixed",
+            "Security": "Security",
+        },
+        "pt-BR": {
+            "Adicionado": "Added",
+            "Modificado": "Changed",
+            "Obsoleto": "Deprecated",
+            "Removido": "Removed",
+            "Corrigido": "Fixed",
+            "Segurança": "Security",
+        },
+    }
+    suport_lang.update(
+        {"all": {k: v for d in suport_lang.values() for k, v in d.items()}}
+    )
+    if lang not in suport_lang:
+        logging.error(
+            ValueError(f"{lang} not suported! Use {suport_lang.keys()}")
+        )
+
     key, msg = msg.split(maxsplit=1)
     date = subprocess.getoutput(
         "git show -s --format=%%cs %s^{commit}" % key  # pylint: disable=C0209
     )
     logging.debug("key=%s; date=%s; msg=%s", key, date, msg)
+    # regex = "(Added|Changed|Deprecated|Removed|Fixed|Security):"
+    selected_lang = suport_lang.get(lang, suport_lang["all"])
+    regex: str = rf"({'|'.join(selected_lang.keys())})\s?:"
+
     txt = re.sub(
-        "(Added|Changed|Deprecated|Removed|Fixed|Security):",
+        regex,
         r"§§\1§:",
         msg,
         flags=re.I,
@@ -41,14 +73,16 @@ def msg_classify(msg: str) -> Dict[str, Any]:
     for i, j in sorted(
         x.strip().rstrip(";").split("§:") for x in txt.strip().split("§§") if x
     ):
-        dct.setdefault(i.capitalize(), []).extend(j.strip().split(";"))
+        dct.setdefault(selected_lang[i.capitalize()], []).extend(
+            j.strip().split(";")
+        )
 
     result = {"key": key, "date": date, "messages": dct}
     return result
 
 
 def changelog_messages(
-    *, text: str, start: Any = None, end: Any = None
+    *, text: str, start: Any = None, end: Any = None, **kwargs
 ) -> List[Tuple[str, Dict[str, Any]]]:
     """
     Changelog messages sort and classify.
@@ -58,10 +92,13 @@ def changelog_messages(
     :param end: (int, str, None)
     :return: list
     """
+    logging.debug("parameters: (%s %s %s %s)", text, start, end, kwargs)
+    lang = kwargs.get("lang", "")
+
     records = []
     for msg in text.strip().splitlines()[start:end]:
         logging.debug("msg=%s", msg)
-        record = msg_classify(msg)
+        record = msg_classify(msg=msg, lang=lang)
         logging.debug("record=%s", record)
         # records.setdefault(record['key']).update(**record)
         records.append((record["key"], record))
@@ -70,18 +107,29 @@ def changelog_messages(
     return records
 
 
-def changelog_header() -> List[str]:
+def changelog_header(
+    url_keepachangelog: str = "",
+    url_semver: str = "",
+    url_convetional_commit: str = "",
+) -> List[str]:
     """Header of changelog file."""
+    url_keepachangelog = (
+        url_keepachangelog or "https://keepachangelog.com/en/1.0.0/"
+    )
+    url_semver = url_semver or "https://semver.org/spec/v2.0.0.html"
+    url_convetional_commit = (
+        url_convetional_commit
+        or "https://www.conventionalcommits.org/pt-br/v1.0.0/"
+    )
     content_formated = [
         "# CHANGELOG\n\n\n",
         "All notable changes to this project",
         " will be documented in this file.\n\n",
         "The format is based on ",
-        "[Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ",
+        f"[Keep a Changelog]({url_keepachangelog}), ",
         "this project adheres to "
-        "[Semantic Versioning](https://semver.org/spec/v2.0.0.html) "
-        "and [Conventional Commit]"
-        "(https://www.conventionalcommits.org/pt-br/v1.0.0/).\n\n",
+        f"[Semantic Versioning]({url_semver}) "
+        f"and [Conventional Commit]({url_convetional_commit}).\n\n",
         "This file was automatically generated for",
         f" [{__title__}](https://gitlab.com/development-incolume/"
         f"incolumepy.utils/-/tree/{__version__})",
@@ -96,17 +144,8 @@ def changelog_body(
     **kwargs,
 ) -> List[str]:
     """Body of changelog file."""
-    for _, entrada in content:
-        logging.debug(entrada)
-        content_formated.append(
-            f"\n\n## [{entrada['key']}]\t &#8212; \t{entrada['date']}:"
-        )
-        for label, msgs in entrada["messages"].items():
-            content_formated.append(f"\n### {label.capitalize()}")
-            for msg in msgs:
-                frase = msg.strip()
-                frase = frase[0].upper() + frase[1:]
-                content_formated.append(f"\n  - {frase};")
+    content_formated.extend(Changelog.iter_logs(content[:-1]))
+    content_formated.extend(Changelog.iter_logs(content[-1:], False))
     return content_formated
 
 
@@ -208,6 +247,75 @@ def update_changelog(
 
 class Changelog:
     """Changelog class."""
+
+    def __init__(
+        self,
+        *,
+        file_output: Path | str = "",
+        url_compare: str = "",
+        reverse: bool = True,
+        **kwargs,
+    ):
+        """Initialize from Changelog class."""
+        self.file_output = file_output or Path("CHANGELOG.md")
+        self.url_compare = url_compare
+        self.reverse = reverse
+        self.url_principal = kwargs.get(
+            "url_pricipal",
+            "https://gitlab.com/development-incolume/incolumepy.utils",
+        )
+        self.url_keepachangelog = kwargs.get(
+            "url_keepachangelog", "https://keepachangelog.com/en/1.0.0/"
+        )
+        self.url_semver = kwargs.get(
+            "url_semver", "https://semver.org/spec/v2.0.0.html"
+        )
+        self.url_convetional_commit = kwargs.get(
+            "url_convetional_commit",
+            "https://www.conventionalcommits.org/pt-br/v1.0.0/",
+        )
+
+    @staticmethod
+    def iter_logs(
+        content: List[Tuple[str, Dict[str, Any]]], linked: bool = True
+    ) -> List[str]:
+        """Iterador de registros git."""
+        result = []
+        for _, entrada in content:
+            logging.debug(entrada)
+            if linked:
+                result.append(
+                    f"\n\n## [{entrada['key']}]\t &#8212; \t{entrada['date']}:"
+                )
+            else:
+                result.append(
+                    f"\n\n## {entrada['key']}\t &#8212; \t{entrada['date']}:"
+                )
+
+            for label, msgs in entrada["messages"].items():
+                result.append(f"\n### {label.capitalize()}")
+                for msg in msgs:
+                    frase = msg.strip()
+                    frase = frase[0].upper() + frase[1:]
+                    result.append(f"\n  - {frase};")
+        return result
+
+    def header(self) -> List[str]:
+        """Header of changelog file."""
+        content_formated = [
+            "# CHANGELOG\n\n\n",
+            "All notable changes to this project",
+            " will be documented in this file.\n\n",
+            "The format is based on ",
+            f"[Keep a Changelog]({self.url_keepachangelog}), ",
+            "this project adheres to "
+            f"[Semantic Versioning]({self.url_semver}) "
+            f"and [Conventional Commit]({self.url_convetional_commit}).\n\n",
+            "This file was automatically generated for",
+            f" [{__title__}]({self.url_principal}/-/tree/{__version__})",
+            "\n\n---\n",
+        ]
+        return content_formated
 
 
 def run():

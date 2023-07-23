@@ -5,10 +5,38 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Conventional Commit](https://www.conventionalcommits.org/pt-br/v1.0.0/).
 
-This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.7.1)
+This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.8.0)
 
 ---
 
+
+## [Unreleased]	 &#8212; 	2023-07-22:
+### Added
+  - Para novos recursos.;
+### Fixed
+  - Para qualquer correção de bug.;
+### Changed
+  - Para alterações em recursos existentes.;
+### Deprecated
+  - Para recursos que serão removidos nas próximas versões.;
+### Removed
+  - Para recursos removidos nesta versão.;
+### Security
+  - Em caso de vulnerabilidades.;
+  - Em caso de vulnerabilidades.;
+
+## [2.8.0]	 &#8212; 	2023-07-22:
+### Added
+  - Adicionado Unreleased/Não publicado para o número de versão conforme indicado por https://keepachangelog.com/en/1.1.0/;
+  - Adicionado uma nova seção Unreleased/Não publicado no topo baseado nas tags registradas no git;
+  - Implementado a tradução para labels de mudanças ptBR -> enUS;
+  - Implementado tradução automática em labels de mudança pt-BR -> en-US;
+  - Implementado nova função iter_logs();
+### Changed
+  - Permitido o uso de labels (Added|Changed|Deprecated|Removed|Fixed|Security) em pt-BR;
+  - Fatorado código para changelog_body();
+### Fixed
+  - Formatação visual para CHANGELOG.md retirado link quebrado para 1ª release;
 
 ## [2.7.1]	 &#8212; 	2023-07-18:
 ### Fixed
@@ -17,6 +45,9 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ## [2.7.0]	 &#8212; 	2023-07-18:
 ### Added
   - Acrescentado CLI - Command Line Interface, para o módulo incolumepy.utils.changelog (gcl, gchangelog, gencl, changelog);
+### Changed
+  - Adequação da formatação visual do arquivo CHANGELOG.md com https://keepachangelog.com/pt-BR/1.0.0/;
+  - Atualização da documetação inicial via README;
 
 ## [2.7.0-rc.1]	 &#8212; 	2023-07-17:
 ### Changed
@@ -305,7 +336,7 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ### Added
   - Implementação para def namespace;
 
-## [0.1.0]	 &#8212; 	2018-05-04:
+## 0.1.0	 &#8212; 	2018-05-04:
 ### Added
   - Initial Commit;
 ---
@@ -364,3 +395,5 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 [2.7.0-rc.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0-rc.0...2.7.0-rc.1
 [2.7.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0-rc.1...2.7.0
 [2.7.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0...2.7.1
+[2.8.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.1...2.8.0
+[Unreleased]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.8.0...Unreleased
