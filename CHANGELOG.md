@@ -36,6 +36,14 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ### Removed
   - Desativado compatibilidade com python 3.6-;
   - Desativado ambiente tox para Python 3.6;
+### Security
+  - Tornado version 6.1;
+  - Py version 1.11.0;
+  - Notebook version 6.4.10;
+  - Nbconvert version 6.0.7;
+  - Jupyter-core version 4.9.2;
+  - Ipywidgets version 7.7.2;
+  - Ipython version 7.16.3;
 
 ## [2.8.0]	 &#8212; 	2023-07-22:
 ### Added
