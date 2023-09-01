@@ -32,7 +32,9 @@ def greeting(nome):
 @click.option(
     "--reverse", "-r", default=True, help="Reverse order of records."
 )
-def changelog(file_changelog: Union[Path, str], url: str = "", reverse: bool = True):
+def changelog(
+    file_changelog: Union[Path, str], url: str = "", reverse: bool = True
+):
     """Operacionaliza uma interface CLI para módulo incolumepy.utils.changelog.
 
     :param file_changelog: changelog full filename.

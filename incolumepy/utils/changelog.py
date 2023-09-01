@@ -251,7 +251,7 @@ class Changelog:
     def __init__(
         self,
         *,
-        file_output: Union[Path,str] = "",
+        file_output: Union[Path, str] = "",
         url_compare: str = "",
         reverse: bool = True,
         **kwargs,
