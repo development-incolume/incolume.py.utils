@@ -48,6 +48,7 @@ def msg_classify(msg: str, lang: str = "") -> Dict[str, Any]:
     suport_lang.update(
         {"all": {k: v for d in suport_lang.values() for k, v in d.items()}}
     )
+    lang = lang or "all"
     if lang not in suport_lang:
         logging.error(
             ValueError(f"{lang} not suported! Use {suport_lang.keys()}")
