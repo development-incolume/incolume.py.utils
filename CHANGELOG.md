@@ -25,6 +25,18 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
   - Em caso de vulnerabilidades.;
   - Em caso de vulnerabilidades.;
 
+## [2.9.0]	 &#8212; 	2023-09-01:
+### Added
+  - Acrescentado automação para preminor via makefile;
+### Changed
+  - Downgrade em definição de typehint, para funcionamento adequado em Python 3.7+;
+  - Regex de validação implementado separadamente;
+### Fixed
+  - Seleção automática dos idiomas para labels default "all";
+### Removed
+  - Desativado compatibilidade com python 3.6-;
+  - Desativado ambiente tox para Python 3.6;
+
 ## [2.8.0]	 &#8212; 	2023-07-22:
 ### Added
   - Adicionado Unreleased/Não publicado para o número de versão conforme indicado por https://keepachangelog.com/en/1.1.0/;
@@ -396,4 +408,5 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 [2.7.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0-rc.1...2.7.0
 [2.7.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0...2.7.1
 [2.8.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.1...2.8.0
-[Unreleased]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.8.0...Unreleased
+[2.9.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.8.0...2.9.0
+[Unreleased]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.9.0...Unreleased
