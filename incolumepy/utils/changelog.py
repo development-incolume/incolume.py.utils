@@ -5,7 +5,7 @@ import logging
 import re
 import subprocess
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Tuple, Union
 
 from incolumepy.utils import __title__, __version__, key_versions_2_sort
 
@@ -251,7 +251,7 @@ class Changelog:
     def __init__(
         self,
         *,
-        file_output: Path | str = "",
+        file_output: Union[Path, str] = "",
         url_compare: str = "",
         reverse: bool = True,
         **kwargs,
