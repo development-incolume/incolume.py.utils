@@ -95,14 +95,21 @@ def changelog_messages(
     """
     logging.debug("parameters: (%s %s %s %s)", text, start, end, kwargs)
     lang = kwargs.get("lang", "")
+    with_prereleases = kwargs.get("with_prereleases", True)
+    regex = r"Unreleased|\d(\.\d){2}(-?\w+\.?\d+)?"
+    regex1 = r"Unreleased|\d(\.\d){2}"
 
     records = []
     for msg in text.strip().splitlines()[start:end]:
         logging.debug("msg=%s", msg)
         record = msg_classify(msg=msg, lang=lang)
         logging.debug("record=%s", record)
+        key = record["key"]
+        logging.debug("key=%s", key)
         # records.setdefault(record['key']).update(**record)
-        records.append((record["key"], record))
+        if re.fullmatch(regex, key, re.I):
+            records.append((key, record))
+
     logging.debug("type return %s=%s", inspect.stack()[0][3], type(records))
     logging.debug("return %s=%s", inspect.stack()[0][3], records)
     return records
@@ -206,6 +213,7 @@ def update_changelog(
     :param urlcompare: url compare from repository of project.
     :param reverse: bool.
     :param changelog_file:  changelog full filename.
+    :param with_prereleases: bool. If include prereleases of records.
     :return: bool. True if success
 
     >>> update_changelog()
@@ -237,6 +245,7 @@ def update_changelog(
                 text=content,
                 start=kwargs.get("start", None),
                 end=kwargs.get("end", None),
+                with_prereleases=kwargs.get("with_prereleases", False),
             ),
             reverse=reverse,
             key=key_versions_2_sort,
