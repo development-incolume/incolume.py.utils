@@ -18,14 +18,17 @@ logging.basicConfig(
 CHANGELOG_FILE = Path(__file__).parents[2] / "CHANGELOG.md"
 
 
-def msg_classify(msg: str, lang: str = "") -> Dict[str, Any]:
+def msg_classify(msg: str, lang: str = "", **kwargs) -> Dict[str, Any]:
     """
     Classify and sort one record for messages git tag -n.
 
     :param lang:
     :param msg: str
+    :param with_prereleases: bool. If include prereleases of records.
     :return: dict
     """
+    with_prereleases = kwargs.get("with_prereleases", False)
+
     logging.debug(lang)
     suport_lang: Dict[Any, Any] = {
         "en-US": {
@@ -62,6 +65,18 @@ def msg_classify(msg: str, lang: str = "") -> Dict[str, Any]:
     # regex = "(Added|Changed|Deprecated|Removed|Fixed|Security):"
     selected_lang = suport_lang.get(lang, suport_lang["all"])
     regex: str = rf"({'|'.join(selected_lang.keys())})\s?:"
+    re1 = r"Unreleased|\d(\.\d){2}(-?\w+\.?\d+)?"
+    re2 = r"Unreleased|\d(\.\d){2}"
+
+    if with_prereleases and re.fullmatch(re1, key, re.I):
+        pass
+    elif not with_prereleases and re.fullmatch(re2, key, re.I):
+        pass
+    else:
+        raise ReferenceError(
+            f"Tag entrer '{key}' was rejected due to not follow "
+            "the partner 'keep a changelog'"
+        )
 
     txt = re.sub(
         regex,
@@ -91,13 +106,12 @@ def changelog_messages(
     :param text: str
     :param start: (int, str, None)
     :param end: (int, str, None)
+    :param with_prereleases: bool. If include prereleases of records.
     :return: list
     """
     logging.debug("parameters: (%s %s %s %s)", text, start, end, kwargs)
     lang = kwargs.get("lang", "")
     with_prereleases = kwargs.get("with_prereleases", True)
-    regex = r"Unreleased|\d(\.\d){2}(-?\w+\.?\d+)?"
-    regex1 = r"Unreleased|\d(\.\d){2}"
 
     records = []
     for msg in text.strip().splitlines()[start:end]:
@@ -107,8 +121,7 @@ def changelog_messages(
         key = record["key"]
         logging.debug("key=%s", key)
         # records.setdefault(record['key']).update(**record)
-        if re.fullmatch(regex, key, re.I):
-            records.append((key, record))
+        records.append((key, record))
 
     logging.debug("type return %s=%s", inspect.stack()[0][3], type(records))
     logging.debug("return %s=%s", inspect.stack()[0][3], records)
