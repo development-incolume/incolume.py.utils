@@ -5,14 +5,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Conventional Commit](https://www.conventionalcommits.org/pt-br/v1.0.0/).
 
-This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.8.0)
+This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.9.0)
 
 ---
 
 
-## [Unreleased]	 &#8212; 	2023-07-22:
+## [Unreleased]	 &#8212; 	2023-09-02:
 ### Added
   - Para novos recursos.;
+  - Compatibilidade com Python 3.12;
 ### Fixed
   - Para qualquer correção de bug.;
 ### Changed
@@ -24,6 +25,22 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ### Security
   - Em caso de vulnerabilidades.;
   - Em caso de vulnerabilidades.;
+
+## [2.9.0]	 &#8212; 	2023-09-02:
+### Added
+  - Acrescentado automação para preminor via makefile;
+### Changed
+  - Downgrade em definição de typehint, para funcionamento adequado em Python 3.7+;
+  - Regex de validação implementado separadamente;
+### Deprecated
+  - Compatibilidade com Python 3.7;
+### Fixed
+  - Seleção automática dos idiomas para labels default "all";
+### Removed
+  - Desativado compatibilidade com python 3.6-;
+  - Desativado ambiente tox para Python 3.6;
+### Security
+  - Vulnerabilidade encontrada, sem impacto direto na API, nos pacotes: tornado version 6.1, py version 1.11.0, notebook version 6.4.10, nbconvert version 6.0.7, jupyter-core version 4.9.2, ipywidgets version 7.7.2, ipython version 7.16.3;
 
 ## [2.8.0]	 &#8212; 	2023-07-22:
 ### Added
@@ -396,4 +413,5 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 [2.7.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0-rc.1...2.7.0
 [2.7.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0...2.7.1
 [2.8.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.1...2.8.0
-[Unreleased]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.8.0...Unreleased
+[2.9.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.8.0...2.9.0
+[Unreleased]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.9.0...Unreleased

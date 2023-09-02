@@ -5,7 +5,7 @@ import logging
 import re
 import subprocess
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Tuple, Union
 
 from incolumepy.utils import __title__, __version__, key_versions_2_sort
 
@@ -48,6 +48,7 @@ def msg_classify(msg: str, lang: str = "") -> Dict[str, Any]:
     suport_lang.update(
         {"all": {k: v for d in suport_lang.values() for k, v in d.items()}}
     )
+    lang = lang or "all"
     if lang not in suport_lang:
         logging.error(
             ValueError(f"{lang} not suported! Use {suport_lang.keys()}")
@@ -251,7 +252,7 @@ class Changelog:
     def __init__(
         self,
         *,
-        file_output: Path | str = "",
+        file_output: Union[Path, str] = "",
         url_compare: str = "",
         reverse: bool = True,
         **kwargs,
