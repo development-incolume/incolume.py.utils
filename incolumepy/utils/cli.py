@@ -1,6 +1,7 @@
 """Command Line Interface module."""
 
 from pathlib import Path
+from typing import Union
 
 import click
 
@@ -31,10 +32,12 @@ def greeting(nome):
 @click.option(
     "--reverse", "-r", default=True, help="Reverse order of records."
 )
-def changelog(file_changelog: str | Path, url: str = "", reverse: bool = True):
+def changelog(
+    file_changelog: Union[Path, str], url: str = "", reverse: bool = True
+):
     """Operacionaliza uma interface CLI para módulo incolumepy.utils.changelog.
 
-    :param changelog_file:  changelog full filename.
+    :param file_changelog: changelog full filename.
     :param url: url compare from repository of project.
     :param reverse: bool.
     :return: bool. True if success
