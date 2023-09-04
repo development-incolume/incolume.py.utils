@@ -414,6 +414,59 @@ class TestCase:
             entrance.update({"changelog_file": ftemp})
         assert update_changelog(**entrance)
 
+    @pytest.mark.parametrize(
+        "entrance expected".split(),
+        (
+            pytest.param(
+                {
+                    "text": "Unrelesed deprecated: suport Python 3.6-; ",
+                    "lang": "fr-FR",
+                },
+                "fr-FR not suported! Use dict_keys(['en-US', 'pt-BR', 'all'])",
+            ),
+        ),
+    )
+    def test_changelog_exceptions(self, entrance, expected, caplog):
+        changelog_messages(**entrance)
+        assert caplog.records[0].message == expected
+
+    @pytest.mark.parametrize(
+        "entrance expected".split(),
+        (
+            pytest.param(
+                {
+                    "msg": "WIP suport Python 3.6-;",
+                },
+                "",
+                # marks=pytest.mark.skip(),
+            ),
+        ),
+    )
+    def test_msg_classify_exceptions(self, entrance, expected, caplog):
+        with pytest.raises(
+            ReferenceError,
+            match="The tag entry 'WIP' was rejected due for not to follow the"
+            " 'keep a changelog' default partner.",
+        ):
+            result = msg_classify(**entrance)
+            assert result
+            assert expected in caplog.records
+
+    @pytest.mark.parametrize(
+        "entrance expected".split(),
+        (
+            pytest.param(
+                {
+                    "text": "Unrelesed suport Python 3.6-; ",
+                },
+                "ValueError: not enough values to unpack (expected 2, got 1)",
+            ),
+        ),
+    )
+    def test_changelog_messages_exceptions(self, entrance, expected, caplog):
+        changelog_messages(**entrance)
+        assert caplog.records[0].message == expected
+
 
 class TestClassChangelog:
     @pytest.mark.parametrize(

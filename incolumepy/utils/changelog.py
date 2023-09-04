@@ -18,15 +18,21 @@ logging.basicConfig(
 CHANGELOG_FILE = Path(__file__).parents[2] / "CHANGELOG.md"
 
 
-def msg_classify(msg: str, lang: str = "") -> Dict[str, Any]:
+def msg_classify(msg: str, lang: str = "", **kwargs) -> Dict[str, Any]:
     """
     Classify and sort one record for messages git tag -n.
 
     :param lang:
     :param msg: str
+    :param with_prereleases: bool. If include prereleases of records.
     :return: dict
+    :exception ValueError for unsuported lang
+    :exception ReferenceError for msg not due keepachangelog.
     """
+    with_prereleases = kwargs.get("with_prereleases", False)
+    logging.debug(msg)
     logging.debug(lang)
+    logging.debug(with_prereleases)
     suport_lang: Dict[Any, Any] = {
         "en-US": {
             "Added": "Added",
@@ -49,6 +55,8 @@ def msg_classify(msg: str, lang: str = "") -> Dict[str, Any]:
         {"all": {k: v for d in suport_lang.values() for k, v in d.items()}}
     )
     lang = lang or "all"
+    logging.debug("lang=%s", lang)
+
     if lang not in suport_lang:
         logging.error(
             ValueError(f"{lang} not suported! Use {suport_lang.keys()}")
@@ -59,10 +67,9 @@ def msg_classify(msg: str, lang: str = "") -> Dict[str, Any]:
         "git show -s --format=%%cs %s^{commit}" % key  # pylint: disable=C0209
     )
     logging.debug("key=%s; date=%s; msg=%s", key, date, msg)
-    # regex = "(Added|Changed|Deprecated|Removed|Fixed|Security):"
     selected_lang = suport_lang.get(lang, suport_lang["all"])
+    # regex = "(Added|Changed|Deprecated|Removed|Fixed|Security):"
     regex: str = rf"({'|'.join(selected_lang.keys())})\s?:"
-
     txt = re.sub(
         regex,
         r"§§\1§:",
@@ -71,13 +78,22 @@ def msg_classify(msg: str, lang: str = "") -> Dict[str, Any]:
     )
     logging.debug("txt=%s", txt)
     dct: Dict[str, Any] = {}
-    for i, j in sorted(
-        x.strip().rstrip(";").split("§:") for x in txt.strip().split("§§") if x
-    ):
-        dct.setdefault(selected_lang[i.capitalize()], []).extend(
-            j.strip().split(";")
-        )
-
+    try:
+        for i, j in sorted(
+            x.strip().rstrip(";").split("§:")
+            for x in txt.strip().split("§§")
+            if x
+        ):
+            dct.setdefault(selected_lang[i.capitalize()], []).extend(
+                j.strip().split(";")
+            )
+    except ValueError as e:
+        logging.error("%s: %s", e.__class__.__name__, e)
+        # if re.match("not enough values to unpack", str(e), re.I):
+        raise ReferenceError(
+            f"The tag entry '{key}' was rejected due for not to "
+            f"follow the 'keep a changelog' default partner."
+        ) from e
     result = {"key": key, "date": date, "messages": dct}
     return result
 
@@ -91,18 +107,35 @@ def changelog_messages(
     :param text: str
     :param start: (int, str, None)
     :param end: (int, str, None)
+    :param with_prereleases: bool. If include prereleases of records.
     :return: list
     """
     logging.debug("parameters: (%s %s %s %s)", text, start, end, kwargs)
     lang = kwargs.get("lang", "")
-
+    with_prereleases = kwargs.get("with_prereleases", True)
+    r1 = r"Unreleased|\d+(\.\d+){2}(-?\w+\.?\d+)?"
+    r2 = r"Unreleased|\d+(\.\d+){2}"
     records = []
     for msg in text.strip().splitlines()[start:end]:
         logging.debug("msg=%s", msg)
-        record = msg_classify(msg=msg, lang=lang)
-        logging.debug("record=%s", record)
-        # records.setdefault(record['key']).update(**record)
-        records.append((record["key"], record))
+        try:
+            record = msg_classify(msg=msg, lang=lang)
+            logging.debug("record=%s", record)
+
+            key = record["key"]
+            logging.debug("key=%s", key)
+
+            # records.setdefault(record['key']).update(**record)
+            if (with_prereleases and re.fullmatch(r1, key, re.I)) or (
+                not with_prereleases and re.fullmatch(r2, key, re.I)
+            ):
+                records.append((key, record))
+            else:
+                pass
+
+        except ReferenceError as e:
+            logging.error("%s: %s", e.__class__.__name__, e)
+
     logging.debug("type return %s=%s", inspect.stack()[0][3], type(records))
     logging.debug("return %s=%s", inspect.stack()[0][3], records)
     return records
@@ -206,6 +239,7 @@ def update_changelog(
     :param urlcompare: url compare from repository of project.
     :param reverse: bool.
     :param changelog_file:  changelog full filename.
+    :param with_prereleases: bool. If include prereleases of records.
     :return: bool. True if success
 
     >>> update_changelog()
@@ -237,6 +271,7 @@ def update_changelog(
                 text=content,
                 start=kwargs.get("start", None),
                 end=kwargs.get("end", None),
+                with_prereleases=kwargs.get("with_prereleases", False),
             ),
             reverse=reverse,
             key=key_versions_2_sort,
