@@ -30,8 +30,9 @@ def msg_classify(msg: str, lang: str = "", **kwargs) -> Dict[str, Any]:
     :exception ReferenceError for msg not due keepachangelog.
     """
     with_prereleases = kwargs.get("with_prereleases", False)
-
+    logging.debug(msg)
     logging.debug(lang)
+    logging.debug(with_prereleases)
     suport_lang: Dict[Any, Any] = {
         "en-US": {
             "Added": "Added",
