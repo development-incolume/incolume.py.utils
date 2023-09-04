@@ -26,6 +26,8 @@ def msg_classify(msg: str, lang: str = "", **kwargs) -> Dict[str, Any]:
     :param msg: str
     :param with_prereleases: bool. If include prereleases of records.
     :return: dict
+    :exception ValueError for unsuported lang
+    :exception ReferenceError for msg not due keepachangelog.
     """
     with_prereleases = kwargs.get("with_prereleases", False)
 
@@ -52,6 +54,8 @@ def msg_classify(msg: str, lang: str = "", **kwargs) -> Dict[str, Any]:
         {"all": {k: v for d in suport_lang.values() for k, v in d.items()}}
     )
     lang = lang or "all"
+    logging.debug("lang=%s", lang)
+
     if lang not in suport_lang:
         logging.error(
             ValueError(f"{lang} not suported! Use {suport_lang.keys()}")
@@ -63,7 +67,6 @@ def msg_classify(msg: str, lang: str = "", **kwargs) -> Dict[str, Any]:
     )
     logging.debug("key=%s; date=%s; msg=%s", key, date, msg)
     selected_lang = suport_lang.get(lang, suport_lang["all"])
-    logging.debug("selected_lang=%s", selected_lang)
     # regex = "(Added|Changed|Deprecated|Removed|Fixed|Security):"
     regex: str = rf"({'|'.join(selected_lang.keys())})\s?:"
     txt = re.sub(
@@ -84,7 +87,7 @@ def msg_classify(msg: str, lang: str = "", **kwargs) -> Dict[str, Any]:
                 j.strip().split(";")
             )
     except ValueError as e:
-        logging.error("{}: {}", e.__class__.__name__, e)
+        logging.error("%s: %s", e.__class__.__name__, e)
         if re.match("not enough values to unpack", str(e), re.I):
             raise ReferenceError(
                 f"The tag entry '{key}' was rejected due for not to follow the  'keep a changelog' default partner."
