@@ -111,16 +111,28 @@ def changelog_messages(
     logging.debug("parameters: (%s %s %s %s)", text, start, end, kwargs)
     lang = kwargs.get("lang", "")
     with_prereleases = kwargs.get("with_prereleases", True)
-
+    r1 = r"Unreleased|\d(\.\d){2}(-?\w+\.?\d+)?"
+    r2 = r"Unreleased|\d(\.\d){2}"
     records = []
     for msg in text.strip().splitlines()[start:end]:
         logging.debug("msg=%s", msg)
-        record = msg_classify(msg=msg, lang=lang)
-        logging.debug("record=%s", record)
-        key = record["key"]
-        logging.debug("key=%s", key)
-        # records.setdefault(record['key']).update(**record)
-        records.append((key, record))
+        try:
+            record = msg_classify(msg=msg, lang=lang)
+            logging.debug("record=%s", record)
+
+            key = record["key"]
+            logging.debug("key=%s", key)
+
+            # records.setdefault(record['key']).update(**record)
+            if with_prereleases and re.fullmatch(r1, key, re.I):
+                records.append((key, record))
+            elif not with_prereleases and re.fullmatch(r2, key, re.I):
+                records.append((key, record))
+            else:
+                pass
+
+        except ReferenceError as e:
+            logging.error("%s: %s", e.__class__.__name__, e)
 
     logging.debug("type return %s=%s", inspect.stack()[0][3], type(records))
     logging.debug("return %s=%s", inspect.stack()[0][3], records)
