@@ -49,7 +49,7 @@ def test_realfilename_suggested_name(entrance, expected, caplog):
         realfilename(entrance)
         assert caplog.messages == [f"Suggested name: {entrance}"]
         assert re.compile(
-            r"\d{4}(-\d{2}){2}@\d{2}(:\d{2}){2}; DEBUG\s+; root; files; "
+            r"\d{4}(-\d{2}){2}T\d{2}(:\d{2}){2}; DEBUG\s+; root; files; "
             r"realfilename; Suggested name: .+\n",
             flags=re.I,
         ).fullmatch(caplog.text)
