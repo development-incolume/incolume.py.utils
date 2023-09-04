@@ -36,7 +36,7 @@ __author__ = "@britodfbr"  # pragma: no cover
     ),
 )
 def test_version(entrance, expected):
-    regex = r"\d(\.\d){2}(-?\w+\.?\d+)?"
+    regex = r"\d+(\.\d+){2}(-?\w+\.?\d+)?"
     assert re.fullmatch(regex, __version__, flags=re.I)
 
 
