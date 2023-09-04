@@ -26,6 +26,13 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
   - Em caso de vulnerabilidades.;
   - Em caso de vulnerabilidades.;
 
+## [2.10.0]	 &#8212; 	2023-09-04:
+### Added
+  - Proteção contra quebra de execução para entradas do 'git tag' fora dos padrões: Versionamento Semântico, Keep a Changelog e Conventional Commit;
+  - Acrescimo de parametro via script (-p, --with_prereleases) para controle de entradas de pré-lançamentos no CHANGELOG.md;
+### Changed
+  - 100% de cobertura atingido para testes nos códigos implementados;
+
 ## [2.9.0]	 &#8212; 	2023-09-02:
 ### Added
   - Acrescentado automação para preminor via makefile;
@@ -414,4 +421,5 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 [2.7.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0...2.7.1
 [2.8.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.1...2.8.0
 [2.9.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.8.0...2.9.0
-[Unreleased]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.9.0...Unreleased
+[2.10.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.9.0...2.10.0
+[Unreleased]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.10.0...Unreleased
