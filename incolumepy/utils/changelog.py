@@ -88,10 +88,11 @@ def msg_classify(msg: str, lang: str = "", **kwargs) -> Dict[str, Any]:
             )
     except ValueError as e:
         logging.error("%s: %s", e.__class__.__name__, e)
-        if re.match("not enough values to unpack", str(e), re.I):
-            raise ReferenceError(
-                f"The tag entry '{key}' was rejected due for not to follow the  'keep a changelog' default partner."
-            )
+        # if re.match("not enough values to unpack", str(e), re.I):
+        raise ReferenceError(
+            f"The tag entry '{key}' was rejected due for not to "
+            f"follow the  'keep a changelog' default partner."
+        ) from e
     result = {"key": key, "date": date, "messages": dct}
     return result
 
@@ -124,9 +125,9 @@ def changelog_messages(
             logging.debug("key=%s", key)
 
             # records.setdefault(record['key']).update(**record)
-            if with_prereleases and re.fullmatch(r1, key, re.I):
-                records.append((key, record))
-            elif not with_prereleases and re.fullmatch(r2, key, re.I):
+            if (with_prereleases and re.fullmatch(r1, key, re.I)) or (
+                not with_prereleases and re.fullmatch(r2, key, re.I)
+            ):
                 records.append((key, record))
             else:
                 pass
