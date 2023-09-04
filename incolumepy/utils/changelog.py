@@ -62,22 +62,10 @@ def msg_classify(msg: str, lang: str = "", **kwargs) -> Dict[str, Any]:
         "git show -s --format=%%cs %s^{commit}" % key  # pylint: disable=C0209
     )
     logging.debug("key=%s; date=%s; msg=%s", key, date, msg)
-    # regex = "(Added|Changed|Deprecated|Removed|Fixed|Security):"
     selected_lang = suport_lang.get(lang, suport_lang["all"])
+    logging.debug("selected_lang=%s", selected_lang)
+    # regex = "(Added|Changed|Deprecated|Removed|Fixed|Security):"
     regex: str = rf"({'|'.join(selected_lang.keys())})\s?:"
-    re1 = r"Unreleased|\d(\.\d){2}(-?\w+\.?\d+)?"
-    re2 = r"Unreleased|\d(\.\d){2}"
-
-    if with_prereleases and re.fullmatch(re1, key, re.I):
-        pass
-    elif not with_prereleases and re.fullmatch(re2, key, re.I):
-        pass
-    else:
-        raise ReferenceError(
-            f"Tag entrer '{key}' was rejected due to not follow "
-            "the partner 'keep a changelog'"
-        )
-
     txt = re.sub(
         regex,
         r"§§\1§:",
@@ -86,13 +74,21 @@ def msg_classify(msg: str, lang: str = "", **kwargs) -> Dict[str, Any]:
     )
     logging.debug("txt=%s", txt)
     dct: Dict[str, Any] = {}
-    for i, j in sorted(
-        x.strip().rstrip(";").split("§:") for x in txt.strip().split("§§") if x
-    ):
-        dct.setdefault(selected_lang[i.capitalize()], []).extend(
-            j.strip().split(";")
-        )
-
+    try:
+        for i, j in sorted(
+            x.strip().rstrip(";").split("§:")
+            for x in txt.strip().split("§§")
+            if x
+        ):
+            dct.setdefault(selected_lang[i.capitalize()], []).extend(
+                j.strip().split(";")
+            )
+    except ValueError as e:
+        logging.error("{}: {}", e.__class__.__name__, e)
+        if re.match("not enough values to unpack", str(e), re.I):
+            raise ReferenceError(
+                f"The tag entry '{key}' was rejected due for not to follow the  'keep a changelog' default partner."
+            )
     result = {"key": key, "date": date, "messages": dct}
     return result
 
