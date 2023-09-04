@@ -92,7 +92,7 @@ def msg_classify(msg: str, lang: str = "", **kwargs) -> Dict[str, Any]:
         # if re.match("not enough values to unpack", str(e), re.I):
         raise ReferenceError(
             f"The tag entry '{key}' was rejected due for not to "
-            f"follow the  'keep a changelog' default partner."
+            f"follow the 'keep a changelog' default partner."
         ) from e
     result = {"key": key, "date": date, "messages": dct}
     return result
