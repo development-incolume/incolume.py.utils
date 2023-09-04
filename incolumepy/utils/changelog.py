@@ -113,8 +113,8 @@ def changelog_messages(
     logging.debug("parameters: (%s %s %s %s)", text, start, end, kwargs)
     lang = kwargs.get("lang", "")
     with_prereleases = kwargs.get("with_prereleases", True)
-    r1 = r"Unreleased|\d(\.\d){2}(-?\w+\.?\d+)?"
-    r2 = r"Unreleased|\d(\.\d){2}"
+    r1 = r"Unreleased|\d+(\.\d+){2}(-?\w+\.?\d+)?"
+    r2 = r"Unreleased|\d+(\.\d+){2}"
     records = []
     for msg in text.strip().splitlines()[start:end]:
         logging.debug("msg=%s", msg)
