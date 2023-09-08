@@ -103,13 +103,33 @@ class TestCLI:
         assert result.output.strip() == expected
 
     @pytest.mark.parametrize(
-        "entrance args",
+        "entrance args".split(),
         (
-            "# CHANGELOG",
-            "[Keep a Changelog]",
-            "[Semantic Versioning]",
-            "[Conventional Commit]",
-            "[incolumepy.utils]",
+            pytest.param(
+                "# CHANGELOG",
+                ["-r", "true", "-p"],
+                # marks=pytest.mark.skip,
+            ),
+            pytest.param(
+                "[Keep a Changelog]",
+                ["-r", "true"],
+                # marks=pytest.mark.skip
+            ),
+            pytest.param(
+                "[Semantic Versioning]",
+                ["-r", "true"],
+                # marks=pytest.mark.skip
+            ),
+            pytest.param(
+                "[Conventional Commit]",
+                ["-r", "true"],
+                # marks=pytest.mark.skip
+            ),
+            pytest.param(
+                "[incolumepy.utils]",
+                ["-r", "false"],
+                # marks=pytest.mark.skip
+            ),
         ),
     )
     def test_changelog(self, entrance, args, file, fakeurl):

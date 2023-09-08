@@ -81,6 +81,7 @@ def digest(hash_type):
     "--with_prereleases",
     "-p",
     default=True,
+    is_flag=True,
     help="Include prereleases of records.",
 )
 def changelog(
@@ -103,9 +104,18 @@ def changelog(
     logging.debug("reverse: %s", reverse)
     logging.debug("with_prereleases: %s", with_prereleases)
 
-    return update_changelog(
-        changelog_file=file_changelog,
-        urlcompare=url,
-        reverse=reverse,
-        with_prereleases=with_prereleases,
-    )
+    if with_prereleases:
+        result = update_changelog(
+            changelog_file=file_changelog,
+            urlcompare=url,
+            reverse=reverse,
+            with_prereleases=True,
+        )
+    else:
+        result = update_changelog(
+            changelog_file=file_changelog,
+            urlcompare=url,
+            reverse=reverse,
+            with_prereleases=False,
+        )
+    return result
