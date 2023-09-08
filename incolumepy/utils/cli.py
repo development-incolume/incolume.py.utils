@@ -1,5 +1,5 @@
 """Command Line Interface module."""
-
+import sys
 from pathlib import Path
 from typing import Union
 
@@ -20,13 +20,57 @@ def greeting(nome):
 
 
 @click.command()
+@click.option("--shout", is_flag=True)
+def info(shout):
+    rv = sys.platform
+    if shout:
+        rv = rv.upper() + "!!!!"
+    click.echo(rv)
+
+
+@click.command()
+@click.option("--shout/--no-shout", default=False)
+def info1(shout):
+    rv = sys.platform
+    if shout:
+        rv = rv.upper() + "!!!!"
+    click.echo(rv)
+
+
+@click.command()
+@click.option("--shout/--no-shout", " /-S", default=False)
+def info2(shout):
+    rv = sys.platform
+    if shout:
+        rv = rv.upper() + "!!!!"
+    click.echo(rv)
+
+
+@click.command()
+@click.option("--upper", "transformation", flag_value="upper", default=True)
+@click.option("--lower", "transformation", flag_value="casefold")
+@click.option("--capitalize", "transformation", flag_value="capitalize")
+def info3(transformation):
+    click.echo(getattr(sys.platform, transformation)())
+
+
+@click.command()
+@click.option(
+    "--hash-type", type=click.Choice(["MD5", "SHA1"], case_sensitive=False)
+)
+def digest(hash_type):
+    click.echo(hash_type)
+
+
+@click.command()
 # @click.argument('stream', type=click.STRING)
 @click.argument("file_changelog", type=click.STRING, default="CHANGELOG.md")
 @click.option(
     "--url",
     "-u",
-    default="https://gitlab.com/development-incolume/"
-    "incolumepy.utils/-/compare",
+    default=(
+        "https://gitlab.com/development-incolume" "/incolumepy.utils/-/compare"
+    ),
     help="Url compare from repository of project.",
 )
 @click.option(
