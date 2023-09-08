@@ -104,18 +104,10 @@ def changelog(
     logging.debug("reverse: %s", reverse)
     logging.debug("with_prereleases: %s", with_prereleases)
 
-    if with_prereleases:
-        result = update_changelog(
-            changelog_file=file_changelog,
-            urlcompare=url,
-            reverse=reverse,
-            with_prereleases=True,
-        )
-    else:
-        result = update_changelog(
-            changelog_file=file_changelog,
-            urlcompare=url,
-            reverse=reverse,
-            with_prereleases=False,
-        )
+    result = update_changelog(
+        changelog_file=file_changelog,
+        urlcompare=url,
+        reverse=reverse,
+        with_prereleases=True if with_prereleases else False,
+    )
     return result
