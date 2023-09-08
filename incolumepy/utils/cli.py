@@ -1,4 +1,5 @@
 """Command Line Interface module."""
+import logging
 import sys
 from pathlib import Path
 from typing import Union
@@ -69,7 +70,7 @@ def digest(hash_type):
     "--url",
     "-u",
     default=(
-        "https://gitlab.com/development-incolume" "/incolumepy.utils/-/compare"
+        "https://gitlab.com/development-incolume/incolumepy.utils/-/compare"
     ),
     help="Url compare from repository of project.",
 )
@@ -97,6 +98,11 @@ def changelog(
     :return: bool. True if success
 
     """
+    logging.debug("file_changelog: %s", file_changelog)
+    logging.debug("url: %s", url)
+    logging.debug("reverse: %s", reverse)
+    logging.debug("with_prereleases: %s", with_prereleases)
+
     return update_changelog(
         changelog_file=file_changelog,
         urlcompare=url,
