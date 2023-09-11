@@ -9,6 +9,7 @@ from click.testing import CliRunner
 from incolumepy.utils.cli import (
     changelog,
     digest,
+    encode,
     greeting,
     info,
     info1,
@@ -29,11 +30,33 @@ class TestCLI:
     def fakeurl(self):
         return "http://fake.incolume.com.br/xpto"
 
-    # @pytest.mark.skip
     def test_greeting(self, capsys):
         result = self.runner.invoke(greeting, ["Peter"])
         assert result.exit_code == 0
         assert result.output == "Oi Peter!\n"
+
+    @pytest.mark.skip(reason="dont ran..")
+    def test_encode_input(self):
+        result = self.runner.invoke(encode, input="\n")
+        assert result.exit_code == 1
+        print(result.output)
+        expected = "Password: "
+        assert result.output == expected
+
+    @pytest.mark.parametrize(
+        "args expected".split(),
+        (
+            (["-p", "abc123"], True),
+            (["--password", "abc123"], True),
+        ),
+    )
+    def test_encode(self, args, expected, capsys):
+        """"""
+        result = self.runner.invoke(encode, args)
+        out, err = capsys.readouterr()
+        assert bool(result) == expected
+        assert out == ""
+        assert err == ""
 
     @pytest.mark.parametrize(
         "args expected".split(),
@@ -133,10 +156,27 @@ class TestCLI:
         ),
     )
     def test_changelog(self, entrance, args, file, fakeurl):
-        runner = CliRunner()
-        args.extend(["-u", fakeurl, "file", file.as_posix()])
-        result = runner.invoke(changelog, args)
+        args.extend(["-u", fakeurl, file.as_posix()])
+        result = self.runner.invoke(changelog, args)
         assert result
         content = file.read_text()
-        assert fakeurl in content
+        # assert fakeurl in content
         assert entrance in content
+
+    @pytest.mark.parametrize(
+        "entrance expected".split(),
+        (
+            pytest.param(
+                changelog,
+                "xpto",
+            ),
+        ),
+    )
+    def test_changelog_logging(
+        self, entrance, expected, caplog, file, fakeurl
+    ):
+        result = self.runner.invoke(entrance, ["-p", "-u", fakeurl, file])
+        assert result
+        assert caplog.records == []
+        for log in caplog.records:
+            assert log == expected

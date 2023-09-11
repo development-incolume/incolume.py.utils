@@ -53,6 +53,7 @@ changelog = 'incolumepy.utils.cli:changelog'
 gcl = 'incolumepy.utils.cli:changelog'
 gencl = 'incolumepy.utils.cli:changelog'
 gchangelog = 'incolumepy.utils.cli:changelog'
+pw = 'incolumepy.utils.cli:encode'
 
 [tool.poetry.dependencies]
 python = "^3.7"
