@@ -7,6 +7,8 @@ import subprocess
 from pathlib import Path
 from typing import Any, Dict, List, Tuple, Union
 
+from deprecation import deprecated
+
 from incolumepy.utils import __title__, __version__, key_versions_2_sort
 
 logging.basicConfig(
@@ -141,10 +143,16 @@ def changelog_messages(
     return records
 
 
+@deprecated(
+    details="This function is outdated, use `Changelog.header` instead."
+    " It will be discontinued in the near future.",
+    deprecated_in="1.11.0",
+)
 def changelog_header(
     url_keepachangelog: str = "",
     url_semver: str = "",
     url_convetional_commit: str = "",
+    **kwargs,
 ) -> List[str]:
     """Header of changelog file."""
     url_keepachangelog = (
@@ -155,21 +163,29 @@ def changelog_header(
         url_convetional_commit
         or "https://www.conventionalcommits.org/pt-br/v1.0.0/"
     )
-    content_formated = [
-        "# CHANGELOG\n\n\n",
-        "All notable changes to this project",
-        " will be documented in this file.\n\n",
-        "The format is based on ",
-        f"[Keep a Changelog]({url_keepachangelog}), ",
-        "this project adheres to "
-        f"[Semantic Versioning]({url_semver}) "
-        f"and [Conventional Commit]({url_convetional_commit}).\n\n",
-        "This file was automatically generated for",
-        f" [{__title__}](https://gitlab.com/development-incolume/"
-        f"incolumepy.utils/-/tree/{__version__})",
-        "\n\n---\n",
-    ]
-    return content_formated
+    # content_formated = [
+    #     "# CHANGELOG\n\n\n",
+    #     "All notable changes to this project",
+    #     " will be documented in this file.\n\n",
+    #     "The format is based on ",
+    #     f"[Keep a Changelog]({url_keepachangelog}), ",
+    #     "this project adheres to "
+    #     f"[Semantic Versioning]({url_semver}) "
+    #     f"and [Conventional Commit]({url_convetional_commit}).\n\n",
+    #     "This file was automatically generated for",
+    #     f" [{__title__}](https://gitlab.com/development-incolume/"
+    #     f"incolumepy.utils/-/tree/{__version__})",
+    #     "\n\n---\n",
+    # ]
+    # return content_formated
+    obj = Changelog(
+        url_semver=url_semver,
+        url_keepachangelog=url_keepachangelog,
+        url_convetional_commit=url_convetional_commit,
+        url_pricipal="https://gitlab.com/development-incolume/incolumepy.utils",
+        **kwargs,
+    )
+    return obj.header()
 
 
 def changelog_body(
