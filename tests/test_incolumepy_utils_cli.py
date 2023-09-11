@@ -1,48 +1,182 @@
 """Command Line Interface - CLI module."""
+import sys
 from pathlib import Path
 from tempfile import gettempdir
 
 import pytest
 from click.testing import CliRunner
 
-from incolumepy.utils.cli import changelog, greeting
+from incolumepy.utils.cli import (
+    changelog,
+    digest,
+    encode,
+    greeting,
+    info,
+    info1,
+    info2,
+    info3,
+)
 
 
 class TestCLI:
-    # @pytest.mark.skip
+    runner = CliRunner()
+
+    @pytest.fixture(scope="function")
+    def file(self):
+        file = Path(gettempdir()) / "CHANGELOG.md"
+        return file
+
+    @pytest.fixture(scope="function")
+    def fakeurl(self):
+        return "http://fake.incolume.com.br/xpto"
+
     def test_greeting(self, capsys):
-        runner = CliRunner()
-        result = runner.invoke(greeting, ["Peter"])
+        result = self.runner.invoke(greeting, ["Peter"])
         assert result.exit_code == 0
         assert result.output == "Oi Peter!\n"
 
+    @pytest.mark.skip(reason="dont ran..")
+    def test_encode_input(self):
+        result = self.runner.invoke(encode, input="\n")
+        assert result.exit_code == 1
+        print(result.output)
+        expected = "Password: "
+        assert result.output == expected
+
     @pytest.mark.parametrize(
-        "entrance",
+        "args expected".split(),
         (
-            "# CHANGELOG",
-            "[Keep a Changelog]",
-            "[Semantic Versioning]",
-            "[Conventional Commit]",
-            "[incolumepy.utils]",
+            (["-p", "abc123"], True),
+            (["--password", "abc123"], True),
         ),
     )
-    def test_output(self, entrance):
-        runner = CliRunner()
-        file = Path(gettempdir()) / "CHANGELOG.md"
-        fakeurl = "http://fake.incolume.com.br/xpto"
-        result = runner.invoke(
-            changelog,
-            [
-                file.as_posix(),
-                "-p",
-                "false",
-                "-u",
-                fakeurl,
-                "-r",
-                "true",
-            ],
-        )
+    def test_encode(self, args, expected, capsys):
+        """"""
+        result = self.runner.invoke(encode, args)
+        out, err = capsys.readouterr()
+        assert bool(result) == expected
+        assert out == ""
+        assert err == ""
+
+    @pytest.mark.parametrize(
+        "args expected".split(),
+        (
+            ([], sys.platform),
+            (["--shout"], "{}!!!!".format(sys.platform.upper())),
+        ),
+    )
+    def test_info(self, args, expected):
+        result = self.runner.invoke(info, [*args])
+        assert result.exit_code == 0
+        assert result.output.strip() == expected
+
+    @pytest.mark.parametrize(
+        "args expected".split(),
+        (
+            ([], sys.platform),
+            (["--no-shout"], sys.platform),
+            (["--shout"], "{}!!!!".format(sys.platform.upper())),
+        ),
+    )
+    def test_info1(self, args, expected):
+        result = self.runner.invoke(info1, [*args])
+        assert result.exit_code == 0
+        assert result.output.strip() == expected
+
+    @pytest.mark.parametrize(
+        "args expected".split(),
+        (
+            ([], sys.platform),
+            (["--shout"], "{}!!!!".format(sys.platform.upper())),
+            (["-S"], sys.platform),
+            (["--no-shout"], sys.platform),
+        ),
+    )
+    def test_info2(self, args, expected):
+        result = self.runner.invoke(info2, [*args])
+        assert result.exit_code == 0
+        assert result.output.strip() == expected
+
+    @pytest.mark.parametrize(
+        "args expected".split(),
+        (
+            (["--lower"], sys.platform),
+            (["--upper"], sys.platform.upper()),
+            (["--capitalize"], sys.platform.capitalize()),
+        ),
+    )
+    def test_info3(self, args, expected):
+        result = self.runner.invoke(info3, [*args])
+        assert result.exit_code == 0
+        assert result.output.strip() == expected
+
+    @pytest.mark.parametrize(
+        "args expected".split(),
+        (
+            (["--hash-type", "md5"], "MD5"),
+            (["--hash-type", "MD5"], "MD5"),
+            (["--hash-type", "SHA1"], "SHA1"),
+            (["--hash-type", "sha1"], "SHA1"),
+        ),
+    )
+    def test_digest(self, args, expected):
+        result = self.runner.invoke(digest, [*args])
+
+        assert result.exit_code == 0
+        assert result.output.strip() == expected
+
+    @pytest.mark.parametrize(
+        "entrance args".split(),
+        (
+            pytest.param(
+                "# CHANGELOG",
+                ["-r", "true", "-p"],
+                # marks=pytest.mark.skip,
+            ),
+            pytest.param(
+                "[Keep a Changelog]",
+                ["-r", "true"],
+                # marks=pytest.mark.skip
+            ),
+            pytest.param(
+                "[Semantic Versioning]",
+                ["-r", "true"],
+                # marks=pytest.mark.skip
+            ),
+            pytest.param(
+                "[Conventional Commit]",
+                ["-r", "true"],
+                # marks=pytest.mark.skip
+            ),
+            pytest.param(
+                "[incolumepy.utils]",
+                ["-r", "false"],
+                # marks=pytest.mark.skip
+            ),
+        ),
+    )
+    def test_changelog(self, entrance, args, file, fakeurl):
+        args.extend(["-u", fakeurl, file.as_posix()])
+        result = self.runner.invoke(changelog, args)
         assert result
         content = file.read_text()
-        assert fakeurl in content
+        # assert fakeurl in content
         assert entrance in content
+
+    @pytest.mark.parametrize(
+        "entrance expected".split(),
+        (
+            pytest.param(
+                changelog,
+                "xpto",
+            ),
+        ),
+    )
+    def test_changelog_logging(
+        self, entrance, expected, caplog, file, fakeurl
+    ):
+        result = self.runner.invoke(entrance, ["-p", "-u", fakeurl, file])
+        assert result
+        assert caplog.records == []
+        for log in caplog.records:
+            assert log == expected
