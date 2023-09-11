@@ -1,4 +1,5 @@
 """Command Line Interface module."""
+import codecs
 import logging
 import sys
 from pathlib import Path
@@ -61,6 +62,14 @@ def info3(transformation):
 )
 def digest(hash_type):
     click.echo(hash_type)
+
+
+@click.command()
+@click.option(
+    "--password", "-p", prompt=True, hide_input=True, confirmation_prompt=True
+)
+def encode(password):
+    click.echo(f"encoded: {codecs.encode(password, 'rot13')}")
 
 
 @click.command()
