@@ -84,7 +84,11 @@ def encode(password):
     help="Url compare from repository of project.",
 )
 @click.option(
-    "--reverse", "-r", default=True, help="Reverse order of records."
+    "--reverse",
+    "-r",
+    default=True,
+    is_flag=True,
+    help="Reverse order of records.",
 )
 @click.option(
     "--with_prereleases",
@@ -116,7 +120,7 @@ def changelog(
     result = update_changelog(
         changelog_file=file_changelog,
         urlcompare=url,
-        reverse=reverse,
+        reverse=True if reverse else False,
         with_prereleases=True if with_prereleases else False,
     )
     return result
