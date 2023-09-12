@@ -199,6 +199,11 @@ def changelog_body(
     return content_formated
 
 
+@deprecated(
+    details="This function is outdated, use `Changelog.header` instead."
+    " It will be discontinued in the near future.",
+    deprecated_in="1.11.0",
+)
 def changelog_footer(
     content: List[Tuple[str, Dict[str, Any]]],
     content_formated: List[str],
@@ -262,7 +267,8 @@ def update_changelog(
     True
     >>> update_changelog(changelog_file='/tmp/CHANGELOG.md')
     True
-    >>> update_changelog(changelog_file=Path('CHANGELOG.md'),
+    >>> update_changelog(
+    changelog_file=Path('CHANGELOG.md'),
     urlcompare="https://gitlab.com/development-incolume
     /incolumepy.utils/-/compare")
     True
@@ -310,7 +316,11 @@ class Changelog:
     ):
         """Initialize from Changelog class."""
         self.file_output = file_output or Path("CHANGELOG.md")
-        self.url_compare = url_compare
+        self.url_compare = (
+            url_compare
+            or "https://gitlab.com/development-incolume/"
+            "incolumepy.utils/-/compare"
+        )
         self.reverse = reverse
         self.url_principal = kwargs.get(
             "url_pricipal",
@@ -326,6 +336,10 @@ class Changelog:
             "url_convetional_commit",
             "https://www.conventionalcommits.org/pt-br/v1.0.0/",
         )
+
+    # @property
+    # def url_compare(self):
+    #     return f'{self.url_principal}/-/tree/{__version__}'
 
     @staticmethod
     def iter_logs(
@@ -369,6 +383,25 @@ class Changelog:
         ]
         return content_formated
 
+    def footer(self, **kwargs) -> List[str]:
+        """Footer of changelog file."""
+
+        content: List[Tuple[str, Dict[str, Any]]] = kwargs.get("content") or []
+        content_formated: List[str] = kwargs.get("content_formated") or []
+        url_compare = kwargs.get("url_compare") or self.url_compare
+
+        logging.debug("url_compare=%s", url_compare)
+
+        content_formated.append("\n---\n\n")
+        y: Dict[str, Any] = {}
+        for _, x in content[::-1]:
+            if y:
+                content_formated.append(
+                    f'[{x["key"]}]: {url_compare}/{y["key"]}...{x["key"]}\n'
+                )
+            y = x
+        return content_formated
+
 
 def run():
     """Examples ran.
@@ -379,7 +412,7 @@ def run():
     logging.debug(msg)
     logging.debug("msg_classify=%s", msg_classify(msg=msg))
 
-    msg = subprocess.getoutput("git tag -n")
+    # msg = subprocess.getoutput("git tag -n")
     result = changelog_messages(text=msg)
 
     logging.debug("result=%s", result)
