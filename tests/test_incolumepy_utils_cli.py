@@ -51,7 +51,7 @@ class TestCLI:
         ),
     )
     def test_encode(self, args, expected, capsys):
-        """"""
+        """Test for encode."""
         result = self.runner.invoke(encode, args)
         out, err = capsys.readouterr()
         assert bool(result) == expected
@@ -62,7 +62,7 @@ class TestCLI:
         "args expected".split(),
         (
             ([], sys.platform),
-            (["--shout"], "{}!!!!".format(sys.platform.upper())),
+            (["--shout"], f"{sys.platform.upper()}!!!!"),
         ),
     )
     def test_info(self, args, expected):
@@ -75,7 +75,7 @@ class TestCLI:
         (
             ([], sys.platform),
             (["--no-shout"], sys.platform),
-            (["--shout"], "{}!!!!".format(sys.platform.upper())),
+            (["--shout"], f"{sys.platform.upper()}!!!!"),
         ),
     )
     def test_info1(self, args, expected):
@@ -87,7 +87,7 @@ class TestCLI:
         "args expected".split(),
         (
             ([], sys.platform),
-            (["--shout"], "{}!!!!".format(sys.platform.upper())),
+            (["--shout"], f"{sys.platform.upper()}!!!!"),
             (["-S"], sys.platform),
             (["--no-shout"], sys.platform),
         ),
