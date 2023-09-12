@@ -182,7 +182,9 @@ def changelog_header(
         url_semver=url_semver,
         url_keepachangelog=url_keepachangelog,
         url_convetional_commit=url_convetional_commit,
-        url_pricipal="https://gitlab.com/development-incolume/incolumepy.utils",
+        url_pricipal=(
+            "https://gitlab.com/development-incolume/incolumepy.utils"
+        ),
         **kwargs,
     )
     return obj.header()
@@ -385,7 +387,6 @@ class Changelog:
 
     def footer(self, **kwargs) -> List[str]:
         """Footer of changelog file."""
-
         content: List[Tuple[str, Dict[str, Any]]] = kwargs.get("content") or []
         content_formated: List[str] = kwargs.get("content_formated") or []
         url_compare = kwargs.get("url_compare") or self.url_compare
