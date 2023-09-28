@@ -24,6 +24,7 @@ def greeting(nome):
 @click.command()
 @click.option("--shout", is_flag=True)
 def info(shout):
+    """Enhancement for example click simple flag."""
     rv = sys.platform
     if shout:
         rv = rv.upper() + "!!!!"
@@ -33,6 +34,7 @@ def info(shout):
 @click.command()
 @click.option("--shout/--no-shout", default=False)
 def info1(shout):
+    """Enhancement for example click double flag."""
     rv = sys.platform
     if shout:
         rv = rv.upper() + "!!!!"
@@ -42,6 +44,7 @@ def info1(shout):
 @click.command()
 @click.option("--shout/--no-shout", " /-S", default=False)
 def info2(shout):
+    """Enhancement for example click triple flag."""
     rv = sys.platform
     if shout:
         rv = rv.upper() + "!!!!"
@@ -53,6 +56,7 @@ def info2(shout):
 @click.option("--lower", "transformation", flag_value="casefold")
 @click.option("--capitalize", "transformation", flag_value="capitalize")
 def info3(transformation):
+    """Enhancement for example click flag_value."""
     click.echo(getattr(sys.platform, transformation)())
 
 
@@ -61,6 +65,7 @@ def info3(transformation):
     "--hash-type", type=click.Choice(["MD5", "SHA1"], case_sensitive=False)
 )
 def digest(hash_type):
+    """Enhancement for example click choices."""
     click.echo(hash_type)
 
 
@@ -69,6 +74,7 @@ def digest(hash_type):
     "--password", "-p", prompt=True, hide_input=True, confirmation_prompt=True
 )
 def encode(password):
+    """Encode password with rot13."""
     click.echo(f"encoded: {codecs.encode(password, 'rot13')}")
 
 
@@ -84,7 +90,11 @@ def encode(password):
     help="Url compare from repository of project.",
 )
 @click.option(
-    "--reverse", "-r", default=True, help="Reverse order of records."
+    "--reverse",
+    "-r",
+    default=True,
+    is_flag=True,
+    help="Reverse order of records.",
 )
 @click.option(
     "--with_prereleases",
@@ -116,7 +126,7 @@ def changelog(
     result = update_changelog(
         changelog_file=file_changelog,
         urlcompare=url,
-        reverse=reverse,
-        with_prereleases=True if with_prereleases else False,
+        reverse=bool(reverse),
+        with_prereleases=bool(with_prereleases),
     )
     return result

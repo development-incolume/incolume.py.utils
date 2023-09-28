@@ -20,6 +20,8 @@ classifiers = [
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+#  "Programming Language :: Python :: 3.12",
   'Topic :: Software Development :: Libraries :: Python Modules',
   'Topic :: Utilities',
 ]
@@ -61,6 +63,7 @@ Deprecated = "^1.2.10"
 rstr = "^2.2.6"
 toml = {extras = ["tomli"], version = "^0.10.2"}
 click = "^8.1.5"
+deprecation = "^2.1.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.10.0"
@@ -293,6 +296,7 @@ envlist =
     py39
     py310
     py311
+#    py312
 
 ;[tox:.package]
 ;basepython = python3
