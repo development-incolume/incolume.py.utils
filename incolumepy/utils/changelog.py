@@ -67,7 +67,7 @@ def msg_classify(msg: str, lang: str = "", **kwargs) -> Dict[str, Any]:
     key, msg = msg.split(maxsplit=1)
 
     date = subprocess.getoutput(
-        'git show -s --pretty="%%cs" %s^{commit}'
+        'git show -s --pretty="%%cs" %s^{commit} --'
         % key  # pylint: disable=C0209
     )
     logging.debug("key=%s; date=%s; msg=%s", key, date, msg)
