@@ -130,27 +130,27 @@ class TestCLI:
         (
             pytest.param(
                 "# CHANGELOG",
-                ["-r", "true", "-p"],
+                ["-r", "-p"],
                 # marks=pytest.mark.skip,
             ),
             pytest.param(
                 "[Keep a Changelog]",
-                ["-r", "true"],
+                ["-r"],
                 # marks=pytest.mark.skip
             ),
             pytest.param(
                 "[Semantic Versioning]",
-                ["-r", "true"],
+                ["-r"],
                 # marks=pytest.mark.skip
             ),
             pytest.param(
                 "[Conventional Commit]",
-                ["-r", "true"],
+                ["-r"],
                 # marks=pytest.mark.skip
             ),
             pytest.param(
                 "[incolumepy.utils]",
-                ["-r", "false"],
+                [],
                 # marks=pytest.mark.skip
             ),
         ),
