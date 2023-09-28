@@ -65,8 +65,10 @@ def msg_classify(msg: str, lang: str = "", **kwargs) -> Dict[str, Any]:
         )
 
     key, msg = msg.split(maxsplit=1)
+
     date = subprocess.getoutput(
-        "git show -s --format=%%cs %s^{commit}" % key  # pylint: disable=C0209
+        'git show -s --pretty="%%cs" %s^{commit} --'
+        % key  # pylint: disable=C0209
     )
     logging.debug("key=%s; date=%s; msg=%s", key, date, msg)
     selected_lang = suport_lang.get(lang, suport_lang["all"])
@@ -135,8 +137,8 @@ def changelog_messages(
             else:
                 pass
 
-        except ReferenceError as e:
-            logging.error("%s: %s", e.__class__.__name__, e)
+        except (ValueError, ReferenceError) as err:
+            logging.error("%s: %s", err.__class__.__name__, err)
 
     logging.debug("type return %s=%s", inspect.stack()[0][3], type(records))
     logging.debug("return %s=%s", inspect.stack()[0][3], records)
