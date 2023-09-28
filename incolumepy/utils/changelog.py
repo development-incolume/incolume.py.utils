@@ -4,7 +4,6 @@ import inspect
 import logging
 import re
 import subprocess
-import sys
 from pathlib import Path
 from typing import Any, Dict, List, Tuple, Union
 
