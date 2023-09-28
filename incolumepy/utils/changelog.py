@@ -4,6 +4,7 @@ import inspect
 import logging
 import re
 import subprocess
+import sys
 from pathlib import Path
 from typing import Any, Dict, List, Tuple, Union
 
@@ -65,6 +66,7 @@ def msg_classify(msg: str, lang: str = "", **kwargs) -> Dict[str, Any]:
         )
 
     key, msg = msg.split(maxsplit=1)
+
     date = subprocess.getoutput(
         "git show -s --format=%%cs %s" % key  # pylint: disable=C0209
     )
@@ -135,8 +137,8 @@ def changelog_messages(
             else:
                 pass
 
-        except ReferenceError as e:
-            logging.error("%s: %s", e.__class__.__name__, e)
+        except (ValueError, ReferenceError) as err:
+            logging.error("%s: %s", err.__class__.__name__, err)
 
     logging.debug("type return %s=%s", inspect.stack()[0][3], type(records))
     logging.debug("return %s=%s", inspect.stack()[0][3], records)
