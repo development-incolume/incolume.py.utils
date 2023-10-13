@@ -1,7 +1,7 @@
 """Sequences Tests."""
 import pytest
 
-from incolumepy.utils.numerical import milhar
+from incolume.py.utils.numerical import milhar
 
 
 @pytest.mark.parametrize(

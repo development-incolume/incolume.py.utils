@@ -2,7 +2,7 @@ import re
 
 import pytest
 
-from incolumepy.utils.url import check_url, identify_dom_url
+from incolume.py.utils.url import check_url, identify_dom_url
 
 __author__ = "@britodfbr"  # pragma: no cover
 
