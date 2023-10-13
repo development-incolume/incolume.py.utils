@@ -8,7 +8,7 @@ from typing import Any, Collection, List, Union
 import toml
 from deprecated import deprecated
 
-confproject = Path(__file__).parents[2] / "pyproject.toml"
+confproject = Path(__file__).parents[3] / "pyproject.toml"
 versionfile = Path(__file__).parent / "version.txt"
 versionfile.write_text(
     toml.load(confproject)["tool"]["poetry"]["version"] + "\n"
