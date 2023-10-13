@@ -2,8 +2,8 @@ import datetime as dt
 
 import pytest
 
-import incolumepy.utils.changelog
-from incolumepy.utils import decorators
+import incolume.py.utils.changelog
+from incolume.py.utils import decorators
 
 
 class TestCase0:
@@ -16,7 +16,7 @@ class TestCase0:
 
     def test_mock_write_files(self, mocker, temp_file_name):
         mock_save_file = mocker.Mock(
-            spec=incolumepy.utils.changelog.changelog_write
+            spec=incolume.py.utils.changelog.changelog_write
         )
         content = [
             (
