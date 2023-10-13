@@ -85,6 +85,7 @@ pylama = "^8.4.1"
 pylint = "^2.12.2"
 types-Deprecated = "^1.2.5"
 types-toml = "^0.10.3"
+ruff = "^0.0.292"
 
 
 [tool.poetry.group.dev.dependencies]
