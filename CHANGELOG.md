@@ -10,10 +10,14 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ---
 
 
-## [Unreleased]	 &#8212; 	2023-09-28:
+## [Unreleased]	 &#8212; 	2023-10-13:
 ### Deprecated
+  - Compatibilidade com Python 3.8;
   - `changelog_header` marcado como obsoleto;
   - `changelog_footer` marcado como obsoleto;
+### Removed
+  - Desativado compatibilidade com python 3.7;
+  - Desativado ambiente tox para Python 3.7;
 ### Fixed
   - Correção na automação `make clean`;
   - Correção na captura de data do `git commit`;
