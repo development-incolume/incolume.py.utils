@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 DIRECTORIES = $$(find -wholename ./src -o -wholename ./incolume* -o -wholename ./tests)
-PKGNAME := "incolumepy"
+PKGNAME := "incolume"
 PYTHON_VERSION := 3.10
 
 .PHONY: black
@@ -74,7 +74,7 @@ check-pydocstyle: ## docstring checking
 
 .PHONY: changelog
 changelog:   ## Update changelog file
-	@poetry run python -c "from incolumepy.utils.changelog import update_changelog; \
+	@poetry run python -c "from incolume.py.utils.changelog import update_changelog; \
 	update_changelog(changelog_file='CHANGELOG.md')"
 	@echo 'Atualização de CHANGELOG realizada com sucesso.'
 
