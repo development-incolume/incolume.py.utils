@@ -7,8 +7,7 @@ authors = ["britodfbr <contato@incolume.com.br>"]
 homepage = "https://pypi.org/project/incolumepy.utils"
 repository = 'https://gitlab.com/development-incolume/incolumepy.utils'
 packages = [
-  {include = "incolumepy", from=""},
-  {include = "incolumepy/**/*.py", from=""},
+  {include = "incolume", from=""},
 ]
 classifiers = [
   'Development Status :: 5 - Production/Stable',
@@ -66,24 +65,26 @@ click = "^8.1.5"
 deprecation = "^2.1.0"
 
 [tool.poetry.dev-dependencies]
-black = "^22.10.0"
+pytest-cov = "^3.0.0"
+pytest-mock = "^3.6.0"
+safety = "^2.2.0"
+tox = "^3.20.1"
+
+[tool.poetry.group.docs.dependencies]
+Sphinx = "^4.4.0"
 furo = "^2022.3.4"
+myst-parser = "^0.16"
+
+[tool.poetry.group.qa.dependencies]
+black = "^22.10.0"
 isort = "^5.10.1"
 mypy = "^0.931"
-myst-parser = "^0.16"
 py3kwarn = "^0.4.4"
 pydocstyle = "^6.1.1"
 pylama = "^8.4.1"
 pylint = "^2.12.2"
-pytest-cov = "^3.0.0"
-pytest-mock = "^3.6.0"
-safety = "^2.2.0"
-Sphinx = "^4.4.0"
-tox = "^3.20.1"
 types-Deprecated = "^1.2.5"
 types-toml = "^0.10.3"
-
-[tool.poetry.group.dev.dependencies]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
