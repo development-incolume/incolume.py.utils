@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "incolumepy.utils"
-version = "2.10.0"
+version = "2.11.0"
 description = "package incolume python utils"
 keywords = ['python', 'utils', 'incolumepy']
 authors = ["britodfbr <contato@incolume.com.br>"]
@@ -16,10 +16,12 @@ classifiers = [
   'Natural Language :: Portuguese (Brazilian)',
   "Programming Language :: Python",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.7",
+#  "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+#  "Programming Language :: Python :: 3.12",
   'Topic :: Software Development :: Libraries :: Python Modules',
   'Topic :: Utilities',
 ]
@@ -53,13 +55,15 @@ changelog = 'incolumepy.utils.cli:changelog'
 gcl = 'incolumepy.utils.cli:changelog'
 gencl = 'incolumepy.utils.cli:changelog'
 gchangelog = 'incolumepy.utils.cli:changelog'
+pw = 'incolumepy.utils.cli:encode'
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 Deprecated = "^1.2.10"
 rstr = "^2.2.6"
 toml = {extras = ["tomli"], version = "^0.10.2"}
 click = "^8.1.5"
+deprecation = "^2.1.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.10.0"
@@ -287,11 +291,12 @@ envlist =
     mypy
     pylama
     pylint
-    py37
+#    py37
     py38
     py39
     py310
     py311
+#    py312
 
 ;[tox:.package]
 ;basepython = python3

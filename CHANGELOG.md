@@ -5,26 +5,40 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Conventional Commit](https://www.conventionalcommits.org/pt-br/v1.0.0/).
 
-This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.10.0)
+This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.11.0)
 
 ---
 
 
-## [Unreleased]	 &#8212; 	2023-09-02:
-### Added
-  - Para novos recursos.;
-  - Compatibilidade com Python 3.12;
-### Fixed
-  - Para qualquer correção de bug.;
-### Changed
-  - Para alterações em recursos existentes.;
+## [Unreleased]	 &#8212; 	2023-10-13:
 ### Deprecated
-  - Para recursos que serão removidos nas próximas versões.;
+  - Compatibilidade com Python 3.8;
+  - `changelog_header` marcado como obsoleto;
+  - `changelog_footer` marcado como obsoleto;
 ### Removed
-  - Para recursos removidos nesta versão.;
+  - Desativado compatibilidade com python 3.7;
+  - Desativado ambiente tox para Python 3.7;
+### Fixed
+  - Correção na automação `make clean`;
+  - Correção na captura de data do `git commit`;
+  - Correção na captura de `git log` sem mensagem;
 ### Security
-  - Em caso de vulnerabilidades.;
-  - Em caso de vulnerabilidades.;
+  - Estudo de compatibilidade com Python 3.12;
+
+## [2.11.0]	 &#8212; 	2023-10-13:
+### Deprecated
+  - Compatibilidade com Python 3.8;
+  - `changelog_header` marcado como obsoleto;
+  - `changelog_footer` marcado como obsoleto;
+### Removed
+  - Desativado compatibilidade com python 3.7;
+  - Desativado ambiente tox para Python 3.7;
+### Fixed
+  - Correção na automação `make clean`;
+  - Correção na captura de data do `git commit`;
+  - Correção na captura de `git log` sem mensagem;
+### Security
+  - Estudo de compatibilidade com Python 3.12;
 
 ## [2.10.0]	 &#8212; 	2023-09-04:
 ### Added
@@ -334,4 +348,5 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 [2.8.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.1...2.8.0
 [2.9.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.8.0...2.9.0
 [2.10.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.9.0...2.10.0
-[Unreleased]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.10.0...Unreleased
+[2.11.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.10.0...2.11.0
+[Unreleased]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.11.0...Unreleased

@@ -7,6 +7,8 @@ import incolumepy.utils.changelog
 from incolumepy.utils.changelog import (
     Changelog,
     __version__,
+    changelog_footer,
+    changelog_header,
     changelog_messages,
     msg_classify,
     update_changelog,
@@ -467,6 +469,120 @@ class TestCase:
         changelog_messages(**entrance)
         assert caplog.records[0].message == expected
 
+    @pytest.mark.parametrize(
+        "entrance expected".split(),
+        (
+            (
+                {},
+                [
+                    "# CHANGELOG\n\n\n",
+                    "All notable changes to this project",
+                    " will be documented in this file.\n\n",
+                    "The format is based on ",
+                    "[Keep a Changelog]"
+                    "(https://keepachangelog.com/en/1.0.0/), ",
+                    "this project adheres to [Semantic Versioning]"
+                    "(https://semver.org/spec/v2.0.0.html) and "
+                    "[Conventional Commit]"
+                    "(https://www.conventionalcommits.org/"
+                    "pt-br/v1.0.0/).\n\n",
+                    "This file was automatically generated for",
+                    " [incolumepy.utils]"
+                    "(https://gitlab.com/development-incolume/"
+                    f"incolumepy.utils/-/tree/{__version__})",
+                    "\n\n---\n",
+                ],
+            ),
+            (
+                {"reverse": False},
+                [
+                    "# CHANGELOG\n\n\n",
+                    "All notable changes to this project",
+                    " will be documented in this file.\n\n",
+                    "The format is based on ",
+                    "[Keep a Changelog]"
+                    "(https://keepachangelog.com/en/1.0.0/), ",
+                    "this project adheres to [Semantic Versioning]"
+                    "(https://semver.org/spec/v2.0.0.html) and "
+                    "[Conventional Commit]"
+                    "(https://www.conventionalcommits.org/"
+                    "pt-br/v1.0.0/).\n\n",
+                    "This file was automatically generated for",
+                    " [incolumepy.utils]"
+                    "(https://gitlab.com/development-incolume/"
+                    f"incolumepy.utils/-/tree/{__version__})",
+                    "\n\n---\n",
+                ],
+            ),
+        ),
+    )
+    def test_changelog_header(self, entrance, expected):
+        """Test for header file."""
+        result = changelog_header(**entrance)
+        assert result == expected
+
+    @pytest.mark.parametrize(
+        "entrance expected".split(),
+        (
+            pytest.param(
+                {"content": "", "content_formated": []},
+                ["\n---\n\n"],
+            ),
+            pytest.param(
+                {
+                    "content": [
+                        (
+                            "0.1.0",
+                            {
+                                "date": "2023-7-19",
+                                "key": "0.1.0",
+                                "messages": {
+                                    "Added": ["Fake record", " other fake"],
+                                    "Fixed": ['Fake fixed",'],
+                                },
+                            },
+                        ),
+                        (
+                            "1.0.0a0",
+                            {
+                                "date": "2023-7-19",
+                                "key": "1.0.0a0",
+                                "messages": {
+                                    "Added": ["Fake record", " other fake"],
+                                    "Fixed": ['Fake fixed",'],
+                                },
+                            },
+                        ),
+                        (
+                            "1.0.0",
+                            {
+                                "date": "2023-7-19",
+                                "key": "1.0.0",
+                                "messages": {
+                                    "Added": ["Fake record", " other fake"],
+                                    "Fixed": ['Fake fixed",'],
+                                },
+                            },
+                        ),
+                    ],
+                    "content_formated": [],
+                },
+                [
+                    "\n---\n\n",
+                    "[1.0.0a0]: https://gitlab.com/development-incolume/"
+                    "incolumepy.utils/-/compare/1.0.0...1.0.0a0\n",
+                    "[0.1.0]: https://gitlab.com/development-incolume/"
+                    "incolumepy.utils/-/compare/1.0.0a0...0.1.0\n",
+                ],
+                # marks=pytest.mark.skip,
+            ),
+        ),
+    )
+    def test_changelog_footer(self, entrance, expected):
+        """Test for footer file."""
+        result = changelog_footer(**entrance)
+        assert result == expected
+
 
 class TestClassChangelog:
     @pytest.mark.parametrize(
@@ -592,3 +708,63 @@ class TestClassChangelog:
     def test_iter_logs(self, entrance, expected):
         """Test for iter_logs"""
         assert Changelog.iter_logs(**entrance) == expected
+
+    @pytest.mark.parametrize(
+        "entrance expected".split(),
+        (
+            pytest.param({}, ["\n---\n\n"]),
+            pytest.param(
+                {
+                    "content": [
+                        (
+                            "0.1.0",
+                            {
+                                "key": "0.1.0",
+                                "date": "2018-10-19",
+                                "messages": {
+                                    "Added": "a1 a2 a3.".split(),
+                                    "Changed": "a;b;c;d;e".split(";"),
+                                    "Deprecated": "1;2;3;a;s;b".split(";"),
+                                    "Fixed": [
+                                        "http://example.com",
+                                        " http://httpbin.com",
+                                    ],
+                                    "Removed": ["1", "2", "3"],
+                                    "Security": ["a", "b", "c"],
+                                },
+                            },
+                        ),
+                        (
+                            "1.0.0",
+                            {
+                                "key": "1.0.0",
+                                "date": "2018-10-19",
+                                "messages": {
+                                    "Added": "a1 a2 a3.".split(),
+                                    "Changed": "a;b;c;d;e".split(";"),
+                                    "Deprecated": "1;2;3;a;s;b".split(";"),
+                                    "Fixed": [
+                                        "http://example.com",
+                                        " http://httpbin.com",
+                                    ],
+                                    "Removed": ["1", "2", "3"],
+                                    "Security": ["a", "b", "c"],
+                                },
+                            },
+                        ),
+                    ],
+                    "content_formated": [],
+                },
+                [
+                    "\n---\n\n",
+                    "[0.1.0]: https://gitlab.com/development-incolume/"
+                    "incolumepy.utils/-/compare/1.0.0...0.1.0\n",
+                ],
+                # marks=pytest.mark.skip,
+            ),
+        ),
+    )
+    def test_footer(self, entrance, expected):
+        """Test Changelog.footer."""
+        o = Changelog()
+        assert o.footer(**entrance) == expected
