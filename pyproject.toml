@@ -64,7 +64,8 @@ toml = {extras = ["tomli"], version = "^0.10.2"}
 click = "^8.1.5"
 deprecation = "^2.1.0"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
+taskipy = "^1.12.0"
 pytest-cov = "^3.0.0"
 pytest-mock = "^3.6.0"
 safety = "^2.2.0"
@@ -86,10 +87,6 @@ pylint = "^2.12.2"
 types-Deprecated = "^1.2.5"
 types-toml = "^0.10.3"
 ruff = "^0.0.292"
-
-
-[tool.poetry.group.dev.dependencies]
-taskipy = "^1.12.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
