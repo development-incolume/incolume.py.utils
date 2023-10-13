@@ -8,7 +8,7 @@ from itertools import repeat
 
 import pytest
 
-from incolumepy.utils import (
+from incolume.py.utils import (
     __version__,
     confproject,
     key_versions_2_sort,
