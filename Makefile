@@ -30,8 +30,8 @@ clean-all: clean   ## Deep cleanning into environment (dist, build, htmlcov, .to
 	@rm -rf dist
 	@rm -rf build
 	@rm -rf htmlcov
-	@rm -rf coverage_report
 	@rm -rf .tox
+	@find ./ -iname *coverage_report -exec rm -rf {} 2> /dev/null \;
 	@find ./ \( -name "*_cache" -o -name '*cache__' \) -exec rm -rf {} 2> /dev/null \;
 	@#fuser -k 8000/tcp &> /dev/null
 	@poetry env list|awk '{print $$1}'|while read a; do poetry env remove $${a} 2> /dev/null && echo "$${a} removed."|| echo "$${a} not removed."; done
