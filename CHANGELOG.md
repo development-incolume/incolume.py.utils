@@ -5,15 +5,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Conventional Commit](https://www.conventionalcommits.org/pt-br/v1.0.0/).
 
-This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.11.0a1)
+This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.11.0a2)
 
 ---
 
 
-## [Unreleased]	 &#8212; 	2023-09-28:
+## [Unreleased]	 &#8212; 	2023-10-13:
 ### Deprecated
+  - Compatibilidade com Python 3.8;
   - `changelog_header` marcado como obsoleto;
   - `changelog_footer` marcado como obsoleto;
+### Removed
+  - Desativado compatibilidade com python 3.7;
+  - Desativado ambiente tox para Python 3.7;
 ### Fixed
   - Correção na automação `make clean`;
   - Correção na captura de data do `git commit`;
