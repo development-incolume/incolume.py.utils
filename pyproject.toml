@@ -16,7 +16,7 @@ classifiers = [
   'Natural Language :: Portuguese (Brazilian)',
   "Programming Language :: Python",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.7",
+#  "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
@@ -58,7 +58,7 @@ gchangelog = 'incolumepy.utils.cli:changelog'
 pw = 'incolumepy.utils.cli:encode'
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 Deprecated = "^1.2.10"
 rstr = "^2.2.6"
 toml = {extras = ["tomli"], version = "^0.10.2"}
@@ -291,7 +291,7 @@ envlist =
     mypy
     pylama
     pylint
-    py37
+#    py37
     py38
     py39
     py310
