@@ -7,7 +7,7 @@ from typing import Union
 
 import click
 
-from incolume.py.utils.changelog import update_changelog
+from incolume.py.utils.tools.changelog import update_changelog
 
 
 @click.command()

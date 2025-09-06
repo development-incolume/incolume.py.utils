@@ -3,8 +3,8 @@ from tempfile import gettempdir
 
 import pytest
 
-import incolume.py.utils.changelog
-from incolume.py.utils.changelog import (
+import incolume.py.utils.tools.changelog
+from incolume.py.utils.tools.changelog import (
     Changelog,
     __version__,
     changelog_footer,
@@ -393,7 +393,7 @@ class TestCase:
         if "changelog_file" not in entrance:
             entrance.update({"changelog_file": ftemp})
 
-        mocked = mocker.Mock(spec=incolume.py.utils.changelog.changelog_write)
+        mocked = mocker.Mock(spec=incolume.py.utils.tools.changelog.changelog_write)
         result = mocked(**entrance)
         esperado = mocker.call(**entrance)
         assert esperado == mocked.call_args  # cobertura QA

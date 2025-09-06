@@ -8,7 +8,7 @@ from tempfile import gettempdir
 
 import pytest
 
-from incolume.py.utils.files import realfilename
+from incolume.py.utils.tools.files import realfilename
 
 __author__ = "@britodfbr"  # pragma: no cover
 test_dir = Path(gettempdir()) / Path(__file__).stem
