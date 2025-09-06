@@ -1,4 +1,5 @@
 """Command Line Interface - CLI module."""
+
 import sys
 from pathlib import Path
 from tempfile import gettempdir
@@ -172,9 +173,7 @@ class TestCLI:
             ),
         ),
     )
-    def test_changelog_logging(
-        self, entrance, expected, caplog, file, fakeurl
-    ):
+    def test_changelog_logging(self, entrance, expected, caplog, file, fakeurl):
         result = self.runner.invoke(entrance, ["-p", "-u", fakeurl, file])
         assert result
         assert caplog.records == []

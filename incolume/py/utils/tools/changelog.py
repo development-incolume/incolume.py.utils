@@ -14,8 +14,7 @@ from incolume.py.utils.tools import key_versions_2_sort
 
 logging.basicConfig(
     level=logging.DEBUG,
-    format="%(asctime)s;%(levelname)-8s;%(name)s;"
-    "%(module)s;%(funcName)s;%(message)s",
+    format="%(asctime)s;%(levelname)-8s;%(name)s;%(module)s;%(funcName)s;%(message)s",
 )
 
 CHANGELOG_FILE = Path(__file__).parents[2] / "CHANGELOG.md"
@@ -61,15 +60,12 @@ def msg_classify(msg: str, lang: str = "", **kwargs) -> Dict[str, Any]:
     logging.debug("lang=%s", lang)
 
     if lang not in suport_lang:
-        logging.error(
-            ValueError(f"{lang} not suported! Use {suport_lang.keys()}")
-        )
+        logging.error(ValueError(f"{lang} not suported! Use {suport_lang.keys()}"))
 
     key, msg = msg.split(maxsplit=1)
 
     date = subprocess.getoutput(
-        'git show -s --pretty="%%cs" %s^{commit} --'
-        % key  # pylint: disable=C0209
+        'git show -s --pretty="%%cs" %s^{commit} --' % key  # pylint: disable=C0209
     )
     logging.debug("key=%s; date=%s; msg=%s", key, date, msg)
     selected_lang = suport_lang.get(lang, suport_lang["all"])
@@ -85,9 +81,7 @@ def msg_classify(msg: str, lang: str = "", **kwargs) -> Dict[str, Any]:
     dct: Dict[str, Any] = {}
     try:
         for i, j in sorted(
-            x.strip().rstrip(";").split("§:")
-            for x in txt.strip().split("§§")
-            if x
+            x.strip().rstrip(";").split("§:") for x in txt.strip().split("§§") if x
         ):
             dct.setdefault(selected_lang[i.capitalize()], []).extend(
                 j.strip().split(";")
@@ -158,13 +152,10 @@ def changelog_header(
     **kwargs,
 ) -> List[str]:
     """Header of changelog file."""
-    url_keepachangelog = (
-        url_keepachangelog or "https://keepachangelog.com/en/1.0.0/"
-    )
+    url_keepachangelog = url_keepachangelog or "https://keepachangelog.com/en/1.0.0/"
     url_semver = url_semver or "https://semver.org/spec/v2.0.0.html"
     url_convetional_commit = (
-        url_convetional_commit
-        or "https://www.conventionalcommits.org/pt-br/v1.0.0/"
+        url_convetional_commit or "https://www.conventionalcommits.org/pt-br/v1.0.0/"
     )
     # content_formated = [
     #     "# CHANGELOG\n\n\n",
@@ -185,9 +176,7 @@ def changelog_header(
         url_semver=url_semver,
         url_keepachangelog=url_keepachangelog,
         url_convetional_commit=url_convetional_commit,
-        url_pricipal=(
-            "https://gitlab.com/development-incolume/incolumepy.utils"
-        ),
+        url_pricipal=("https://gitlab.com/development-incolume/incolumepy.utils"),
         **kwargs,
     )
     return obj.header()
@@ -225,15 +214,13 @@ def changelog_footer(
     for _, x in content[::-1]:
         if y:
             content_formated.append(
-                f'[{x["key"]}]: {urlcompare}/{y["key"]}...{x["key"]}\n'
+                f"[{x['key']}]: {urlcompare}/{y['key']}...{x['key']}\n"
             )
         y = x
     return content_formated
 
 
-def changelog_write(
-    *, content: List[Tuple[str, Dict[str, Any]]], **kwargs
-) -> bool:
+def changelog_write(*, content: List[Tuple[str, Dict[str, Any]]], **kwargs) -> bool:
     """Write CHANGELOG.md file formatted.
 
     :param content: List[Tuple[str, Dict[str, Any]]]
@@ -268,11 +255,11 @@ def update_changelog(
     :param with_prereleases: bool. If include prereleases of records.
     :return: bool. True if success
 
-    >>> update_changelog()
+    >> update_changelog()
     True
-    >>> update_changelog(changelog_file='/tmp/CHANGELOG.md')
+    >> update_changelog(changelog_file='/tmp/CHANGELOG.md')
     True
-    >>> update_changelog(
+    >> update_changelog(
     changelog_file=Path('CHANGELOG.md'),
     urlcompare="https://gitlab.com/development-incolume
     /incolumepy.utils/-/compare")
@@ -323,8 +310,7 @@ class Changelog:
         self.file_output = file_output or Path("CHANGELOG.md")
         self.url_compare = (
             url_compare
-            or "https://gitlab.com/development-incolume/"
-            "incolumepy.utils/-/compare"
+            or "https://gitlab.com/development-incolume/incolumepy.utils/-/compare"
         )
         self.reverse = reverse
         self.url_principal = kwargs.get(
@@ -359,9 +345,7 @@ class Changelog:
                     f"\n\n## [{entrada['key']}]\t &#8212; \t{entrada['date']}:"
                 )
             else:
-                result.append(
-                    f"\n\n## {entrada['key']}\t &#8212; \t{entrada['date']}:"
-                )
+                result.append(f"\n\n## {entrada['key']}\t &#8212; \t{entrada['date']}:")
 
             for label, msgs in entrada["messages"].items():
                 result.append(f"\n### {label.capitalize()}")
@@ -401,7 +385,7 @@ class Changelog:
         for _, x in content[::-1]:
             if y:
                 content_formated.append(
-                    f'[{x["key"]}]: {url_compare}/{y["key"]}...{x["key"]}\n'
+                    f"[{x['key']}]: {url_compare}/{y['key']}...{x['key']}\n"
                 )
             y = x
         return content_formated

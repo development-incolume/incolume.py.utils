@@ -4,7 +4,6 @@
 # coding: utf-8
 import logging
 import os
-from pathlib import Path
 
 from deprecated import deprecated
 
@@ -42,9 +41,17 @@ def ll(path=".", ext=None, string=True, recursive=False):  # pragma: no cover
             if file.lower().endswith(ext)
         ]
     elif (string and recursive) and not ext:
-        return [os.path.join(p, file) for p, _, files in os.walk(os.path.abspath(path)) for file in files]
+        return [
+            os.path.join(p, file)
+            for p, _, files in os.walk(os.path.abspath(path))
+            for file in files
+        ]
     elif not string and not recursive:
-        return [(path, nome) for nome in os.listdir(path) if os.path.isfile(os.path.join(path, nome))]
+        return [
+            (path, nome)
+            for nome in os.listdir(path)
+            if os.path.isfile(os.path.join(path, nome))
+        ]
     else:
         return [
             os.path.join(path, nome)
@@ -60,7 +67,7 @@ def preserve_file(file_orig):
     :param file_orig: string with path file
     :return: True if sucess.
     """
-    raise NotImplemented("Lançamento futuro..")
+    raise NotImplementedError("Lançamento futuro..")
 
 
 def realfilename(filebase, ext=None, digits=2, separador=True):

@@ -1,4 +1,5 @@
 """Utils tests."""
+
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 import datetime as dt
@@ -13,7 +14,12 @@ from incolume.py.utils import (
     confproject,
     versionfile,
 )
-from incolume.py.utils.tools import key_versions_2_sort, namespace, update_changelog, logger
+from incolume.py.utils.tools import (
+    key_versions_2_sort,
+    namespace,
+    update_changelog,
+    logger,
+)
 
 __author__ = "@britodfbr"  # pragma: no cover
 
@@ -254,22 +260,22 @@ def test_apply_key_versions_2_sort(entrance, reverse, expected):
                 f"[incolumepy.utils](https://gitlab.com/development-incolume/"
                 f"incolumepy.utils/-/tree/{__version__})\n"
                 "\n---\n"
-                f'## [0.0.1]\t &#8212; \t{dt.datetime.now().strftime("%F")}:\n'
+                f"## [0.0.1]\t &#8212; \t{dt.datetime.now().strftime('%F')}:\n"
                 "  - Fake record\n"
-                f'## [0.1.0]\t &#8212; \t{dt.datetime.now().strftime("%F")}:\n'
+                f"## [0.1.0]\t &#8212; \t{dt.datetime.now().strftime('%F')}:\n"
                 "  - system\n"
                 f"## [0.1.1-alpha.0]\t &#8212; "
-                f'\t{dt.datetime.now().strftime("%F")}:\n'
+                f"\t{dt.datetime.now().strftime('%F')}:\n"
                 "  - Fake record\n"
                 f"## [0.1.1-rc.0]\t &#8212; "
-                f'\t{dt.datetime.now().strftime("%F")}:\n'
+                f"\t{dt.datetime.now().strftime('%F')}:\n"
                 "  - Fake record\n"
                 f"## [0.1.1-rc.1]\t &#8212; "
-                f'\t{dt.datetime.now().strftime("%F")}:\n'
+                f"\t{dt.datetime.now().strftime('%F')}:\n"
                 "  - Fake record\n"
-                f'## [0.1.1]\t &#8212; \t{dt.datetime.now().strftime("%F")}:\n'
+                f"## [0.1.1]\t &#8212; \t{dt.datetime.now().strftime('%F')}:\n"
                 "  - Fake record\n"
-                f'## [0.2.0]\t &#8212; \t{dt.datetime.now().strftime("%F")}:\n'
+                f"## [0.2.0]\t &#8212; \t{dt.datetime.now().strftime('%F')}:\n"
                 "  - Fake record\n"
                 "---\n"
                 "\n"
@@ -492,9 +498,7 @@ def test_apply_key_versions_2_sort(entrance, reverse, expected):
         ),
     ],
 )
-def test_update_changelog(
-    class_mocker, temp_file_name, str_testing, reverse, expected
-):
+def test_update_changelog(class_mocker, temp_file_name, str_testing, reverse, expected):
     file = temp_file_name.with_suffix(".md")
     # print(file)
     entrance = {"changelog_file": file, "reverse": reverse}

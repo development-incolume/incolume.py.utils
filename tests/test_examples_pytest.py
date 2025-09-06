@@ -70,7 +70,6 @@ class TestCaseExamples:
 
             with pytest.raises(
                 expected_exception=AssertionError,
-                match='Sistema operacional "windows" '
-                "incompativél com este método",
+                match='Sistema operacional "windows" incompativél com este método',
             ):
                 winexec()

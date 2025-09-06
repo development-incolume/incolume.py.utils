@@ -1,4 +1,5 @@
 """Package utils.tools."""
+
 import logging
 import os
 import re
@@ -7,9 +8,8 @@ from typing import Any, Collection, List, Union
 
 from deprecated import deprecated
 
-def key_versions_2_sort(
-    x: Collection[str], qdig: int = 0, regex: str = ""
-) -> str:
+
+def key_versions_2_sort(x: Collection[str], qdig: int = 0, regex: str = "") -> str:
     """
     Sort by SemVer notation.
 
@@ -70,8 +70,7 @@ def update_changelog(
     :return:
     """
     raise NotImplementedError(
-        "This function was replaced. "
-        "Use incolumepy.utils.changelog.update_changelog"
+        "This function was replaced. Use incolumepy.utils.changelog.update_changelog"
     )
 
 
@@ -86,8 +85,7 @@ def logger(str_format="", datefmt="", level=0, filelog=None):
     """
     str_format = (
         str_format
-        or "%(asctime)s;%(levelname)-8s;%(name)s;"
-        "%(module)s;%(funcName)s;%(message)s"
+        or "%(asctime)s;%(levelname)-8s;%(name)s;%(module)s;%(funcName)s;%(message)s"
     )
     datefmt = datefmt or "%Y/%m/%d %H:%M:%S %z"
     # create logger
@@ -115,10 +113,10 @@ def read(*rnames):
 
     :param rnames:
     :return:
-    >>> read(os.path.dirname(__file__), 'version.txt')
+    >> read(os.path.dirname(__file__), 'version.txt')
     '0.9.4'
 
-    >>> read(os.path.dirname(__file__), 'README')
+    >> read(os.path.dirname(__file__), 'README')
     'incolumepy.utils'
 
     """

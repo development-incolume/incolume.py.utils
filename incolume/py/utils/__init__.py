@@ -1,16 +1,17 @@
 """incolumepy.utils module."""
+
 from pathlib import Path
+
 try:
-    import toml
+    import tomllib as tomli  # type: ignore[import]
 except ImportError:
-    import tomli as toml  # type: ignore[import]
+    import tomli
 
 confproject = Path(__file__).parents[3] / "pyproject.toml"
 versionfile = Path(__file__).parent / "version.txt"
 
-versionfile.write_text(
-    toml.load(confproject)["tool"]["poetry"]["version"] + "\n"
-)
+with confproject.open("rb") as f:
+    versionfile.write_text(tomli.load(f)["project"]["version"] + "\n")
 
 __version__ = versionfile.read_text().strip()
 __title__ = "incolume.py.utils"

@@ -1,4 +1,5 @@
 """Namespace testings."""
+
 import unittest
 
 from incolume.py.utils.tools import namespace

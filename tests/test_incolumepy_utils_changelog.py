@@ -36,8 +36,7 @@ class TestCase:
             "1.0.0 Added: Fake record; other fake record; Fixed: Fake fixed",
             "1.0.5 Added: Fake record; other fake record; Fixed: Fake fixed",
             "1.3.0 Fixed: Fake record; other fake record; Changed: Fake fixed",
-            "2.0.0 Security: "
-            "Aderência a https://keepachangelog.com/pt-BR/1.0.0/",
+            "2.0.0 Security: Aderência a https://keepachangelog.com/pt-BR/1.0.0/",
             "2.2.1 Security: Fake record; other fake record; Fake fixed",
         ),
     )
@@ -51,10 +50,7 @@ class TestCase:
         "entrance expected".split(),
         (
             pytest.param(
-                {
-                    "msg": "1.0.0 Added: Fake record; other "
-                    "fakrecord; Fixed: Fake fixed"
-                },
+                {"msg": "1.0.0 Added: Fake record; other fakrecord; Fixed: Fake fixed"},
                 {
                     "key": "1.0.0",
                     "date": "2018-10-19",
@@ -92,8 +88,7 @@ class TestCase:
                     "date": "2022-02-16",
                     "messages": {
                         "Security": [
-                            "Aderência a "
-                            "https://keepachangelog.com/pt-BR/1.0.0/"
+                            "Aderência a https://keepachangelog.com/pt-BR/1.0.0/"
                         ]
                     },
                 },
@@ -101,8 +96,7 @@ class TestCase:
             ),
             pytest.param(
                 {
-                    "msg": "2.4.1 Obsoleto: Fakerecord; "
-                    "other fkrecord; Fak fixd",
+                    "msg": "2.4.1 Obsoleto: Fakerecord; other fkrecord; Fak fixd",
                     "lang": "pt-BR",
                 },
                 {
@@ -187,8 +181,7 @@ class TestCase:
                             "link quebrado para 1ª release",
                         ],
                         "Deprecated": [
-                            "para recursos que serão removidos "
-                            "nas próximas versões."
+                            "para recursos que serão removidos nas próximas versões."
                         ],
                         "Removed": ["para recursos removidos nesta versão."],
                         "Security": [
@@ -196,7 +189,7 @@ class TestCase:
                             "em caso de vulnerabilidades.",
                         ],
                     },
-                }
+                },
                 # marks=pytest.mark.skip(reason='skiped')
             ),
         ),
@@ -403,11 +396,7 @@ class TestCase:
         "entrance",
         (
             {},
-            {
-                "changelog_file": Path(gettempdir())
-                .joinpath("xpto.md")
-                .as_posix()
-            },
+            {"changelog_file": Path(gettempdir()).joinpath("xpto.md").as_posix()},
         ),
     )
     def test_update_changelog(self, entrance, ftemp, return_git_tag):
@@ -479,8 +468,7 @@ class TestCase:
                     "All notable changes to this project",
                     " will be documented in this file.\n\n",
                     "The format is based on ",
-                    "[Keep a Changelog]"
-                    "(https://keepachangelog.com/en/1.0.0/), ",
+                    "[Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ",
                     "this project adheres to [Semantic Versioning]"
                     "(https://semver.org/spec/v2.0.0.html) and "
                     "[Conventional Commit]"
@@ -500,8 +488,7 @@ class TestCase:
                     "All notable changes to this project",
                     " will be documented in this file.\n\n",
                     "The format is based on ",
-                    "[Keep a Changelog]"
-                    "(https://keepachangelog.com/en/1.0.0/), ",
+                    "[Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ",
                     "this project adheres to [Semantic Versioning]"
                     "(https://semver.org/spec/v2.0.0.html) and "
                     "[Conventional Commit]"
@@ -607,8 +594,7 @@ class TestClassChangelog:
                     "All notable changes to this project",
                     " will be documented in this file.\n\n",
                     "The format is based on ",
-                    "[Keep a Changelog]"
-                    "(https://keepachangelog.com/en/1.0.0/), ",
+                    "[Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ",
                     "this project adheres to [Semantic Versioning]"
                     "(https://semver.org/spec/v2.0.0.html) and "
                     "[Conventional Commit]"
@@ -628,8 +614,7 @@ class TestClassChangelog:
                     "All notable changes to this project",
                     " will be documented in this file.\n\n",
                     "The format is based on ",
-                    "[Keep a Changelog]"
-                    "(https://keepachangelog.com/en/1.0.0/), ",
+                    "[Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ",
                     "this project adheres to [Semantic Versioning]"
                     "(https://semver.org/spec/v2.0.0.html) and "
                     "[Conventional Commit]"
