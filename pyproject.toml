@@ -91,13 +91,7 @@ mkdocs = "^1.5.3"
 mkdocs-material = "^9.4.5"
 
 [tool.poetry.group.qa.dependencies]
-black = "^22.10.0"
-isort = "^5.10.1"
 mypy = "^0.931"
-py3kwarn = "^0.4.4"
-pydocstyle = "^6.1.1"
-pylama = "^8.4.1"
-pylint = "^2.12.2"
 types-Deprecated = "^1.2.5"
 types-toml = "^0.10.3"
 ruff = "^0.0.292"
