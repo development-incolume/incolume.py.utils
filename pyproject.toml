@@ -77,7 +77,6 @@ Deprecated = "^1.2.10"
 rstr = "^2.2.6"
 toml = {extras = ["tomli"], version = "^0.10.2"}
 click = "^8.1.5"
-deprecation = "^2.1.0"
 
 [tool.poetry.group.dev.dependencies]
 taskipy = "^1.12.0"
@@ -87,8 +86,6 @@ safety = "^2.2.0"
 tox = "^3.20.1"
 
 [tool.poetry.group.docs.dependencies]
-Sphinx = "^4.4.0"
-furo = "^2022.3.4"
 myst-parser = "^0.16"
 mkdocs = "^1.5.3"
 mkdocs-material = "^9.4.5"
