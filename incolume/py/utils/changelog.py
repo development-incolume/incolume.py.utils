@@ -7,7 +7,7 @@ import subprocess
 from pathlib import Path
 from typing import Any, Dict, List, Tuple, Union
 
-from deprecation import deprecated
+from deprecated import deprecated
 
 from incolume.py.utils import __title__, __version__, key_versions_2_sort
 
@@ -146,9 +146,9 @@ def changelog_messages(
 
 
 @deprecated(
-    details="This function is outdated, use `Changelog.header` instead."
+    reason="This function is outdated, use `Changelog.header` instead."
     " It will be discontinued in the near future.",
-    deprecated_in="1.11.0",
+    version="1.11.0",
 )
 def changelog_header(
     url_keepachangelog: str = "",
@@ -204,9 +204,9 @@ def changelog_body(
 
 
 @deprecated(
-    details="This function is outdated, use `Changelog.header` instead."
+    reason="This function is outdated, use `Changelog.header` instead."
     " It will be discontinued in the near future.",
-    deprecated_in="1.11.0",
+    version="1.11.0",
 )
 def changelog_footer(
     content: List[Tuple[str, Dict[str, Any]]],
