@@ -1,11 +1,44 @@
-[tool.ruff]
-# Always generate Python compatible code.
-target-version = "py39"
-# Decrease the maximum line length to 79 characters.
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+
+# Same as Black.
 line-length = 79
-tab-size = 4
-src = ["incolume/", "tests/"]
-respect-gitignore = true
+indent-width = 4
+
+# Assume Python 3.9
+target-version = "py39"
+
+[lint]
+# Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`) codes by default.
+# Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
+# McCabe complexity (`C901`) by default.
 select = [
   "A",    #flake8-builtins
   "AIR",    #Airflow
@@ -65,44 +98,41 @@ select = [
   "UP",  # pyupgrade
   "YTT",    #flake8-2020
 ]
-
-# Never enforce `E501` (line length violations).
 ignore = ["INP001", "CPY001"]
 
-# Avoid trying to fix flake8-bugbear (`B`) violations.
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
 unfixable = ["B"]
 
-[tool.ruff.per-file-ignores]
-# Ignore `E402` (import violations) in all `__init__.py` files, and in `path/to/file.py`.
-#"__init__.py" = ["E402"]
-#"path/to/file.py" = ["E402"]
-"**/{tests,docs,tools,utils}/*" = ["EXE002"]
-"**/test_*.py" = [
-  "I001",
-  "EXE002",
-  "ANN001",
-  "ANN101",
-  "PLR6301",
-  "S101",
-#  TODO remover ANN001 ANN201 ANN202 D100 D103 D202 PT007 após estabilizar teste piloto
-#  TODO remover temporários no futuro
-#  "ANN201",
-#  "ANN202",
-#  "D100",
-#  "D103",
-#  "D202",
-#  "PT007",
-]
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
-[tool.ruff.mccabe]
-# Unlike Flake8, default to a complexity level of 10.
-max-complexity = 5
-
-[tool.ruff.pydocstyle]
-convention = "google"
-
-[tool.ruff.flake8-quotes]
+[format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
 docstring-quotes = "double"    # ""single"
 inline-quotes = "single"
 multiline-quotes = "double"
 
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+# Enable auto-formatting of code examples in docstrings. Markdown,
+# reStructuredText code/literal blocks and doctests are all supported.
+#
+# This is currently disabled by default, but it is planned for this
+# to be opt-out in the future.
+docstring-code-format = false
+
+# Set the line length limit used when formatting code snippets in
+# docstrings.
+#
+# This only has an effect when the `docstring-code-format` setting is
+# enabled.
+docstring-code-line-length = "dynamic"
