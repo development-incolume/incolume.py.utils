@@ -9,7 +9,8 @@ from typing import Any, Dict, List, Tuple, Union
 
 from deprecated import deprecated
 
-from incolume.py.utils import __title__, __version__, key_versions_2_sort
+from incolume.py.utils import __title__, __version__
+from incolume.py.utils.tools import key_versions_2_sort
 
 logging.basicConfig(
     level=logging.DEBUG,

@@ -1,7 +1,7 @@
 """Read test."""
 import unittest
 
-from incolume.py.utils import read
+from incolume.py.utils.tools import read
 
 
 class UtilsTest(unittest.TestCase):

@@ -11,12 +11,9 @@ import pytest
 from incolume.py.utils import (
     __version__,
     confproject,
-    key_versions_2_sort,
-    logger,
-    namespace,
-    update_changelog,
     versionfile,
 )
+from incolume.py.utils.tools import key_versions_2_sort, namespace, update_changelog, logger
 
 __author__ = "@britodfbr"  # pragma: no cover
 
