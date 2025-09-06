@@ -19,7 +19,7 @@ logging.basicConfig(
 
 CHANGELOG_FILE = Path(__file__).parents[2] / "CHANGELOG.md"
 
-
+@deprecated(reason="This function was emancipated to new module 'incolume.py.changelog'.", version="2.11.0")
 def msg_classify(msg: str, lang: str = "", **kwargs) -> Dict[str, Any]:
     """
     Classify and sort one record for messages git tag -n.
@@ -97,6 +97,7 @@ def msg_classify(msg: str, lang: str = "", **kwargs) -> Dict[str, Any]:
     return result
 
 
+@deprecated(reason="This function was emancipated to new module 'incolume.py.changelog'.", version="2.11.0")
 def changelog_messages(
     *, text: str, start: Any = None, end: Any = None, **kwargs
 ) -> List[Tuple[str, Dict[str, Any]]]:
@@ -140,6 +141,7 @@ def changelog_messages(
     return records
 
 
+@deprecated(reason="This function was emancipated to new module 'incolume.py.changelog'.", version="2.11.0")
 @deprecated(
     reason="This function is outdated, use `Changelog.header` instead."
     " It will be discontinued in the near future.",
@@ -182,6 +184,7 @@ def changelog_header(
     return obj.header()
 
 
+@deprecated(reason="This function was emancipated to new module 'incolume.py.changelog'.", version="2.11.0")
 def changelog_body(
     content: List[Tuple[str, Dict[str, Any]]],
     content_formated: List[str],
@@ -193,6 +196,7 @@ def changelog_body(
     return content_formated
 
 
+@deprecated(reason="This function was emancipated to new module 'incolume.py.changelog'.", version="2.11.0")
 @deprecated(
     reason="This function is outdated, use `Changelog.header` instead."
     " It will be discontinued in the near future.",
@@ -220,6 +224,7 @@ def changelog_footer(
     return content_formated
 
 
+@deprecated(reason="This function was emancipated to new module 'incolume.py.changelog'.", version="2.11.0")
 def changelog_write(*, content: List[Tuple[str, Dict[str, Any]]], **kwargs) -> bool:
     """Write CHANGELOG.md file formatted.
 
@@ -240,6 +245,7 @@ def changelog_write(*, content: List[Tuple[str, Dict[str, Any]]], **kwargs) -> b
         return True
 
 
+@deprecated(reason="This function was emancipated to new module 'incolume.py.changelog'.", version="2.11.0")
 def update_changelog(
     *,
     changelog_file: Any = None,
@@ -295,6 +301,7 @@ def update_changelog(
     )
 
 
+@deprecated(reason="This class was emancipated to new module 'incolume.py.changelog'.", version="2.11.0")
 class Changelog:
     """Changelog class."""
 
@@ -310,12 +317,12 @@ class Changelog:
         self.file_output = file_output or Path("CHANGELOG.md")
         self.url_compare = (
             url_compare
-            or "https://gitlab.com/development-incolume/incolumepy.utils/-/compare"
+            or "https://gitlab.com/development-incolume/incolume.py.utils/-/compare"
         )
         self.reverse = reverse
         self.url_principal = kwargs.get(
             "url_pricipal",
-            "https://gitlab.com/development-incolume/incolumepy.utils",
+            "https://gitlab.com/development-incolume/incolume.py.utils",
         )
         self.url_keepachangelog = kwargs.get(
             "url_keepachangelog", "https://keepachangelog.com/en/1.0.0/"

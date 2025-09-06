@@ -4,6 +4,7 @@
 # coding: utf-8
 import logging
 import os
+from pathlib import Path
 
 from deprecated import deprecated
 
@@ -70,7 +71,7 @@ def preserve_file(file_orig):
     raise NotImplementedError("Lançamento futuro..")
 
 
-def realfilename(filebase, ext=None, digits=2, separador=True):
+def realfilename(filebase, ext=None, digits=2, separador=True) -> Path:
     """
     Return real file name for filebase.
 
@@ -122,7 +123,7 @@ def realfilename(filebase, ext=None, digits=2, separador=True):
             if os.path.isfile(filename):
                 raise IOError("Arquivo existente: ", filename)
             logging.debug("Nome sugerido: %s", filebase)
-            return filename
+            return Path(filename)
         except IOError as e:
             logging.warning(e)
         finally:

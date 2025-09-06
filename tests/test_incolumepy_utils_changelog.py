@@ -475,9 +475,9 @@ class TestCase:
                     "(https://www.conventionalcommits.org/"
                     "pt-br/v1.0.0/).\n\n",
                     "This file was automatically generated for",
-                    " [incolumepy.utils]"
+                    " [incolume.py.utils]"
                     "(https://gitlab.com/development-incolume/"
-                    f"incolumepy.utils/-/tree/{__version__})",
+                    f"incolume.py.utils/-/tree/{__version__})",
                     "\n\n---\n",
                 ],
             ),
@@ -495,9 +495,9 @@ class TestCase:
                     "(https://www.conventionalcommits.org/"
                     "pt-br/v1.0.0/).\n\n",
                     "This file was automatically generated for",
-                    " [incolumepy.utils]"
+                    " [incolume.py.utils]"
                     "(https://gitlab.com/development-incolume/"
-                    f"incolumepy.utils/-/tree/{__version__})",
+                    f"incolume.py.utils/-/tree/{__version__})",
                     "\n\n---\n",
                 ],
             ),
@@ -557,9 +557,9 @@ class TestCase:
                 [
                     "\n---\n\n",
                     "[1.0.0a0]: https://gitlab.com/development-incolume/"
-                    "incolumepy.utils/-/compare/1.0.0...1.0.0a0\n",
+                    "incolume.py.utils/-/compare/1.0.0...1.0.0a0\n",
                     "[0.1.0]: https://gitlab.com/development-incolume/"
-                    "incolumepy.utils/-/compare/1.0.0a0...0.1.0\n",
+                    "incolume.py.utils/-/compare/1.0.0a0...0.1.0\n",
                 ],
                 # marks=pytest.mark.skip,
             ),
@@ -601,9 +601,9 @@ class TestClassChangelog:
                     "(https://www.conventionalcommits.org/"
                     "pt-br/v1.0.0/).\n\n",
                     "This file was automatically generated for",
-                    " [incolumepy.utils]"
+                    " [incolume.py.utils]"
                     "(https://gitlab.com/development-incolume/"
-                    f"incolumepy.utils/-/tree/{__version__})",
+                    f"incolume.py.utils/-/tree/{__version__})",
                     "\n\n---\n",
                 ],
             ),
@@ -621,9 +621,9 @@ class TestClassChangelog:
                     "(https://www.conventionalcommits.org/"
                     "pt-br/v1.0.0/).\n\n",
                     "This file was automatically generated for",
-                    " [incolumepy.utils]"
+                    " [incolume.py.utils]"
                     "(https://gitlab.com/development-incolume/"
-                    f"incolumepy.utils/-/tree/{__version__})",
+                    f"incolume.py.utils/-/tree/{__version__})",
                     "\n\n---\n",
                 ],
             ),
@@ -743,7 +743,7 @@ class TestClassChangelog:
                 [
                     "\n---\n\n",
                     "[0.1.0]: https://gitlab.com/development-incolume/"
-                    "incolumepy.utils/-/compare/1.0.0...0.1.0\n",
+                    "incolume.py.utils/-/compare/1.0.0...0.1.0\n",
                 ],
                 # marks=pytest.mark.skip,
             ),

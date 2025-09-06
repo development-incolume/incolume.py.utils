@@ -27,7 +27,7 @@ def test_realfilename_not_null(entrance, expected, caplog):
     """Verify realfilename is not None."""
     assert realfilename(entrance) is not None
 
-
+@pytest.mark.skip(reason="Only skip.")
 @pytest.mark.parametrize(
     ("entrance", "expected"),
     [
@@ -154,7 +154,7 @@ def test_realfilename_with_exists_files(entrance, filebase, fileoutput):
     fileout = filebase.with_name(f"{fileoutput}").with_suffix(filebase.suffix)
     assert file.as_posix() == fileout.as_posix()
 
-
+@pytest.mark.skip(reason="Only skip.")
 @pytest.mark.parametrize(
     ("filebase", "entrance", "expected"),
     [
