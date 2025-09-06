@@ -1,28 +1,37 @@
-[tool.poetry]
-name = "incolumepy.utils"
+[project]
+name = "incolume.py.utils"
 version = "3.0.0a2"
-description = "package incolumepy utils"
-keywords = ['python', 'utils', 'incolumepy']
-authors = ["britodfbr <contato@incolume.com.br>"]
-homepage = "https://pypi.org/project/incolumepy.utils"
-repository = 'https://gitlab.com/development-incolume/incolumepy.utils'
-packages = [
-  {include = "incolume", from=""},
-]
+description = "Add your description here"
+readme = "README.md"
+keywords = ['python', 'utils', 'incolume']
+requires-python = ">=3.8"
 classifiers = [
   'Development Status :: 5 - Production/Stable',
   'Operating System :: OS Independent',
   'Natural Language :: Portuguese (Brazilian)',
   "Programming Language :: Python",
   "Programming Language :: Python :: 3 :: Only",
-#  "Programming Language :: Python :: 3.7",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
-#  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   'Topic :: Software Development :: Libraries :: Python Modules',
   'Topic :: Utilities',
+]
+dependencies = []
+
+[tool.poetry]
+name = "incolumepy.utils"
+version = "3.0.0a2"
+description = "package incolumepy utils"
+keywords = ['python', 'utils', 'incolume']
+authors = ["britodfbr <contato@incolume.com.br>"]
+homepage = "https://pypi.org/project/incolumepy.utils"
+repository = 'https://gitlab.com/development-incolume/incolumepy.utils'
+packages = [
+  {include = "incolume", from=""},
 ]
 include = [
   'README.md',
