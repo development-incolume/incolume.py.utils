@@ -1,7 +1,8 @@
 """Namespace testings."""
+
 import unittest
 
-from incolume.py.utils import namespace
+from incolume.py.utils.tools import namespace
 
 
 class UtilsTest(unittest.TestCase):

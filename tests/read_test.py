@@ -1,7 +1,9 @@
 """Read test."""
+
 import unittest
 
-from incolume.py.utils import read
+from incolume.py.utils.tools import read
+from incolume.py.utils import versionfile
 
 
 class UtilsTest(unittest.TestCase):
@@ -9,7 +11,7 @@ class UtilsTest(unittest.TestCase):
 
     def test_read1(self):
         """Read test."""
-        self.assertTrue(read("version.txt"))
+        self.assertTrue(read(versionfile))
 
 
 if __name__ == "__main__":

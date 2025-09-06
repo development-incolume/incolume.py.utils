@@ -1,4 +1,5 @@
 """Command Line Interface module."""
+
 import codecs
 import logging
 import sys
@@ -7,7 +8,7 @@ from typing import Union
 
 import click
 
-from incolume.py.utils.changelog import update_changelog
+from incolume.py.utils.tools.changelog import update_changelog
 
 
 @click.command()
@@ -61,9 +62,7 @@ def info3(transformation):
 
 
 @click.command()
-@click.option(
-    "--hash-type", type=click.Choice(["MD5", "SHA1"], case_sensitive=False)
-)
+@click.option("--hash-type", type=click.Choice(["MD5", "SHA1"], case_sensitive=False))
 def digest(hash_type):
     """Enhancement for example click choices."""
     click.echo(hash_type)
@@ -84,9 +83,7 @@ def encode(password):
 @click.option(
     "--url",
     "-u",
-    default=(
-        "https://gitlab.com/development-incolume/incolumepy.utils/-/compare"
-    ),
+    default=("https://gitlab.com/development-incolume/incolumepy.utils/-/compare"),
     help="Url compare from repository of project.",
 )
 @click.option(
