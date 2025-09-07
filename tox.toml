@@ -13,39 +13,37 @@ commands = [["mypy", "src{/}tox"], ["mypy", "tests"]]
 
 
 [tox]
-minversion = 3.1.0
-isolated_build = True
-envlist =
-    clean
-    black
-    isort
-    pydocstyle
-    mypy
-    pylama
-    pylint
-#    py37
-    py38
-    py39
-    py310
-    py311
-    py312
-    py313
+minversion = "3.1.0"
+isolated_build = true
 
-;[tox:.package]
-;basepython = python3
+env_list = [
+  "clean",
+  "black",
+  "isort",
+  "pydocstyle",
+  "mypy",
+  "pylama",
+  "pylint",
+  "py38",
+  "py39",
+  "py310",
+  "py311",
+  "py312",
+  "py313"
+]
 
 [testenv]
-whitelist_externals = poetry
+whitelist_externals = "uv"
 skip_install = true
-commands =
-    poetry env use {envpython}
-    poetry install -vv --no-root
-    poetry run pytest --pylama {posargs} tests/ -m \"not(slow or webtest)\"
+commands = [
+  "uv sync --python {envpython}",
+  "uv run pytest --pylama {posargs} tests/ -m \"not(slow or webtest)\""
+]
 
 [testenv:clean]
 deps = coverage
 commands =
-  poetry run coverage erase
+  uv run coverage erase
 
 [testenv:linters]
 commands =
@@ -58,7 +56,7 @@ commands =
   {[testenv:pylint]commands}
 
 [testenv:stats]
-commands = poetry run pytest -xv --cov-report html:coverage_report/html --cov-report xml:coverage_report/cov.xml
+commands = uv run pytest -xv --cov-report html:coverage_report/html --cov-report xml:coverage_report/cov.xml
 
 ;[testenv:flake8]
 ;deps = flake8
