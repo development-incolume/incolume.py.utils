@@ -30,6 +30,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "bandit>=1.8.6",
     "incolume-py-changelog>=0.8.0 ; python_full_version >= '3.9'",
     "ipykernel>=6.29.5",
     "jupyter>=1.1.1",
@@ -41,6 +42,17 @@ dev = [
     "taskipy>=1.14.1",
     "tox>=4.25.0",
 ]
+
+[tool.poetry.urls]
+'Documentation' = ''
+'Source' = 'https://github.com/development-incolume/incolume.py.utils'
+'Git' = 'https://github.com/development-incolume/incolume.py.utils.git'
+'Tracker' = 'https://github.com/development-incolume/incolume.py.utils/issues'
+'Oficial' = 'https://pypi.org/project/incolume.py.utils/'
+
+[project.scripts]
+incolumepy-utils = 'incolume.py.utils.main:run'
+pw = 'incolume.py.utils.cli:encode'
 
 [tool.poetry]
 name = "incolumepy.utils"
@@ -69,17 +81,6 @@ exclude = [
   "my_package/excluded.py",
   "tests/",
 ]
-
-[tool.poetry.urls]
-'Documentation' = 'https://brito.blog.incolume.com.br/search/label/development-incolume'
-'Source' = 'https://gitlab.com/development-incolume/incolumepy.utils'
-'Git' = 'https://gitlab.com/development-incolume/incolumepy.utils.git'
-'Tracker' = 'https://gitlab.com/development-incolume/incolumepy.utils/issues'
-'Oficial' = 'https://pypi.org/project/incolumepy.utils/'
-
-[project.scripts]
-incolumepy-utils = 'incolume.py.utils.main:run'
-pw = 'incolume.py.utils.cli:encode'
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -408,118 +409,19 @@ docstring-quotes = "double"    # ""single"
 inline-quotes = "single"
 multiline-quotes = "double"
 
-[tool.tox]
-legacy_tox_ini = """
-[tox]
-minversion = 3.1.0
-isolated_build = True
-envlist =
-    clean
-    black
-    isort
-    pydocstyle
-    mypy
-    pylama
-    pylint
-#    py37
-    py38
-    py39
-    py310
-    py311
-#    py312
-
-;[tox:.package]
-;basepython = python3
-
-[testenv]
-whitelist_externals = poetry
-skip_install = true
-commands =
-    poetry env use {envpython}
-    poetry install -vv --no-root
-    poetry run pytest --pylama {posargs} tests/ -m \"not(slow or webtest)\"
-
-[testenv:clean]
-deps = coverage
-commands =
-  poetry run coverage erase
-
-[testenv:linters]
-commands =
-  {[testenv:black]commands}
-  {[testenv:isort]commands}
-;  {[testenv:flake8]commands}
-  {[testenv:pydocstyle]commands}
-  {[testenv:mypy]commands}
-  {[testenv:pylama]commands}
-  {[testenv:pylint]commands}
-
-[testenv:stats]
-commands = poetry run pytest -xv --cov-report html:coverage_report/html --cov-report xml:coverage_report/cov.xml
-
-;[testenv:flake8]
-;deps = flake8
-;commands = poetry run flake8 --config pyproject.toml incolumepy/ tests/
-
-[testenv:mypy]
-deps =
-    mypy
-    types-toml
-    types-Deprecated
-commands = poetry run mypy incolumepy/
-
-[testenv:pydocstyle]
-commands = poetry run pydocstyle incolumepy/ tests/
-
-[testenv:isort]
-commands = poetry run isort --check --atomic --py all incolumepy/ tests/
-
-[testenv:pylama]
-deps = pylama
-commands = poetry run pylama incolumepy/ tests/
-
-[testenv:pylint]
-commands = poetry run pylint incolumepy/ tests/
-
-[testenv:black]
-commands = poetry run black --check incolumepy/ tests/
-
-[testenv:safety]
-commands = poetry run safety check
-"""
-
 [tool.taskipy.variables]
 path = "incolume/ tests/"
 CHANGELOGFILE = "docs/about/CHANGELOG.md"
-URLCOMPARE = "https://gitlab.com/development-incolume/incolumepy.utils/-/compare"
+URLCOMPARE = "https://github.com/development-incolume/incolume.py.utils/compare"
 
 [tool.taskipy.tasks]
 bandit={help='', cmd='poetry run bandit -c pyproject.toml -r {path}', use_vars=true}
 pre_check-all = {cmd='echo Starting Check all ..', help=''}
 check-all = {cmd='poetry run task clean-all; poetry run task lint; poetry run task sec',  help = "Checking all" }
 post_check-all = {cmd='echo Checking finished!', help=''}
-clean = {cmd = "echo -n 'Starting cleanning environment..'; find ./ \\( -name '*.pyc' -o -name '*~' -o -name '*.log' -o -name '*.log.*' -o -name '.cache' -o -name '.coverage' \\) -delete ; echo ' ok' ",  help = "Shallow clean into environment (.pyc, .cache, .egg, .log, et all)" }
-pre_clean-all = {cmd='poetry run task clean', help=''}
-clean-all = {cmd = "echo -n 'Starting Deep cleanning ..'; find ./ \\( -name '*_cache' -o -name '*cache__' -o -name dist -o -name build -o -name .tox -o -name site -o -name coverage_report \\) -exec rm -rf {} 2> /dev/null \\; ; echo ' Deep cleaning finished!' ",  help = "Deep cleanning into environment (dist, build, htmlcov, .tox, *_cache, et all)" }
 pre_docs-build={help='Pre docs-build', cmd="poetry run task changelog"}
 docs-build = {help="Generate documentation", cmd="poetry run mkdocs gh-deploy --config-file mkdocs.yml --remote-branch webdoc"}
 docs-serve = {help="Run server documentation", cmd="poetry run mkdocs serve"}
-pre_lint="task lint_blue && task lint_isort && task lint_flake8 && task lint_pydocstyle && task lint_pylint && task lint_mypy"
-lint={help='Checking all linters configurated', cmd=''}
-lint_black={help='Checking with black', cmd='echo --black--; poetry run black --check --diff {path}', use_vars=true}
-lint_blue={help='Checking with blue', cmd='echo --blue--; poetry run blue --check --diff {path}', use_vars=true}
-lint_flake8={help='Checking with flake8', cmd='echo --flake8--; poetry run flake8 --config pyproject.toml {path}', use_vars=true}
-lint_isort={help='Checking with isort', cmd='echo --isort--; poetry run isort --profile black --check --atomic --py all -m 3 {path}', use_vars=true}
-lint_mypy={help='Checking with mypy', cmd='echo --mypy--; poetry run mypy --check {path}', use_vars=true}
-lint_pydocstyle={help='Checking with pydocstyle', cmd='echo --pydocstyle--; poetry run pydocstyle {path}', use_vars=true}
-lint_pylint={help='Checking with pylint', cmd='echo --pylint--; poetry run pylint {path}', use_vars=true}
-lint_ruff={help='', cmd='echo --ruff--; poetry run ruff check {path}', use_vars=true}
-pre_patch={help='Run linters tools', cmd="poetry run task lint"}
-patch={cmd='v=$(poetry version patch) && poetry run pytest && git ci -m "$v" pyproject.toml $(find incolume* -name version.txt)', help='Generate a patch Sematic Version'}
-post_patch={help='Run securety tools', cmd="poetry run task bandit && poetry run task safety"}
-premajor={cmd='v=$(poetry version premajor) && poetry run pytest && git ci -m "$v" pyproject.toml $(find incolume* -name version.txt)', help='poetry version premajor'}
-preminor={cmd='v=$(poetry version preminor) && poetry run pytest && git ci -m "$v" pyproject.toml $(find incolume* -name version.txt)', help='poetry version preminor'}
-prerelease={cmd='v=$(poetry version prerelease) && poetry run pytest && git ci -m "$v" pyproject.toml $(find incolume* -name version.txt)', help='poetry version prerelease'}
 safety={help='Check safety of packages into project.', cmd='poetry run safety check'}
 pre_sec={help='Securance validations', cmd='poetry run task bandit && poetry run task safety'}
 sec={help="Checking environment's safety", cmd=''}
