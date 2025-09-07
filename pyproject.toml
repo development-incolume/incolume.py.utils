@@ -411,7 +411,7 @@ multiline-quotes = "double"
 [tool.taskipy.variables]
 path = "incolume/ tests/"
 CHANGELOGFILE = "docs/about/CHANGELOG.md"
-URLCOMPARE = "https://gitlab.com/development-incolume/incolumepy.utils/-/compare"
+URLCOMPARE = "https://github.com/development-incolume/incolume.py.utils/compare"
 
 [tool.taskipy.tasks]
 bandit={help='', cmd='poetry run bandit -c pyproject.toml -r {path}', use_vars=true}
