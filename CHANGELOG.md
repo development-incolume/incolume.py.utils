@@ -5,25 +5,46 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and [Conventional Commit](https://www.conventionalcommits.org/pt-br/v1.0.0/).
 
-This file was automatically generated for [incolumepy.utils](https://gitlab.com/development-incolume/incolumepy.utils/-/tree/2.11.0)
+This file was automatically generated for [incolume.py.changelog](https://github.com/development-incolume/incolume.py.changelog/-/tree/0.14.0)
 
 ---
 
 
-## [Unreleased]	 &#8212; 	2023-10-13:
+## [3.0.0]	 &#8212; 	2025-09-07:
 ### Deprecated
   - Compatibilidade com Python 3.8;
   - `changelog_header` marcado como obsoleto;
-  - `changelog_footer` marcado como obsoleto;
+  - `changelog_footer` marcado como     obsoleto;
+  - Utils.changelog;
+### Fixed
+  - Correção     na automação `make clean`;
+  - Correção na captura de data do `git commit`;
+  - Correção na captura de `git log` sem mensagem;
 ### Removed
   - Desativado compatibilidade com python 3.7;
   - Desativado ambiente tox para Python 3.7;
-### Fixed
-  - Correção na automação `make clean`;
-  - Correção na captura de data do `git commit`;
-  - Correção na captura de `git log` sem mensagem;
 ### Security
   - Estudo de compatibilidade com Python 3.12;
+### Added
+  - Ferramentas de lint: pylint, ruff, blue, isort;
+  - Recuperação total do projeto arquivado`incolumepy.utils`;
+### Changed
+  - Migrado projeto `gitlab` para `github` atualização do namespace de `incolumepy.utils` para `incolume.py.utils`;
+  - Suite de documentação `sphinx` substituída para `MKDocs`;
+  - Recuperação do projeto `incolumepy.utils` como `incolume.py.utils`;
+  - Obsoleted: Python 3.8 descontinuado;
+  - Python 3.9 descontinuado;
+
+## [3.0.0rc1]	 &#8212; 	2023-10-13:
+### Added
+  - Ferramentas de lint: pylint, ruff, blue, isort;
+### Changed
+  - Atualização do namespace para incolume.py.utils;
+  - Suite de documentação atualizada para MKDocs;
+
+## [3.0.0rc0]	 &#8212; 	2023-10-13:
+### Changed
+  - Atualização do namespace para incolume.py.utils;
 
 ## [2.11.0]	 &#8212; 	2023-10-13:
 ### Deprecated
@@ -87,6 +108,14 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
   - Adequação da formatação visual do arquivo CHANGELOG.md com https://keepachangelog.com/pt-BR/1.0.0/;
   - Atualização da documetação inicial via README;
 
+## [2.7.0-rc.1]	 &#8212; 	2023-07-17:
+### Changed
+  - Atualização da documetação inicial via README;
+
+## [2.7.0-rc.0]	 &#8212; 	2023-07-17:
+### Changed
+  - Adequação da formatação visual do arquivo CHANGELOG.md com https://keepachangelog.com/pt-BR/1.0.0/;
+
 ## [2.6.0]	 &#8212; 	2023-07-11:
 ### Added
   - Ampliado abrangência para Python3.11;
@@ -126,6 +155,63 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
   - Pacote jupyter;
   - Refinamento da configuração com as novas funcionalidades.;
   - Suite de testes nose desativada permanentemente;
+
+## [2.6.0rc5]	 &#8212; 	2022-12-12:
+### Changed
+  - Estilização em cores para resposta de commits;
+  - Branches main/master protegido contra alterações indevidas;
+  - Politica de validação com Black e isort diretamente via git hooks;
+  - Mensagens geradas pela ferramenta poetry autenticadas na execução;
+
+## [2.6.0rc4]	 &#8212; 	2022-12-08:
+### Changed
+  - 100% de cobertura atingido;
+  - Complexidade ciclomática limitada (5);
+  - Aualizado pacotes de dependências do projeto;
+  - Melhoria nos processos automatizados;
+  - Refinamento na configuração do pylint;
+  - Refinamento na configuração do pylama;
+### Removed
+  - Pacote coverage;
+  - Pacote jupyter;
+
+## [2.6.0rc3]	 &#8212; 	2022-12-06:
+### Changed
+  - Refinamento da configuração com as novas funcionalidades.;
+
+## [2.6.0rc2]	 &#8212; 	2022-12-06:
+### Added
+  - Lint pylama;
+  - Compatibilidade com Python 3.11;
+  - Documentação no formato HTML;
+### Removed
+  - Lint flake8 substituído por lint pylama;
+  - Compatibilidade com Python 3.6;
+
+## [2.6.0rc1]	 &#8212; 	2022-12-05:
+### Added
+  - Ampliado abrangência para Python3.11;
+  - Documentação compilada acrescentada ao versionamento;
+  - Ordenação de etiquetas no CHANGELOG.md;
+  - Encapsulamento Mock em testes de acesso a arquivos;
+### Changed
+  - Aperfeiçoado o camando 'make setup' para configuração do ambiente em apenas uma execução;
+  - Aplicado ISO8601 para data em registros automatizados via comando make;
+  - Automação de script para gerar release e patch via comando make;
+### Removed
+  - Suite de testes nose desativada permanentemente;
+
+## [2.6.0-rc.0]	 &#8212; 	2022-12-03:
+### Added
+  - Módulo incolumepy.utils.changelog para tratar de recuros do changelog;
+  - Aderência a convensão de commit disponível em https://www.conventionalcommits.org/pt-br/v1.0.0/;
+  - Aderência a Keep a Changelog disponível em https://keepachangelog.com/pt-BR/1.0.0/;
+### Changed
+  - Estilização do CHANGELOG.md;
+  - Cobertura de 100% em incolumepy.utils.__init__.py;
+  - Alteração nas regras githooks para melhoria de gerenciamento do projeto e garantir o versionamento semântico disponível em https://semver.org/lang/pt-BR/;
+### Deprecated
+  - Função "incolumepy.utils.update_changelog" tornada obsoleta em favor "incolumepy.utils.changelog.update_changelog";
 
 ## [2.5.4]	 &#8212; 	2022-03-13:
 ### Added
@@ -179,6 +265,18 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
   - Funcionalidades obsoletas sinalizadas como deprecated.;
 ### Removed
   - Módulo incolumepy.utils.sequences deixou de existir;
+
+## [2.0.0-rc.2]	 &#8212; 	2022-02-15:
+### Changed
+  - Atualização de teste para key_sort_2_versions;
+
+## [2.0.0-rc.1]	 &#8212; 	2022-02-15:
+### Deprecated
+  - Funcionalidades obsoletas sinalizadas como deprecated.;
+
+## [2.0.0-rc.0]	 &#8212; 	2022-02-15:
+### Changed
+  - Redefinição de estrutura;
 
 ## [1.7.0]	 &#8212; 	2022-02-15:
 ### Added
@@ -300,53 +398,67 @@ This file was automatically generated for [incolumepy.utils](https://gitlab.com/
 ## 0.1.0	 &#8212; 	2018-05-04:
 ### Added
   - Initial Commit;
+
 ---
 
-[0.2.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.1.0...0.2.0
-[0.3.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.2.0...0.3.0
-[0.4.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.3.0...0.4.0
-[0.5.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.4.0...0.5.0
-[0.6.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.5.0...0.6.0
-[0.7.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.6.0...0.7.0
-[0.7.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.7.0...0.7.1
-[0.7.2]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.7.1...0.7.2
-[0.8.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.7.2...0.8.0
-[0.9.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.8.0...0.9.0
-[0.9.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.9.0...0.9.1
-[0.9.2]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.9.1...0.9.2
-[0.9.3]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.9.2...0.9.3
-[0.9.4]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.9.3...0.9.4
-[1.0.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/0.9.4...1.0.0
-[1.0.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.0.0...1.0.1
-[1.1.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.0.1...1.1.0
-[1.1.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.1.0...1.1.1
-[1.2.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.1.1...1.2.0
-[1.3.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.2.0...1.3.0
-[1.3.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.3.0...1.3.1
-[1.3.2]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.3.1...1.3.2
-[1.4.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.3.2...1.4.0
-[1.5.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.4.0...1.5.0
-[1.6.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.5.0...1.6.0
-[1.6.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.6.0...1.6.1
-[1.6.2]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.6.1...1.6.2
-[1.6.3]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.6.2...1.6.3
-[1.7.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.6.3...1.7.0
-[2.0.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/1.7.0...2.0.0
-[2.1.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.0.0...2.1.0
-[2.2.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.1.0...2.2.0
-[2.3.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.2.0...2.3.0
-[2.4.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.3.0...2.4.0
-[2.4.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.4.0...2.4.1
-[2.5.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.4.1...2.5.0
-[2.5.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.5.0...2.5.1
-[2.5.2]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.5.1...2.5.2
-[2.5.3]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.5.2...2.5.3
-[2.5.4]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.5.3...2.5.4
-[2.6.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.5.4...2.6.0
-[2.7.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.6.0...2.7.0
-[2.7.1]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.0...2.7.1
-[2.8.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.7.1...2.8.0
-[2.9.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.8.0...2.9.0
-[2.10.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.9.0...2.10.0
-[2.11.0]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.10.0...2.11.0
-[Unreleased]: https://gitlab.com/development-incolume/incolumepy.utils/-/compare/2.11.0...Unreleased
+[0.2.0]: https://github.com/development-incolume/incolume.py.utils/compare/0.1.0...0.2.0
+[0.3.0]: https://github.com/development-incolume/incolume.py.utils/compare/0.2.0...0.3.0
+[0.4.0]: https://github.com/development-incolume/incolume.py.utils/compare/0.3.0...0.4.0
+[0.5.0]: https://github.com/development-incolume/incolume.py.utils/compare/0.4.0...0.5.0
+[0.6.0]: https://github.com/development-incolume/incolume.py.utils/compare/0.5.0...0.6.0
+[0.7.0]: https://github.com/development-incolume/incolume.py.utils/compare/0.6.0...0.7.0
+[0.7.1]: https://github.com/development-incolume/incolume.py.utils/compare/0.7.0...0.7.1
+[0.7.2]: https://github.com/development-incolume/incolume.py.utils/compare/0.7.1...0.7.2
+[0.8.0]: https://github.com/development-incolume/incolume.py.utils/compare/0.7.2...0.8.0
+[0.9.0]: https://github.com/development-incolume/incolume.py.utils/compare/0.8.0...0.9.0
+[0.9.1]: https://github.com/development-incolume/incolume.py.utils/compare/0.9.0...0.9.1
+[0.9.2]: https://github.com/development-incolume/incolume.py.utils/compare/0.9.1...0.9.2
+[0.9.3]: https://github.com/development-incolume/incolume.py.utils/compare/0.9.2...0.9.3
+[0.9.4]: https://github.com/development-incolume/incolume.py.utils/compare/0.9.3...0.9.4
+[1.0.0]: https://github.com/development-incolume/incolume.py.utils/compare/0.9.4...1.0.0
+[1.0.1]: https://github.com/development-incolume/incolume.py.utils/compare/1.0.0...1.0.1
+[1.1.0]: https://github.com/development-incolume/incolume.py.utils/compare/1.0.1...1.1.0
+[1.1.1]: https://github.com/development-incolume/incolume.py.utils/compare/1.1.0...1.1.1
+[1.2.0]: https://github.com/development-incolume/incolume.py.utils/compare/1.1.1...1.2.0
+[1.3.0]: https://github.com/development-incolume/incolume.py.utils/compare/1.2.0...1.3.0
+[1.3.1]: https://github.com/development-incolume/incolume.py.utils/compare/1.3.0...1.3.1
+[1.3.2]: https://github.com/development-incolume/incolume.py.utils/compare/1.3.1...1.3.2
+[1.4.0]: https://github.com/development-incolume/incolume.py.utils/compare/1.3.2...1.4.0
+[1.5.0]: https://github.com/development-incolume/incolume.py.utils/compare/1.4.0...1.5.0
+[1.6.0]: https://github.com/development-incolume/incolume.py.utils/compare/1.5.0...1.6.0
+[1.6.1]: https://github.com/development-incolume/incolume.py.utils/compare/1.6.0...1.6.1
+[1.6.2]: https://github.com/development-incolume/incolume.py.utils/compare/1.6.1...1.6.2
+[1.6.3]: https://github.com/development-incolume/incolume.py.utils/compare/1.6.2...1.6.3
+[1.7.0]: https://github.com/development-incolume/incolume.py.utils/compare/1.6.3...1.7.0
+[2.0.0-rc.0]: https://github.com/development-incolume/incolume.py.utils/compare/1.7.0...2.0.0-rc.0
+[2.0.0-rc.1]: https://github.com/development-incolume/incolume.py.utils/compare/2.0.0-rc.0...2.0.0-rc.1
+[2.0.0-rc.2]: https://github.com/development-incolume/incolume.py.utils/compare/2.0.0-rc.1...2.0.0-rc.2
+[2.0.0]: https://github.com/development-incolume/incolume.py.utils/compare/2.0.0-rc.2...2.0.0
+[2.1.0]: https://github.com/development-incolume/incolume.py.utils/compare/2.0.0...2.1.0
+[2.2.0]: https://github.com/development-incolume/incolume.py.utils/compare/2.1.0...2.2.0
+[2.3.0]: https://github.com/development-incolume/incolume.py.utils/compare/2.2.0...2.3.0
+[2.4.0]: https://github.com/development-incolume/incolume.py.utils/compare/2.3.0...2.4.0
+[2.4.1]: https://github.com/development-incolume/incolume.py.utils/compare/2.4.0...2.4.1
+[2.5.0]: https://github.com/development-incolume/incolume.py.utils/compare/2.4.1...2.5.0
+[2.5.1]: https://github.com/development-incolume/incolume.py.utils/compare/2.5.0...2.5.1
+[2.5.2]: https://github.com/development-incolume/incolume.py.utils/compare/2.5.1...2.5.2
+[2.5.3]: https://github.com/development-incolume/incolume.py.utils/compare/2.5.2...2.5.3
+[2.5.4]: https://github.com/development-incolume/incolume.py.utils/compare/2.5.3...2.5.4
+[2.6.0-rc.0]: https://github.com/development-incolume/incolume.py.utils/compare/2.5.4...2.6.0-rc.0
+[2.6.0rc1]: https://github.com/development-incolume/incolume.py.utils/compare/2.6.0-rc.0...2.6.0rc1
+[2.6.0rc2]: https://github.com/development-incolume/incolume.py.utils/compare/2.6.0rc1...2.6.0rc2
+[2.6.0rc3]: https://github.com/development-incolume/incolume.py.utils/compare/2.6.0rc2...2.6.0rc3
+[2.6.0rc4]: https://github.com/development-incolume/incolume.py.utils/compare/2.6.0rc3...2.6.0rc4
+[2.6.0rc5]: https://github.com/development-incolume/incolume.py.utils/compare/2.6.0rc4...2.6.0rc5
+[2.6.0]: https://github.com/development-incolume/incolume.py.utils/compare/2.6.0rc5...2.6.0
+[2.7.0-rc.0]: https://github.com/development-incolume/incolume.py.utils/compare/2.6.0...2.7.0-rc.0
+[2.7.0-rc.1]: https://github.com/development-incolume/incolume.py.utils/compare/2.7.0-rc.0...2.7.0-rc.1
+[2.7.0]: https://github.com/development-incolume/incolume.py.utils/compare/2.7.0-rc.1...2.7.0
+[2.7.1]: https://github.com/development-incolume/incolume.py.utils/compare/2.7.0...2.7.1
+[2.8.0]: https://github.com/development-incolume/incolume.py.utils/compare/2.7.1...2.8.0
+[2.9.0]: https://github.com/development-incolume/incolume.py.utils/compare/2.8.0...2.9.0
+[2.10.0]: https://github.com/development-incolume/incolume.py.utils/compare/2.9.0...2.10.0
+[2.11.0]: https://github.com/development-incolume/incolume.py.utils/compare/2.10.0...2.11.0
+[3.0.0rc0]: https://github.com/development-incolume/incolume.py.utils/compare/2.11.0...3.0.0rc0
+[3.0.0rc1]: https://github.com/development-incolume/incolume.py.utils/compare/3.0.0rc0...3.0.0rc1
+[3.0.0]: https://github.com/development-incolume/incolume.py.utils/compare/3.0.0rc1...3.0.0
