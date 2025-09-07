@@ -30,6 +30,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "bandit>=1.8.6",
     "incolume-py-changelog>=0.8.0 ; python_full_version >= '3.9'",
     "ipykernel>=6.29.5",
     "jupyter>=1.1.1",
