@@ -1,0 +1,9 @@
+incolumepy.utils
+
+Gerar o docs/CHARGES.rst
+
+cat > docs/CHANGES.rst << eof
+> CHARGES
+> =============
+> $(git tag -ln|tac)
+> eof

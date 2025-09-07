@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from incolumepy.utils.decorators import nonexequi, time_it
+from incolume.py.utils.decorators import nonexequi, time_it
 
 # import io
 # import sys
@@ -29,10 +29,10 @@ class TestCaseDecoratorNonexequi:
         return stack()[0][3]
 
     @pytest.mark.parametrize(
-        "entrance",
+        'entrance',
         (
-            "func_x",
-            "func_y",
+            'func_x',
+            'func_y',
         ),
     )
     def test_name(self, entrance):
@@ -40,10 +40,10 @@ class TestCaseDecoratorNonexequi:
         assert entrance == getattr(self, entrance).__name__
 
     @pytest.mark.parametrize(
-        "entrance expected".split(),
+        ['entrance', 'expected'],
         (
-            ("func_x", "Skiped: func_x"),
-            ("func_y", "func_y"),
+            ('func_x', 'Skiped: func_x'),
+            ('func_y', 'func_y'),
         ),
     )
     def test_return(self, entrance, expected):
@@ -51,16 +51,16 @@ class TestCaseDecoratorNonexequi:
         assert getattr(self, entrance)() == expected
 
     @pytest.mark.parametrize(
-        "entrance expected".split(),
+        ['entrance', 'expected'],
         (
-            ("func_x", "Skiped: func_x"),
-            ("func_y", "func_y"),
+            ('func_x', 'Skiped: func_x'),
+            ('func_y', 'func_y'),
         ),
     )
     def test_output(self, entrance, expected, caplog):
         with caplog.at_level(
             logging.DEBUG,
-            logger=Path(tempfile.gettempdir()).joinpath("reg.log").as_posix(),
+            logger=Path(tempfile.gettempdir()).joinpath('reg.log').as_posix(),
         ):
             result = getattr(self, entrance)()
             assert result == expected
@@ -81,13 +81,13 @@ class TestCaseDecoratorTimeIt:
     @time_it
     def func_x(self):
         """Test for func_x."""
-        return "func_x"
+        return 'func_x'
 
     @pytest.mark.parametrize(
-        "entrance",
+        'entrance',
         (
-            "xpto",
-            "func_x",
+            'xpto',
+            'func_x',
         ),
     )
     def test_name(self, entrance):
@@ -95,10 +95,10 @@ class TestCaseDecoratorTimeIt:
         assert entrance == getattr(self, entrance).__name__
 
     @pytest.mark.parametrize(
-        "entrance expected".split(),
+        ['entrance', 'expected'],
         (
-            ("xpto", "Test for xpto."),
-            ("func_x", "Test for func_x."),
+            ('xpto', 'Test for xpto.'),
+            ('func_x', 'Test for func_x.'),
         ),
     )
     def test_docstring(self, entrance, expected):
@@ -106,10 +106,10 @@ class TestCaseDecoratorTimeIt:
         assert getattr(self, entrance).__doc__ == expected
 
     @pytest.mark.parametrize(
-        "entrance expected".split(),
+        ['entrance', 'expected'],
         (
-            ("xpto", 0),
-            ("func_x", "func_x"),
+            ('xpto', 0),
+            ('func_x', 'func_x'),
         ),
     )
     def test_return(self, entrance, expected):
@@ -117,17 +117,17 @@ class TestCaseDecoratorTimeIt:
         assert getattr(self, entrance)() == expected
 
     @pytest.mark.parametrize(
-        "entrance",
+        'entrance',
         (
-            "xpto",
-            "func_x",
+            'xpto',
+            'func_x',
         ),
     )
     def test_output(self, entrance, capsys):
         getattr(self, entrance)()
         out, err = capsys.readouterr()
-        assert re.match(rf"^{entrance}: \d*.?\d+ ms$", out, re.I)
-        assert err == ""
+        assert re.match(rf'^{entrance}: \d*.?\d+ ms$', out, re.IGNORECASE)
+        assert err == ''
 
 
 # class DecoratorTests(TestCase):

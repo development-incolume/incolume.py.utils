@@ -1,4 +1,5 @@
 """Configurate tests."""
+
 # -*- coding: utf-8 -*-
 from pathlib import Path
 from tempfile import NamedTemporaryFile, gettempdir
@@ -7,19 +8,19 @@ import pytest
 import rstr
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope='function')
 def temp_file_name():
     """Generate aleatory filename into tempdir for tests."""
     return Path(gettempdir()) / rstr.letters(15)
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope='function')
 def changelog_stamps():
     """Return labels Keep a Changelog."""
-    return "Added Changed Deprecated Removed Fixed Security".upper().strip()
+    return 'Added Changed Deprecated Removed Fixed Security'.upper().strip()
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope='function')
 def return_git_tag():
     """Return fake `git tag -n`."""
     return """1.0.0 Added: Fake record; other fake; Fixed: Fake fixed
