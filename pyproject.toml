@@ -42,6 +42,17 @@ dev = [
     "tox>=4.25.0",
 ]
 
+[tool.poetry.urls]
+'Documentation' = ''
+'Source' = 'https://github.com/development-incolume/incolume.py.utils'
+'Git' = 'https://github.com/development-incolume/incolume.py.utils.git'
+'Tracker' = 'https://github.com/development-incolume/incolume.py.utils/issues'
+'Oficial' = 'https://pypi.org/project/incolume.py.utils/'
+
+[project.scripts]
+incolumepy-utils = 'incolume.py.utils.main:run'
+pw = 'incolume.py.utils.cli:encode'
+
 [tool.poetry]
 name = "incolumepy.utils"
 version = "3.0.0a3"
@@ -69,17 +80,6 @@ exclude = [
   "my_package/excluded.py",
   "tests/",
 ]
-
-[tool.poetry.urls]
-'Documentation' = 'https://brito.blog.incolume.com.br/search/label/development-incolume'
-'Source' = 'https://gitlab.com/development-incolume/incolumepy.utils'
-'Git' = 'https://gitlab.com/development-incolume/incolumepy.utils.git'
-'Tracker' = 'https://gitlab.com/development-incolume/incolumepy.utils/issues'
-'Oficial' = 'https://pypi.org/project/incolumepy.utils/'
-
-[project.scripts]
-incolumepy-utils = 'incolume.py.utils.main:run'
-pw = 'incolume.py.utils.cli:encode'
 
 [tool.poetry.dependencies]
 python = "^3.9"
