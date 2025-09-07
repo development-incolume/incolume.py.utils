@@ -65,10 +65,6 @@ exclude = [
 
 [project.scripts]
 incolumepy-utils = 'incolume.py.utils.main:run'
-changelog = 'incolume.py.utils.cli:changelog'
-gcl = 'incolume.py.utils.cli:changelog'
-gencl = 'incolume.py.utils.cli:changelog'
-gchangelog = 'incolume.py.utils.cli:changelog'
 pw = 'incolume.py.utils.cli:encode'
 
 [tool.poetry.dependencies]
