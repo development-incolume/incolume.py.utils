@@ -28,6 +28,20 @@ dependencies = [
     "tqdm",
 ]
 
+[dependency-groups]
+dev = [
+    "incolume-py-changelog>=0.8.0 ; python_full_version >= '3.9'",
+    "ipykernel>=6.29.5",
+    "jupyter>=1.1.1",
+    "mkdocs-material>=9.6.18",
+    "pytest-cov>=5.0.0",
+    "pytest-mock>=3.14.1",
+    "ruff>=0.12.12",
+    "safety>=3.6.1",
+    "taskipy>=1.14.1",
+    "tox>=4.25.0",
+]
+
 [tool.poetry]
 name = "incolumepy.utils"
 version = "3.0.0a3"
@@ -273,18 +287,6 @@ include_trailing_comma = true
 
 [pycodestyle]
 
-[dependency-groups]
-dev = [
-    "ipykernel>=6.29.5",
-    "jupyter>=1.1.1",
-    "mkdocs-material>=9.6.18",
-    "pytest-cov>=5.0.0",
-    "pytest-mock>=3.14.1",
-    "ruff>=0.12.12",
-    "safety>=3.6.1",
-    "taskipy>=1.14.1",
-    "tox>=4.25.0",
-]
 #max_line_length = 120
 
 # Fail
