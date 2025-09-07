@@ -1,7 +1,7 @@
 [project]
 name = "incolume.py.utils"
 version = "3.0.0a3"
-description = "Add your description here"
+description = "package incolume.py.utils"
 readme = "README.md"
 keywords = ['python', 'utils', 'incolume']
 requires-python = ">=3.8"
@@ -30,8 +30,8 @@ dependencies = [
 
 [tool.poetry]
 name = "incolumepy.utils"
-version = "3.0.0a2"
-description = "package incolumepy utils"
+version = "3.0.0a3"
+description = "package incolume.py.utils"
 keywords = ['python', 'utils', 'incolume']
 authors = ["britodfbr <contato@incolume.com.br>"]
 homepage = "https://pypi.org/project/incolumepy.utils"
@@ -63,13 +63,13 @@ exclude = [
 'Tracker' = 'https://gitlab.com/development-incolume/incolumepy.utils/issues'
 'Oficial' = 'https://pypi.org/project/incolumepy.utils/'
 
-[tool.poetry.scripts]
-incolumepy-utils = 'incolumepy.utils.main:run'
-changelog = 'incolumepy.utils.cli:changelog'
-gcl = 'incolumepy.utils.cli:changelog'
-gencl = 'incolumepy.utils.cli:changelog'
-gchangelog = 'incolumepy.utils.cli:changelog'
-pw = 'incolumepy.utils.cli:encode'
+[project.scripts]
+incolumepy-utils = 'incolume.py.utils.main:run'
+changelog = 'incolume.py.utils.cli:changelog'
+gcl = 'incolume.py.utils.cli:changelog'
+gencl = 'incolume.py.utils.cli:changelog'
+gchangelog = 'incolume.py.utils.cli:changelog'
+pw = 'incolume.py.utils.cli:encode'
 
 [tool.poetry.dependencies]
 python = "^3.8"
