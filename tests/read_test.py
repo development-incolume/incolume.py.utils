@@ -2,8 +2,8 @@
 
 import unittest
 
-from incolume.py.utils.tools import read
 from incolume.py.utils import versionfile
+from incolume.py.utils.tools import read
 
 
 class UtilsTest(unittest.TestCase):
@@ -14,5 +14,5 @@ class UtilsTest(unittest.TestCase):
         self.assertTrue(read(versionfile))
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

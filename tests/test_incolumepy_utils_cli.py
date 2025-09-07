@@ -22,33 +22,33 @@ from incolume.py.utils.cli import (
 class TestCLI:
     runner = CliRunner()
 
-    @pytest.fixture(scope="function")
+    @pytest.fixture(scope='function')
     def file(self):
-        file = Path(gettempdir()) / "CHANGELOG.md"
+        file = Path(gettempdir()) / 'CHANGELOG.md'
         return file
 
-    @pytest.fixture(scope="function")
+    @pytest.fixture(scope='function')
     def fakeurl(self):
-        return "http://fake.incolume.com.br/xpto"
+        return 'http://fake.incolume.com.br/xpto'
 
     def test_greeting(self, capsys):
-        result = self.runner.invoke(greeting, ["Peter"])
+        result = self.runner.invoke(greeting, ['Peter'])
         assert result.exit_code == 0
-        assert result.output == "Oi Peter!\n"
+        assert result.output == 'Oi Peter!\n'
 
-    @pytest.mark.skip(reason="dont ran..")
+    @pytest.mark.skip(reason='dont ran..')
     def test_encode_input(self):
-        result = self.runner.invoke(encode, input="\n")
+        result = self.runner.invoke(encode, input='\n')
         assert result.exit_code == 1
         print(result.output)
-        expected = "Password: "
+        expected = 'Password: '
         assert result.output == expected
 
     @pytest.mark.parametrize(
-        "args expected".split(),
+        ['args', 'expected'],
         (
-            (["-p", "abc123"], True),
-            (["--password", "abc123"], True),
+            (['-p', 'abc123'], True),
+            (['--password', 'abc123'], True),
         ),
     )
     def test_encode(self, args, expected, capsys):
@@ -56,14 +56,14 @@ class TestCLI:
         result = self.runner.invoke(encode, args)
         out, err = capsys.readouterr()
         assert bool(result) == expected
-        assert out == ""
-        assert err == ""
+        assert out == ''
+        assert err == ''
 
     @pytest.mark.parametrize(
-        "args expected".split(),
+        ['args', 'expected'],
         (
             ([], sys.platform),
-            (["--shout"], f"{sys.platform.upper()}!!!!"),
+            (['--shout'], f'{sys.platform.upper()}!!!!'),
         ),
     )
     def test_info(self, args, expected):
@@ -72,11 +72,11 @@ class TestCLI:
         assert result.output.strip() == expected
 
     @pytest.mark.parametrize(
-        "args expected".split(),
+        ['args', 'expected'],
         (
             ([], sys.platform),
-            (["--no-shout"], sys.platform),
-            (["--shout"], f"{sys.platform.upper()}!!!!"),
+            (['--no-shout'], sys.platform),
+            (['--shout'], f'{sys.platform.upper()}!!!!'),
         ),
     )
     def test_info1(self, args, expected):
@@ -85,12 +85,12 @@ class TestCLI:
         assert result.output.strip() == expected
 
     @pytest.mark.parametrize(
-        "args expected".split(),
+        ['args', 'expected'],
         (
             ([], sys.platform),
-            (["--shout"], f"{sys.platform.upper()}!!!!"),
-            (["-S"], sys.platform),
-            (["--no-shout"], sys.platform),
+            (['--shout'], f'{sys.platform.upper()}!!!!'),
+            (['-S'], sys.platform),
+            (['--no-shout'], sys.platform),
         ),
     )
     def test_info2(self, args, expected):
@@ -99,11 +99,11 @@ class TestCLI:
         assert result.output.strip() == expected
 
     @pytest.mark.parametrize(
-        "args expected".split(),
+        ['args', 'expected'],
         (
-            (["--lower"], sys.platform),
-            (["--upper"], sys.platform.upper()),
-            (["--capitalize"], sys.platform.capitalize()),
+            (['--lower'], sys.platform),
+            (['--upper'], sys.platform.upper()),
+            (['--capitalize'], sys.platform.capitalize()),
         ),
     )
     def test_info3(self, args, expected):
@@ -112,12 +112,12 @@ class TestCLI:
         assert result.output.strip() == expected
 
     @pytest.mark.parametrize(
-        "args expected".split(),
+        ['args', 'expected'],
         (
-            (["--hash-type", "md5"], "MD5"),
-            (["--hash-type", "MD5"], "MD5"),
-            (["--hash-type", "SHA1"], "SHA1"),
-            (["--hash-type", "sha1"], "SHA1"),
+            (['--hash-type', 'md5'], 'MD5'),
+            (['--hash-type', 'MD5'], 'MD5'),
+            (['--hash-type', 'SHA1'], 'SHA1'),
+            (['--hash-type', 'sha1'], 'SHA1'),
         ),
     )
     def test_digest(self, args, expected):
@@ -127,37 +127,37 @@ class TestCLI:
         assert result.output.strip() == expected
 
     @pytest.mark.parametrize(
-        "entrance args".split(),
+        ['entrance', 'args'],
         (
             pytest.param(
-                "# CHANGELOG",
-                ["-r", "-p"],
+                '# CHANGELOG',
+                ['-r', '-p'],
                 # marks=pytest.mark.skip,
             ),
             pytest.param(
-                "[Keep a Changelog]",
-                ["-r"],
+                '[Keep a Changelog]',
+                ['-r'],
                 # marks=pytest.mark.skip
             ),
             pytest.param(
-                "[Semantic Versioning]",
-                ["-r"],
+                '[Semantic Versioning]',
+                ['-r'],
                 # marks=pytest.mark.skip
             ),
             pytest.param(
-                "[Conventional Commit]",
-                ["-r"],
+                '[Conventional Commit]',
+                ['-r'],
                 # marks=pytest.mark.skip
             ),
             pytest.param(
-                "[incolumepy.utils]",
+                '[incolumepy.utils]',
                 [],
                 # marks=pytest.mark.skip
             ),
         ),
     )
     def test_changelog(self, entrance, args, file, fakeurl):
-        args.extend(["-u", fakeurl, file.as_posix()])
+        args.extend(['-u', fakeurl, file.as_posix()])
         result = self.runner.invoke(changelog, args)
         assert result
         content = file.read_text()
@@ -165,16 +165,18 @@ class TestCLI:
         assert entrance in content
 
     @pytest.mark.parametrize(
-        "entrance expected".split(),
+        ['entrance', 'expected'],
         (
             pytest.param(
                 changelog,
-                "xpto",
+                'xpto',
             ),
         ),
     )
-    def test_changelog_logging(self, entrance, expected, caplog, file, fakeurl):
-        result = self.runner.invoke(entrance, ["-p", "-u", fakeurl, file])
+    def test_changelog_logging(
+        self, entrance, expected, caplog, file, fakeurl
+    ):
+        result = self.runner.invoke(entrance, ['-p', '-u', fakeurl, file])
         assert result
         assert caplog.records == []
         for log in caplog.records:

@@ -14,179 +14,181 @@ from incolume.py.utils.changelog import (
     update_changelog,
 )
 
-__author__ = "@britodfbr"  # pragma: no cover
+__author__ = '@britodfbr'  # pragma: no cover
 
 
 class TestCase:
     @pytest.mark.parametrize(
-        "entrance",
+        'entrance',
         (
-            "1.0.0 Added: Fake record; other fake record; Fixed: Fake fixed",
-            "1.3.0 Fixed: Fake record; other fake record; Changed: Fake fixed",
-            "2.2.1 Security: Fake record; other fake record; Fake fixed",
-            "1.0.5 Added: Fake record; other fake record; Fixed: Fake fixed",
+            '1.0.0 Added: Fake record; other fake record; Fixed: Fake fixed',
+            '1.3.0 Fixed: Fake record; other fake record; Changed: Fake fixed',
+            '2.2.1 Security: Fake record; other fake record; Fake fixed',
+            '1.0.5 Added: Fake record; other fake record; Fixed: Fake fixed',
         ),
     )
     def test_msg_classify_type(self, entrance):
         assert isinstance(msg_classify(entrance), dict)
 
     @pytest.mark.parametrize(
-        "entrance",
+        'entrance',
         (
-            "1.0.0 Added: Fake record; other fake record; Fixed: Fake fixed",
-            "1.0.5 Added: Fake record; other fake record; Fixed: Fake fixed",
-            "1.3.0 Fixed: Fake record; other fake record; Changed: Fake fixed",
-            "2.0.0 Security: Aderência a https://keepachangelog.com/pt-BR/1.0.0/",
-            "2.2.1 Security: Fake record; other fake record; Fake fixed",
+            '1.0.0 Added: Fake record; other fake record; Fixed: Fake fixed',
+            '1.0.5 Added: Fake record; other fake record; Fixed: Fake fixed',
+            '1.3.0 Fixed: Fake record; other fake record; Changed: Fake fixed',
+            '2.0.0 Security: Aderência a https://keepachangelog.com/pt-BR/1.0.0/',
+            '2.2.1 Security: Fake record; other fake record; Fake fixed',
         ),
     )
     def test_msg_classify_value(self, entrance):
         result = msg_classify(entrance)
-        assert "key" in result
-        assert "date" in result
-        assert "messages" in result
+        assert 'key' in result
+        assert 'date' in result
+        assert 'messages' in result
 
     @pytest.mark.parametrize(
-        "entrance expected".split(),
+        ['entrance', 'expected'],
         (
             pytest.param(
-                {"msg": "1.0.0 Added: Fake record; other fakrecord; Fixed: Fake fixed"},
                 {
-                    "key": "1.0.0",
-                    "date": "2018-10-19",
-                    "messages": {
-                        "Added": ["Fake record", " other fakrecord"],
-                        "Fixed": ["Fake fixed"],
+                    'msg': '1.0.0 Added: Fake record; other fakrecord; Fixed: Fake fixed'
+                },
+                {
+                    'key': '1.0.0',
+                    'date': '2018-10-19',
+                    'messages': {
+                        'Added': ['Fake record', ' other fakrecord'],
+                        'Fixed': ['Fake fixed'],
                     },
                 },
                 # marks=pytest.mark.skip(reason='skiped')
             ),
             pytest.param(
                 {
-                    "msg": "1.5.0 Added: Fake record; "
-                    "other fake record; Fixed: Fake fixed",
-                    "lang": "en-US",
+                    'msg': '1.5.0 Added: Fake record; '
+                    'other fake record; Fixed: Fake fixed',
+                    'lang': 'en-US',
                 },
                 {
-                    "key": "1.5.0",
-                    "date": "2022-01-22",
-                    "messages": {
-                        "Added": ["Fake record", " other fake record"],
-                        "Fixed": ["Fake fixed"],
+                    'key': '1.5.0',
+                    'date': '2022-01-22',
+                    'messages': {
+                        'Added': ['Fake record', ' other fake record'],
+                        'Fixed': ['Fake fixed'],
                     },
                 },
                 # marks=pytest.mark.skip(reason='skiped')
             ),
             pytest.param(
                 {
-                    "msg": "2.0.0 Segurança: Aderência a "
-                    "https://keepachangelog.com/pt-BR/1.0.0/",
-                    "lang": "pt-BR",
+                    'msg': '2.0.0 Segurança: Aderência a '
+                    'https://keepachangelog.com/pt-BR/1.0.0/',
+                    'lang': 'pt-BR',
                 },
                 {
-                    "key": "2.0.0",
-                    "date": "2022-02-16",
-                    "messages": {
-                        "Security": [
-                            "Aderência a https://keepachangelog.com/pt-BR/1.0.0/"
-                        ]
+                    'key': '2.0.0',
+                    'date': '2022-02-16',
+                    'messages': {
+                        'Security': [
+                            'Aderência a https://keepachangelog.com/pt-BR/1.0.0/',
+                        ],
                     },
                 },
                 # marks=pytest.mark.skip(reason='skiped')
             ),
             pytest.param(
                 {
-                    "msg": "2.4.1 Obsoleto: Fakerecord; other fkrecord; Fak fixd",
-                    "lang": "pt-BR",
+                    'msg': '2.4.1 Obsoleto: Fakerecord; other fkrecord; Fak fixd',
+                    'lang': 'pt-BR',
                 },
                 {
-                    "key": "2.4.1",
-                    "date": "2022-03-08",
-                    "messages": {
-                        "Deprecated": [
-                            "Fakerecord",
-                            " other fkrecord",
-                            " Fak fixd",
-                        ]
+                    'key': '2.4.1',
+                    'date': '2022-03-08',
+                    'messages': {
+                        'Deprecated': [
+                            'Fakerecord',
+                            ' other fkrecord',
+                            ' Fak fixd',
+                        ],
                     },
                 },
                 # marks=pytest.mark.skip(reason='skiped')
             ),
             pytest.param(
                 {
-                    "msg": "1.0.1 deprecated: Fake record; "
-                    "Removed: other fake; ab; cd; ef;gh; ij; kl; "
-                    "mn; op; Fixed: Fake fixed",
+                    'msg': '1.0.1 deprecated: Fake record; '
+                    'Removed: other fake; ab; cd; ef;gh; ij; kl; '
+                    'mn; op; Fixed: Fake fixed',
                     # "lang": "pt-BR",
                 },
                 {
-                    "key": "1.0.1",
-                    "date": "2018-10-19",
-                    "messages": {
-                        "Fixed": ["Fake fixed"],
-                        "Removed": [
-                            "other fake",
-                            " ab",
-                            " cd",
-                            " ef",
-                            "gh",
-                            " ij",
-                            " kl",
-                            " mn",
-                            " op",
+                    'key': '1.0.1',
+                    'date': '2018-10-19',
+                    'messages': {
+                        'Fixed': ['Fake fixed'],
+                        'Removed': [
+                            'other fake',
+                            ' ab',
+                            ' cd',
+                            ' ef',
+                            'gh',
+                            ' ij',
+                            ' kl',
+                            ' mn',
+                            ' op',
                         ],
-                        "Deprecated": ["Fake record"],
+                        'Deprecated': ['Fake record'],
                     },
                 },
                 # marks=pytest.mark.skip(reason='skiped')
             ),
             pytest.param(
                 {
-                    "msg": "2.8.0      Adicionado: Unreleased/"
-                    "Não publicado para o número de versão e adicionar "
-                    "uma nova seção Unreleased/Não publicado no topo; "
-                    "Tradução para labels ptBR -> enUS; "
-                    "Implementado nova função iter_logs(); Fixed: "
-                    "Formatação visual para CHANGELOG.md retirado link"
-                    " quebrado para 1ª release; Changed: Fatorado "
-                    "código para changelog_body(); Security: em caso de"
-                    " vulnerabilidades.;Adicionado: para novos "
-                    "recursos.; Modificado: para alterações em "
-                    "recursos existentes.; "
-                    "Obsoleto: para recursos que serão "
-                    "removidos nas próximas versões.;Removido :para "
-                    "recursos removidos nesta versão.; Corrigido :para "
-                    "qualquer correção de bug.; Segurança :em caso de "
-                    "vulnerabilidades.;",
+                    'msg': '2.8.0      Adicionado: Unreleased/'
+                    'Não publicado para o número de versão e adicionar '
+                    'uma nova seção Unreleased/Não publicado no topo; '
+                    'Tradução para labels ptBR -> enUS; '
+                    'Implementado nova função iter_logs(); Fixed: '
+                    'Formatação visual para CHANGELOG.md retirado link'
+                    ' quebrado para 1ª release; Changed: Fatorado '
+                    'código para changelog_body(); Security: em caso de'
+                    ' vulnerabilidades.;Adicionado: para novos '
+                    'recursos.; Modificado: para alterações em '
+                    'recursos existentes.; '
+                    'Obsoleto: para recursos que serão '
+                    'removidos nas próximas versões.;Removido :para '
+                    'recursos removidos nesta versão.; Corrigido :para '
+                    'qualquer correção de bug.; Segurança :em caso de '
+                    'vulnerabilidades.;',
                 },
                 {
-                    "key": "2.8.0",
-                    "date": "2023-07-22",
-                    "messages": {
-                        "Added": [
-                            "Unreleased/Não publicado para o número de versão "
-                            "e adicionar uma nova seção Unreleased/Não "
-                            "publicado no topo",
-                            " Tradução para labels ptBR -> enUS",
-                            " Implementado nova função iter_logs()",
-                            "para novos recursos.",
+                    'key': '2.8.0',
+                    'date': '2023-07-22',
+                    'messages': {
+                        'Added': [
+                            'Unreleased/Não publicado para o número de versão '
+                            'e adicionar uma nova seção Unreleased/Não '
+                            'publicado no topo',
+                            ' Tradução para labels ptBR -> enUS',
+                            ' Implementado nova função iter_logs()',
+                            'para novos recursos.',
                         ],
-                        "Changed": [
-                            "Fatorado código para changelog_body()",
-                            "para alterações em recursos existentes.",
+                        'Changed': [
+                            'Fatorado código para changelog_body()',
+                            'para alterações em recursos existentes.',
                         ],
-                        "Fixed": [
-                            "para qualquer correção de bug.",
-                            "Formatação visual para CHANGELOG.md retirado "
-                            "link quebrado para 1ª release",
+                        'Fixed': [
+                            'para qualquer correção de bug.',
+                            'Formatação visual para CHANGELOG.md retirado '
+                            'link quebrado para 1ª release',
                         ],
-                        "Deprecated": [
-                            "para recursos que serão removidos nas próximas versões."
+                        'Deprecated': [
+                            'para recursos que serão removidos nas próximas versões.',
                         ],
-                        "Removed": ["para recursos removidos nesta versão."],
-                        "Security": [
-                            "em caso de vulnerabilidades.",
-                            "em caso de vulnerabilidades.",
+                        'Removed': ['para recursos removidos nesta versão.'],
+                        'Security': [
+                            'em caso de vulnerabilidades.',
+                            'em caso de vulnerabilidades.',
                         ],
                     },
                 },
@@ -199,74 +201,74 @@ class TestCase:
         assert expected == result
 
     @pytest.mark.parametrize(
-        "entrance expected".split(),
+        ['entrance', 'expected'],
         (
             pytest.param(
                 {
-                    "text": "1.0.1 Obsoleto: Fake record; Removed: other fake;"
-                    " ab; cd; ef;gh; ij; kl; mn;op; Fixed: Fake fixed,"
-                    "Unreleased    Added: Unreleased/Não publicado "
-                    "para o número de versão e adicionar uma nova "
-                    "seção Unreleased/Não publicado no topo; Tradução "
-                    "para labels ptBR -> enUS; Implementado nova "
-                    "função iter_logs(); Fixed: Formatação visual "
-                    "para CHANGELOG.md retirado link quebrado para 1ª "
-                    "release; Changed: Fatorado código para "
-                    "changelog_body(); Security: em caso de "
-                    "vulnerabilidades.;Adicionado: para novos "
-                    "recursos.; Modificado: para alterações em "
-                    "recursos existentes.; Obsoleto: para recursos que"
-                    " serão removidos nas próximas versões.;Removido"
-                    " :para recursos removidos nesta versão.; "
-                    "Corrigido :para qualquer correção de bug.; "
-                    "Segurança :em caso de vulnerabilidades.;",
-                    "lang": None,
+                    'text': '1.0.1 Obsoleto: Fake record; Removed: other fake;'
+                    ' ab; cd; ef;gh; ij; kl; mn;op; Fixed: Fake fixed,'
+                    'Unreleased    Added: Unreleased/Não publicado '
+                    'para o número de versão e adicionar uma nova '
+                    'seção Unreleased/Não publicado no topo; Tradução '
+                    'para labels ptBR -> enUS; Implementado nova '
+                    'função iter_logs(); Fixed: Formatação visual '
+                    'para CHANGELOG.md retirado link quebrado para 1ª '
+                    'release; Changed: Fatorado código para '
+                    'changelog_body(); Security: em caso de '
+                    'vulnerabilidades.;Adicionado: para novos '
+                    'recursos.; Modificado: para alterações em '
+                    'recursos existentes.; Obsoleto: para recursos que'
+                    ' serão removidos nas próximas versões.;Removido'
+                    ' :para recursos removidos nesta versão.; '
+                    'Corrigido :para qualquer correção de bug.; '
+                    'Segurança :em caso de vulnerabilidades.;',
+                    'lang': None,
                 },
                 [
                     (
-                        "1.0.1",
+                        '1.0.1',
                         {
-                            "key": "1.0.1",
-                            "date": "2018-10-19",
-                            "messages": {
-                                "Added": [
-                                    "Unreleased/Não publicado para o número "
-                                    "de versão e adicionar uma nova seção "
-                                    "Unreleased/Não publicado no topo",
-                                    " Tradução para labels ptBR -> enUS",
-                                    " Implementado nova função iter_logs()",
-                                    "para novos recursos.",
+                            'key': '1.0.1',
+                            'date': '2018-10-19',
+                            'messages': {
+                                'Added': [
+                                    'Unreleased/Não publicado para o número '
+                                    'de versão e adicionar uma nova seção '
+                                    'Unreleased/Não publicado no topo',
+                                    ' Tradução para labels ptBR -> enUS',
+                                    ' Implementado nova função iter_logs()',
+                                    'para novos recursos.',
                                 ],
-                                "Changed": [
-                                    "Fatorado código para changelog_body()",
-                                    "para alterações em recursos existentes.",
+                                'Changed': [
+                                    'Fatorado código para changelog_body()',
+                                    'para alterações em recursos existentes.',
                                 ],
-                                "Fixed": [
-                                    "para qualquer correção de bug.",
-                                    "Fake fixed,Unreleased",
-                                    "Formatação visual para CHANGELOG.md "
-                                    "retirado link quebrado para 1ª release",
+                                'Fixed': [
+                                    'para qualquer correção de bug.',
+                                    'Fake fixed,Unreleased',
+                                    'Formatação visual para CHANGELOG.md '
+                                    'retirado link quebrado para 1ª release',
                                 ],
-                                "Deprecated": [
-                                    "Fake record",
-                                    "para recursos que serão removidos "
-                                    "nas próximas versões.",
+                                'Deprecated': [
+                                    'Fake record',
+                                    'para recursos que serão removidos '
+                                    'nas próximas versões.',
                                 ],
-                                "Removed": [
-                                    "other fake",
-                                    " ab",
-                                    " cd",
-                                    " ef",
-                                    "gh",
-                                    " ij",
-                                    " kl",
-                                    " mn",
-                                    "op",
-                                    "para recursos removidos nesta versão.",
+                                'Removed': [
+                                    'other fake',
+                                    ' ab',
+                                    ' cd',
+                                    ' ef',
+                                    'gh',
+                                    ' ij',
+                                    ' kl',
+                                    ' mn',
+                                    'op',
+                                    'para recursos removidos nesta versão.',
                                 ],
-                                "Security": [
-                                    "em caso de vulnerabilidades.",
-                                    "em caso de vulnerabilidades.",
+                                'Security': [
+                                    'em caso de vulnerabilidades.',
+                                    'em caso de vulnerabilidades.',
                                 ],
                             },
                         },
@@ -276,58 +278,58 @@ class TestCase:
             ),
             (
                 {
-                    "text": """
+                    'text': """
                     1.0.0 Added: Fake record; other fake; Fixed: Fake fixed",
                     1.3.0 Fixed: Fake record; other fake; Changed: Fake fixed",
                     1.5.0 Added: Fake record; other fake; Fixed: Fake fixed",
                     2.2.0 Security: Fake record; other record; Fake fixed",
-                    """
+                    """,
                 },
                 [
                     (
-                        "1.0.0",
+                        '1.0.0',
                         {
-                            "date": "2018-10-19",
-                            "key": "1.0.0",
-                            "messages": {
-                                "Added": ["Fake record", " other fake"],
-                                "Fixed": ['Fake fixed",'],
+                            'date': '2018-10-19',
+                            'key': '1.0.0',
+                            'messages': {
+                                'Added': ['Fake record', ' other fake'],
+                                'Fixed': ['Fake fixed",'],
                             },
                         },
                     ),
                     (
-                        "1.3.0",
+                        '1.3.0',
                         {
-                            "date": "2022-01-21",
-                            "key": "1.3.0",
-                            "messages": {
-                                "Changed": ['Fake fixed",'],
-                                "Fixed": ["Fake record", " other fake"],
+                            'date': '2022-01-21',
+                            'key': '1.3.0',
+                            'messages': {
+                                'Changed': ['Fake fixed",'],
+                                'Fixed': ['Fake record', ' other fake'],
                             },
                         },
                     ),
                     (
-                        "1.5.0",
+                        '1.5.0',
                         {
-                            "date": "2022-01-22",
-                            "key": "1.5.0",
-                            "messages": {
-                                "Added": ["Fake record", " other fake"],
-                                "Fixed": ['Fake fixed",'],
+                            'date': '2022-01-22',
+                            'key': '1.5.0',
+                            'messages': {
+                                'Added': ['Fake record', ' other fake'],
+                                'Fixed': ['Fake fixed",'],
                             },
                         },
                     ),
                     (
-                        "2.2.0",
+                        '2.2.0',
                         {
-                            "date": "2022-02-16",
-                            "key": "2.2.0",
-                            "messages": {
-                                "Security": [
-                                    "Fake record",
-                                    " other record",
+                            'date': '2022-02-16',
+                            'key': '2.2.0',
+                            'messages': {
+                                'Security': [
+                                    'Fake record',
+                                    ' other record',
                                     ' Fake fixed",',
-                                ]
+                                ],
                             },
                         },
                     ),
@@ -335,30 +337,30 @@ class TestCase:
             ),
             (
                 {
-                    "text": "1.0.0 Security: a;b;c; "
-                    "Removed: 1;2;3; Changed: a;b;c;d;e; "
-                    "Fixed: http://example.com; http://httpbin.com;"
-                    "Deprecated: 1;2;3;a;s;b; Added: a1;a2;a3."
+                    'text': '1.0.0 Security: a;b;c; '
+                    'Removed: 1;2;3; Changed: a;b;c;d;e; '
+                    'Fixed: http://example.com; http://httpbin.com;'
+                    'Deprecated: 1;2;3;a;s;b; Added: a1;a2;a3.',
                 },
                 [
                     (
-                        "1.0.0",
+                        '1.0.0',
                         {
-                            "key": "1.0.0",
-                            "date": "2018-10-19",
-                            "messages": {
-                                "Added": "a1 a2 a3.".split(),
-                                "Changed": "a;b;c;d;e".split(";"),
-                                "Deprecated": "1;2;3;a;s;b".split(";"),
-                                "Fixed": [
-                                    "http://example.com",
-                                    " http://httpbin.com",
+                            'key': '1.0.0',
+                            'date': '2018-10-19',
+                            'messages': {
+                                'Added': ['a1', 'a2', 'a3.'],
+                                'Changed': ['a', 'b', 'c', 'd', 'e'],
+                                'Deprecated': ['1', '2', '3', 'a', 's', 'b'],
+                                'Fixed': [
+                                    'http://example.com',
+                                    ' http://httpbin.com',
                                 ],
-                                "Removed": ["1", "2", "3"],
-                                "Security": ["a", "b", "c"],
+                                'Removed': ['1', '2', '3'],
+                                'Security': ['a', 'b', 'c'],
                             },
                         },
-                    )
+                    ),
                 ],
             ),
         ),
@@ -367,11 +369,11 @@ class TestCase:
         assert changelog_messages(**entrance) == expected
 
     @pytest.mark.parametrize(
-        "entrance",
+        'entrance',
         (
-            {"changelog_file": Path(gettempdir()) / "CHANGELOG.md"},
+            {'changelog_file': Path(gettempdir()) / 'CHANGELOG.md'},
             pytest.param(
-                {"changelog_file": None},
+                {'changelog_file': None},
                 # marks=pytest.mark.skip(
                 #     reason='need mock to write CHANGELOG.md')
             ),
@@ -382,36 +384,42 @@ class TestCase:
     )
     def test_changelog_write(self, entrance, ftemp, return_git_tag, mocker):
         result = changelog_messages(text=return_git_tag)
-        entrance.update({"content": result})
-        if "changelog_file" not in entrance:
-            entrance.update({"changelog_file": ftemp})
+        entrance.update({'content': result})
+        if 'changelog_file' not in entrance:
+            entrance.update({'changelog_file': ftemp})
 
-        mocked = mocker.Mock(spec=incolume.py.utils.tools.changelog.changelog_write)
+        mocked = mocker.Mock(
+            spec=incolume.py.utils.tools.changelog.changelog_write
+        )
         result = mocked(**entrance)
         esperado = mocker.call(**entrance)
         assert esperado == mocked.call_args  # cobertura QA
         assert result  # Resultado
 
     @pytest.mark.parametrize(
-        "entrance",
+        'entrance',
         (
             {},
-            {"changelog_file": Path(gettempdir()).joinpath("xpto.md").as_posix()},
+            {
+                'changelog_file': Path(gettempdir())
+                .joinpath('xpto.md')
+                .as_posix()
+            },
         ),
     )
     def test_update_changelog(self, entrance, ftemp, return_git_tag):
-        entrance.update({"content": return_git_tag})
-        if "changelog_file" not in entrance:
-            entrance.update({"changelog_file": ftemp})
+        entrance.update({'content': return_git_tag})
+        if 'changelog_file' not in entrance:
+            entrance.update({'changelog_file': ftemp})
         assert update_changelog(**entrance)
 
     @pytest.mark.parametrize(
-        "entrance expected".split(),
+        ['entrance', 'expected'],
         (
             pytest.param(
                 {
-                    "text": "Unrelesed deprecated: suport Python 3.6-; ",
-                    "lang": "fr-FR",
+                    'text': 'Unrelesed deprecated: suport Python 3.6-; ',
+                    'lang': 'fr-FR',
                 },
                 "fr-FR not suported! Use dict_keys(['en-US', 'pt-BR', 'all'])",
             ),
@@ -422,13 +430,13 @@ class TestCase:
         assert caplog.records[0].message == expected
 
     @pytest.mark.parametrize(
-        "entrance expected".split(),
+        ['entrance', 'expected'],
         (
             pytest.param(
                 {
-                    "msg": "WIP suport Python 3.6-;",
+                    'msg': 'WIP suport Python 3.6-;',
                 },
-                "",
+                '',
                 # marks=pytest.mark.skip(),
             ),
         ),
@@ -444,13 +452,13 @@ class TestCase:
             assert expected in caplog.records
 
     @pytest.mark.parametrize(
-        "entrance expected".split(),
+        ['entrance', 'expected'],
         (
             pytest.param(
                 {
-                    "text": "Unrelesed suport Python 3.6-; ",
+                    'text': 'Unrelesed suport Python 3.6-; ',
                 },
-                "ValueError: not enough values to unpack (expected 2, got 1)",
+                'ValueError: not enough values to unpack (expected 2, got 1)',
             ),
         ),
     )
@@ -459,46 +467,46 @@ class TestCase:
         assert caplog.records[0].message == expected
 
     @pytest.mark.parametrize(
-        "entrance expected".split(),
+        ['entrance', 'expected'],
         (
             (
                 {},
                 [
-                    "# CHANGELOG\n\n\n",
-                    "All notable changes to this project",
-                    " will be documented in this file.\n\n",
-                    "The format is based on ",
-                    "[Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ",
-                    "this project adheres to [Semantic Versioning]"
-                    "(https://semver.org/spec/v2.0.0.html) and "
-                    "[Conventional Commit]"
-                    "(https://www.conventionalcommits.org/"
-                    "pt-br/v1.0.0/).\n\n",
-                    "This file was automatically generated for",
-                    " [incolume.py.utils]"
-                    "(https://gitlab.com/development-incolume/"
-                    f"incolume.py.utils/-/tree/{__version__})",
-                    "\n\n---\n",
+                    '# CHANGELOG\n\n\n',
+                    'All notable changes to this project',
+                    ' will be documented in this file.\n\n',
+                    'The format is based on ',
+                    '[Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ',
+                    'this project adheres to [Semantic Versioning]'
+                    '(https://semver.org/spec/v2.0.0.html) and '
+                    '[Conventional Commit]'
+                    '(https://www.conventionalcommits.org/'
+                    'pt-br/v1.0.0/).\n\n',
+                    'This file was automatically generated for',
+                    ' [incolume.py.utils]'
+                    '(https://gitlab.com/development-incolume/'
+                    f'incolume.py.utils/-/tree/{__version__})',
+                    '\n\n---\n',
                 ],
             ),
             (
-                {"reverse": False},
+                {'reverse': False},
                 [
-                    "# CHANGELOG\n\n\n",
-                    "All notable changes to this project",
-                    " will be documented in this file.\n\n",
-                    "The format is based on ",
-                    "[Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ",
-                    "this project adheres to [Semantic Versioning]"
-                    "(https://semver.org/spec/v2.0.0.html) and "
-                    "[Conventional Commit]"
-                    "(https://www.conventionalcommits.org/"
-                    "pt-br/v1.0.0/).\n\n",
-                    "This file was automatically generated for",
-                    " [incolume.py.utils]"
-                    "(https://gitlab.com/development-incolume/"
-                    f"incolume.py.utils/-/tree/{__version__})",
-                    "\n\n---\n",
+                    '# CHANGELOG\n\n\n',
+                    'All notable changes to this project',
+                    ' will be documented in this file.\n\n',
+                    'The format is based on ',
+                    '[Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ',
+                    'this project adheres to [Semantic Versioning]'
+                    '(https://semver.org/spec/v2.0.0.html) and '
+                    '[Conventional Commit]'
+                    '(https://www.conventionalcommits.org/'
+                    'pt-br/v1.0.0/).\n\n',
+                    'This file was automatically generated for',
+                    ' [incolume.py.utils]'
+                    '(https://gitlab.com/development-incolume/'
+                    f'incolume.py.utils/-/tree/{__version__})',
+                    '\n\n---\n',
                 ],
             ),
         ),
@@ -509,57 +517,57 @@ class TestCase:
         assert result == expected
 
     @pytest.mark.parametrize(
-        "entrance expected".split(),
+        ['entrance', 'expected'],
         (
             pytest.param(
-                {"content": "", "content_formated": []},
-                ["\n---\n\n"],
+                {'content': '', 'content_formated': []},
+                ['\n---\n\n'],
             ),
             pytest.param(
                 {
-                    "content": [
+                    'content': [
                         (
-                            "0.1.0",
+                            '0.1.0',
                             {
-                                "date": "2023-7-19",
-                                "key": "0.1.0",
-                                "messages": {
-                                    "Added": ["Fake record", " other fake"],
-                                    "Fixed": ['Fake fixed",'],
+                                'date': '2023-7-19',
+                                'key': '0.1.0',
+                                'messages': {
+                                    'Added': ['Fake record', ' other fake'],
+                                    'Fixed': ['Fake fixed",'],
                                 },
                             },
                         ),
                         (
-                            "1.0.0a0",
+                            '1.0.0a0',
                             {
-                                "date": "2023-7-19",
-                                "key": "1.0.0a0",
-                                "messages": {
-                                    "Added": ["Fake record", " other fake"],
-                                    "Fixed": ['Fake fixed",'],
+                                'date': '2023-7-19',
+                                'key': '1.0.0a0',
+                                'messages': {
+                                    'Added': ['Fake record', ' other fake'],
+                                    'Fixed': ['Fake fixed",'],
                                 },
                             },
                         ),
                         (
-                            "1.0.0",
+                            '1.0.0',
                             {
-                                "date": "2023-7-19",
-                                "key": "1.0.0",
-                                "messages": {
-                                    "Added": ["Fake record", " other fake"],
-                                    "Fixed": ['Fake fixed",'],
+                                'date': '2023-7-19',
+                                'key': '1.0.0',
+                                'messages': {
+                                    'Added': ['Fake record', ' other fake'],
+                                    'Fixed': ['Fake fixed",'],
                                 },
                             },
                         ),
                     ],
-                    "content_formated": [],
+                    'content_formated': [],
                 },
                 [
-                    "\n---\n\n",
-                    "[1.0.0a0]: https://gitlab.com/development-incolume/"
-                    "incolume.py.utils/-/compare/1.0.0...1.0.0a0\n",
-                    "[0.1.0]: https://gitlab.com/development-incolume/"
-                    "incolume.py.utils/-/compare/1.0.0a0...0.1.0\n",
+                    '\n---\n\n',
+                    '[1.0.0a0]: https://gitlab.com/development-incolume/'
+                    'incolume.py.utils/-/compare/1.0.0...1.0.0a0\n',
+                    '[0.1.0]: https://gitlab.com/development-incolume/'
+                    'incolume.py.utils/-/compare/1.0.0a0...0.1.0\n',
                 ],
                 # marks=pytest.mark.skip,
             ),
@@ -573,10 +581,10 @@ class TestCase:
 
 class TestClassChangelog:
     @pytest.mark.parametrize(
-        "entrance",
+        'entrance',
         (
             {},
-            {"reverse": False},
+            {'reverse': False},
         ),
     )
     def test_init(self, entrance):
@@ -585,46 +593,46 @@ class TestClassChangelog:
         assert isinstance(o, Changelog)
 
     @pytest.mark.parametrize(
-        "entrance expected".split(),
+        ['entrance', 'expected'],
         (
             (
                 {},
                 [
-                    "# CHANGELOG\n\n\n",
-                    "All notable changes to this project",
-                    " will be documented in this file.\n\n",
-                    "The format is based on ",
-                    "[Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ",
-                    "this project adheres to [Semantic Versioning]"
-                    "(https://semver.org/spec/v2.0.0.html) and "
-                    "[Conventional Commit]"
-                    "(https://www.conventionalcommits.org/"
-                    "pt-br/v1.0.0/).\n\n",
-                    "This file was automatically generated for",
-                    " [incolume.py.utils]"
-                    "(https://gitlab.com/development-incolume/"
-                    f"incolume.py.utils/-/tree/{__version__})",
-                    "\n\n---\n",
+                    '# CHANGELOG\n\n\n',
+                    'All notable changes to this project',
+                    ' will be documented in this file.\n\n',
+                    'The format is based on ',
+                    '[Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ',
+                    'this project adheres to [Semantic Versioning]'
+                    '(https://semver.org/spec/v2.0.0.html) and '
+                    '[Conventional Commit]'
+                    '(https://www.conventionalcommits.org/'
+                    'pt-br/v1.0.0/).\n\n',
+                    'This file was automatically generated for',
+                    ' [incolume.py.utils]'
+                    '(https://gitlab.com/development-incolume/'
+                    f'incolume.py.utils/-/tree/{__version__})',
+                    '\n\n---\n',
                 ],
             ),
             (
-                {"reverse": False},
+                {'reverse': False},
                 [
-                    "# CHANGELOG\n\n\n",
-                    "All notable changes to this project",
-                    " will be documented in this file.\n\n",
-                    "The format is based on ",
-                    "[Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ",
-                    "this project adheres to [Semantic Versioning]"
-                    "(https://semver.org/spec/v2.0.0.html) and "
-                    "[Conventional Commit]"
-                    "(https://www.conventionalcommits.org/"
-                    "pt-br/v1.0.0/).\n\n",
-                    "This file was automatically generated for",
-                    " [incolume.py.utils]"
-                    "(https://gitlab.com/development-incolume/"
-                    f"incolume.py.utils/-/tree/{__version__})",
-                    "\n\n---\n",
+                    '# CHANGELOG\n\n\n',
+                    'All notable changes to this project',
+                    ' will be documented in this file.\n\n',
+                    'The format is based on ',
+                    '[Keep a Changelog](https://keepachangelog.com/en/1.0.0/), ',
+                    'this project adheres to [Semantic Versioning]'
+                    '(https://semver.org/spec/v2.0.0.html) and '
+                    '[Conventional Commit]'
+                    '(https://www.conventionalcommits.org/'
+                    'pt-br/v1.0.0/).\n\n',
+                    'This file was automatically generated for',
+                    ' [incolume.py.utils]'
+                    '(https://gitlab.com/development-incolume/'
+                    f'incolume.py.utils/-/tree/{__version__})',
+                    '\n\n---\n',
                 ],
             ),
         ),
@@ -635,56 +643,56 @@ class TestClassChangelog:
         assert o.header() == expected
 
     @pytest.mark.parametrize(
-        "entrance expected".split(),
+        ['entrance', 'expected'],
         (
             (
                 {
-                    "content": [
+                    'content': [
                         (
-                            "1.0.0a1",
+                            '1.0.0a1',
                             {
-                                "date": "2023-7-19",
-                                "key": "1.0.0a1",
-                                "messages": {
-                                    "Added": ["Fake record", " other fake"],
-                                    "Fixed": ['Fake fixed",'],
+                                'date': '2023-7-19',
+                                'key': '1.0.0a1',
+                                'messages': {
+                                    'Added': ['Fake record', ' other fake'],
+                                    'Fixed': ['Fake fixed",'],
                                 },
                             },
                         ),
                     ],
-                    "linked": False,
+                    'linked': False,
                 },
                 [
-                    "\n\n## 1.0.0a1\t &#8212; \t2023-7-19:",
-                    "\n### Added",
-                    "\n  - Fake record;",
-                    "\n  - Other fake;",
-                    "\n### Fixed",
+                    '\n\n## 1.0.0a1\t &#8212; \t2023-7-19:',
+                    '\n### Added',
+                    '\n  - Fake record;',
+                    '\n  - Other fake;',
+                    '\n### Fixed',
                     '\n  - Fake fixed",;',
                 ],
             ),
             (
                 {
-                    "content": [
+                    'content': [
                         (
-                            "1.0.0a0",
+                            '1.0.0a0',
                             {
-                                "date": "2023-7-19",
-                                "key": "1.0.0a0",
-                                "messages": {
-                                    "Added": ["Fake record", " other fake"],
-                                    "Fixed": ['Fake fixed",'],
+                                'date': '2023-7-19',
+                                'key': '1.0.0a0',
+                                'messages': {
+                                    'Added': ['Fake record', ' other fake'],
+                                    'Fixed': ['Fake fixed",'],
                                 },
                             },
                         ),
                     ],
                 },
                 [
-                    "\n\n## [1.0.0a0]\t &#8212; \t2023-7-19:",
-                    "\n### Added",
-                    "\n  - Fake record;",
-                    "\n  - Other fake;",
-                    "\n### Fixed",
+                    '\n\n## [1.0.0a0]\t &#8212; \t2023-7-19:',
+                    '\n### Added',
+                    '\n  - Fake record;',
+                    '\n  - Other fake;',
+                    '\n### Fixed',
                     '\n  - Fake fixed",;',
                 ],
             ),
@@ -695,55 +703,69 @@ class TestClassChangelog:
         assert Changelog.iter_logs(**entrance) == expected
 
     @pytest.mark.parametrize(
-        "entrance expected".split(),
+        ['entrance', 'expected'],
         (
-            pytest.param({}, ["\n---\n\n"]),
+            pytest.param({}, ['\n---\n\n']),
             pytest.param(
                 {
-                    "content": [
+                    'content': [
                         (
-                            "0.1.0",
+                            '0.1.0',
                             {
-                                "key": "0.1.0",
-                                "date": "2018-10-19",
-                                "messages": {
-                                    "Added": "a1 a2 a3.".split(),
-                                    "Changed": "a;b;c;d;e".split(";"),
-                                    "Deprecated": "1;2;3;a;s;b".split(";"),
-                                    "Fixed": [
-                                        "http://example.com",
-                                        " http://httpbin.com",
+                                'key': '0.1.0',
+                                'date': '2018-10-19',
+                                'messages': {
+                                    'Added': ['a1', 'a2', 'a3.'],
+                                    'Changed': ['a', 'b', 'c', 'd', 'e'],
+                                    'Deprecated': [
+                                        '1',
+                                        '2',
+                                        '3',
+                                        'a',
+                                        's',
+                                        'b',
                                     ],
-                                    "Removed": ["1", "2", "3"],
-                                    "Security": ["a", "b", "c"],
+                                    'Fixed': [
+                                        'http://example.com',
+                                        ' http://httpbin.com',
+                                    ],
+                                    'Removed': ['1', '2', '3'],
+                                    'Security': ['a', 'b', 'c'],
                                 },
                             },
                         ),
                         (
-                            "1.0.0",
+                            '1.0.0',
                             {
-                                "key": "1.0.0",
-                                "date": "2018-10-19",
-                                "messages": {
-                                    "Added": "a1 a2 a3.".split(),
-                                    "Changed": "a;b;c;d;e".split(";"),
-                                    "Deprecated": "1;2;3;a;s;b".split(";"),
-                                    "Fixed": [
-                                        "http://example.com",
-                                        " http://httpbin.com",
+                                'key': '1.0.0',
+                                'date': '2018-10-19',
+                                'messages': {
+                                    'Added': ['a1', 'a2', 'a3.'],
+                                    'Changed': ['a', 'b', 'c', 'd', 'e'],
+                                    'Deprecated': [
+                                        '1',
+                                        '2',
+                                        '3',
+                                        'a',
+                                        's',
+                                        'b',
                                     ],
-                                    "Removed": ["1", "2", "3"],
-                                    "Security": ["a", "b", "c"],
+                                    'Fixed': [
+                                        'http://example.com',
+                                        ' http://httpbin.com',
+                                    ],
+                                    'Removed': ['1', '2', '3'],
+                                    'Security': ['a', 'b', 'c'],
                                 },
                             },
                         ),
                     ],
-                    "content_formated": [],
+                    'content_formated': [],
                 },
                 [
-                    "\n---\n\n",
-                    "[0.1.0]: https://gitlab.com/development-incolume/"
-                    "incolume.py.utils/-/compare/1.0.0...0.1.0\n",
+                    '\n---\n\n',
+                    '[0.1.0]: https://gitlab.com/development-incolume/'
+                    'incolume.py.utils/-/compare/1.0.0...0.1.0\n',
                 ],
                 # marks=pytest.mark.skip,
             ),
