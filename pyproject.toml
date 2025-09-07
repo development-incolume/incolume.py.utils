@@ -4,19 +4,19 @@ version = "3.0.0a3"
 description = "package incolume.py.utils"
 readme = "README.md"
 keywords = ['python', 'utils', 'incolume']
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 classifiers = [
   'Development Status :: 5 - Production/Stable',
   'Operating System :: OS Independent',
   'Natural Language :: Portuguese (Brazilian)',
   "Programming Language :: Python",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   'Topic :: Software Development :: Libraries :: Python Modules',
   'Topic :: Utilities',
 ]
@@ -82,7 +82,7 @@ incolumepy-utils = 'incolume.py.utils.main:run'
 pw = 'incolume.py.utils.cli:encode'
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 Deprecated = "^1.2.10"
 rstr = "^2.2.6"
 toml = {extras = ["tomli"], version = "^0.10.2"}
@@ -166,7 +166,7 @@ max-line-length = 79
 
 [tool.black]
 line-length = 79
-#target-version = ['py38']
+#target-version = ['py39']
 # include = '\.pyi?$'
 extend-exclude = '''
 # A regex preceded with ^/ will apply only to files and directories
