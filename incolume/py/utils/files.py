@@ -125,6 +125,3 @@ def realfilename(filebase, ext=None, digits=2, separador=True) -> Path:
             logging.warning(e)
         finally:
             count += 1
-
-
-# pylama:select=C901
