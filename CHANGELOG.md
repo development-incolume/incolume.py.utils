@@ -10,22 +10,7 @@ This file was automatically generated for [incolume.py.changelog](https://github
 ---
 
 
-## [WIP]	 &#8212; 	2023-09-12:
-### Added
-  - Para novos recursos.;
-### Fixed
-  - Para qualquer correção de bug.;
-### Changed
-  - Para alterações em recursos existentes.;
-### Deprecated
-  - Para recursos que serão removidos nas próximas versões.;
-### Removed
-  - Para recursos removidos nesta versão.;
-### Security
-  - Em caso de vulnerabilidades.;
-  - Em caso de vulnerabilidades.;
-
-## [Unreleased]	 &#8212; 	2025-09-06:
+## [3.0.0]	 &#8212; 	2025-09-07:
 ### Deprecated
   - Compatibilidade com Python 3.8;
   - `changelog_header` marcado como obsoleto;
@@ -476,5 +461,4 @@ This file was automatically generated for [incolume.py.changelog](https://github
 [2.11.0]: https://github.com/development-incolume/incolume.py.utils/compare/2.10.0...2.11.0
 [3.0.0rc0]: https://github.com/development-incolume/incolume.py.utils/compare/2.11.0...3.0.0rc0
 [3.0.0rc1]: https://github.com/development-incolume/incolume.py.utils/compare/3.0.0rc0...3.0.0rc1
-[Unreleased]: https://github.com/development-incolume/incolume.py.utils/compare/3.0.0rc1...Unreleased
-[WIP]: https://github.com/development-incolume/incolume.py.utils/compare/Unreleased...WIP
+[3.0.0]: https://github.com/development-incolume/incolume.py.utils/compare/3.0.0rc1...3.0.0
