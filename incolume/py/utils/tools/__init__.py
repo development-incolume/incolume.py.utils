@@ -3,15 +3,19 @@
 import logging
 import os
 import re
+from collections.abc import Collection
 from pathlib import Path
-from typing import Any, Collection, List, Union
+from typing import Any, List, Union
 
 from deprecated import deprecated
 
 
-def key_versions_2_sort(x: Collection[str], qdig: int = 0, regex: str = "") -> str:
-    """
-    Sort by SemVer notation.
+def key_versions_2_sort(
+    x: Collection[str],
+    qdig: int = 0,
+    regex: str = '',
+) -> str:
+    """Sort by SemVer notation.
 
     :param regex: regex to version format.
     :param qdig: Quantity digits to sort.
@@ -21,13 +25,13 @@ def key_versions_2_sort(x: Collection[str], qdig: int = 0, regex: str = "") -> s
     qdig = qdig or 5
     assert isinstance(x, (tuple, list)), "'x' must be tuple or list."
     classifies = {
-        "post": 9 * 10**qdig,
-        "rc": 8 * 10 ** (qdig - 1),
-        "alpha": 2 * 10 ** (qdig - 1),
-        "a": 2 * 10 ** (qdig - 1),
-        "dev": 0,
+        'post': 9 * 10**qdig,
+        'rc': 8 * 10 ** (qdig - 1),
+        'alpha': 2 * 10 ** (qdig - 1),
+        'a': 2 * 10 ** (qdig - 1),
+        'dev': 0,
     }
-    regex = regex or r"(\d+)\.(\d+)\.(\d+)((-?\D+)(\d+))?"
+    regex = regex or r'(\d+)\.(\d+)\.(\d+)((-?\D+)(\d+))?'
     get_major_minor_patch_build = re.compile(regex)
     logging.debug(get_major_minor_patch_build)
     try:
@@ -38,31 +42,30 @@ def key_versions_2_sort(x: Collection[str], qdig: int = 0, regex: str = "") -> s
         patch = values.group(3)  # type: ignore
         build = values.group(6)  # type: ignore
         # pegar build, se não tiver colocar uma alta 99999
-        build = build or "9" * qdig
-        logging.debug("values.group(5): %s", values.group(5))  # type: ignore
+        build = build or '9' * qdig
+        logging.debug('values.group(5): %s', values.group(5))  # type: ignore
         plus = classifies.get(
-            re.sub(r"[-.]", "", str(values.group(5)).lower()),  # type: ignore
+            re.sub(r'[-.]', '', str(values.group(5)).lower()),  # type: ignore
             0,
         )
-        logging.debug("plus: %s", plus)
+        logging.debug('plus: %s', plus)
         build = int(build) + plus
-        result = f"{major:0>4}{minor:0>2}{patch:0>2}.{build:0>6}"
+        result = f'{major:0>4}{minor:0>2}{patch:0>2}.{build:0>6}'
     except AttributeError:
         result = str(x[0])
     return result
 
 
 @deprecated(
-    reason="Use incolumepy.utils.changelog.update_changelog",
-    version="2.6.0-alpha.4",
+    reason='Use incolumepy.utils.changelog.update_changelog',
+    version='2.6.0-alpha.4',
 )
 def update_changelog(
     changelog_file: Union[str, Path],
     reverse: bool = True,
-    urlcompare: str = "",
+    urlcompare: str = '',
 ):
-    """
-    Update Changelog.md file.
+    """Update Changelog.md file.
 
     :param urlcompare: url compare from repository of project.
     :param reverse: bool.
@@ -70,11 +73,11 @@ def update_changelog(
     :return:
     """
     raise NotImplementedError(
-        "This function was replaced. Use incolumepy.utils.changelog.update_changelog"
+        'This function was replaced. Use incolumepy.utils.changelog.update_changelog',
     )
 
 
-def logger(str_format="", datefmt="", level=0, filelog=None):
+def logger(str_format='', datefmt='', level=0, filelog=None):
     """Logger function for log.
 
     :str_format:
@@ -85,28 +88,31 @@ def logger(str_format="", datefmt="", level=0, filelog=None):
     """
     str_format = (
         str_format
-        or "%(asctime)s;%(levelname)-8s;%(name)s;%(module)s;%(funcName)s;%(message)s"
+        or '%(asctime)s;%(levelname)-8s;%(name)s;%(module)s;%(funcName)s;%(message)s'
     )
-    datefmt = datefmt or "%Y/%m/%d %H:%M:%S %z"
+    datefmt = datefmt or '%Y/%m/%d %H:%M:%S %z'
     # create logger
     level = level or logging.DEBUG
-    filelog = filelog or Path(__file__).with_suffix(".py")
+    filelog = filelog or Path(__file__).with_suffix('.py')
 
     logging.basicConfig(
-        filename=filelog, level=level, format=str_format, datefmt=datefmt
+        filename=filelog,
+        level=level,
+        format=str_format,
+        datefmt=datefmt,
     )
 
     console = logging.StreamHandler()
     formatter = logging.Formatter(str_format)
     console.setFormatter(formatter)
-    logging.getLogger("").addHandler(console)
+    logging.getLogger('').addHandler(console)
 
     return logging.getLogger()
 
 
 @deprecated(
-    reason="Use pathlib.Path.read_text or pathlib.Path.read_bytes.",
-    version="2.6.0a0",
+    reason='Use pathlib.Path.read_text or pathlib.Path.read_bytes.',
+    version='2.6.0a0',
 )
 def read(*rnames):
     """Return content from file informed in '*rnames'.
@@ -145,22 +151,23 @@ def namespace(package_name: str) -> List[str]:
 
     >>> namespace('incolumepy')
     ['incolumepy']
+
     """
-    logging.debug("package_name=%s", package_name)
+    logging.debug('package_name=%s', package_name)
     result: List[Any] = []
-    temp = ""
+    temp = ''
     try:
-        bits = package_name.split(".")
+        bits = package_name.split('.')
     except AttributeError:
         return result
 
     if len(bits) <= 1:
-        logging.debug("bits=%s", bits)
+        logging.debug('bits=%s', bits)
         return bits
 
     for bit in bits[:-1]:
-        temp = f"{temp}.{bit}" if temp else bit
-        logging.debug("temp=%s", temp)
+        temp = f'{temp}.{bit}' if temp else bit
+        logging.debug('temp=%s', temp)
         result.append(temp)
-    logging.debug("result=%s", result)
+    logging.debug('result=%s', result)
     return result

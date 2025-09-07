@@ -2,14 +2,13 @@
 
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
-__author__ = "@britodfbr"  # pragma: no cover
+__author__ = '@britodfbr'  # pragma: no cover
 
 import re
 
 
 def check_url(url: str) -> bool:
-    """
-    Check URL.
+    """Check URL.
 
     :param url: Url to check.
     :return: True if valid URL.
@@ -30,13 +29,13 @@ def check_url(url: str) -> bool:
     True
     """
     regex = re.compile(
-        r"^(?:http|ftp)s?://"  # http:// or https://
-        r"(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)"
-        r"+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|"  # domain...
-        r"localhost|"  # localhost...
-        r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})"  # ...or ip
-        r"(?::\d+)?"  # optional port
-        r"(?:/?|[/?]\S+)$",
+        r'^(?:http|ftp)s?://'  # http:// or https://
+        r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)'
+        r'+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain...
+        r'localhost|'  # localhost...
+        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'  # ...or ip
+        r'(?::\d+)?'  # optional port
+        r'(?:/?|[/?]\S+)$',
         re.IGNORECASE,
     )
 
@@ -44,10 +43,11 @@ def check_url(url: str) -> bool:
 
 
 def identify_dom_url(
-    url: str, lista_dominio: list[str] = None, verboso: bool = False
+    url: str,
+    lista_dominio: list[str] = None,
+    verboso: bool = False,
 ) -> str:
-    """
-    Locate match standard on url by lista_dominio, ideal for use into pandas.
+    """Locate match standard on url by lista_dominio, ideal for use into pandas.
 
     :param url: referida url
     :param verboso: verbosity mode
@@ -77,10 +77,10 @@ def identify_dom_url(
     args: (url: https://google.com, lista_dominio: ['google'])
     'google'
     """
-    lista_dominio = lista_dominio or ["planalto", "camara", "senado"]
+    lista_dominio = lista_dominio or ['planalto', 'camara', 'senado']
     if verboso:
-        print(f"args: (url: {url}, lista_dominio: {lista_dominio})")
+        print(f'args: (url: {url}, lista_dominio: {lista_dominio})')
     for dominio in lista_dominio:
         if re.compile(dominio).search(url):
             return str(dominio)
-    return ""
+    return ''

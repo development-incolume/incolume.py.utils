@@ -5,13 +5,13 @@ from pathlib import Path
 try:
     import tomllib as tomli  # type: ignore[import]
 except ImportError:
-    import tomli
+    import tomli  # type: ignore[import]
 
-confproject = Path(__file__).parents[3] / "pyproject.toml"
-versionfile = Path(__file__).parent / "version.txt"
+confproject = Path(__file__).parents[3] / 'pyproject.toml'
+versionfile = Path(__file__).parent / 'version.txt'
 
-with confproject.open("rb") as f:
-    versionfile.write_text(tomli.load(f)["project"]["version"] + "\n")
+with confproject.open('rb') as f:
+    versionfile.write_text(tomli.load(f)['project']['version'] + '\n')
 
 __version__ = versionfile.read_text().strip()
-__title__ = "incolume.py.utils"
+__title__ = 'incolume.py.utils'
