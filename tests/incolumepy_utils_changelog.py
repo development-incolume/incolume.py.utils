@@ -51,7 +51,7 @@ class TestCase:
         (
             pytest.param(
                 {
-                    'msg': '1.0.0 Added: Fake record; other fakrecord; Fixed: Fake fixed'
+                    'msg': '1.0.0 Added: Fake record; other fakrecord; Fixed: Fake fixed',
                 },
                 {
                     'key': '1.0.0',
@@ -389,7 +389,7 @@ class TestCase:
             entrance.update({'changelog_file': ftemp})
 
         mocked = mocker.Mock(
-            spec=incolume.py.utils.tools.changelog.changelog_write
+            spec=incolume.py.utils.tools.changelog.changelog_write,
         )
         result = mocked(**entrance)
         esperado = mocker.call(**entrance)
@@ -403,7 +403,7 @@ class TestCase:
             {
                 'changelog_file': Path(gettempdir())
                 .joinpath('xpto.md')
-                .as_posix()
+                .as_posix(),
             },
         ),
     )

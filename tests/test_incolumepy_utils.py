@@ -499,7 +499,11 @@ def test_apply_key_versions_2_sort(entrance, reverse, expected):
     ],
 )
 def test_update_changelog(
-    class_mocker, temp_file_name, str_testing, reverse, expected
+    class_mocker,
+    temp_file_name,
+    str_testing,
+    reverse,
+    expected,
 ):
     file = temp_file_name.with_suffix('.md')
     # print(file)

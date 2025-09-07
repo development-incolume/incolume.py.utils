@@ -174,7 +174,12 @@ class TestCLI:
         ),
     )
     def test_changelog_logging(
-        self, entrance, expected, caplog, file, fakeurl
+        self,
+        entrance,
+        expected,
+        caplog,
+        file,
+        fakeurl,
     ):
         result = self.runner.invoke(entrance, ['-p', '-u', fakeurl, file])
         assert result
