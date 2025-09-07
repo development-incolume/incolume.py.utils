@@ -11,7 +11,9 @@ from deprecated import deprecated
 
 
 def key_versions_2_sort(
-    x: Collection[str], qdig: int = 0, regex: str = ''
+    x: Collection[str],
+    qdig: int = 0,
+    regex: str = '',
 ) -> str:
     """Sort by SemVer notation.
 
