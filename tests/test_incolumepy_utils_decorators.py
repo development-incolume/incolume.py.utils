@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from incolume.py.utils.tools.decorators import nonexequi, time_it
+from incolume.py.utils.decorators import nonexequi, time_it
 
 # import io
 # import sys

@@ -16,8 +16,8 @@ def nonexequi(a_func):
 
     @wraps(a_func)
     def wrap_the_function(*args, **kwargs):
-        logging.debug("%s(%s, %s).", a_func.__name__, args, kwargs)
-        return f"Skiped: {a_func.__name__}"
+        logging.debug('%s(%s, %s).', a_func.__name__, args, kwargs)
+        return f'Skiped: {a_func.__name__}'
 
     return wrap_the_function
 
@@ -34,7 +34,7 @@ def time_it(func):
         start = time()
         result = func(*args, **kwargs)
         end = time()
-        print(f"{func.__name__}: {1000 * (end - start):3.5f} ms")
+        print(f'{func.__name__}: {1000 * (end - start):3.5f} ms')
         return result
 
     return wrapper

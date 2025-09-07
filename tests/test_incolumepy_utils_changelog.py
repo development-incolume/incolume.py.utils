@@ -3,8 +3,8 @@ from tempfile import gettempdir
 
 import pytest
 
-import incolume.py.utils.tools.changelog
-from incolume.py.utils.tools.changelog import (
+import incolume.py.utils.changelog
+from incolume.py.utils.changelog import (
     Changelog,
     __version__,
     changelog_footer,

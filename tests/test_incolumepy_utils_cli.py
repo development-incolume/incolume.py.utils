@@ -7,7 +7,7 @@ from tempfile import gettempdir
 import pytest
 from click.testing import CliRunner
 
-from incolume.py.utils.tools.cli import (
+from incolume.py.utils.cli import (
     changelog,
     digest,
     encode,
