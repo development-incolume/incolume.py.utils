@@ -1,16 +1,18 @@
 """incolumepy.utils module."""
 
+from contextlib import suppress
 from pathlib import Path
 
-try:
+with suppress(ImportError, ModuleNotFoundError):
     import tomllib as tomli  # type: ignore[import]
-except ImportError:
+
+with suppress(ImportError, ModuleNotFoundError):
     import tomli  # type: ignore[import]
 
 confproject = Path(__file__).parents[3] / 'pyproject.toml'
 versionfile = Path(__file__).parent / 'version.txt'
 
-with confproject.open('rb') as f:
+with suppress(FileNotFoundError), confproject.open('rb') as f:
     versionfile.write_text(tomli.load(f)['project']['version'] + '\n')
 
 __version__ = versionfile.read_text().strip()

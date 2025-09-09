@@ -24,7 +24,7 @@ dependencies = [
     "click>=8.1.5",
     "deprecated>=1.2.18",
     "rstr>=3.2.2",
-    "toml>=0.10.2 ; python_full_version < '3.10'",
+    "tomli; python_full_version < '3.11'",
     "tqdm",
 ]
 
