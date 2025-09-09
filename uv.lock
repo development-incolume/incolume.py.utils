@@ -956,7 +956,7 @@ dependencies = [
     { name = "click", version = "8.2.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
     { name = "deprecated" },
     { name = "rstr" },
-    { name = "toml", marker = "python_full_version < '3.10'" },
+    { name = "tomli", marker = "python_full_version < '3.11'" },
     { name = "tqdm" },
 ]
 
@@ -989,7 +989,7 @@ requires-dist = [
     { name = "click", specifier = ">=8.1.5" },
     { name = "deprecated", specifier = ">=1.2.18" },
     { name = "rstr", specifier = ">=3.2.2" },
-    { name = "toml", marker = "python_full_version < '3.10'", specifier = ">=0.10.2" },
+    { name = "tomli", marker = "python_full_version < '3.11'" },
     { name = "tqdm" },
 ]
 
