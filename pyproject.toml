@@ -1,6 +1,6 @@
 [project]
 name = "incolume.py.utils"
-version = "3.1.0a4"
+version = "3.1.0"
 description = "package incolume.py.utils"
 readme = "README.md"
 keywords = ['python', 'utils', 'incolume']
