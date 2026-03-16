@@ -4,7 +4,7 @@ version = "3.1.0a3"
 description = "package incolume.py.utils"
 readme = "README.md"
 keywords = ['python', 'utils', 'incolume']
-requires-python = ">=3.9"
+requires-python = ">=3.9,<4"
 classifiers = [
   'Development Status :: 5 - Production/Stable',
   'Operating System :: OS Independent',
